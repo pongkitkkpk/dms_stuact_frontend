@@ -24,6 +24,7 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 // import Upgrade from "views/Upgrade.js";
 import Login from "views/Login";
+import ProjectDocument from "views/ProjectDocument";
 
 const dashboardRoutes = [
   // {
@@ -36,9 +37,16 @@ const dashboardRoutes = [
   // },
   {
     path: "/login",
-    name: "Login",
+    name: "เข้าสู่ระบบ",
     icon: "nc-icon nc-badge",
     component: Login,
+    layout: "/admin"
+  },
+  {
+    path: "/project-doc",
+    name: "เอกสารโครงการ",
+    icon: "nc-icon nc-notes",
+    component: ProjectDocument,
     layout: "/admin"
   },
   {

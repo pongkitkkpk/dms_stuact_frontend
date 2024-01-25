@@ -1,41 +1,51 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { useLocation, NavLink } from "react-router-dom";
-
 import { Nav } from "react-bootstrap";
-
-import logo from "assets/img/reactlogo.png";
+import { FiZoomIn, FiZoomOut } from "react-icons/fi"; // Assuming you have zoom in and zoom out icons
 
 function Sidebar({ color, image, routes }) {
   const location = useLocation();
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
+
+  const [zoomed, setZoomed] = useState(false);
+
+  const handleMouseEnter = () => {
+    setZoomed(true);
+  };
+
+  const handleMouseLeave = () => {
+    setZoomed(false);
+  };
+
+  const sidebarStyle = {
+    width: zoomed ? "250px" : "75px",
+    transition: "width 0.3s ease",
+  };
+
+  const iconStyle = {
+    transform: zoomed ? "scale(1)" : "scale(1.3)",
+    transition: "transform 0.3s ease",
+  };
+
   return (
-    <div className="sidebar" data-image={image} data-color={color}>
+    <div
+      className={`sidebar ${zoomed ? "zoomed" : ""}`}
+      style={sidebarStyle}
+      data-color={color}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div
         className="sidebar-background"
         style={{
-          backgroundImage: "url(" + image + ")"
+          backgroundImage: "url(" + image + ")",
+          width: zoomed ? "250px" : "75px", // Adjust background width
         }}
       />
       <div className="sidebar-wrapper">
+
         <div className="logo d-flex align-items-center justify-content-start">
           <a
             href="https://www.creative-tim.com?ref=lbd-sidebar"
@@ -66,7 +76,7 @@ function Sidebar({ color, image, routes }) {
                     className="nav-link"
                     activeClassName="active"
                   >
-                    <i className={prop.icon} />
+                    <i className={prop.icon} style={iconStyle} />
                     <p>{prop.name}</p>
                   </NavLink>
                 </li>

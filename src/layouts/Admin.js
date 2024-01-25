@@ -63,11 +63,15 @@ function Admin() {
   }, [location]);
   return (
     <>
-      <div className="wrapper">
+    
+      <div className="wrapper" >
+      
         <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
         <div className="main-panel" ref={mainPanel}>
+          
           <AdminNavbar />
-          <div className="content">
+          
+          <div className="content" >
             <Switch>{getRoutes(routes)}</Switch>
           </div>
           <Footer />
