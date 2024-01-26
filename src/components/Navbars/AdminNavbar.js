@@ -45,7 +45,7 @@ function Header() {
   };
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" >
         <Container fluid>
           <div className="d-flex justify-content-center align-items-center ml-2 ml-lg-0">
             <Button
@@ -141,8 +141,8 @@ function Header() {
             </Nav.Item> */}
 
             </Nav>
-            <Nav className="ml-auto" navbar>
-              <Nav.Item>
+            <Nav className="ml-auto" navbar style={{ marginRight: "10%" }}>
+              <Nav.Item style={{ marginTop: "1%" }}>
                 <Nav.Link
                   className="m-0"
                   href="#pablo"
@@ -151,7 +151,7 @@ function Header() {
                   <span className="no-icon">Account</span>
                 </Nav.Link>
               </Nav.Item>
-              <Dropdown as={Nav.Item}>
+              <Dropdown as={Nav.Item} style={{ marginTop: "1%" }}>
                 <Dropdown.Toggle
                   aria-expanded={false}
                   aria-haspopup={true}

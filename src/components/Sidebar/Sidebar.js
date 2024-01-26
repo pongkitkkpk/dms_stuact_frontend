@@ -22,17 +22,18 @@ function Sidebar({ color, image, routes }) {
   const sidebarStyle = {
     width: zoomed ? "250px" : "75px",
     transition: "width 0.3s ease",
+    overflow: "hidden"
   };
 
   const iconStyle = {
-    transform: zoomed ? "scale(1)" : "scale(1.3)",
+    transform: zoomed ? "scale(1)" : "scale(1.2)",
     transition: "transform 0.3s ease",
   };
 
   return (
     <div
       className={`sidebar ${zoomed ? "zoomed" : ""}`}
-      style={sidebarStyle}
+      style={sidebarStyle }
       data-color={color}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
