@@ -1,9 +1,10 @@
 .multi-step-progress-bar {
     position: relative;
-    width: 80%;
+    width: 97%;  /* เอาไว้แก้ความยาว*/
     height: 50px;
-    background-color: #fff;
+    background-color: #f7f7f9;
     overflow: hidden;
+    margin-left: 50px;
 }
 
 .progress {
@@ -13,7 +14,7 @@
     left: 0;
     top: 0;
     transition: width 0.3s ease-in-out;
-    clip-path: polygon(80% 0, 100% 49%, 80% 100%, 0 100%, 0 0);
+    clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
 }
 
 .step {
@@ -23,15 +24,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    clip-path: polygon(80% 0, 100% 49%, 80% 100%, 0 100%, 0 0);
+    margin-left: -2.5%;  /* เอาไว้แก้ความห่าง */
+    clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
 }
 
 .step.completed {
     background-color: #4caf50;
-    clip-path: polygon(80% 0, 100% 49%, 80% 100%, 0 100%, 0 0);
+    clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
+    margin-left: -2.5%;
 }
 
 .step.current {
     background-color: #d39b34;
-    clip-path: polygon(80% 0, 100% 49%, 80% 100%, 0 100%, 0 0);
+    clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
 }

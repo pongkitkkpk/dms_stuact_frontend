@@ -7,11 +7,11 @@ const ArrowProgressBar = ({ steps, currentStep }) => {
     };
 
     const stepTitles = [
-        'จัดทำโครงการ',
-        'อนุมัติจัดโครงการ',
-        'ร่างคำขอปิดฯ',
-        'ประธานโครงการ',
-        'ประธานหน่วยงาน',
+        ' จัดทำโครงการ',
+        ' อนุมัติจัดโครงการ',
+        ' ร่างคำขอปิดฯ',
+        ' ประธานโครงการ',
+        ' ประธานหน่วยงาน',
         'Running',   // New: Running status
         'Finished',  // New: Finished status
         // Add more titles as needed
@@ -32,6 +32,7 @@ const ArrowProgressBar = ({ steps, currentStep }) => {
                 <div
                     className={`step ${index+1 < currentStep ? 'completed' : ''} ${stepStates[index] ? 'active' : ''} ${index === currentStep - 1 ? 'current' : ''}`}
                     style={{ width: `${100 / steps}%` }}
+                    // style={{ width: `${100 / steps}%` }}
                     onClick={() => handleStepClick(index)}
                 >
                     {index < currentStep - 1 ? (
