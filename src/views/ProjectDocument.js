@@ -7,10 +7,11 @@ import {
   Form,
   Container,
   Row,
-  Col
+  Col,
+  Nav
 } from "react-bootstrap";
 
-import ArrowProgressBar from './ArrowProgressBar';
+import ArrowProgressBar from './Compo_ProjectDoc/ArrowProgressBar';
 function ProjectDocument() {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 7;
@@ -23,8 +24,11 @@ function ProjectDocument() {
     setCurrentStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
+
+
   return (
     <>
+      {/* <h1>{currentStep}</h1> */}
       <div>
         <ArrowProgressBar steps={totalSteps} currentStep={currentStep} />
         <div>
@@ -39,6 +43,25 @@ function ProjectDocument() {
 
       <Container fluid>
         <Row>
+          <Col md="2">
+            <Card className="bg-dark text-white">
+              <Card.Header className="bg-secondary text-white" >เมนูจัดการโครงการ</Card.Header>
+              <Card.Body>
+                
+                  <Nav.Link href="#section1">1. แบบขออนุมัติโครงการ</Nav.Link>
+                  <Nav.Link href="#section1-1">1.1 ข้อมูลพื้นฐานโครงการ</Nav.Link>
+                  <Nav.Link href="#section1-2">1.2 แผนการดำเนินงาน</Nav.Link>
+                  <Nav.Link href="#section1-3">1.3 งบประมาณ</Nav.Link>
+                  <Nav.Link href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</Nav.Link>
+                  <Nav.Link href="#section1-5">1.5 ข้อมูลเพิ่มเติม</Nav.Link>
+                  <Nav.Link href="#section1-6">1.6 เอกสารเพิ่มเติม</Nav.Link>
+                  <Nav.Link href="#section2">2. รายการเปลี่ยนแปลงแก้ไข</Nav.Link>
+                  <Nav.Link href="#pr-1">3. สรุปและประเมินผลโครงการ</Nav.Link>
+                
+              </Card.Body>
+            </Card>
+
+          </Col>
           <Col md="8">
             <Card>
               <Card.Header>
@@ -172,64 +195,9 @@ function ProjectDocument() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md="4">
-            <Card className="card-user">
-              <div className="card-image">
-                <img
-                  alt="..."
-                  src={require("assets/img/photo-1431578500526-4d9613015464.jpeg")}
-                ></img>
-              </div>
-              <Card.Body>
-                <div className="author">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar border-gray"
-                      src={require("assets/img/faces/face-3.jpg")}
-                    ></img>
-                    <h5 className="title">Mike Andrew</h5>
-                  </a>
-                  <p className="description">michael24</p>
-                </div>
-                <p className="description text-center">
-                  "Lamborghini Mercy <br></br>
-                  Your chick she so thirsty <br></br>
-                  I'm in that two seat Lambo"
-                </p>
-              </Card.Body>
-              <hr></hr>
-              <div className="button-container mr-auto ml-auto">
-                <Button
-                  className="btn-simple btn-icon"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  variant="link"
-                >
-                  <i className="fab fa-facebook-square"></i>
-                </Button>
-                <Button
-                  className="btn-simple btn-icon"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  variant="link"
-                >
-                  <i className="fab fa-twitter"></i>
-                </Button>
-                <Button
-                  className="btn-simple btn-icon"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  variant="link"
-                >
-                  <i className="fab fa-google-plus-square"></i>
-                </Button>
-              </div>
-            </Card>
-          </Col>
         </Row>
 
-      </Container>
+      </Container >
     </>
   );
 }
