@@ -55,9 +55,14 @@ function TableList() {
                     {userList.map((val, key) => {
                       return (
                      <tr>
-                       <td> {val.idpersion}</td>
+                       <td> {val.idStudent}</td>
                        <td>ชื่อค้าบบบ</td>
-
+                       <td>{val.position === "S" ? 'นักศึกษาประสานงาน' : val.position}</td>
+                       <td>{val.position === "SC-P" ? 'ประธานสภา' : val.position}</td>
+                       <td>{val.position === "SO-P" ? 'นายกองค์การ' : val.position}</td>
+                       <td>{val.position === "C-P" ? 'ประธานชมรม' : val.position}</td>
+                       <td>{val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : val.position}</td>
+                       <td>{val.position === "Stuact" ? 'บุคลการกองกิจการนักศึกษา' : val.position}</td>
                        <td> {val.position}</td>
                        <td> {val.codeclub}</td>
                      </tr>
