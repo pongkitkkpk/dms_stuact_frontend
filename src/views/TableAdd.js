@@ -14,31 +14,47 @@ import {
     Form
 } from "react-bootstrap";
 import setCode from "./setCode.json"
-import { Axios } from 'axios';
+import Axios from 'axios';
 
 function TableAdd() {
     // Bangkok Prachin Rayong
     // พอเชื่อม database มอแล้ว จะได้ 
     // name,campus,department
     // year
+    const [userList, setUserList] = useState([]);
+
     const [idStudent, setIdStudent] = useState("")
-    const [nameStudent, setName] = useState("")
-    const [department, setDepartment] = useState("")
+    const [nameStudent, setName] = useState("AAA")
+    const [department, setDepartment] = useState("BBB")
     const [position, setPosition] = useState("")
 
-    const [campus, setCampus] = useState("Prachin")
+    const [campus, setCampus] = useState("Bangkok")
     const [clubName, setClubName] = useState("")
     const [codeClub, setCodeClub] = useState("")
 
-    const addUser =()=>{
-        Axios.post('http://localhost:3001/create',{
-            idStudent:idStudent,
-            nameStudent:nameStudent,
-            department:department,
-            position:position,
-            campus:campus,
-            clubName:clubName,
-            codeClub:codeClub
+    const addUser = () => {
+        Axios.post('http://localhost:3001/create', {
+            idStudent: idStudent,
+            nameStudent: nameStudent,
+            department: department,
+            position: position,
+            campus: campus,
+            clubName: clubName,
+            codeClub: codeClub
+        }).then(() => {
+            setUserList([
+                ...userList,
+                {
+                    idStudent: idStudent,
+                    nameStudent: nameStudent,
+                    department: department,
+                    position: position,
+                    campus: campus,
+                    clubName: clubName,
+                    codeClub: codeClub
+                }
+            ])
+
         })
     }
     return (
@@ -104,7 +120,13 @@ function TableAdd() {
                                     );
                                 })}
                             </Form.Select>
-
+                            <Button
+                                onClick={addUser}
+                                type="submit"
+                                variant="info"
+                            >
+                                Update Profile
+                            </Button>
 
                         </Form.Group>
                     </Card.Body>
