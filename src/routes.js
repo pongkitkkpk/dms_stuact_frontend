@@ -25,6 +25,7 @@ import Notifications from "views/Notifications.js";
 // import Upgrade from "views/Upgrade.js";
 import Login from "views/Login";
 import ProjectDocument from "views/ProjectDocument";
+import AllProject from "views/AllProject";
 
 const dashboardRoutes = [
   // {
@@ -54,6 +55,13 @@ const dashboardRoutes = [
     name: "ตารางจัดการบทบาท",
     icon: "nc-icon nc-notes",
     component: TableList,
+    layout: "/admin"
+  },
+  {
+    path: "/allproject",
+    name: "โครงการทั้งหมด",
+    icon: "nc-icon nc-notes",
+    component: AllProject,
     layout: "/admin"
   },
   {

@@ -24,6 +24,15 @@ function TableList() {
       setUserList(response.data);
     })
   }
+  const deleteUser = (id) => {
+    Axios.delete(`http://localhost:3001/deleteUser/${id}`).then((response) => {
+      setUserList(
+        userList.filter((val) => {
+          return val.id !== id; // Use 'id' instead of 'idStudent'
+        })
+      );
+    });
+  };
   getUsers()
   return (
     <>
@@ -56,15 +65,20 @@ function TableList() {
                       return (
                         <tr>
                           <td> {val.idStudent}</td>
-                          <td>ชื่อค้าบบบ</td>
-                          <td>{val.position === "S" ? 'นักศึกษาประสานงาน' : null}
-                            {val.position === "SC-P" ? 'ประธานสภา' : null}
-                            {val.position === "SO-P" ? 'นายกองค์การ' : null}
-                            {val.position === "C-P" ? 'ประธานชมรม' : null}
+                          <td>{val.nameStudent}</td>
+                          <td>
+                            {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
+                            {val.position === "SH" ? (
+                              val.clubName.includes("สภา") ? 'ประธานสภา' :
+                                val.clubName.includes("องค์การ") ? 'นายกองค์การ' :
+                                  'ประธานชมรม'
+                            ) : null}
                             {val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : null}
-                            {val.position === "Stuact" ? 'บุคลการกองกิจการนักศึกษา' : null}</td>
-                          {/* <td> {val.position}</td> */}
-                          <td> {val.codeclub}</td>
+                            {val.position === "Stuact" ? 'บุคลการกองกิจการนักศึกษา' : null}
+                          </td>
+                          {/* <td> {val.codeclub}</td> */}
+                          <td> {val.clubName}</td>
+                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
                         </tr>
                       )
                     })}

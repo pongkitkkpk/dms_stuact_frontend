@@ -24,7 +24,7 @@ function TableAdd() {
     const [userList, setUserList] = useState([]);
 
     const [idStudent, setIdStudent] = useState("")
-    const [nameStudent, setName] = useState("AAA")
+    const [nameStudent, setName] = useState("ชื่อค้าบบบ")
     const [department, setDepartment] = useState("BBB")
     const [position, setPosition] = useState("")
 
@@ -33,7 +33,7 @@ function TableAdd() {
     const [codeClub, setCodeClub] = useState("")
 
     const addUser = () => {
-        Axios.post('http://localhost:3001/create', {
+        Axios.post('http://localhost:3001/createUser', {
             idStudent: idStudent,
             nameStudent: nameStudent,
             department: department,
@@ -54,8 +54,8 @@ function TableAdd() {
                     codeClub: codeClub
                 }
             ])
-
         })
+
     }
     return (
         <>
@@ -88,9 +88,7 @@ function TableAdd() {
                             }} required>
                                 <option >เลือกบลาๆ</option>
                                 <option value="S">นักศึกษาประสานงาน</option>
-                                <option value="SC-P">ประธานสภา</option>
-                                <option value="SO-P">นายกองค์การ</option>
-                                <option value="C-P">ประธานชมรม</option>
+                                <option value="SH">ประธานสภา/นายกองค์การ/ประธานชมรม</option>
                                 <option value="Ad">อาจารย์ที่ปรึกษา</option>
                                 <option value="Stuact">บุคลการกองกิจการนักศึกษา</option>
                             </Form.Select>
