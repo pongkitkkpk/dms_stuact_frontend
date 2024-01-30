@@ -44,9 +44,16 @@ const dashboardRoutes = [
   },
   {
     path: "/project-doc",
-    name: "เอกสารโครงการ",
+    name: "เขียนเอกสารโครงการใหม่(เอาไว้เป็นส่วนประกอบ)",
     icon: "nc-icon nc-notes",
     component: ProjectDocument,
+    layout: "/admin"
+  },
+  {
+    path: "/table",
+    name: "ตารางจัดการบทบาท",
+    icon: "nc-icon nc-notes",
+    component: TableList,
     layout: "/admin"
   },
   {
@@ -63,13 +70,7 @@ const dashboardRoutes = [
     component: UserProfile,
     layout: "/admin"
   },
-  {
-    path: "/table",
-    name: "Table List",
-    icon: "nc-icon nc-notes",
-    component: TableList,
-    layout: "/admin"
-  },
+  
   {
     path: "/typography",
     name: "Typography",

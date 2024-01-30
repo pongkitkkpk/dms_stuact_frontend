@@ -85,7 +85,7 @@ function TableAdd() {
                             </Form.Label>
                             <Form.Select aria-label="Default select example" onChange={(event) => {
                                 setPosition(event.target.value)
-                            }} >
+                            }} required>
                                 <option >เลือกบลาๆ</option>
                                 <option value="S">นักศึกษาประสานงาน</option>
                                 <option value="SC-P">ประธานสภา</option>
@@ -102,7 +102,8 @@ function TableAdd() {
                                 setCodeClub(event.target.value)
                                 const selectedText = event.target.options[event.target.selectedIndex].text;
                                 setClubName(selectedText)
-                            }} >
+                            }} required>
+                                <option>กรุณาเลือก</option>
                                 {setCode.Divison.D04.Agency.map((agencyGroup, index) => {
                                     const campusData = agencyGroup[campus]; // Get data for the selected campus
                                     return (
