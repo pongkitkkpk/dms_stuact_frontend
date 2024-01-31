@@ -1,5 +1,4 @@
-import React from "react";
-import ChartistGraph from "react-chartist";
+import React, { useState } from 'react';
 // react-bootstrap components
 import {
   Badge,
@@ -16,99 +15,46 @@ import {
   Tooltip,
 } from "react-bootstrap";
 
+import CSD_detail from './Compo_ProjectDoc/CreateDetailP/CSD_detail';
 function NewProjectDocument() {
+    const [cSD_Detail, setCSD_Detail] = useState(true);
+
+    const CSD_DetailComponent = () => {
+        setCSD_Detail(true);
+      };
+
     return(
         <>
-        <h1>สร้างโครงการใหม่่</h1>
-         <Col md="12">
-                <Card>
-                    <Table striped="columns">
-                        <thead>
-                            <tr>
-                                <th>ข้อมูลพื้นฐานโครงการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className='head-side-td'>ชื่อโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>หน่วยงานที่รับผิดชอบ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ปีการศึกษา</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ที่ปรึกษา<p className='detail-prodoc'>ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ประธานโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ผู้ประสานงานโครงการ</td>
-                                <td className='back-side-td'>
-                                    <Table striped="columns">
-                                        <thead>
-                                            <tr>
-                                                <th>ชื่อ-สกุล</th>
-                                                <th>โทรศัพท์</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Mark</td>
-                                                <td>789456</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mark</td>
-                                                <td>789456</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>หลักการและเหตุผล</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>วัตถุประสงค์</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>วันจัดโครงการ<p className='detail-prodoc'>กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ผู้เข้าร่วมโครงการ</td>
-                                <td className='back-side-td'>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Card>
+        <Container fluid>
+          <Row>
+            <Col md="2">
+              <Card className="bg-dark text-white">
+                <Card.Header className="bg-secondary text-white" >เมนูจัดการโครงการ</Card.Header>
+                <Card.Body>
+                  <Nav.Link href="#section1">1. แบบขออนุมัติโครงการ</Nav.Link>
+                  <Nav.Link href="#" onClick={CSD_DetailComponent}>
+                    1.1 ข้อมูลพื้นฐานโครงการ
+                  </Nav.Link>
+                  <Nav.Link href="#" >
+                    1.2 แผนการดำเนินงาน
+                  </Nav.Link>
+                  <Nav.Link href="#">1.3 งบประมาณ</Nav.Link>
+                  <Nav.Link href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</Nav.Link>
+                  <Nav.Link href="#section1-5">1.5 ข้อมูลเพิ่มเติม</Nav.Link>
+                  <Nav.Link href="#section1-6">1.6 เอกสารเพิ่มเติม</Nav.Link>
+                  <Nav.Link href="#section2">2. รายการเปลี่ยนแปลงแก้ไข</Nav.Link>
+                  <Nav.Link href="#pr-1">3. สรุปและประเมินผลโครงการ</Nav.Link>
+                </Card.Body>
+              </Card>
             </Col>
-        </>
+  
+           
+            {cSD_Detail &&<CSD_detail/>}
+            
+          </Row>
+  
+        </Container >
+      </>
     );
 }
 export default NewProjectDocument;

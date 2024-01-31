@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// react-bootstrap components
 import {
     Button,
     Card,
@@ -12,7 +11,7 @@ import {
     Table
 } from "react-bootstrap";
 
-function SD_detail() {
+function SD_budget() {
     return (
         <>
             <Col md="9">
@@ -20,10 +19,14 @@ function SD_detail() {
                     <Table striped="columns">
                         <thead>
                             <tr>
-                                <th>ข้อมูลพื้นฐานโครงการ</th>
+                                <th>ข้อมูลงบประมาณ</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
+                            <div>
+                                
+                            </div>
                             <tr>
                                 <td className='head-side-td'>ชื่อโครงการ</td>
                                 <td className='back-side-td'>Mark</td>
@@ -106,4 +109,4 @@ function SD_detail() {
         </>
     );
 }
-export default SD_detail
+export default SD_budget

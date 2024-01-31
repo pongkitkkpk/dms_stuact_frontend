@@ -859,23 +859,3 @@
   color: white;
 }
 
-.input-container {
-  position: relative;
-  width: 15%;
-}
-
-.input-container i {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #888;
-}
-
-.input-container input {
-  padding-left: 30px; /* Adjust this value to your desired spacing */
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  height: 30px;
-}

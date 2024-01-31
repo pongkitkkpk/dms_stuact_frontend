@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
+import { Card, Container, Row, Col, Button, InputGroup, Form } from "react-bootstrap";
 
 function AllProject() {
-    const [searchTopic, setSearchTopic] = useState(""); // State to hold the search input value
 
-    const handleSearchChange = (event) => {
-        setSearchTopic(event.target.value);
-    };
     return (
         <>
 
             <Container fluid>
                 <Row>
                     <Col md="12">
-                        <div class="input-container">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                            <input type="text" value={searchTopic} onChange={handleSearchChange} placeholder="Search..." />
-                        </div>
-                        
-                        <br/>
-                        <Card className='card-with-border-warning ' style={{"margin":"0% 0"}}>
+                        <InputGroup className="mb-3" style={{ width: '20%' }}>
+                            <Form.Control
+                                placeholder="ค้นหา"
+                                aria-describedby="basic-addon2"
+                                onChange={(event) => console.log(event.target.value)}
+                            />
+                            <InputGroup.Text><i className="fa fa-search" aria-hidden="true"></i></InputGroup.Text>
+                        </InputGroup>
+
+
+
+
+                        <br />
+                        <Card className='card-with-border-warning ' style={{ "margin": "0% 0" }}>
                             <Card.Body>
                                 <div className="status-tag">
                                     <span className="badge badge-warning">In Progress</span>
@@ -43,7 +46,7 @@ function AllProject() {
                     </Col>
 
                     <Col md="12">
-                        <Card className='card-with-border-success ' style={{"margin":"0% 0"}}>
+                        <Card className='card-with-border-success ' style={{ "margin": "0% 0" }}>
                             <Card.Body>
                                 <div className="status-tag">
                                     <span className="badge badge-success">In Progress</span>

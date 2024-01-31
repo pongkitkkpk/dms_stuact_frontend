@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// react-bootstrap components
 import {
     Button,
     Card,
@@ -11,7 +12,7 @@ import {
     Table
 } from "react-bootstrap";
 
-function SD_Budget() {
+function SD_detail() {
     return (
         <>
             <Col md="9">
@@ -19,14 +20,10 @@ function SD_Budget() {
                     <Table striped="columns">
                         <thead>
                             <tr>
-                                <th>ข้อมูลงบประมาณ</th>
+                                <th>ข้อมูลพื้นฐานโครงการ</th>
                             </tr>
                         </thead>
-                        
                         <tbody>
-                            <div>
-                                
-                            </div>
                             <tr>
                                 <td className='head-side-td'>ชื่อโครงการ</td>
                                 <td className='back-side-td'>Mark</td>
@@ -40,15 +37,11 @@ function SD_Budget() {
                                 <td className='back-side-td'>Mark</td>
                             </tr>
                             <tr>
-                                <td className='head-side-td'>ที่ปรึกษา<p className='detail-prodoc'>ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ</p></td>
+                                <td className='head-side-td'>อาจารย์ที่ปรึกษา<p className='detail-prodoc'>ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ</p></td>
                                 <td className='back-side-td'>Mark</td>
                             </tr>
                             <tr>
-                                <td className='head-side-td'>ประธานโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ผู้ประสานงานโครงการ</td>
+                                <td className='head-side-td'>ผู้รับผิดชอบโครงการ</td>
                                 <td className='back-side-td'>
                                     <Table striped="columns">
                                         <thead>
@@ -58,11 +51,11 @@ function SD_Budget() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr style={{ backgroundColor: "white" }}>
                                                 <td>Mark</td>
                                                 <td>789456</td>
                                             </tr>
-                                            <tr>
+                                            <tr style={{ backgroundColor: "white" }}>
                                                 <td>Mark</td>
                                                 <td>789456</td>
                                             </tr>
@@ -109,4 +102,4 @@ function SD_Budget() {
         </>
     );
 }
-export default SD_Budget
+export default SD_detail

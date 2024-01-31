@@ -74,8 +74,6 @@ function TableAdd() {
                             </Form.Label>
                             <Form.Control type="text" placeholder="Enter ID Code" onChange={(event) => {
                                 setIdStudent(event.target.value)
-                                console.log(idStudent)
-
                             }} />
 
                             <p>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต</p>

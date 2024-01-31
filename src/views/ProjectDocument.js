@@ -13,17 +13,17 @@ import {
 } from "react-bootstrap";
 
 import ArrowProgressBar from './Compo_ProjectDoc/ArrowProgressBar';
-import SD_detail from './Compo_ProjectDoc/ShowDetail/SD_detail';
-import SD_plan from './Compo_ProjectDoc/ShowDetail/SD_plan';
-import SD_Budget from './Compo_ProjectDoc/ShowDetail/SD_Budget';
+import SD_detail from './Compo_ProjectDoc/ShowDetailP/SD_detail';
+import SD_plan from './Compo_ProjectDoc/ShowDetailP/SD_plan';
+import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
 
 function ProjectDocument() {
 
   // รับค่ามากจาก database ที่เป็นโครงการ 1 อัน
   const [currentStep, setCurrentStep] = useState(1);
-  const [showSD_Detail, setSD_Detail] = useState(false);
-  const [showSD_Plan, setShowSD_Plan] = useState(false);
-  const [showSD_Budget, setShowSD_Budget] = useState(false);
+  const [SD_Detail, setSD_Detail] = useState(true);
+  const [SD_Plan, setSD_Plan] = useState(false);
+  const [SD_Budget, setSD_Budget] = useState(false);
   const totalSteps = 7;
 
   const handleNextStep = () => {
@@ -34,20 +34,20 @@ function ProjectDocument() {
     setCurrentStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
-  const showSD_DetailComponent = () => {
+  const SD_DetailComponent = () => {
     setSD_Detail(true);
-    setShowSD_Plan(false);
-    setShowSD_Budget(false);
+    setSD_Plan(false);
+    setSD_Budget(false);
   };
-  const showSD_PlanComponent = () => {
+  const SD_PlanComponent = () => {
     setSD_Detail(false);
-    setShowSD_Plan(true);
-    setShowSD_Budget(false);
+    setSD_Plan(true);
+    setSD_Budget(false);
   };
-  const showSD_BudgetComponent = () => {
+  const SD_BudgetComponent = () => {
     setSD_Detail(false);
-    setShowSD_Plan(false);
-    setShowSD_Budget(true);
+    setSD_Plan(false);
+    setSD_Budget(true);
   };
 
 
@@ -74,13 +74,13 @@ function ProjectDocument() {
               <Card.Header className="bg-secondary text-white" >เมนูจัดการโครงการ</Card.Header>
               <Card.Body>
                 <Nav.Link href="#section1">1. แบบขออนุมัติโครงการ</Nav.Link>
-                <Nav.Link href="#" onClick={showSD_DetailComponent}>
+                <Nav.Link href="#" onClick={SD_DetailComponent}>
                   1.1 ข้อมูลพื้นฐานโครงการ
                 </Nav.Link>
-                <Nav.Link href="#" onClick={showSD_PlanComponent}>
+                <Nav.Link href="#" onClick={SD_PlanComponent}>
                   1.2 แผนการดำเนินงาน
                 </Nav.Link>
-                <Nav.Link href="#"onClick={showSD_BudgetComponent}>1.3 งบประมาณ</Nav.Link>
+                <Nav.Link href="#"onClick={SD_BudgetComponent}>1.3 งบประมาณ</Nav.Link>
                 <Nav.Link href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</Nav.Link>
                 <Nav.Link href="#section1-5">1.5 ข้อมูลเพิ่มเติม</Nav.Link>
                 <Nav.Link href="#section1-6">1.6 เอกสารเพิ่มเติม</Nav.Link>
@@ -90,9 +90,9 @@ function ProjectDocument() {
             </Card>
           </Col>
 
-          {showSD_Detail && <SD_detail />}
-          {showSD_Plan && <SD_plan />}
-          {showSD_Budget && <SD_Budget />}
+          {SD_Detail && <SD_detail />}
+          {SD_Plan && <SD_plan />}
+          {SD_Budget && <SD_budget />}
         </Row>
 
       </Container >
