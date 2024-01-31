@@ -26,6 +26,7 @@ import Notifications from "views/Notifications.js";
 import Login from "views/Login";
 import ProjectDocument from "views/ProjectDocument";
 import AllProject from "views/AllProject";
+import NewProjectDocument from "views/NewProjectDocument";
 
 const dashboardRoutes = [
   // {
@@ -45,9 +46,16 @@ const dashboardRoutes = [
   },
   {
     path: "/project-doc",
-    name: "เขียนเอกสารโครงการใหม่(เอาไว้เป็นส่วนประกอบ)",
+    name: "แสดงเอกสารโครงการใหม่(เอาไว้เป็นส่วนประกอบ)",
     icon: "nc-icon nc-notes",
     component: ProjectDocument,
+    layout: "/admin"
+  },
+  {
+    path: "/c-project-doc",
+    name: "สร้างโครงการใหม่",
+    icon: "nc-icon nc-notes",
+    component: NewProjectDocument,
     layout: "/admin"
   },
   {

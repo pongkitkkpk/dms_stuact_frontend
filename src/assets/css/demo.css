@@ -827,3 +827,55 @@
   font-size: 12px; /* Adjust the font size as needed */
   color: gray;    /* Use your desired gray color */
 }
+
+/* CSS AllProject */
+.card-with-border-warning {
+  border-left: 4px solid #ffc404;
+  position: relative;
+}
+
+.show-detail-button-warning {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #ffc404;
+  color: white;
+}
+
+.card-with-border-success {
+  border-left: 4px solid #28a745;
+  position: relative;
+}
+
+.show-detail-button-success {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #28a745;
+  color: white;
+}
+
+.input-container {
+  position: relative;
+  width: 15%;
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-container input {
+  padding-left: 30px; /* Adjust this value to your desired spacing */
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 30px;
+}

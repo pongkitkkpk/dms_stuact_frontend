@@ -15,11 +15,15 @@ import {
 import ArrowProgressBar from './Compo_ProjectDoc/ArrowProgressBar';
 import SD_detail from './Compo_ProjectDoc/ShowDetail/SD_detail';
 import SD_plan from './Compo_ProjectDoc/ShowDetail/SD_plan';
+import SD_Budget from './Compo_ProjectDoc/ShowDetail/SD_Budget';
 
 function ProjectDocument() {
+
+  // รับค่ามากจาก database ที่เป็นโครงการ 1 อัน
   const [currentStep, setCurrentStep] = useState(1);
   const [showSD_Detail, setSD_Detail] = useState(false);
   const [showSD_Plan, setShowSD_Plan] = useState(false);
+  const [showSD_Budget, setShowSD_Budget] = useState(false);
   const totalSteps = 7;
 
   const handleNextStep = () => {
@@ -33,10 +37,17 @@ function ProjectDocument() {
   const showSD_DetailComponent = () => {
     setSD_Detail(true);
     setShowSD_Plan(false);
+    setShowSD_Budget(false);
   };
-  const showSD_PlanProComponent = () => {
+  const showSD_PlanComponent = () => {
     setSD_Detail(false);
     setShowSD_Plan(true);
+    setShowSD_Budget(false);
+  };
+  const showSD_BudgetComponent = () => {
+    setSD_Detail(false);
+    setShowSD_Plan(false);
+    setShowSD_Budget(true);
   };
 
 
@@ -66,10 +77,10 @@ function ProjectDocument() {
                 <Nav.Link href="#" onClick={showSD_DetailComponent}>
                   1.1 ข้อมูลพื้นฐานโครงการ
                 </Nav.Link>
-                <Nav.Link href="#" onClick={showSD_PlanProComponent}>
+                <Nav.Link href="#" onClick={showSD_PlanComponent}>
                   1.2 แผนการดำเนินงาน
                 </Nav.Link>
-                <Nav.Link href="#section1-3">1.3 งบประมาณ</Nav.Link>
+                <Nav.Link href="#"onClick={showSD_BudgetComponent}>1.3 งบประมาณ</Nav.Link>
                 <Nav.Link href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</Nav.Link>
                 <Nav.Link href="#section1-5">1.5 ข้อมูลเพิ่มเติม</Nav.Link>
                 <Nav.Link href="#section1-6">1.6 เอกสารเพิ่มเติม</Nav.Link>
@@ -81,6 +92,7 @@ function ProjectDocument() {
 
           {showSD_Detail && <SD_detail />}
           {showSD_Plan && <SD_plan />}
+          {showSD_Budget && <SD_Budget />}
         </Row>
 
       </Container >
