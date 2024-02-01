@@ -23,35 +23,35 @@ function TableAdd() {
     // year
     const [userList, setUserList] = useState([]);
 
-    const [idStudent, setIdStudent] = useState("")
-    const [nameStudent, setName] = useState("ชื่อค้าบบบ")
+    const [id_student, setId_student] = useState("")
+    const [name_student, setName] = useState("ชื่อค้าบบบ")
     const [department, setDepartment] = useState("BBB")
     const [position, setPosition] = useState("")
 
     const [campus, setCampus] = useState("Bangkok")
-    const [clubName, setClubName] = useState("")
-    const [codeClub, setCodeClub] = useState("")
+    const [clubname, setClubname] = useState("")
+    const [codeclub, setCodeclub] = useState("")
 
     const addUser = () => {
         Axios.post('http://localhost:3001/createUser', {
-            idStudent: idStudent,
-            nameStudent: nameStudent,
+            id_student: id_student,
+            name_student: name_student,
             department: department,
             position: position,
             campus: campus,
-            clubName: clubName,
-            codeClub: codeClub
+            clubname: clubname,
+            codeclub: codeclub
         }).then(() => {
             setUserList([
                 ...userList,
                 {
-                    idStudent: idStudent,
-                    nameStudent: nameStudent,
+                    id_student: id_student,
+                    name_student: name_student,
                     department: department,
                     position: position,
                     campus: campus,
-                    clubName: clubName,
-                    codeClub: codeClub
+                    clubname: clubname,
+                    codeclub: codeclub
                 }
             ])
         })
@@ -73,7 +73,7 @@ function TableAdd() {
                                 ID Code :
                             </Form.Label>
                             <Form.Control type="text" placeholder="Enter ID Code" onChange={(event) => {
-                                setIdStudent(event.target.value)
+                                setId_student(event.target.value)
                             }} />
 
                             <p>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต</p>
@@ -95,9 +95,9 @@ function TableAdd() {
                                 ชมรม/หน่วยงาน/องค์กร:
                             </Form.Label>
                             <Form.Select aria-label="Default select example" onChange={(event) => {
-                                setCodeClub(event.target.value)
+                                setCodeclub(event.target.value)
                                 const selectedText = event.target.options[event.target.selectedIndex].text;
-                                setClubName(selectedText)
+                                setClubname(selectedText)
                             }} required>
                                 <option>กรุณาเลือก</option>
                                 {setCode.Divison.D04.Agency.map((agencyGroup, index) => {
