@@ -22,6 +22,7 @@ function CSD_detail() {
     const [endDate, setEndDate] = useState(null);
     const minDate = new Date();
 
+    // วัตถุประสงค์
     const [itemCount, setItemCount] = useState(1);
     const increaseItemCount = () => {
         if (itemCount < 3) {
@@ -35,6 +36,62 @@ function CSD_detail() {
             setLocationCount(locationCount + 1);
         }
     };
+
+    const [participants, setParticipants] = useState([
+        { type: 'นักศึกษา', name: '', total: '' },
+        { type: 'บุคลาการ', name: '', total: '' },
+
+    ]);
+
+    const addParticipantType = () => {
+        if (participants.length < 5) {
+            setParticipants([...participants, { type: '', name: '', total: '' }]);
+        }
+    };
+    const handleTotalChange = (event, index) => {
+        const updatedParticipants = [...participants];
+        const value = event.target.value;
+
+        // Check if the value is numeric (digits only)
+        if (/^\d*$/.test(value)) {
+            updatedParticipants[index].total = value;
+            setParticipants(updatedParticipants);
+        }
+    };
+    const participantInputs = participants.map((participant, index) => (
+        <div key={index}>
+            <Row>
+                <Col>
+                    <Form.Group>
+                        <Form.Label>{`Input name for ${participant.type}`}</Form.Label>
+                        <Form.Control
+                            size="lg"
+                            type="text"
+                            placeholder={`Input name for ${participant.type}`}
+                            value={participant.name}
+                            onChange={(event) => {
+                                const updatedParticipants = [...participants];
+                                updatedParticipants[index].name = event.target.value;
+                                setParticipants(updatedParticipants);
+                            }}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group>
+                        <Form.Label>{`Total persons for ${participant.type}`}</Form.Label>
+                        <Form.Control
+                            size="lg"
+                            type="text"
+                            placeholder={`Total persons for ${participant.type}`}
+                            value={participant.total}
+                            onChange={(event) => handleTotalChange(event, index)}
+                        />
+                    </Form.Group>
+                </Col>
+            </Row>
+        </div>
+    ));
     return (
         <>
             {/* วนค่าจากdatabase  */}
@@ -290,7 +347,7 @@ function CSD_detail() {
                                             dateFormat="dd/MM/yyyy"
                                             placeholderText="เลือกวันเริ่มต้น"
                                             className="form-control"
-                                            minDate={maxDate} // Set max date to current date
+                                            minDate={minDate} // Set max date to current date
                                         />
                                     </div>
                                     <div>
@@ -301,23 +358,24 @@ function CSD_detail() {
                                             dateFormat="dd/MM/yyyy"
                                             placeholderText="เลือกวันสิ้นสุด"
                                             className="form-control"
-                                            minDate={maxDate} // Set max date to current date
+                                            minDate={minDate} // Set max date to current date
                                         />
                                     </div>
                                 </td>
                             </tr>
+                            {/* ผู้เข้าร่วมโครงการ */}
                             <tr>
                                 <td className='head-side-td'>ผู้เข้าร่วมโครงการ</td>
                                 <td className='back-side-td'>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
+                                    {participantInputs}
+                                    {participants.length < 5 && (
+                                        <Button variant="primary" onClick={addParticipantType}>
+                                            เพิ่มประเภทผู้เข้าร่วม
+                                        </Button>
+                                    )}
                                 </td>
                             </tr>
-                            <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
+                            
                         </tbody>
                     </Table>
                 </Card>
