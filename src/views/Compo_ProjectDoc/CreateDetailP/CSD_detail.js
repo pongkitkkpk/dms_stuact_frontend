@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 // react-bootstrap components
 import {
     Button,
@@ -16,6 +17,24 @@ function CSD_detail() {
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
     const ad_name = "asdfasdfasdf "
+
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const minDate = new Date();
+
+    const [itemCount, setItemCount] = useState(1);
+    const increaseItemCount = () => {
+        if (itemCount < 3) {
+            setItemCount(itemCount + 1);
+        }
+    };
+
+    const [locationCount, setLocationCount] = useState(1);
+    const increaseLocationCount = () => {
+        if (locationCount < 3) {
+            setLocationCount(locationCount + 1);
+        }
+    };
     return (
         <>
             {/* วนค่าจากdatabase  */}
@@ -190,7 +209,7 @@ function CSD_detail() {
                                     />
                                 </td>
                             </tr>
-                            
+                            {/* หลักการและเหตุผล */}
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td'>หลักการและเหตุผล</td>
                                 <td style={{ verticalAlign: "middle" }}>
@@ -204,17 +223,88 @@ function CSD_detail() {
                                     />
                                 </td>
                             </tr>
+                            {/* วัตถุประสงค์ */}
                             <tr>
                                 <td className='head-side-td'>วัตถุประสงค์</td>
-                                <td className='back-side-td'>Mark</td>
+                                <td className='back-side-td'>
+                                    <ul>
+                                        {Array.from({ length: itemCount }).map((_, index) => (
+                                            <li key={index}>
+                                                <Form.Control
+                                                    size="lg"
+                                                    type="text"
+                                                    placeholder={`วัตถุประสงค์ ${index + 1}`}
+                                                    onChange={(event) => {
+                                                        // Handle input change for objectives
+                                                    }}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {itemCount < 3 && (
+                                        <Button variant="primary" onClick={increaseItemCount}>
+                                            เพิ่มวัตถุประสงค์
+                                        </Button>
+                                    )}
+                                </td>
                             </tr>
+                            {/* สถานที่จัดโครงการ */}
                             <tr>
                                 <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
+                                <td className='back-side-td'>
+                                    <ul>
+                                        {Array.from({ length: locationCount }).map((_, index) => (
+                                            <li key={index}>
+                                                <Form.Control
+                                                    size="lg"
+                                                    type="text"
+                                                    placeholder={`สถานที่จัดโครงการ ${index + 1}`}
+                                                    onChange={(event) => {
+                                                        // Handle input change for project locations
+                                                    }}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {locationCount < 3 && (
+                                        <Button variant="primary" onClick={increaseLocationCount}>
+                                            เพิ่มสถานที่
+                                        </Button>
+                                    )}
+                                </td>
                             </tr>
+                            {/* วันจัดโครงการ */}
                             <tr>
-                                <td className='head-side-td'>วันจัดโครงการ<p className='detail-prodoc'>กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน</p></td>
-                                <td className='back-side-td'>Mark</td>
+                                <td className='head-side-td'>
+                                    วันจัดโครงการ
+                                    <p className='detail-prodoc'>
+                                        กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
+                                    </p>
+                                </td>
+                                <td className='back-side-td'>
+                                    <div>
+                                        <Form.Label>วันเริ่มต้น:</Form.Label>
+                                        <DatePicker
+                                            selected={startDate}
+                                            onChange={(date) => setStartDate(date)}
+                                            dateFormat="dd/MM/yyyy"
+                                            placeholderText="เลือกวันเริ่มต้น"
+                                            className="form-control"
+                                            minDate={maxDate} // Set max date to current date
+                                        />
+                                    </div>
+                                    <div>
+                                        <Form.Label>วันสิ้นสุด:</Form.Label>
+                                        <DatePicker
+                                            selected={endDate}
+                                            onChange={(date) => setEndDate(date)}
+                                            dateFormat="dd/MM/yyyy"
+                                            placeholderText="เลือกวันสิ้นสุด"
+                                            className="form-control"
+                                            minDate={maxDate} // Set max date to current date
+                                        />
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td className='head-side-td'>ผู้เข้าร่วมโครงการ</td>
