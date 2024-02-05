@@ -55,8 +55,8 @@ function TableAdd() {
                 }
             ])
         })
-
     }
+    
     return (
         <>
             <Container fluid>
