@@ -19,13 +19,17 @@ function CSD_detail() {
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
     const ad_name = "aaaaaaaaaaaa"
+//ตัวแปรรับค่าจาก database
 
-    // ******************************
-    const [id_student, setId_student] = useState('s63030516');
+
+
+
+// ตัวแปรส่งค่าไปยัง database
+    const [id_student, setId_student] = useState('s6');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('B');
     const [codeclub, setCodeClub] = useState('A');
-    const [yearly, setYearly] = useState(2566); // Assuming yearly is a number
+    const [yearly, setYearly] = useState(66); // Assuming yearly is a number
     const [yearly_count, setYearlyCount] = useState(0); // Assuming yearly_count is a number
     const [responsible_agency, setResponsibleAgency] = useState('');
     const [academic_year, setAcademicYear] = useState('');
@@ -58,15 +62,7 @@ function CSD_detail() {
     const [startDate, setStartDate] = useState('2024-02-05'); // Assuming startDate is a Date object
     const [endDate, setEndDate] = useState('2024-02-05'); // Assuming endDate is a Date object
     
-
-
-    // **************************************
-
-
-    
-
-    // const [startDate, setStartDate] = useState(null);
-    // const [endDate, setEndDate] = useState(null);
+//
     const minDate = new Date();
 
     // วัตถุประสงค์
