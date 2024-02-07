@@ -18,14 +18,15 @@ function CSD_detail() {
     const [projectList, setProjectList] = useState([]);
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
-    const ad_name = "aaaaaaaaaaaa    "
+    const ad_name = "aaaaaaaaaaaa"
 
     // ******************************
+    const [id_student, setId_student] = useState('s63030516');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('B');
     const [codeclub, setCodeClub] = useState('A');
-    const [yearly, setYearly] = useState(null); // Assuming yearly is a number
-    const [yearly_count, setYearlyCount] = useState(null); // Assuming yearly_count is a number
+    const [yearly, setYearly] = useState(2566); // Assuming yearly is a number
+    const [yearly_count, setYearlyCount] = useState(0); // Assuming yearly_count is a number
     const [responsible_agency, setResponsibleAgency] = useState('');
     const [academic_year, setAcademicYear] = useState('');
     const [advisor_name, setAdvisorName] = useState('');
@@ -42,20 +43,20 @@ function CSD_detail() {
     const [project_type1, setProjectType1] = useState('');
     const [project_type2, setProjectType2] = useState('');
     const [project_type3, setProjectType3] = useState('');
-    const [is_newproject, setIsNewProject] = useState(null); // Assuming is_newproject is a boolean
-    const [is_continueproject, setIsContinueProject] = useState(null); // Assuming is_continueproject is a boolean
-    const [number_of_staff, setNumberOfStaff] = useState(null); // Assuming number_of_staff is a number
-    const [number_of_staffstudent, setNumberOfStaffStudent] = useState(null); // Assuming number_of_staffstudent is a number
-    const [number_of_joinstudent, setNumberOfJoinStudent] = useState(null); // Assuming number_of_joinstudent is a number
+    const [is_newproject, setIsNewProject] = useState(false); // Assuming is_newproject is a boolean
+    const [is_continueproject, setIsContinueProject] = useState(false); // Assuming is_continueproject is a boolean
+    const [number_of_staff, setNumberOfStaff] = useState(0); // Assuming number_of_staff is a number
+    const [number_of_staffstudent, setNumberOfStaffStudent] = useState(0); // Assuming number_of_staffstudent is a number
+    const [number_of_joinstudent, setNumberOfJoinStudent] = useState(0); // Assuming number_of_joinstudent is a number
     const [etc_typename1, setEtcTypename1] = useState('');
-    const [number_of_etc1, setNumberOfEtc1] = useState(null); // Assuming number_of_etc1 is a number
+    const [number_of_etc1, setNumberOfEtc1] = useState(0); // Assuming number_of_etc1 is a number
     const [etc_typename2, setEtcTypename2] = useState('');
-    const [number_of_etc2, setNumberOfEtc2] = useState(null); // Assuming number_of_etc2 is a number
+    const [number_of_etc2, setNumberOfEtc2] = useState(0); // Assuming number_of_etc2 is a number
     const [location1, setLocation1] = useState('');
     const [location2, setLocation2] = useState('');
     const [location3, setLocation3] = useState('');
-    const [startDate, setStartDate] = useState(null); // Assuming startDate is a Date object
-    const [endDate, setEndDate] = useState(null); // Assuming endDate is a Date object
+    const [startDate, setStartDate] = useState('2024-02-05'); // Assuming startDate is a Date object
+    const [endDate, setEndDate] = useState('2024-02-05'); // Assuming endDate is a Date object
     
 
 
@@ -142,6 +143,7 @@ function CSD_detail() {
 
     const addBasicProject = () => {
         Axios.post('http://localhost:3001/createProject', {
+            id_student:id_student,
             project_name: project_name,
             project_number: project_number,
             codeclub: codeclub,
@@ -182,6 +184,7 @@ function CSD_detail() {
             setProjectList([
                 ...projectList,
                 {
+                    id_student:id_student,
                     project_name: project_name,
                     project_number: project_number,
                     codeclub: codeclub,
