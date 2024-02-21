@@ -3,7 +3,10 @@ import Axios from 'axios';
 import { Card, Container, Row, Col, Button, InputGroup, Form } from "react-bootstrap";
 
 function AllProject() {
-
+    const [projectList, setPtojectList] = useState([]);
+    const [project_name, setProjectName] = useState('');
+    const [project_number, setProjectNumber] = useState('B');
+    const [lastUp, setLastUp] = useState('B');
     return (
         <>
 
@@ -28,11 +31,11 @@ function AllProject() {
                                 <div className="status-tag">
                                     <span className="badge badge-warning">In Progress</span>
                                 </div>
-                                <Card.Title as="h4">Project Title</Card.Title>
-                                <p className="card-category">Project subtitle or category</p>
+                                <Card.Title as="h4">Project Title || รหัสเลขหนังสือ B23254888885</Card.Title>
+
+                                <p className="card-category">ฟหกดกฟหดฟหกดหฟกดหก</p>
                                 <div className="stats">
                                     <i className="fas fa-history"></i>
-
                                     Updated 3 minutes ago
                                 </div>
                                 <Button
