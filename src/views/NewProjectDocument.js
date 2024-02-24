@@ -37,7 +37,7 @@ function NewProjectDocument() {
     <>
       <Container fluid>
         <Row>
-          <Col md="2">
+          <Col md="3">
             <Card className="bg-dark text-white">
               <Card.Header className="bg-secondary text-white" >เมนูจัดการโครงการ</Card.Header>
               <Card.Body>

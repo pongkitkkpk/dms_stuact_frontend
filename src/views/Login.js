@@ -12,7 +12,7 @@ function Login() {
     return (
         <Container className="mt-5">
             <Row className="justify-content-center">
-                <Col md={6}>
+                <Col md={10}>
                     <Card>
                         <Card.Header className="bg-dark text-white">
                             <Card.Title as="h4" className="text-center text-white mb-2">

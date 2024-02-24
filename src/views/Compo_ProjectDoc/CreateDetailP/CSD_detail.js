@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // react-bootstrap components
@@ -56,11 +56,11 @@ function CSD_detail() {
     const [location1, setLocation1] = useState('');
     const [location2, setLocation2] = useState('');
     const [location3, setLocation3] = useState('');
-    const [start_prepare, setStartPrepare] = useState('2024-02-05');
-    const [end_prepare, setEndPrepare] = useState('2024-02-05');
-    const [start_event, setStartEvent] = useState('2024-02-05');
-    const [end_event, setEndEvent] = useState('2024-02-05');
-    const [deadLine, setDeadLine] = useState('2024-02-05');
+    const [start_prepare, setStartPrepare] = useState('');
+    const [end_prepare, setEndPrepare] = useState('');
+    const [start_event, setStartEvent] = useState('');
+    const [end_event, setEndEvent] = useState('');
+    const [deadline, setDeadLine] = useState('');
 
     const [problem1, setProblem1] = useState('');
     const [result1, setResult1] = useState('');
@@ -73,25 +73,40 @@ function CSD_detail() {
     const minDate = new Date();
 
     // วัตถุประสงค์
-    const [itemCount, setItemCount] = useState(1);
     const [PrinciplesAndReasonsCount, setPrinciplesAndReasonsount] = useState(1);
     const increasePrinciplesAndReasons = () => {
         if (PrinciplesAndReasonsCount < 5) {
             setPrinciplesAndReasonsount(PrinciplesAndReasonsCount + 1);
         }
     };
+    // 
+    const [itemCount, setItemCount] = useState(1);
     const increaseItemCount = () => {
         if (itemCount < 3) {
             setItemCount(itemCount + 1);
         }
     };
-
+    // เพิ่มสถานที่
     const [locationCount, setLocationCount] = useState(1);
     const increaseLocationCount = () => {
         if (locationCount < 3) {
             setLocationCount(locationCount + 1);
         }
     };
+    // เพิ่มลักษณะรูปแบบโครงการ
+    const [project_typeCount, setProjectTypeCount] = useState(1);
+    const increaseProjectTypeCount = () => {
+        if (project_typeCount < 5) {
+            setProjectTypeCount(project_typeCount + 1);
+        }
+    };
+    // เพิ่มปัญหา ไม่ใช่ดีกว่า
+    // const [problemCount, setProblemCount] = useState(1);
+    // const increaseProblemCount = () => {
+    //     if (project_typeCount < 3) {
+    //         setProblemCount(problemCount + 1);
+    //     }
+    // };
 
 
     const addBasicProject = () => {
@@ -131,7 +146,7 @@ function CSD_detail() {
             end_prepare: end_prepare,
             start_event: start_event,
             end_event: end_event,
-            deadLine: deadLine,
+            deadline: deadline,
             problem1: problem1,
             result1: result1,
             problem2: problem2,
@@ -178,7 +193,7 @@ function CSD_detail() {
                     end_prepare: end_prepare,
                     start_event: start_event,
                     end_event: end_event,
-                    deadLine: deadLine,
+                    deadline: deadline,
                     problem1: problem1,
                     result1: result1,
                     problem2: problem2,
@@ -188,14 +203,31 @@ function CSD_detail() {
                 }
             ]);
         });
+        setStartPrepare('');
+        setEndPrepare('');
+        setStartEvent('');
+        setEndEvent('');
     }
+
+    // Calculate end date for วันส่งรายงาน
+    useEffect(() => {
+        if (end_event) {
+            const endReportDate = new Date(end_event);
+            endReportDate.setDate(endReportDate.getDate() + 30);
+
+            const day = endReportDate.getDate().toString().padStart(2, '0');
+            const month = (endReportDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = endReportDate.getFullYear();
+
+            setDeadLine(`${day}/${month}/${year}`);
+        }
+    }, [end_event]);
 
 
     return (
         <>
             {/* วนค่าจากdatabase  */}
             <Col md="9">
-
                 <Card>
                     <Table striped="columns">
                         <thead>
@@ -211,7 +243,7 @@ function CSD_detail() {
                                 </td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
-                                        size="lg"
+                                        size="sm"
                                         type="text"
                                         placeholder="ชื่อโครงการ"
                                         onChange={(event) => {
@@ -225,7 +257,7 @@ function CSD_detail() {
                                 <td className='head-side-td'>หน่วยงานที่รับผิดชอบ</td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
-                                        size="lg"
+                                        size="sm"
                                         type="text"
                                         placeholder="Enter ID Code"
                                         value={divition}
@@ -238,7 +270,7 @@ function CSD_detail() {
                                 <td className='head-side-td'>ปีการศึกษา</td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
-                                        size="lg"
+                                        size="sm"
                                         type="text"
                                         placeholder="Enter ID Code"
                                         value={years}
@@ -251,7 +283,7 @@ function CSD_detail() {
                                 <td className='head-side-td'>อาจารย์ปรึกษา<p className='detail-prodoc'>ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ</p></td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
-                                        size="lg"
+                                        size="sm"
                                         type="text"
                                         placeholder="Enter ID Code"
                                         value={ad_name}
@@ -276,7 +308,7 @@ function CSD_detail() {
                                                 {/* ชื่อ คนที่ 1  */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 1"
                                                         onChange={(event) => {
@@ -287,7 +319,7 @@ function CSD_detail() {
                                                 {/* เบอร์ คนที่ 1 */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
                                                         onChange={(event) => {
@@ -301,7 +333,7 @@ function CSD_detail() {
                                                 {/* ชื่อ คนที่ 2 */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 2"
                                                         onChange={(event) => {
@@ -312,7 +344,7 @@ function CSD_detail() {
                                                 {/* เบอร์ คนที่ 2 */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 2"
                                                         onChange={(event) => {
@@ -326,7 +358,7 @@ function CSD_detail() {
                                                 {/* ชื่อ คนที่ 3 */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 3"
                                                         onChange={(event) => {
@@ -337,7 +369,7 @@ function CSD_detail() {
                                                 {/* เบอร์ คนที่ 3 */}
                                                 <td style={{ verticalAlign: "middle" }}>
                                                     <Form.Control
-                                                        size="lg"
+                                                        size="sm"
                                                         type="text"
                                                         placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 3"
                                                         onChange={(event) => {
@@ -356,7 +388,7 @@ function CSD_detail() {
                                 <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
-                                        size="lg"
+                                        size="sm"
                                         type="text"
                                         placeholder="ชื่ออาจารย์ผู้ดูแลโครงการ"
                                         onChange={(event) => {
@@ -373,7 +405,7 @@ function CSD_detail() {
                                         {Array.from({ length: PrinciplesAndReasonsCount }).map((_, index) => (
                                             <li key={index}>
                                                 <Form.Control
-                                                    size="lg"
+                                                    size="sm"
                                                     type="text"
                                                     placeholder={`เพิ่มหลักการและเหตุผล ${index + 1}`}
                                                     onChange={(event) => {
@@ -416,7 +448,7 @@ function CSD_detail() {
                                         {Array.from({ length: itemCount }).map((_, index) => (
                                             <li key={index}>
                                                 <Form.Control
-                                                    size="lg"
+                                                    size="sm"
                                                     type="text"
                                                     placeholder={`วัตถุประสงค์ ${index + 1}`}
                                                     onChange={(event) => {
@@ -445,6 +477,173 @@ function CSD_detail() {
                                     )}
                                 </td>
                             </tr>
+                            {/* ลักษณะรูปแบบโครงการ */}
+                            <tr>
+                                <td className='head-side-td'>ลักษณะรูปแบบโครงการ</td>
+                                <td className='back-side-td'>
+                                    <ul>
+                                        {Array.from({ length: project_typeCount }).map((_, index) => (
+                                            <li key={index}>
+                                                <Form.Control
+                                                    size="sm"
+                                                    type="text"
+                                                    placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${index + 1}`}
+                                                    onChange={(event) => {
+                                                        switch (index) {
+                                                            case 0:
+                                                                setProjectType1(event.target.value);
+                                                                break;
+                                                            case 1:
+                                                                setProjectType2(event.target.value);
+                                                                break;
+                                                            case 2:
+                                                                setProjectType3(event.target.value);
+                                                                break;
+                                                            case 3:
+                                                                setProjectType4(event.target.value);
+                                                                break;
+                                                            case 4:
+                                                                setProjectType5(event.target.value);
+                                                                break;
+
+                                                            default:
+                                                            // Handle other cases if needed
+                                                        }
+                                                    }}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {project_typeCount < 5 && (
+                                        <Button variant="primary" onClick={increaseProjectTypeCount}>
+                                            เพิ่มลักษณะรูปแบบโครงการ
+                                        </Button>
+                                    )}
+                                </td>
+                            </tr>
+                            {/* ลักษณะโครงการ */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td'>ลักษณะโครงการ</td>
+                                <td className='back-side-td' >
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <div style={{ flex: '1', marginRight: '5%' }}>
+                                            <Form.Check
+                                                type="radio"
+                                                id="newProjectRadio"
+                                                label="โครงการใหม่"
+                                                checked={is_newproject}
+                                                onChange={() => {
+                                                    setIsNewProject(true);
+                                                    setIsContinueProject(false);
+                                                }}
+                                            />
+                                        </div>
+                                        <div style={{ flex: '1', marginRight: '20%' }}>
+                                            <Form.Check
+                                                type="radio"
+                                                id="continueProjectRadio"
+                                                label="โครงการต่อเนื่อง"
+                                                checked={is_continueproject}
+                                                onChange={() => {
+                                                    setIsNewProject(false);
+                                                    setIsContinueProject(true);
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    {is_continueproject && (
+                                        <>
+                                            <Table striped="columns">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ปัญหาและอุปสรรคในปีที่ผ่านมา</th>
+                                                        <th>แนวทางการปรับปรุงแก้ไขปัญหา และอุปสรรคในครั้งนี้</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {/* ข้อ 1 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 1  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 1"
+                                                                onChange={(event) => {
+                                                                    setProblem1(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 1 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 1 "
+                                                                onChange={(event) => {
+                                                                    setResult1(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                    {/* ข้อ 2 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 2  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 2"
+                                                                onChange={(event) => {
+                                                                    setProblem2(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 2 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 2 "
+                                                                onChange={(event) => {
+                                                                    setResult2(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                    {/* ข้อ 3 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 3  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 3"
+                                                                onChange={(event) => {
+                                                                    setProblem3(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 3 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 3 "
+                                                                onChange={(event) => {
+                                                                    setResult3(event.target.value)
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </Table>
+                                        </>
+                                    )}
+
+                                </td>
+                            </tr>
+
                             {/* สถานที่จัดโครงการ */}
                             <tr>
                                 <td className='head-side-td'>สถานที่จัดโครงการ</td>
@@ -453,7 +652,7 @@ function CSD_detail() {
                                         {Array.from({ length: locationCount }).map((_, index) => (
                                             <li key={index}>
                                                 <Form.Control
-                                                    size="lg"
+                                                    size="sm"
                                                     type="text"
                                                     placeholder={`สถานที่จัดโครงการ ${index + 1}`}
                                                     onChange={(event) => {
@@ -486,11 +685,14 @@ function CSD_detail() {
                             <tr>
                                 <td className='head-side-td'>
                                     วันจัดเตรียมโครงการ
+                                    <p className='detail-prodoc'>
+                                        ระบุช่วงเวลาเตรียมงาน
+                                    </p>
                                 </td>
                                 <td className='back-side-td'>
                                     <div style={{ display: 'flex', flexDirection: 'row' }}>
                                         <div style={{ marginRight: '20px' }}>
-                                            <Form.Label>วันเริ่มต้น(จัดเตรียม):</Form.Label>
+                                            <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
                                             <DatePicker
                                                 selected={start_prepare}
                                                 onChange={(date) => setStartPrepare(date)}
@@ -501,7 +703,7 @@ function CSD_detail() {
                                             />
                                         </div>
                                         <div>
-                                            <Form.Label>วันสิ้นสุด(จัดเตรียม):</Form.Label>
+                                            <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
                                             <DatePicker
                                                 selected={end_prepare}
                                                 onChange={(date) => setEndPrepare(date)}
@@ -526,7 +728,7 @@ function CSD_detail() {
                                 <td className='back-side-td'>
                                     <div style={{ display: 'flex', flexDirection: 'row' }}>
                                         <div style={{ marginRight: '20px' }}>
-                                            <Form.Label>วันเริ่มต้น(ดำเนิน):</Form.Label>
+                                            <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
                                             <DatePicker
                                                 selected={start_event}
                                                 onChange={(date) => setStartEvent(date)}
@@ -535,9 +737,10 @@ function CSD_detail() {
                                                 className="form-control"
                                                 minDate={end_prepare}
                                             />
+
                                         </div>
                                         <div>
-                                            <Form.Label>วันสิ้นสุด(ดำเนิน):</Form.Label>
+                                            <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
                                             <DatePicker
                                                 selected={end_event}
                                                 onChange={(date) => setEndEvent(date)}
@@ -551,7 +754,30 @@ function CSD_detail() {
                                 </td>
 
                             </tr>
-                            
+                            {/* วันกำหนดส่งโครงการ */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td'>
+                                    วันกำหนดส่งโครงการ
+                                    <p className='detail-prodoc'>
+                                        กำหนด 30 วัน หลังจากวันดำเนินงาน
+                                    </p>
+                                </td>
+                                <td>
+                                    <div className="d-flex align-items-center">
+                                        <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
+
+
+                                        <input
+                                            type="text"
+                                            value={deadline}
+                                            className="form-control"
+                                            readOnly
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+
+
 
                         </tbody>
                     </Table>

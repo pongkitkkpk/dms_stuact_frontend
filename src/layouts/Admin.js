@@ -50,12 +50,13 @@ function Admin() {
 
   return (
     <>
+      <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
       <div className="wrapper" style={{ overflow: "hidden" }}>
-        
-        <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
-        
-        <div className="main-panel" ref={mainPanel} style={{ marginRight: "-7%", width: "calc(100% + 50px)" }}>
-        
+
+
+
+        {/* style={{ marginRight: "-5%", width: "calc(100% )" }} */}
+        <div className="main-panel" ref={mainPanel} >
           <AdminNavbar />
           <div className="content">
             <Switch>{getRoutes(routes)}</Switch>
