@@ -18,6 +18,10 @@ function CSD_person() {
     const [studentType2Number,setStudentType2Number]= useState('');
     const [studentType3Name,setStudentType3Name]= useState('');
     const [studentType3Number,setStudentType3Number]= useState('');
+    const [studentType4Name,setStudentType4Name]= useState('');
+    const [studentType4Number,setStudentType4Number]= useState('');
+    const [studentType5Name,setStudentType5Name]= useState('');
+    const [studentType5Number,setStudentType5Number]= useState('');
     const [studentTypeCount, setStudentTypeCount] = useState(1);
     const increaseStudentTypeCount = () => {
         if (studentTypeCount < 5) {
@@ -40,43 +44,120 @@ function CSD_person() {
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td'>ประเภทนักศึกษา</td>
                                 <td className='back-side-td'>
-                                    <ul>
-                                        {Array.from({ length: studentTypeCount }).map((_, index) => (
-                                            <li key={index}>
-                                                <Form.Control
-                                                    size="lg"
-                                                    type="text"
-                                                    placeholder={`เพิ่มหลักการและเหตุผล ${index + 1}`}
-                                                    onChange={(event) => {
-                                                        switch (index) {
-                                                            case 0:
-                                                                setStudentType1Name(event.target.value);
-                                                                break;
-                                                            case 1:
-                                                                setStudentType2Name(event.target.value);
-                                                                break;
-                                                            case 2:
-                                                                setStudentType3Name(event.target.value);
-                                                                break;
-                                                            case 3:
-                                                                setStudentType1Name(event.target.value);
-                                                                break;
-                                                            case 4:
-                                                                setStudentType1Name(event.target.value);
-                                                                break;
-                                                            default:
-                                                            // Handle other cases if needed
-                                                        }
-                                                    }}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {studentTypeCount < 5 && (
-                                        <Button variant="primary" onClick={increaseStudentTypeCount}>
-                                            เพิ่มหลักการและเหตุผล
-                                        </Button>
-                                    )}
+                                    <label>จำนวนนักศึกษา   ป   คน</label>
+                                    <Table striped="columns">
+                                        <thead>
+                                            <tr>
+                                                <th>ประเภทนักศึกษา</th>
+                                                <th>จำนวน</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {/* ประเภทที่ 1 */}
+                                            <tr style={{ backgroundColor: "white" }}>
+                                                {/* ประเภทที่ 1 ของนักศึกษา  */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="ประเภทที่ 1 ของนักศึกษา "
+                                                        onChange={(event) => {
+                                                            setStudentType1Name(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                                {/* จำนวนนักศึกษาของ ประเภทที่ 1 */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="จำนวนนักศึกษาของ ประเภทที่ 1 "
+                                                        onChange={(event) => {
+                                                            setStudentType1Number(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+
+                                             {/* ประเภทที่ 2 */}
+                                             <tr style={{ backgroundColor: "white" }}>
+                                                {/* ประเภทที่ 2 ของนักศึกษา  */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="ประเภทที่ 2 ของนักศึกษา "
+                                                        onChange={(event) => {
+                                                            setStudentType2Name(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                                {/* จำนวนนักศึกษาของ ประเภทที่ 2 */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="จำนวนนักศึกษาของ ประเภทที่ 2 "
+                                                        onChange={(event) => {
+                                                            setStudentType2Number(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+
+                                            {/* ประเภทที่ 3 */}
+                                            <tr style={{ backgroundColor: "white" }}>
+                                                {/* ประเภทที่ 3 ของนักศึกษา  */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="ประเภทที่ 3 ของนักศึกษา "
+                                                        onChange={(event) => {
+                                                            setStudentType3Name(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                                {/* จำนวนนักศึกษาของ ประเภทที่ 3 */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="จำนวนนักศึกษาของ ประเภทที่ 3 "
+                                                        onChange={(event) => {
+                                                            setStudentType3Number(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+
+                                             {/* ประเภทที่ 4 */}
+                                             <tr style={{ backgroundColor: "white" }}>
+                                                {/* ประเภทที่ 4 ของนักศึกษา  */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="ประเภทที่ 4 ของนักศึกษา "
+                                                        onChange={(event) => {
+                                                            setStudentType4Name(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                                {/* จำนวนนักศึกษาของ ประเภทที่ 4 */}
+                                                <td style={{ verticalAlign: "middle" }}>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder="จำนวนนักศึกษาของ ประเภทที่ 4 "
+                                                        onChange={(event) => {
+                                                            setStudentType4Number(event.target.value)
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        </Table>
                                 </td>
                             </tr>
                         </tbody>

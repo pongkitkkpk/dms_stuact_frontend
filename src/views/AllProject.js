@@ -21,10 +21,7 @@ function AllProject() {
                             />
                             <InputGroup.Text><i className="fa fa-search" aria-hidden="true"></i></InputGroup.Text>
                         </InputGroup>
-
-
-
-
+                        
                         <br />
                         <Card className='card-with-border-warning ' style={{ "margin": "0% 0" }}>
                             <Card.Body>

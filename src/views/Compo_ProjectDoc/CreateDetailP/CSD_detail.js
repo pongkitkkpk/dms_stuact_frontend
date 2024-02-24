@@ -22,10 +22,8 @@ function CSD_detail() {
     //ตัวแปรรับค่าจาก database
 
 
-
-
     // ตัวแปรส่งค่าไปยัง database
-    const [id_student, setId_student] = useState('s6');
+    const [id_student, setId_student] = useState('s6303051613149');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('B');
     const [codeclub, setCodeClub] = useState('A');
@@ -71,6 +69,26 @@ function CSD_detail() {
 
     //
     const minDate = new Date();
+
+    // *********************************************************
+    const [userList, setUserList] = useState([]);
+    const getUsers = () => {
+        Axios.get('http://localhost:3001/users').then((response) => {
+            setUserList(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getUsers();
+    }, []);
+
+    useEffect(() => {
+        const user = userList.find(user => user.id_student === id_student);
+        if (user) {
+            setProjectNumber(user.codebooksome);
+        }
+    }, [userList, id_student]);
+    // *********************************************************
 
     // วัตถุประสงค์
     const [PrinciplesAndReasonsCount, setPrinciplesAndReasonsount] = useState(1);
@@ -208,6 +226,7 @@ function CSD_detail() {
         setStartEvent('');
         setEndEvent('');
     }
+
 
     // Calculate end date for วันส่งรายงาน
     useEffect(() => {
@@ -777,8 +796,6 @@ function CSD_detail() {
                                 </td>
                             </tr>
 
-
-
                         </tbody>
                     </Table>
                     <Button
@@ -786,7 +803,7 @@ function CSD_detail() {
                         type="submit"
                         variant="info"
                     >
-                        Update Profile
+                        อัพขึ้นสู่ระบบ
                     </Button>
                 </Card>
             </Col>

@@ -64,8 +64,8 @@ function TableList() {
                     {userList.map((val, key) => {
                       return (
                         <tr>
-                          <td> {val.idStudent}</td>
-                          <td>{val.nameStudent}</td>
+                          <td> {val.id_student}</td>
+                          <td>{val.name_student}</td>
                           <td>
                             {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
                             {val.position === "SH" ? (
