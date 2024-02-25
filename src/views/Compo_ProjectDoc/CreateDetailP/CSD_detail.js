@@ -90,14 +90,14 @@ function CSD_detail() {
     }, [userList, id_student]);
     // *********************************************************
 
-    // วัตถุประสงค์
+    // หลักการและเหตุผล
     const [PrinciplesAndReasonsCount, setPrinciplesAndReasonsount] = useState(1);
     const increasePrinciplesAndReasons = () => {
         if (PrinciplesAndReasonsCount < 5) {
             setPrinciplesAndReasonsount(PrinciplesAndReasonsCount + 1);
         }
     };
-    // 
+    // วัตถุประสงค์
     const [itemCount, setItemCount] = useState(1);
     const increaseItemCount = () => {
         if (itemCount < 3) {
