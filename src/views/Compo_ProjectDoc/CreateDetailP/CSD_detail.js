@@ -25,10 +25,10 @@ function CSD_detail() {
     // ตัวแปรส่งค่าไปยัง database
     const [id_student, setId_student] = useState('s6303051613149');
     const [project_name, setProjectName] = useState('');
-    const [project_number, setProjectNumber] = useState('B');
-    const [codeclub, setCodeClub] = useState('A');
+    const [project_number, setProjectNumber] = useState('');
+    const [codeclub, setCodeClub] = useState('');
     const [yearly, setYearly] = useState(66); // Assuming yearly is a number
-    const [yearly_count, setYearlyCount] = useState(0); // Assuming yearly_count is a number
+    const [yearly_count, setYearlyCount] = useState(''); // Assuming yearly_count is a number
     const [responsible_agency, setResponsibleAgency] = useState('');
     const [academic_year, setAcademicYear] = useState('');
     const [advisor_name, setAdvisorName] = useState('');
@@ -41,6 +41,8 @@ function CSD_detail() {
     const [principles_and_reasons1, setPrinciplesAndReasons1] = useState('');
     const [principles_and_reasons2, setPrinciplesAndReasons2] = useState('');
     const [principles_and_reasons3, setPrinciplesAndReasons3] = useState('');
+    const [principles_and_reasons4, setPrinciplesAndReasons4] = useState('');
+    const [principles_and_reasons5, setPrinciplesAndReasons5] = useState('');
     const [objective1, setObjective1] = useState('');
     const [objective2, setObjective2] = useState('');
     const [objective3, setObjective3] = useState('');
@@ -85,7 +87,7 @@ function CSD_detail() {
     useEffect(() => {
         const user = userList.find(user => user.id_student === id_student);
         if (user) {
-            setProjectNumber(user.codebooksome);
+            setCodeClub(user.codebooksome);
         }
     }, [userList, id_student]);
     // *********************************************************
@@ -97,6 +99,32 @@ function CSD_detail() {
             setPrinciplesAndReasonsount(PrinciplesAndReasonsCount + 1);
         }
     };
+    const decreasePrinciplesAndReasons = () => {
+        if (PrinciplesAndReasonsCount > 1) {
+            setPrinciplesAndReasonsount(PrinciplesAndReasonsCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (PrinciplesAndReasonsCount) {
+                case 4:
+                    setPrinciplesAndReasons5('');
+                    break;
+                case 3:
+                    setPrinciplesAndReasons4('');
+                    break;
+                case 2:
+                    setPrinciplesAndReasons3('');
+                    break;
+                case 1:
+                    setPrinciplesAndReasons2('');
+                    break;
+                case 0:
+                    setPrinciplesAndReasons1('');
+                    break;
+                default:
+                // Handle other cases if needed
+            }
+        }
+    };
+
     // วัตถุประสงค์
     const [itemCount, setItemCount] = useState(1);
     const increaseItemCount = () => {
@@ -104,6 +132,26 @@ function CSD_detail() {
             setItemCount(itemCount + 1);
         }
     };
+    const decreaseItemCount = () => {
+        if (itemCount > 1) {
+            setItemCount(itemCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (itemCount) {
+                case 2:
+                    setObjective3('');
+                    break;
+                case 1:
+                    setObjective2('');
+                    break;
+                case 0:
+                    setObjective1('');
+                    break;
+                default:
+                // Handle other cases if needed
+            }
+        }
+    };
+
     // เพิ่มสถานที่
     const [locationCount, setLocationCount] = useState(1);
     const increaseLocationCount = () => {
@@ -111,6 +159,26 @@ function CSD_detail() {
             setLocationCount(locationCount + 1);
         }
     };
+    const decreaseLocationCount = () => {
+        if (locationCount > 1) {
+            setLocationCount(locationCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (locationCount) {
+                case 2:
+                    setLocation3('');
+                    break;
+                case 1:
+                    setLocation2('');
+                    break;
+                case 0:
+                    setLocation1('');
+                    break;
+                default:
+                // Handle other cases if needed
+            }
+        }
+    };
+
     // เพิ่มลักษณะรูปแบบโครงการ
     const [project_typeCount, setProjectTypeCount] = useState(1);
     const increaseProjectTypeCount = () => {
@@ -118,23 +186,59 @@ function CSD_detail() {
             setProjectTypeCount(project_typeCount + 1);
         }
     };
-    // เพิ่มปัญหา ไม่ใช่ดีกว่า
-    // const [problemCount, setProblemCount] = useState(1);
-    // const increaseProblemCount = () => {
-    //     if (project_typeCount < 3) {
-    //         setProblemCount(problemCount + 1);
-    //     }
-    // };
-
+    const decreaseProjectTypeCount = () => {
+        if (project_typeCount > 1) {
+            setProjectTypeCount(project_typeCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (project_typeCount) {
+                case 4:
+                    setProjectType5('');
+                    break;
+                case 3:
+                    setProjectType4('');
+                    break;
+                case 2:
+                    setProjectType3('');
+                    break;
+                case 1:
+                    setProjectType2('');
+                    break;
+                case 0:
+                    setProjectType1('');
+                    break;
+                default:
+                // Handle other cases if needed
+            }
+        }
+    };
 
     const addBasicProject = () => {
+        Axios.get(`http://localhost:3001/projects/${codeclub}`).then((response) => {
+        const existingProject = response.data.find(project => project.codeclub === codeclub);
+        if (existingProject) {
+            const currentYearlyCount = parseInt(existingProject.yearly_count, 10);
+            const updatedYearlyCount = currentYearlyCount + 1;
+            const formattedYearlyCount = String(updatedYearlyCount).padStart(2, '0');
+            // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
+            // setProjectNumber(codeclub+formattedYearlyCount)
+
+            createProject(formattedYearlyCount);
+
+        } else {
+            // If project_number doesn't exist, create a new project with yearly_count set to 1
+            createProject('01');
+        }
+    });
+    };
+
+    const createProject  = (yearlyCount) => {
         Axios.post('http://localhost:3001/createProject', {
             id_student: id_student,
             project_name: project_name,
             project_number: project_number,
             codeclub: codeclub,
             yearly: yearly,
-            yearly_count: yearly_count,
+            yearly_count: yearlyCount,
             responsible_agency: responsible_agency,
             academic_year: academic_year,
             advisor_name: advisor_name,
@@ -147,6 +251,8 @@ function CSD_detail() {
             principles_and_reasons1: principles_and_reasons1,
             principles_and_reasons2: principles_and_reasons2,
             principles_and_reasons3: principles_and_reasons3,
+            principles_and_reasons4: principles_and_reasons4,
+            principles_and_reasons5: principles_and_reasons5,
             objective1: objective1,
             objective2: objective2,
             objective3: objective3,
@@ -194,6 +300,8 @@ function CSD_detail() {
                     principles_and_reasons1: principles_and_reasons1,
                     principles_and_reasons2: principles_and_reasons2,
                     principles_and_reasons3: principles_and_reasons3,
+                    principles_and_reasons4: principles_and_reasons4,
+                    principles_and_reasons5: principles_and_reasons5,
                     objective1: objective1,
                     objective2: objective2,
                     objective3: objective3,
@@ -453,8 +561,13 @@ function CSD_detail() {
                                         ))}
                                     </ul>
                                     {PrinciplesAndReasonsCount < 5 && (
-                                        <Button variant="primary" onClick={increasePrinciplesAndReasons}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increasePrinciplesAndReasons}>
                                             เพิ่มหลักการและเหตุผล
+                                        </Button>
+                                    )}
+                                    {PrinciplesAndReasonsCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreasePrinciplesAndReasons}>
+                                            ลดหลักการและเหตุผล
                                         </Button>
                                     )}
                                 </td>
@@ -490,8 +603,13 @@ function CSD_detail() {
                                         ))}
                                     </ul>
                                     {itemCount < 3 && (
-                                        <Button variant="primary" onClick={increaseItemCount}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseItemCount}>
                                             เพิ่มวัตถุประสงค์
+                                        </Button>
+                                    )}
+                                    {itemCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseItemCount}>
+                                            ลดวัตถุประสงค์
                                         </Button>
                                     )}
                                 </td>
@@ -534,8 +652,13 @@ function CSD_detail() {
                                         ))}
                                     </ul>
                                     {project_typeCount < 5 && (
-                                        <Button variant="primary" onClick={increaseProjectTypeCount}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseProjectTypeCount}>
                                             เพิ่มลักษณะรูปแบบโครงการ
+                                        </Button>
+                                    )}
+                                    {project_typeCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseProjectTypeCount}>
+                                            ลดลักษณะรูปแบบโครงการ
                                         </Button>
                                     )}
                                 </td>
@@ -694,8 +817,13 @@ function CSD_detail() {
                                         ))}
                                     </ul>
                                     {locationCount < 3 && (
-                                        <Button variant="primary" onClick={increaseLocationCount}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseLocationCount}>
                                             เพิ่มสถานที่
+                                        </Button>
+                                    )}
+                                    {locationCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseLocationCount}>
+                                            ลดสถานที่
                                         </Button>
                                     )}
                                 </td>

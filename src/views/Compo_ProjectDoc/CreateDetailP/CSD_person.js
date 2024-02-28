@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState,useEffect } from 'react';
+import Axios from 'axios';
 // react-bootstrap components
 import {
     Button,
@@ -12,6 +12,7 @@ import {
     Table
 } from "react-bootstrap";
 function CSD_person() {
+    const [id_projects,setIDProjects]=useState('');
     // ********************************************** ผู้บริหาร *********************************************
     const [executiveType1Name, setExecutiveType1Name] = useState('');
     const [executiveType1Number, setExecutiveType1Number] = useState('');
@@ -25,6 +26,8 @@ function CSD_person() {
     const [executiveType5Number, setExecutiveType5Number] = useState('');
 
     const [executiveTypeCount, setExecutiveTypeCount] = useState(1);
+    const [grandTotalExecutive, setGrandTotalExecutive] = useState(0);
+    
     const increaseExecutiveTypeCount = () => {
         if (executiveTypeCount < 5) {
             setExecutiveTypeCount(executiveTypeCount + 1);
@@ -54,8 +57,13 @@ function CSD_person() {
             }
         }
     };
-    const totalExecutiveCount = Number(executiveType1Number) + Number(executiveType2Number) + Number(executiveType3Number) + Number(executiveType4Number) + Number(executiveType5Number);
-
+    useEffect(() => {
+        // Calculate total for executive category
+        const totalExecutiveCount= Number(executiveType1Number) + Number(executiveType2Number) + Number(executiveType3Number) + Number(executiveType4Number) + Number(executiveType5Number);
+    
+        // Update the grand total state for executive
+        setGrandTotalExecutive(totalExecutiveCount);
+    }, [executiveType1Number, executiveType2Number, executiveType3Number, executiveType4Number, executiveType5Number]);
     // ********************************************** ผู้บริหาร *********************************************
 
     // ********************************************** คณาจารย์ / บุคลากร *********************************************
@@ -71,6 +79,7 @@ function CSD_person() {
     const [professorType5Number, setProfessorType5Number] = useState('');
 
     const [professorTypeCount, setProfessorTypeCount] = useState(1);
+    const [grandTotalProfessor, setGrandTotalProfessor] = useState(0);
     const increaseProfessorTypeCount = () => {
         if (professorTypeCount < 5) {
             setProfessorTypeCount(professorTypeCount + 1);
@@ -102,8 +111,13 @@ function CSD_person() {
         }
     };
     
-    const totalProfessorCount = Number(professorType1Number) + Number(professorType2Number) + Number(professorType3Number) + Number(professorType4Number) + Number(professorType5Number);
-
+    useEffect(() => {
+        // Calculate total for professor category
+        const totalProfessorCount = Number(professorType1Number) + Number(professorType2Number) + Number(professorType3Number) + Number(professorType4Number) + Number(professorType5Number);
+    
+        // Update the grand total state for professor
+        setGrandTotalProfessor(totalProfessorCount);
+    }, [professorType1Number, professorType2Number, professorType3Number, professorType4Number, professorType5Number]);
     // ********************************************** คณาจารย์ / บุคลากร *********************************************
 
     // ********************************************** นักศึกษา *********************************************
@@ -120,6 +134,7 @@ function CSD_person() {
     const [studentType5Number, setStudentType5Number] = useState('');
 
     const [studentTypeCount, setStudentTypeCount] = useState(1);
+    const [grandTotalStudent, setGrandTotalStudent] = useState(0);
     const increaseStudentTypeCount = () => {
         if (studentTypeCount < 5) {
             setStudentTypeCount(studentTypeCount + 1);
@@ -151,14 +166,136 @@ function CSD_person() {
         }
     };
     
-    const totalStudentCount = Number(studentType1Number) + Number(studentType2Number) + Number(studentType3Number) + Number(studentType4Number) + Number(studentType5Number);
-
+    useEffect(() => {
+        // Calculate total for student category
+        const totalStudentCount = Number(studentType1Number) + Number(studentType2Number) + Number(studentType3Number) + Number(studentType4Number) + Number(studentType5Number);
+    
+        // Update the grand total state for student
+        setGrandTotalStudent(totalStudentCount);
+    }, [studentType1Number, studentType2Number, studentType3Number, studentType4Number, studentType5Number]);
     // ********************************************** นักศึกษา *********************************************
 
     // ********************************************** วิทยากร *********************************************
 
+    const [expertType1Name,   setExpertType1Name] = useState('');
+    const [expertType1Number, setExpertType1Number] = useState('');
+    const [expertType2Name,   setExpertType2Name] = useState('');
+    const [expertType2Number, setExpertType2Number] = useState('');
+    const [expertType3Name,   setExpertType3Name] = useState('');
+    const [expertType3Number, setExpertType3Number] = useState('');
+    const [expertType4Name,   setExpertType4Name] = useState('');
+    const [expertType4Number, setExpertType4Number] = useState('');
+    const [expertType5Name,   setExpertType5Name] = useState('');
+    const [expertType5Number, setExpertType5Number] = useState('');
+
+    const [expertTypeCount, setExpertTypeCount] = useState(1);
+    const [grandTotalExpert, setGrandTotalExpert] = useState(0);
+    const increaseExpertTypeCount = () => {
+        if (expertTypeCount < 5) {
+            setExpertTypeCount(expertTypeCount + 1);
+        }
+    };
+    const decreaseExpertTypeCount = () => {
+        if (expertTypeCount > 1) {
+            setExpertTypeCount(expertTypeCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (studentTypeCount) {
+                case 5:
+                    setExpertType5Number(0);
+                    break;
+                case 4:
+                    setExpertType4Number(0);
+                    break;
+                case 3:
+                    setExpertType3Number(0);
+                    break;
+                case 2:
+                    setExpertType2Number(0);
+                    break;
+                case 1:
+                    setExpertType1Number(0);
+                    break;
+                default:
+                    // Handle other cases if needed
+            }
+        }
+    };
+    
+    useEffect(() => {
+        const totalExpertCount = Number(expertType1Number) + Number(expertType2Number) + Number(expertType3Number) + Number(expertType4Number) + Number(expertType5Number);
+
+        setGrandTotalExpert(totalExpertCount);
+    }, [expertType1Number, expertType2Number, expertType3Number, expertType4Number, expertType5Number]);
 
     // ********************************************** วิทยากร *********************************************
+
+    const [grandTotalAll,setGrandTotalAll]=useState('')
+    useEffect(() => {
+        const totalAll = Number(grandTotalExecutive) + Number(grandTotalProfessor) + Number(grandTotalStudent) + Number(grandTotalExpert) + Number(expertType5Number);
+
+        setGrandTotalAll(totalAll);
+
+    }, [grandTotalExecutive, , grandTotalProfessor, grandTotalStudent, grandTotalExpert]);
+
+    const createPerson = () => {
+        Axios.post('http://localhost:3001/createProject_person', {
+            id_projects ,
+            executiveType1Name,
+            executiveType1Number,
+            executiveType2Name,
+            executiveType2Number,
+            executiveType3Name,
+            executiveType3Number,
+            executiveType4Name,
+            executiveType4Number,
+            executiveType5Name,
+            executiveType5Number,
+            grandTotalExecutive,
+            professorType1Name,
+            professorType1Number,
+            professorType2Name,
+            professorType2Number,
+            professorType3Name,
+            professorType3Number,
+            professorType4Name,
+            professorType4Number,
+            professorType5Name,
+            professorType5Number,
+            grandTotalProfessor,
+            studentType1Name,
+            studentType1Number,
+            studentType2Name,
+            studentType2Number,
+            studentType3Name,
+            studentType3Number,
+            studentType4Name,
+            studentType4Number,
+            studentType5Name,
+            studentType5Number,
+            grandTotalStudent,
+            expertType1Name,
+            expertType1Number,
+            expertType2Name,
+            expertType2Number,
+            expertType3Name,
+            expertType3Number,
+            expertType4Name,
+            expertType4Number,
+            expertType5Name,
+            expertType5Number,
+            grandTotalExpert,
+            grandTotalAll
+        })
+        .then(response => {
+            console.log(response.data);
+            // Handle success, if needed
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+            // Handle error, if needed
+        });
+    };
+    
 
     return (
         <>
@@ -176,7 +313,7 @@ function CSD_person() {
                             <tr>
                                 <td className='head-side-td'>ประเภทผู้บริหาร</td>
                                 <td className='back-side-td'>
-                                    <label>ผู้บริหาร จำนวน {totalExecutiveCount} คน</label>
+                                    <label>ผู้บริหาร จำนวน {grandTotalExecutive} คน</label>
 
                                     <Table striped="columns">
                                         <thead>
@@ -222,7 +359,7 @@ function CSD_person() {
                                                     <td style={{ verticalAlign: "middle", width: "30%" }}>
                                                         <Form.Control
                                                             size="sm"
-                                                            type="text"
+                                                            type="number"
                                                             placeholder={`จำนวนผู้บริหาร ประเภทที่  ${index + 1}`}
                                                             onChange={(event) => {
                                                                 switch (index) {
@@ -271,7 +408,7 @@ function CSD_person() {
                             <tr>
                                 <td className='head-side-td'>ประเภท คณาจารย์ / บุคลากร</td>
                                 <td className='back-side-td'>
-                                    <label>คณาจารย์ / บุคลากร จำนวน {totalProfessorCount} คน</label>
+                                    <label>คณาจารย์ / บุคลากร จำนวน {grandTotalProfessor} คน</label>
                                     <Table striped="columns">
                                         <thead>
                                             <tr>
@@ -315,7 +452,7 @@ function CSD_person() {
                                                     <td style={{ verticalAlign: "middle", width: "30%" }}>
                                                         <Form.Control
                                                             size="sm"
-                                                            type="text"
+                                                            type="number"
                                                             placeholder={`จำนวนคณาจารย์ / บุคลากร ประเภทที่ ${index + 1}`}
                                                             onChange={(event) => {
                                                                 switch (index) {
@@ -360,7 +497,7 @@ function CSD_person() {
                             <tr>
                                 <td className='head-side-td'>ประเภทนักศึกษา</td>
                                 <td className='back-side-td'>
-                                    <label>นักศึกษา จำนวน  {totalStudentCount}   คน</label>
+                                    <label>นักศึกษา จำนวน  {grandTotalStudent}   คน</label>
                                     <Table striped="columns">
                                         <thead>
                                             <tr>
@@ -405,7 +542,7 @@ function CSD_person() {
                                                     <td style={{ verticalAlign: "middle", width: "30%" }}>
                                                         <Form.Control
                                                             size="sm"
-                                                            type="text"
+                                                            type="number"
                                                             placeholder={`จำนวนนักศึกษาประเภทที่  ${index + 1}`}
                                                             onChange={(event) => {
                                                                 switch (index) {
@@ -448,11 +585,104 @@ function CSD_person() {
                                     )}
                                 </td>
                             </tr>
+                            {/* ประเภทวิทยากร */}
+                            <tr>
+                                <td className='head-side-td'>ประเภทวิทยากร</td>
+                                <td className='back-side-td'>
+                                    <label>วิทยากร จำนวน  {grandTotalExpert}   คน</label>
+                                    <Table striped="columns">
+                                        <thead>
+                                            <tr>
+                                                <th colSpan={2}>ประเภทวิทยากร</th>
+                                                <th>จำนวน</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.from({ length: expertTypeCount }).map((_, index) => (
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    {/* ประเภทที่ i ของวิทยากร  */}
+                                                    <td colSpan={2} style={{ verticalAlign: "middle" }}>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`วิทยากรประเภทที่  ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                switch (index) {
+                                                                    case 0:
+                                                                        setExpertType1Name(event.target.value);
+                                                                        break;
+                                                                    case 1:
+                                                                        setExpertType2Name(event.target.value);
+                                                                        break;
+                                                                    case 2:
+                                                                        setExpertType3Name(event.target.value);
+                                                                        break;
+                                                                    case 3:
+                                                                        setExpertType4Name(event.target.value);
+                                                                        break;
+                                                                    case 4:
+                                                                        setExpertType5Name(event.target.value);
+                                                                        break;
+                                                                    default:
+                                                                    // Handle other cases if needed
+                                                                }
+
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    {/* จำนวนวิทยากรของ ประเภทที่ i */}
+                                                    <td style={{ verticalAlign: "middle", width: "30%" }}>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="number"
+                                                            placeholder={`จำนวนวิทยากรประเภทที่  ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                
+                                                                switch (index) {
+                                                                    case 0:
+                                                                        setExpertType1Number(event.target.value);
+                                                                        break;
+                                                                    case 1:
+                                                                        setExpertType2Number(event.target.value);
+                                                                        break;
+                                                                    case 2:
+                                                                        setExpertType3Number(event.target.value);
+                                                                        break;
+                                                                    case 3:
+                                                                        setExpertType4Number(event.target.value);
+                                                                        break;
+                                                                    case 4:
+                                                                        setExpertType5Number(event.target.value);
+                                                                        break;
+                                                                    default:
+                                                                    // Handle other cases if needed
+                                                                }
+
+                                                            }}
+                                                        />
+                                                    </td>
+                                                </tr>
+
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                    {expertTypeCount < 3 && (
+                                        <Button variant="primary"className="ml-5 mb-3"  onClick={increaseExpertTypeCount}>
+                                            เพิ่มประเภทวิทยากร
+                                        </Button>
+                                    )}
+                                    {expertTypeCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseExpertTypeCount}>
+                                            ลดประเภทวิทยากร
+                                        </Button>
+                                    )}
+                                </td>
+                            </tr>
 
                         </tbody>
                     </Table>
                     <Button
-                        // onClick={addBasicProject}
+                        onClick={createPerson}
                         type="submit"
                         variant="info"
                     >
