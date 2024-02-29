@@ -14,12 +14,13 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import Axios from 'axios';
 
 import CSD_detail from './Compo_ProjectDoc/CreateDetailP/CSD_detail';
 import CSD_person from './Compo_ProjectDoc/CreateDetailP/CSD_person';
 
 function NewProjectDocument() {
-
+  const [id_projects, setIdProjects] = useState('');
 
   const [cSD_Detail, setCSD_Detail] = useState(true);
   const [cSD_person, setCSD_Person] = useState(false);
@@ -36,6 +37,7 @@ function NewProjectDocument() {
   return (
     <>
       <Container fluid>
+        <h1>{id_projects}</h1>
         <Row>
           <Col md="3">
             <Card className="bg-dark text-white">
@@ -59,8 +61,8 @@ function NewProjectDocument() {
           </Col>
 
 
-          {cSD_Detail && <CSD_detail />}
-          {cSD_person && <CSD_person />}
+          {cSD_Detail && <CSD_detail setIdProjects={setIdProjects} />}
+          {cSD_person && <CSD_person id_projects={id_projects} />}
 
         </Row>
 

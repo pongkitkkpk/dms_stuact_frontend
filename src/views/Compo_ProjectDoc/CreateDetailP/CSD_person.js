@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 // react-bootstrap components
 import {
@@ -11,8 +11,36 @@ import {
     Nav,
     Table
 } from "react-bootstrap";
-function CSD_person() {
-    const [id_projects,setIDProjects]=useState('');
+
+function CSD_person({ id_projects }) {
+    const [codeclub, setCodeClub] = useState('');
+    const [yearly_countsketch, setYearlyCountSketch] = useState('');
+
+    const [pPersonData, setPPersonData] = useState([]);
+    const [pPersonid, setPPersonID] = useState([]);
+
+    const getpPersonData = () => {
+        Axios.get('http://localhost:3001/p_person').then((response) => {
+            setPPersonData(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getpPersonData();
+    }, []);
+
+    useEffect(() => {
+        const idinperson = pPersonData.filter(person => person.id_projects === id_projects);
+        console.log("id" + id_projects);
+      
+        // Assuming idinperson is an array and you want to get data from the first element
+        if (idinperson.length > 0) {
+          const { codeclub, yearly_countsketch } = idinperson[0];
+          setCodeClub(codeclub);
+          setYearlyCountSketch(yearly_countsketch);
+        }
+      
+      }, [id_projects, pPersonData]);
     // ********************************************** ผู้บริหาร *********************************************
     const [executiveType1Name, setExecutiveType1Name] = useState('');
     const [executiveType1Number, setExecutiveType1Number] = useState('');
@@ -27,7 +55,7 @@ function CSD_person() {
 
     const [executiveTypeCount, setExecutiveTypeCount] = useState(1);
     const [grandTotalExecutive, setGrandTotalExecutive] = useState(0);
-    
+
     const increaseExecutiveTypeCount = () => {
         if (executiveTypeCount < 5) {
             setExecutiveTypeCount(executiveTypeCount + 1);
@@ -59,8 +87,8 @@ function CSD_person() {
     };
     useEffect(() => {
         // Calculate total for executive category
-        const totalExecutiveCount= Number(executiveType1Number) + Number(executiveType2Number) + Number(executiveType3Number) + Number(executiveType4Number) + Number(executiveType5Number);
-    
+        const totalExecutiveCount = Number(executiveType1Number) + Number(executiveType2Number) + Number(executiveType3Number) + Number(executiveType4Number) + Number(executiveType5Number);
+
         // Update the grand total state for executive
         setGrandTotalExecutive(totalExecutiveCount);
     }, [executiveType1Number, executiveType2Number, executiveType3Number, executiveType4Number, executiveType5Number]);
@@ -106,15 +134,15 @@ function CSD_person() {
                     setProfessorType1Number(0);
                     break;
                 default:
-                    // Handle other cases if needed
+                // Handle other cases if needed
             }
         }
     };
-    
+
     useEffect(() => {
         // Calculate total for professor category
         const totalProfessorCount = Number(professorType1Number) + Number(professorType2Number) + Number(professorType3Number) + Number(professorType4Number) + Number(professorType5Number);
-    
+
         // Update the grand total state for professor
         setGrandTotalProfessor(totalProfessorCount);
     }, [professorType1Number, professorType2Number, professorType3Number, professorType4Number, professorType5Number]);
@@ -161,15 +189,15 @@ function CSD_person() {
                     setStudentType1Number(0);
                     break;
                 default:
-                    // Handle other cases if needed
+                // Handle other cases if needed
             }
         }
     };
-    
+
     useEffect(() => {
         // Calculate total for student category
         const totalStudentCount = Number(studentType1Number) + Number(studentType2Number) + Number(studentType3Number) + Number(studentType4Number) + Number(studentType5Number);
-    
+
         // Update the grand total state for student
         setGrandTotalStudent(totalStudentCount);
     }, [studentType1Number, studentType2Number, studentType3Number, studentType4Number, studentType5Number]);
@@ -177,15 +205,15 @@ function CSD_person() {
 
     // ********************************************** วิทยากร *********************************************
 
-    const [expertType1Name,   setExpertType1Name] = useState('');
+    const [expertType1Name, setExpertType1Name] = useState('');
     const [expertType1Number, setExpertType1Number] = useState('');
-    const [expertType2Name,   setExpertType2Name] = useState('');
+    const [expertType2Name, setExpertType2Name] = useState('');
     const [expertType2Number, setExpertType2Number] = useState('');
-    const [expertType3Name,   setExpertType3Name] = useState('');
+    const [expertType3Name, setExpertType3Name] = useState('');
     const [expertType3Number, setExpertType3Number] = useState('');
-    const [expertType4Name,   setExpertType4Name] = useState('');
+    const [expertType4Name, setExpertType4Name] = useState('');
     const [expertType4Number, setExpertType4Number] = useState('');
-    const [expertType5Name,   setExpertType5Name] = useState('');
+    const [expertType5Name, setExpertType5Name] = useState('');
     const [expertType5Number, setExpertType5Number] = useState('');
 
     const [expertTypeCount, setExpertTypeCount] = useState(1);
@@ -216,11 +244,11 @@ function CSD_person() {
                     setExpertType1Number(0);
                     break;
                 default:
-                    // Handle other cases if needed
+                // Handle other cases if needed
             }
         }
     };
-    
+
     useEffect(() => {
         const totalExpertCount = Number(expertType1Number) + Number(expertType2Number) + Number(expertType3Number) + Number(expertType4Number) + Number(expertType5Number);
 
@@ -229,7 +257,7 @@ function CSD_person() {
 
     // ********************************************** วิทยากร *********************************************
 
-    const [grandTotalAll,setGrandTotalAll]=useState('')
+    const [grandTotalAll, setGrandTotalAll] = useState('')
     useEffect(() => {
         const totalAll = Number(grandTotalExecutive) + Number(grandTotalProfessor) + Number(grandTotalStudent) + Number(grandTotalExpert) + Number(expertType5Number);
 
@@ -238,8 +266,10 @@ function CSD_person() {
     }, [grandTotalExecutive, , grandTotalProfessor, grandTotalStudent, grandTotalExpert]);
 
     const createPerson = () => {
-        Axios.post('http://localhost:3001/createProject_person', {
-            id_projects ,
+        Axios.post('http://localhost:3001/updateProject_person', {
+            id_projects,
+            codeclub,
+            yearly_countsketch,
             executiveType1Name,
             executiveType1Number,
             executiveType2Name,
@@ -286,16 +316,16 @@ function CSD_person() {
             grandTotalExpert,
             grandTotalAll
         })
-        .then(response => {
-            console.log(response.data);
-            // Handle success, if needed
-        })
-        .catch(error => {
-            console.error('There was an error!', error);
-            // Handle error, if needed
-        });
+            .then(response => {
+                console.log(response.data);
+                // Handle success, if needed
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+                // Handle error, if needed
+            });
     };
-    
+
 
     return (
         <>
@@ -574,7 +604,7 @@ function CSD_person() {
                                         </tbody>
                                     </Table>
                                     {studentTypeCount < 5 && (
-                                        <Button variant="primary"className="ml-5 mb-3"  onClick={increaseStudentTypeCount}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseStudentTypeCount}>
                                             เพิ่มประเภทนักศึกษา
                                         </Button>
                                     )}
@@ -637,7 +667,7 @@ function CSD_person() {
                                                             type="number"
                                                             placeholder={`จำนวนวิทยากรประเภทที่  ${index + 1}`}
                                                             onChange={(event) => {
-                                                                
+
                                                                 switch (index) {
                                                                     case 0:
                                                                         setExpertType1Number(event.target.value);
@@ -667,7 +697,7 @@ function CSD_person() {
                                         </tbody>
                                     </Table>
                                     {expertTypeCount < 3 && (
-                                        <Button variant="primary"className="ml-5 mb-3"  onClick={increaseExpertTypeCount}>
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseExpertTypeCount}>
                                             เพิ่มประเภทวิทยากร
                                         </Button>
                                     )}

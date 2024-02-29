@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_detail() {
+function CSD_detail({ setIdProjects }) {
     const [projectList, setProjectList] = useState([]);
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
@@ -28,7 +28,8 @@ function CSD_detail() {
     const [project_number, setProjectNumber] = useState('');
     const [codeclub, setCodeClub] = useState('');
     const [yearly, setYearly] = useState(66); // Assuming yearly is a number
-    const [yearly_count, setYearlyCount] = useState(''); // Assuming yearly_count is a number
+    const [yearly_count, setYearlyCount] = useState(''); // Assuming yearly_countsketch is a number
+    const [yearly_countsketch, setYearlyCountSketch] = useState(''); // Assuming yearly_countsketch is a number
     const [responsible_agency, setResponsibleAgency] = useState('');
     const [academic_year, setAcademicYear] = useState('');
     const [advisor_name, setAdvisorName] = useState('');
@@ -214,31 +215,33 @@ function CSD_detail() {
 
     const addBasicProject = () => {
         Axios.get(`http://localhost:3001/projects/${codeclub}`).then((response) => {
-        const existingProject = response.data.find(project => project.codeclub === codeclub);
-        if (existingProject) {
-            const currentYearlyCount = parseInt(existingProject.yearly_count, 10);
-            const updatedYearlyCount = currentYearlyCount + 1;
-            const formattedYearlyCount = String(updatedYearlyCount).padStart(2, '0');
-            // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
-            // setProjectNumber(codeclub+formattedYearlyCount)
+            const existingProject = response.data.find(project => project.codeclub === codeclub);
+            if (existingProject) {
+                const currentYearlyCount = parseInt(existingProject.yearly_countsketch, 10);
+                const updatedYearlyCount = currentYearlyCount + 1;
+                const formattedYearlyCount = String(updatedYearlyCount).padStart(2, '0');
+                // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
+                // setProjectNumber(codeclub+formattedYearlyCount)
 
-            createProject(formattedYearlyCount);
-
-        } else {
-            // If project_number doesn't exist, create a new project with yearly_count set to 1
-            createProject('01');
-        }
-    });
+                createProject(formattedYearlyCount);
+                const newProjectId = response.data[0].id; // Assuming the id is the correct property
+                setIdProjects(newProjectId+1);
+            } else {
+                // If project_number doesn't exist, create a new project with yearly_count set to 1
+                createProject('01');
+            }
+        });
     };
 
-    const createProject  = (yearlyCount) => {
+    const createProject = (yearlyCountsketch) => {
         Axios.post('http://localhost:3001/createProject', {
             id_student: id_student,
             project_name: project_name,
             project_number: project_number,
             codeclub: codeclub,
             yearly: yearly,
-            yearly_count: yearlyCount,
+            yearly_count: yearly_count,
+            yearly_countsketch: yearlyCountsketch,
             responsible_agency: responsible_agency,
             academic_year: academic_year,
             advisor_name: advisor_name,
@@ -288,6 +291,7 @@ function CSD_detail() {
                     codeclub: codeclub,
                     yearly: yearly,
                     yearly_count: yearly_count,
+                    yearly_countsketch: yearly_countsketch,
                     responsible_agency: responsible_agency,
                     academic_year: academic_year,
                     advisor_name: advisor_name,
