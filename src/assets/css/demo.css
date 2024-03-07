@@ -859,3 +859,6 @@
   color: white;
 }
 
+.list-group-item.active {
+  background-color: #133122;
+}
