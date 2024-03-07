@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_detail({ setIdProjects }) {
+function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     const [projectList, setProjectList] = useState([]);
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
@@ -69,6 +69,8 @@ function CSD_detail({ setIdProjects }) {
     const [result2, setResult2] = useState('');
     const [problem3, setProblem3] = useState('');
     const [result3, setResult3] = useState('');
+
+    const[onlymonthstart,setOnlyMonthStart]=useState('')
 
     //
     const minDate = new Date();
@@ -225,7 +227,8 @@ function CSD_detail({ setIdProjects }) {
 
                 createProject(formattedYearlyCount);
                 const newProjectId = response.data[0].id; // Assuming the id is the correct property
-                setIdProjects(newProjectId+1);
+                setIdProjects(newProjectId + 1);
+                setStartMonth(onlymonthstart);
             } else {
                 // If project_number doesn't exist, create a new project with yearly_count set to 1
                 createProject('01');
@@ -337,9 +340,20 @@ function CSD_detail({ setIdProjects }) {
         setEndPrepare('');
         setStartEvent('');
         setEndEvent('');
+        // window.scrollTo({ top: 0, behavior: 'smooth' });
+        switchToCSDPerson();
+
+
     }
 
-
+    // Split month start_prepare
+    useEffect(() => {
+        if (start_prepare) {
+            const start = new Date(start_prepare);
+            const month = (start.getMonth() + 1).toString().padStart(2, '0');
+            setOnlyMonthStart(`${month}`);
+        }
+    }, [start_prepare]);
     // Calculate end date for วันส่งรายงาน
     useEffect(() => {
         if (end_event) {
@@ -930,13 +944,10 @@ function CSD_detail({ setIdProjects }) {
 
                         </tbody>
                     </Table>
-                    <Button
-                        onClick={addBasicProject}
-                        type="submit"
-                        variant="info"
-                    >
-                        อัพขึ้นสู่ระบบ
-                    </Button>
+                    <div>
+                        {/* Your component JSX */}
+                        <Button onClick={addBasicProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
+                    </div>
                 </Card>
             </Col>
         </>
