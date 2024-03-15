@@ -853,3 +853,7 @@
 .list-group-item.active {
   background-color: #133122;
 }
+.sticky-sidebar {
+  position: sticky;
+  top: 5%;
+}

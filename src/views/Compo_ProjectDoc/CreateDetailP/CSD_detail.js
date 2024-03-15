@@ -23,10 +23,10 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
 
 
     // ตัวแปรส่งค่าไปยัง database
-    const [id_student, setId_student] = useState('s6303051613149');
+    const [id_student, setId_student] = useState('7878');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('');
-    const [codeclub, setCodeClub] = useState('');
+    const [codeclub, setCodeClub] = useState('A1qww');//code_some
     const [yearly, setYearly] = useState(66); // Assuming yearly is a number
     const [yearly_count, setYearlyCount] = useState(''); // Assuming yearly_countsketch is a number
     const [yearly_countsketch, setYearlyCountSketch] = useState(''); // Assuming yearly_countsketch is a number
@@ -70,10 +70,14 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     const [problem3, setProblem3] = useState('');
     const [result3, setResult3] = useState('');
 
+    const[created_at,setCreated_At]=useState(new Date())
+    const[updated_at,setUpdated_at]=useState('')
     const[onlymonthstart,setOnlyMonthStart]=useState('')
+    
 
     //
     const minDate = new Date();
+    
 
     // *********************************************************
     const [userList, setUserList] = useState([]);
@@ -283,6 +287,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
             result2: result2,
             problem3: problem3,
             result3: result3,
+            created_at:created_at,
+            updated_at:updated_at
         }).then(() => {
             // Assuming setProjectList is a state setter function for your projectList state
             setProjectList([
@@ -333,6 +339,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                     result2: result2,
                     problem3: problem3,
                     result3: result3,
+                    created_at:created_at,
+                    updated_at:updated_at
                 }
             ]);
         });
@@ -945,7 +953,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                         </tbody>
                     </Table>
                     <div>
-                        {/* Your component JSX */}
+                        
                         <Button onClick={addBasicProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
                     </div>
                 </Card>

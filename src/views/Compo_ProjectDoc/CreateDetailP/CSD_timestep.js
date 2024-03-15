@@ -12,7 +12,7 @@ import {
     Table
 } from "react-bootstrap";
 
-function CSD_person({ id_projects }) {
+function CSD_timestep({ id_projects,startMonth }) {
    
 
     return (
@@ -412,4 +412,4 @@ function CSD_person({ id_projects }) {
 
     );
 }
-export default CSD_person
+export default CSD_timestep

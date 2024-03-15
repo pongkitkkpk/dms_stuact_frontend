@@ -53,17 +53,21 @@ function Admin() {
 
   const handleSidebarMouseEnter = () => {
     setIsSidebarHovered(true);
+
   };
 
   const handleSidebarMouseLeave = () => {
     setIsSidebarHovered(false);
+
   };
   const handleMainpanelMouseEnter = () => {
     setIsMainpanelHovered(true);
+
   };
 
   const handleMainpanelMouseLeave = () => {
     setIsMainpanelHovered(false);
+
   };
 
 
@@ -85,7 +89,8 @@ function Admin() {
           style={{
             transition: "margin-left 0.5s ease, width 0.5s ease",
             marginLeft: isMainpanelHovered ? "15%" : "0",
-            width: isSidebarHovered||isMainpanelHovered ? (isMainpanelHovered ? "93%" : "83%"):"93%",
+            width:  (isMainpanelHovered ? "93%" : "83%"),
+            
           }}
           onMouseEnter={handleMainpanelMouseEnter}
           onMouseLeave={handleMainpanelMouseLeave}

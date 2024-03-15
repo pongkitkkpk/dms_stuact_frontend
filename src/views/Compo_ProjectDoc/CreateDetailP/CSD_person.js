@@ -12,7 +12,7 @@ import {
     Table
 } from "react-bootstrap";
 
-function CSD_person({ id_projects }) {
+function CSD_person({ id_projects,switchToCSDTimestep }) {
     const [codeclub, setCodeClub] = useState('');
     const [yearly_countsketch, setYearlyCountSketch] = useState('');
 
@@ -266,7 +266,7 @@ function CSD_person({ id_projects }) {
     }, [grandTotalExecutive, , grandTotalProfessor, grandTotalStudent, grandTotalExpert]);
 
     const createPerson = () => {
-        Axios.post('http://localhost:3001/updateProject_person', {
+        Axios.post('http://localhost:3001/createperson_project', {
             id_projects,
             codeclub,
             yearly_countsketch,
@@ -324,6 +324,7 @@ function CSD_person({ id_projects }) {
                 console.error('There was an error!', error);
                 // Handle error, if needed
             });
+            switchToCSDTimestep();
     };
 
 
