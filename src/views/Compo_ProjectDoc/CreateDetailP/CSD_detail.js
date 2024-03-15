@@ -372,7 +372,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
             const month = (endReportDate.getMonth() + 1).toString().padStart(2, '0');
             const year = endReportDate.getFullYear();
 
-            setDeadLine(`${day}/${month}/${year}`);
+            setDeadLine(`${year}-${month}-${day}`);
         }
     }, [end_event]);
 

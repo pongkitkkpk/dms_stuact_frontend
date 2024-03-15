@@ -7,9 +7,9 @@ import CSD_timestep from './Compo_ProjectDoc/CreateDetailP/CSD_timestep';
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
   const [startMonth, setStartMonth] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(true);
+  const [cSD_Detail, setCSD_Detail] = useState(false);
   const [cSD_person, setCSD_Person] = useState(false);
-  const [cSD_timestep, setCSD_timestep] = useState(false);
+  const [cSD_timestep, setCSD_timestep] = useState(true);
   const containerRef = useRef(null);
 
   const CSD_DetailComponent = () => {
