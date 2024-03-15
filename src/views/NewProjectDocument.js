@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import CSD_detail from './Compo_ProjectDoc/CreateDetailP/CSD_detail';
 import CSD_person from './Compo_ProjectDoc/CreateDetailP/CSD_person';
-import CSD_person from './Compo_ProjectDoc/CreateDetailP/CSD_timestep';
+import CSD_timestep from './Compo_ProjectDoc/CreateDetailP/CSD_timestep';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');

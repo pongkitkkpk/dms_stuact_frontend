@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Route, Switch } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
@@ -14,8 +14,11 @@ function Admin() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false); 
+  const [isMainpanelHovered, setIsMainpanelHovered] = useState(false); 
   const location = useLocation();
   const mainPanel = React.useRef(null);
+ 
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -48,15 +51,45 @@ function Admin() {
     }
   }, [location]);
 
+  const handleSidebarMouseEnter = () => {
+    setIsSidebarHovered(true);
+  };
+
+  const handleSidebarMouseLeave = () => {
+    setIsSidebarHovered(false);
+  };
+  const handleMainpanelMouseEnter = () => {
+    setIsMainpanelHovered(true);
+  };
+
+  const handleMainpanelMouseLeave = () => {
+    setIsMainpanelHovered(false);
+  };
+
+
+  
+
   return (
     <>
-      <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
+      <Sidebar
+        color={color}
+        image={hasImage ? image : ""}
+        routes={routes}
+        onMouseEnter={handleSidebarMouseEnter}
+        onMouseLeave={handleSidebarMouseLeave}
+      />
       <div className="wrapper" style={{ overflow: "hidden" }}>
-
-
-
-        {/* style={{ marginRight: "-5%", width: "calc(100% )" }} */}
-        <div className="main-panel" ref={mainPanel} >
+        <div
+          className="main-panel"
+          ref={mainPanel}
+          style={{
+            transition: "margin-left 0.5s ease, width 0.5s ease",
+            marginLeft: isMainpanelHovered ? "15%" : "0",
+            width: isSidebarHovered||isMainpanelHovered ? (isMainpanelHovered ? "93%" : "83%"):"93%",
+          }}
+          onMouseEnter={handleMainpanelMouseEnter}
+          onMouseLeave={handleMainpanelMouseLeave}
+        >
           <AdminNavbar />
           <div className="content">
             <Switch>{getRoutes(routes)}</Switch>
