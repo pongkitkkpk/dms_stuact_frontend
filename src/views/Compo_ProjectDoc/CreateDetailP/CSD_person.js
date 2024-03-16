@@ -17,7 +17,6 @@ function CSD_person({ id_projects,switchToCSDTimestep }) {
     const [yearly_countsketch, setYearlyCountSketch] = useState('');
 
     const [pPersonData, setPPersonData] = useState([]);
-    const [pPersonid, setPPersonID] = useState([]);
 
     const getpPersonData = () => {
         Axios.get('http://localhost:3001/p_person').then((response) => {

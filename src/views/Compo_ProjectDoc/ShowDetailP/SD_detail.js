@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 // react-bootstrap components
 import {
     Button,
@@ -12,11 +12,61 @@ import {
     Table
 } from "react-bootstrap";
 
-function SD_detail() {
+function SD_detail({ id_project }) {
+    const [id_student, setId_student] = useState('s6');
+    const [project_name, setProjectName] = useState('');
+
+    const [originalData, setOriginalData] = useState({});
+    const [editData, setEditData] = useState({});
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    const getProjectData = () => {
+        Axios.get(`http://localhost:3001/projects/${id_project}`).then((response) => {
+            setOriginalData(response.data);
+            setEditData(response.data);
+            setId_student(response.data[0].id_student)
+            setProjectName(response.data[0].project_name);
+        });
+    };
+
+    useEffect(() => {
+        getProjectData();
+    }, [id_project]);
+
+    const handleEditClick = () => {
+        setIsEditMode(true);
+    };
+
+    const handleSaveClick = () => {
+        // Save data here
+        setIsEditMode(false);
+        alert("Do you want to save changes?");
+    };
+
+    const handleBackClick = () => {
+        setIsEditMode(false);
+        // Reset editData to originalData
+        setEditData(originalData);
+    };
+// รอแก้
+    // useEffect(() => {
+    //     console.log("ori", originalData);
+    //     console.log("edit", editData);
+    // }, [originalData, editData]);
+
     return (
         <>
             <Col md="9">
                 <Card>
+                    {!isEditMode && (
+                        <Button variant="primary" onClick={handleEditClick}>Edit</Button>
+                    )}
+                    {isEditMode ? (
+                        <>
+                            <Button variant="success" onClick={handleSaveClick}>Save</Button>
+                            <Button variant="danger" onClick={handleBackClick}>Back</Button>
+                        </>
+                    ) : null}
                     <Table striped="columns">
                         <thead>
                             <tr>
@@ -24,76 +74,22 @@ function SD_detail() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className='head-side-td'>ชื่อโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>หน่วยงานที่รับผิดชอบ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ปีการศึกษา</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>อาจารย์ที่ปรึกษา<p className='detail-prodoc'>ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ผู้รับผิดชอบโครงการ</td>
-                                <td className='back-side-td'>
-                                    <Table striped="columns">
-                                        <thead>
-                                            <tr>
-                                                <th>ชื่อ-สกุล</th>
-                                                <th>โทรศัพท์</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr style={{ backgroundColor: "white" }}>
-                                                <td>Mark</td>
-                                                <td>789456</td>
-                                            </tr>
-                                            <tr style={{ backgroundColor: "white" }}>
-                                                <td>Mark</td>
-                                                <td>789456</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className="head-side-td">
+                                    ชื่อโครงการ
                                 </td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>หลักการและเหตุผล</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>วัตถุประสงค์</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>วันจัดโครงการ<p className='detail-prodoc'>กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน</p></td>
-                                <td className='back-side-td'>Mark</td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>ผู้เข้าร่วมโครงการ</td>
-                                <td className='back-side-td'>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
-                                    <li>Mark</li>
+                                <td style={{ verticalAlign: "middle" }}>
+                                    <Form.Control
+                                        size="sm"
+                                        type="text"
+                                        placeholder="ชื่อโครงการ"
+                                        value={isEditMode ? editData.project_name : project_name}
+                                        readOnly={!isEditMode}
+                                        onChange={(event) => {
+                                            setEditData({ ...editData, project_name: event.target.value });
+                                        }}
+                                    />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>Mark</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -102,4 +98,5 @@ function SD_detail() {
         </>
     );
 }
-export default SD_detail
+
+export default SD_detail;

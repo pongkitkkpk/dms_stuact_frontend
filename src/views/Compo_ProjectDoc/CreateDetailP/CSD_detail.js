@@ -26,7 +26,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     const [id_student, setId_student] = useState('s6');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('');
-    const [codeclub, setCodeClub] = useState('A1qww');//code_some
+    const [codeclub, setCodeClub] = useState('');//code_some
     const [yearly, setYearly] = useState(66); // Assuming yearly is a number
     const [yearly_count, setYearlyCount] = useState(''); // Assuming yearly_countsketch is a number
     const [yearly_countsketch, setYearlyCountSketch] = useState(''); // Assuming yearly_countsketch is a number

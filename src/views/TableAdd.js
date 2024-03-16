@@ -163,7 +163,7 @@ function TableAdd() {
                                                                     agencyKey !== 'name' && (
                                                                         <option key={agencyKey} value={agencyKey}>
                                                                             {/* แบบแสดงรหัส */}
-                                                                            {` ${agencyKey} ${campusData[agencyKey]}`}
+                                                                            {/* {` ${agencyKey} ${campusData[agencyKey]}`} */}
                                                                             {` ${campusData[agencyKey]}`}
                                                                         </option>
                                                                     )
@@ -195,7 +195,7 @@ function TableAdd() {
                                                                 agencyKey !== 'name' && (
                                                                     <option key={agencyKey} value={agencyKey}>
                                                                         {/* แบบแสดงรหัส */}
-                                                                        {`${agencyKey}  ${agencyGroup[agencyKey]}`}
+                                                                        {/* {`${agencyKey}  ${agencyGroup[agencyKey]}`} */}
                                                                         {` ${agencyGroup[agencyKey]}`}
 
                                                                     </option>
@@ -224,8 +224,8 @@ function TableAdd() {
                                                     (divisionKey === 'D06' || divisionKey === 'D07' || divisionKey === 'D08' || divisionKey === 'D09' || divisionKey === 'D10' || divisionKey === 'D11' || divisionKey === 'D12') && (
                                                         <option key={divisionKey} value={divisionKey}>
                                                             {/* แบบแสดงรหัส */}
-                                                            {`${divisionKey}  ${setCode.Divison[divisionKey].name}`}
-                                                            {/* {`${setCode.Divison[divisionKey].name}`} */}
+                                                            {/* {`${divisionKey}  ${setCode.Divison[divisionKey].name}`} */}
+                                                            {`${setCode.Divison[divisionKey].name}`}
                                                         </option>
                                                     )
                                                 ))}
@@ -257,8 +257,8 @@ function TableAdd() {
                                             (divisionKey === 'D01' || divisionKey === 'D02' || divisionKey === 'D03' || divisionKey === 'D05') && (
                                                 <option key={divisionKey} value={divisionKey}>
                                                     {/* แบบแสดงรหัส */}
-                                                    {`${divisionKey}  ${setCode.Divison[divisionKey].name}`}
-                                                    {/* {`${setCode.Divison[divisionKey].name}`} */}
+                                                    {/* {`${divisionKey}  ${setCode.Divison[divisionKey].name}`} */}
+                                                    {`${setCode.Divison[divisionKey].name}`}
                                                 </option>
                                             )
                                         ))}
@@ -310,8 +310,8 @@ function TableAdd() {
                                                                 agencyKey !== 'name' && (
                                                                     <option key={agencyKey} value={agencyKey}>
                                                                         {/* แบบแสดงรหัส */}
-                                                                        {`${agencyKey} ${agencyGroup[agencyKey].name}`}
-                                                                        {/* {`${agencyGroup[agencyKey].name}`} */}
+                                                                        {/* {`${agencyKey} ${agencyGroup[agencyKey].name}`} */}
+                                                                        {`${agencyGroup[agencyKey].name}`}
                                                                     </option>
                                                                 )
                                                             ))}
@@ -339,8 +339,8 @@ function TableAdd() {
                                                                 agencyKey !== 'name' && (
                                                                     <option key={agencyKey} value={agencyKey}>
                                                                         {/* แบบแสดงรหัส */}
-                                                                        {`${agencyKey}  ${agencyGroup[agencyKey]}`}
-                                                                        {/* {` ${agencyGroup[agencyKey]}`} */}
+                                                                        {/* {`${agencyKey}  ${agencyGroup[agencyKey]}`} */}
+                                                                        {` ${agencyGroup[agencyKey]}`}
                                                                     </option>
                                                                 )
                                                             ))}
@@ -365,15 +365,15 @@ function TableAdd() {
                                                 {Object.keys(setCode.Divison.D05.Agency).map((agencyKey) => (
                                                     <option key={agencyKey} value={agencyKey}>
                                                         {/* แบบแสดงรหัส */}
-                                                        {`${agencyKey} ${setCode.Divison.D05.Agency[agencyKey]}`}
-                                                        {/* {`${setCode.Divison.D05.Agency[agencyKey]}`} */}
+                                                        {/* {`${agencyKey} ${setCode.Divison.D05.Agency[agencyKey]}`} */}
+                                                        {`${setCode.Divison.D05.Agency[agencyKey]}`}
                                                     </option>
                                                 ))}
                                             </Form.Select>
                                         </>
                                     )}
                                     {/* WorkGroup Dropdown */}
-                                    {codeagency && codedivision !== 'D05'&& setCode.Divison[codedivision].Agency.map((agencyGroup, index) => (
+                                    {codeagency && codedivision !== 'D05' && setCode.Divison[codedivision].Agency.map((agencyGroup, index) => (
                                         agencyGroup[codeagency]?.WorkGroup && (
                                             <select key={index} onChange={(e) => handleWorkGroupChange(e.target.value)}>
                                                 <option value="">Select WorkGroup</option>

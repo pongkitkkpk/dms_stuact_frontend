@@ -849,6 +849,20 @@
   background-color: #28a745;
   color: white;
 }
+.card-with-border-secondary {
+  border-left: 4px solid #6C757D;
+  position: relative;
+}
+.show-detail-button-secondary{
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  /* background-color: #28a745;
+  color: white; */
+}
+
 
 .list-group-item.active {
   background-color: #133122;

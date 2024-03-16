@@ -45,7 +45,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/project-doc",
+    path: "/project-doc/:id_project", // Add route parameter for id_project
     name: "แสดงเอกสารโครงการใหม่(เอาไว้เป็นส่วนประกอบ)",
     icon: "nc-icon nc-notes",
     component: ProjectDocument,

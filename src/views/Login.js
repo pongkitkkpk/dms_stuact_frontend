@@ -3,6 +3,9 @@ import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 function Login() {
+    // ส่ง id_student , codebooksome
+    //if ตรวจสอบผ่านให้ดึง codebooksome จากdatabaseมาและส่งไปหน้า AllProject.js
+    const [id_student,setIDStudent]=useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
