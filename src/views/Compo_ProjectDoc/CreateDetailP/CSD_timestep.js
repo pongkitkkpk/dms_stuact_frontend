@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 // react-bootstrap components
 import {
     Button,
@@ -12,6 +12,7 @@ import {
     Nav,
     Table
 } from "react-bootstrap";
+import Axios from 'axios';
 
 function CSD_timestep({ startMonth }) {
     const [id_projects, setIDproject] = useState('1')
@@ -21,8 +22,8 @@ function CSD_timestep({ startMonth }) {
 
     const [table1Id, setTable1Id] = useState('');
     const [table1Topic, setTable1Topic] = useState('');
-    const [startDurationTable1, setStartDurationTable1] = useState(null);
-    const [endDurationTable1, setEndDurationTable1] = useState(null);
+    const [startDurationTable1, setStartDurationTable1] = useState('');
+    const [endDurationTable1, setEndDurationTable1] = useState('');
     const [responsibleTable1, setResponsibleTable1] = useState([]);
     const handleresponsibleTable1Change = (event) => {
         const name = event.target.value;
@@ -290,7 +291,16 @@ function CSD_timestep({ startMonth }) {
     useEffect(() => {
         getProjectData();
     }, []);
-
+    // useEffect(() => {
+    //     console.log("Start1"+startDurationTable1)
+    //     console.log("en1"+endDurationTable1)
+    //     console.log("res1"+responsibleTable1)
+    // }, [startDurationTable1,endDurationTable1,responsibleTable1]);
+    // useEffect(() => {
+    //     console.log("Star2"+startDurationTable2)
+    //     console.log("en2"+endDurationTable2)
+    //     console.log("res2"+responsibleTable2)
+    // }, [startDurationTable2,endDurationTable2,responsibleTable2]);
     return (
         <>
             <Col md="9">
@@ -300,6 +310,7 @@ function CSD_timestep({ startMonth }) {
                         <thead>
                             <tr>
                                 <th>ขั้นตอนการและแผนการดำเนินโครงการ</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -317,26 +328,42 @@ function CSD_timestep({ startMonth }) {
                                     />
                                     <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
                                         <Form.Label>ระยะเวลา : </Form.Label>
-                                        <DatePicker
-                                            selected={startDurationTable1}
-                                            onChange={(date) => setStartDurationTable1(date)}
-                                            dateFormat="dd/MM/yyyy"
-                                            placeholderText="เลือกวันเริ่มต้น"
-                                            className="form-control"
-                                            minDate={start_prepare}
+                                        <div>
 
-                                        />
+                                            <DatePicker
+                                                selected={startDurationTable1}
+                                                onChange={(date) => setStartDurationTable1(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันเริ่มต้น"
+                                                className="form-control"
+                                                minDate={start_prepare}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsStart
+                                                startDate={startDurationTable1}
+                                                endDate={endDurationTable1}
+                                            />
+                                        </div>
                                         <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
-                                        <DatePicker
-                                            selected={endDurationTable1}
-                                            onChange={(date) => setEndDurationTable1(date)}
-                                            dateFormat="dd/MM/yyyy"
-                                            placeholderText="เลือกวันสิ้นสุด"
-                                            className="form-control"
-                                            minDate={startDurationTable1}
-                                            maxDate={deadline}
+                                        <div>
+                                            <DatePicker
+                                                selected={endDurationTable1}
+                                                onChange={(date) => setEndDurationTable1(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันสิ้นสุด"
+                                                className="form-control"
+                                                minDate={startDurationTable1}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsEnd
+                                                startDate={startDurationTable1}
+                                                endDate={endDurationTable1}
+                                            />
+                                        </div>
 
-                                        />
+
                                     </div>
                                     <br></br>
                                     <div style={{ display: 'inline-block' }}>
@@ -358,12 +385,141 @@ function CSD_timestep({ startMonth }) {
 
                                 </td>
                             </tr>
-                            <div>
-                                <p>{table1Topic}</p>
-                                <p>{startDurationTable1}</p>
-                                <p>{endDurationTable1}</p>
-                                <p>{responsibleTable1}</p>
-                            </div>
+                            {/* หัวข้อ2 */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td'>หัวข้อที่ 2 </td>
+                                <td className='back-side-td'>
+                                    <Form.Label>การดำเนินงาน : </Form.Label>
+                                    <Form.Control
+                                        onChange={(event) => setTable2Topic(event.target.value)}
+                                        value={table2Topic}
+                                        size="sm"
+                                        type="text"
+                                        placeholder={`การดำเนินงาน ${2}`}
+                                    />
+                                    <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
+                                        <Form.Label>ระยะเวลา : </Form.Label>
+                                        <div>
+                                            <DatePicker
+                                                selected={startDurationTable2}
+                                                onChange={(date) => setStartDurationTable2(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันเริ่มต้น"
+                                                className="form-control"
+                                                minDate={start_prepare}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsStart
+                                                startDate={startDurationTable2}
+                                                endDate={endDurationTable2}
+                                            />
+                                        </div>
+                                        <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
+                                        <div>
+                                            <DatePicker
+                                                selected={endDurationTable2}
+                                                onChange={(date) => setEndDurationTable2(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันสิ้นสุด"
+                                                className="form-control"
+                                                minDate={startDurationTable2}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsEnd
+                                                startDate={startDurationTable2}
+                                                endDate={endDurationTable2}
+                                            />
+                                        </div>
+                                    </div>
+                                    <br></br>
+                                    <div style={{ display: 'inline-block' }}>
+                                        <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                        {personNames.map((name, index) => (
+                                            <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        value={name}
+                                                        checked={responsibleTable2.includes(name)}
+                                                        onChange={handleresponsibleTable2Change}
+                                                    />
+                                                    {` ` + name}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </td>
+                            </tr>
+                            {/* หัวข้อที่ 3 */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td'>หัวข้อที่ 3 </td>
+                                <td className='back-side-td'>
+                                    <Form.Label>การดำเนินงาน : </Form.Label>
+                                    <Form.Control
+                                        onChange={(event) => setTable3Topic(event.target.value)}
+                                        value={table3Topic}
+                                        size="sm"
+                                        type="text"
+                                        placeholder={`การดำเนินงาน ${3}`}
+                                    />
+                                    <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
+                                        <Form.Label>ระยะเวลา : </Form.Label>
+                                        <div>
+                                            <DatePicker
+                                                selected={startDurationTable3}
+                                                onChange={(date) => setStartDurationTable3(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันเริ่มต้น"
+                                                className="form-control"
+                                                minDate={start_prepare}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsStart
+                                                startDate={startDurationTable3}
+                                                endDate={endDurationTable3}
+                                            />
+                                        </div>
+                                        <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
+                                        <div>
+                                            <DatePicker
+                                                selected={endDurationTable3}
+                                                onChange={(date) => setEndDurationTable3(date)}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="เลือกวันสิ้นสุด"
+                                                className="form-control"
+                                                minDate={startDurationTable3}
+                                                maxDate={deadline}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsEnd
+                                                startDate={startDurationTable3}
+                                                endDate={endDurationTable3}
+                                            />
+                                        </div>
+                                    </div>
+                                    <br></br>
+                                    <div style={{ display: 'inline-block' }}>
+                                        <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                        {personNames.map((name, index) => (
+                                            <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        value={name}
+                                                        checked={responsibleTable3.includes(name)}
+                                                        onChange={handleresponsibleTable3Change}
+                                                    />
+                                                    {` ` + name}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </td>
+                            </tr>
+
 
 
 

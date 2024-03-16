@@ -125,7 +125,7 @@ function TableAdd() {
                                     <Form.Select aria-label="Default select example" onChange={(event) => {
                                         setPosition(event.target.value)
                                     }} required>
-                                        <option >เลือกบลาๆ</option>
+                                        <option value="">โปรดเลือกตำแหน่ง</option>
                                         <option value="S">นักศึกษาประสานงาน</option>
                                         <option value="SH">ประธานสภา/นายกองค์การ/ประธานชมรม</option>
                                     </Form.Select>
@@ -135,7 +135,7 @@ function TableAdd() {
                                     <Form.Select aria-label="Default select example" onChange={(event) => {
                                         setPositionagency(event.target.value)
                                     }} required>
-                                        <option >เลือกบลาๆ</option>
+                                        <option value="">โปรดเลือกหน่วยงาน</option>
                                         <option value="center">หน่วยงานกลาง</option>
                                         <option value="smo">สโมสรนักศึกษา</option>
                                         <option value="etc">อื่นๆ</option>
@@ -153,7 +153,7 @@ function TableAdd() {
                                                 const selectedText = event.target.options[event.target.selectedIndex].text;
                                                 setClubname(selectedText)
                                             }} required>
-                                                <option>กรุณาเลือก</option>
+                                                <option value="">กรุณาเลือก ชมรม/หน่วยงาน/องค์กร</option>
                                                 {setCode.Divison.D04.Agency.map((agencyGroup, index) => {
                                                     const campusData = agencyGroup[campus]; // Get data for the selected campus
                                                     return (
@@ -187,7 +187,7 @@ function TableAdd() {
                                                 const selectedText = event.target.options[event.target.selectedIndex].text;
                                                 setClubname(selectedText)
                                             }} required>
-                                                <option>กรุณาเลือก</option>
+                                                <option value="">กรุณาเลือก สโมสรนักศึกษา</option>
                                                 {setCode.Divison.D02.Agency.map((agencyGroup, index) => (
                                                     agencyGroup.name != 'คณะ/วิทยาลัย' && (
                                                         <optgroup key={index} label={agencyGroup.name}>
@@ -219,7 +219,7 @@ function TableAdd() {
                                                 const selectedText = event.target.options[event.target.selectedIndex].text;
                                                 setClubname(selectedText)
                                             }} required>
-                                                <option>กรุณาเลือก</option>
+                                                <option value="">กรุณาเลือก</option>
                                                 {Object.keys(setCode.Divison).map((divisionKey) => (
                                                     (divisionKey === 'D06' || divisionKey === 'D07' || divisionKey === 'D08' || divisionKey === 'D09' || divisionKey === 'D10' || divisionKey === 'D11' || divisionKey === 'D12') && (
                                                         <option key={divisionKey} value={divisionKey}>

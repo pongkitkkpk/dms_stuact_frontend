@@ -873,6 +873,11 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                                 placeholderText="เลือกวันเริ่มต้น"
                                                 className="form-control"
                                                 minDate={minDate}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsStart
+                                                startDate={start_prepare}
+                                                endDate={end_prepare}
                                             />
                                         </div>
                                         <div>
@@ -884,6 +889,11 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                                 placeholderText="เลือกวันสิ้นสุด"
                                                 className="form-control"
                                                 minDate={start_prepare}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsEnd
+                                                startDate={start_prepare}
+                                                endDate={end_prepare}
                                             />
                                         </div>
                                     </div>
@@ -909,6 +919,11 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                                 placeholderText="เลือกวันเริ่มต้น"
                                                 className="form-control"
                                                 minDate={end_prepare}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsStart
+                                                startDate={start_event}
+                                                endDate={end_event}
                                             />
 
                                         </div>
@@ -921,6 +936,11 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                                 placeholderText="เลือกวันสิ้นสุด"
                                                 className="form-control"
                                                 minDate={start_event}
+                                                popperPlacement="top-start"
+                                                isClearable
+                                                selectsEnd
+                                                startDate={start_event}
+                                                endDate={end_event}
                                             />
                                         </div>
                                     </div>
