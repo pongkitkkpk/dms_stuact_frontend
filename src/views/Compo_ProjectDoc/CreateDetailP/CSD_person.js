@@ -85,6 +85,10 @@ function CSD_person({ id_projects,switchToCSDTimestep }) {
             }
         }
     };
+
+    useEffect(()=>{
+        console.log(executiveType1Name)
+    },[executiveType1Name]);
     useEffect(() => {
         // Calculate total for executive category
         const totalExecutiveCount = Number(executiveType1Number) + Number(executiveType2Number) + Number(executiveType3Number) + Number(executiveType4Number) + Number(executiveType5Number);

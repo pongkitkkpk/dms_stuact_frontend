@@ -23,7 +23,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
 
 
     // ตัวแปรส่งค่าไปยัง database
-    const [id_student, setId_student] = useState('7878');
+    const [id_student, setId_student] = useState('s6');
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('');
     const [codeclub, setCodeClub] = useState('A1qww');//code_some
@@ -220,7 +220,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     };
 
     const addBasicProject = () => {
-        Axios.get(`http://localhost:3001/projects/${codeclub}`).then((response) => {
+        Axios.get(`http://localhost:3001/projects-cc/${codeclub}`).then((response) => {
             const existingProject = response.data.find(project => project.codeclub === codeclub);
             if (existingProject) {
                 const currentYearlyCount = parseInt(existingProject.yearly_countsketch, 10);

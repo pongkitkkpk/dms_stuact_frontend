@@ -45,8 +45,12 @@ function Sidebar({ color, image, routes }) {
       style={{
         overflowX: "hidden",
         left: leftPosition,
-        transition: "left 0.5s ease", 
+        transition: "left 0.5s ease",
         zIndex: 1000,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
       }}
     >
       <div
@@ -56,15 +60,15 @@ function Sidebar({ color, image, routes }) {
       <div className="sidebar-wrapper" style={{ overflowY: "hidden" }}>
         <div className="logo d-flex align-items-center justify-content-start">
           <a
-            href="https://www.creative-tim.com?ref=lbd-sidebar"
+            href="https://www..com?ref=lbd-sidebar"
             className="simple-text logo-mini mx-1"
           >
             <div className="logo-img">
               <img src={logo} alt="..." />
             </div>
           </a>
-          <a className="simple-text" href="http://www.creative-tim.com">
-            Creative Tim
+          <a className="simple-text" href="http://www..com">
+            kkpk
           </a>
         </div>
         <Nav>
@@ -79,9 +83,12 @@ function Sidebar({ color, image, routes }) {
                     to={prop.layout + prop.path}
                     className="nav-link"
                     activeClassName="active"
+                    style={{ display: "flex", justifyContent: "space-between" }}
                   >
+                    <span>{prop.name}</span>
+
                     <i className={prop.icon} />
-                    <p>{prop.name}</p>
+
                   </NavLink>
                 </li>
               );
