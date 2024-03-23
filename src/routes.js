@@ -44,13 +44,7 @@ const dashboardRoutes = [
     component: Login,
     layout: "/admin"
   },
-  {
-    path: "/project-doc/:id_project", // Add route parameter for id_project
-    name: "แสดงเอกสารโครงการใหม่(เอาไว้เป็นส่วนประกอบ)",
-    icon: "nc-icon nc-notes",
-    component: ProjectDocument,
-    layout: "/admin"
-  },
+
   {
     path: "/c-project-doc",
     name: "สร้างโครงการใหม่",
@@ -113,8 +107,36 @@ const dashboardRoutes = [
     name: "Notifications",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
-    layout: "/admin"
+    layout: "/user"
   }
 ];
 
+const adminRoutes =[
+  {
+    path: "/table",
+    name: "ตารางจัดการบทบาท",
+    icon: "nc-icon nc-notes",
+    component: TableList,
+    layout: "/admin"
+  },
+
+];
+
+const userRoutes =[
+  {
+    path: "/c-project-doc",
+    name: "สร้างโครงการใหม่",
+    icon: "nc-icon nc-notes",
+    component: NewProjectDocument,
+    layout: "/user"
+  },
+  {
+    path: "/allproject",
+    name: "โครงการทั้งหมด",
+    icon: "nc-icon nc-notes",
+    component: AllProject,
+    layout: "/user"
+  },
+];
+export {adminRoutes, userRoutes};
 export default dashboardRoutes;

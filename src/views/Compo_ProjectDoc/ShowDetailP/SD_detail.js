@@ -61,7 +61,7 @@ function SD_detail({ id_project }) {
     const [originalData, setOriginalData] = useState({});
     const [editData, setEditData] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
-
+    const [showdeadline, setShowDeadLine] = useState('');
     const getProjectData = () => {
         Axios.get(`http://localhost:3001/student/project/getidproject/${id_project}`).then((response) => {
             setOriginalData(response.data[0]);
@@ -151,7 +151,23 @@ function SD_detail({ id_project }) {
             setEditData(originalData);
         }
     };
+    useEffect(() => {
+        if (editData.end_event) {
+            const endReportDate = new Date(editData.end_event);
+            endReportDate.setDate(endReportDate.getDate() + 30);
 
+            const day = endReportDate.getDate().toString().padStart(2, '0');
+            const month = (endReportDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = endReportDate.getFullYear();
+
+            setDeadLine(`${year}-${month}-${day}`);
+            setShowDeadLine(`${day}/${month}/${year}`);
+        }
+    }, [editData.end_event]);
+
+    useEffect(()=>{
+        setEditData({ ...editData, deadline: deadline });
+    },[deadline])
 
     return (
         <>
@@ -160,12 +176,7 @@ function SD_detail({ id_project }) {
                     {!isEditMode && (
                         <Button variant="primary" onClick={handleEditClick}>Edit</Button>
                     )}
-                    {isEditMode ? (
-                        <>
-                            <Button variant="success" onClick={handleSaveClick}>Save</Button>
-                            <Button variant="danger" onClick={handleBackClick}>Back</Button>
-                        </>
-                    ) : null}
+                    
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -848,36 +859,25 @@ function SD_detail({ id_project }) {
                                     <div className="d-flex align-items-center">
                                         <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
 
-                                        <DatePicker
-                                            selected={editData.deadline}
-                                            dateFormat="dd/MM/yyyy"
-                                            placeholderText="เลือกวันสิ้นสุด"
+
+                                        <input
+                                            type="text"
+                                            value={showdeadline}
                                             className="form-control"
-                                            maxDate={editData.end_event}
-                                            minDate={editData.end_event}
-                                            popperPlacement="top-start"
-                                            isClearable
-                                            selectsEnd
-                                            startDate={editData.end_event}
-                                            endDate={editData.end_event}
-                                            disabled
-                                            onChange={(date) => {
-                                                if (date) {
-                                                    const selectedDate = new Date(date);
-                                                    // Adjust date to UTC+8
-                                                    let deadline = new Date(selectedDate);
-                                                    deadline.setDate(deadline.getDate() + 30);
-                                                    const deadlineFormatted = `${deadline.getDate()}/${deadline.getMonth() }/${deadline.getFullYear()}`;
-                                                    setEditData({ ...editData, deadline: deadlineFormatted });
-                                                }
-                                            }}
+                                            readOnly
                                         />
                                     </div>
                                 </td>
                             </tr>
-
                         </tbody>
+
                     </Table>
+                    {isEditMode ? (
+                        <>
+                            <Button variant="success" onClick={handleSaveClick}>Save</Button>
+                            <Button variant="danger" onClick={handleBackClick}>Back</Button>
+                        </>
+                    ) : null}
                 </Card>
             </Col>
         </>

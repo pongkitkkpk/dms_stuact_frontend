@@ -73,7 +73,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     const [created_at, setCreated_At] = useState(new Date())
     const [updated_at, setUpdated_at] = useState('')
     const [onlymonthstart, setOnlyMonthStart] = useState('')
-
+    const [showdeadline, setShowDeadLine] = useState('');
 
     //
     const minDate = new Date();
@@ -373,6 +373,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
             const year = endReportDate.getFullYear();
 
             setDeadLine(`${year}-${month}-${day}`);
+            setShowDeadLine(`${day}/${month}/${year}`);
         }
     }, [end_event]);
 
@@ -962,7 +963,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
 
                                         <input
                                             type="text"
-                                            value={deadline}
+                                            value={showdeadline}
                                             className="form-control"
                                             readOnly
                                         />
