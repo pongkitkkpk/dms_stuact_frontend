@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
 
 function Login() {
-    // ส่ง id_student , codebooksome
-    //if ตรวจสอบผ่านให้ดึง codebooksome จากdatabaseมาและส่งไปหน้า AllProject.js
-    const [id_student,setIDStudent]=useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const history = useHistory();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        // Validate the username and password
+        if (username === 'admin' && password === 'admin') {
+            // Redirect to the admin page
+            history.push('/admin');
+            // Call the onLogin function passed from the parent component
+            
+        } else {
+            alert('Invalid username or password');
+        }
     };
 
     return (
@@ -19,22 +33,24 @@ function Login() {
                     <Card>
                         <Card.Header className="bg-dark text-white">
                             <Card.Title as="h4" className="text-center text-white mb-2">
-                                <i className="nc-icon nc-attach-87"></i> กรุณาป้อน ICIT Account และรหัสผ่าน
+                                <i className="nc-icon nc-attach-87"></i> Please Enter Your Credentials
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <Form className="mx-5 py-2">
+                            <Form className="mx-5 py-2" onSubmit={handleLogin}>
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>ICIT Account</Form.Label>
-                                    <Form.Control type="text" placeholder="sxxxxxxxxxxxxx" />
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
                                 </Form.Group>
 
                                 <div style={{ position: "relative" }}>
                                     <Form.Group controlId="formBasicPassword">
-                                        <Form.Label>รหัสผ่าน</Form.Label>
+                                        <Form.Label>Password</Form.Label>
                                         <Form.Control
                                             type={showPassword ? "text" : "password"}
                                             placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </Form.Group>
                                     
@@ -47,13 +63,6 @@ function Login() {
                                         {showPassword ? <FiEyeOff size={16} /> : <FiEye size={16} />}
                                     </Button>
                                 </div>
-
-                                <Form.Text className="text-muted">
-                                    ฟหกดฟหกดฟหกด
-                                </Form.Text>
-                                <Form.Text className="text-muted">
-                                    asdfsadfsdf
-                                </Form.Text>
 
                                 <Button variant="primary" type="submit">
                                     Login
