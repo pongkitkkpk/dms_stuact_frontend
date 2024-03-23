@@ -61,7 +61,7 @@ function TableAdd() {
 
         const newCodebooksome = `${campusAbbreviation}${yearly}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
         setCodebooksome(newCodebooksome);
-        Axios.post('http://localhost:3001/createUser', {
+        Axios.post('http://localhost:3001/admin/user/createUser', {
             id_student: id_student,
             name_student: name_student,
             department: department,

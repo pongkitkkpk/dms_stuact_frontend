@@ -247,7 +247,7 @@ function CSD_timestep({ startMonth }) {
 
 
     const getProjectData = () => {
-        Axios.get(`http://localhost:3001/projects/${id_projects}`).then((response) => {
+        Axios.get(`http://localhost:3001/student/project/getidproject/${id_projects}`).then((response) => {
             setProjectData(response.data);
 
             setPerson1(response.data[0].person1_name)

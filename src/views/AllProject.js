@@ -10,7 +10,7 @@ function AllProject() {
     const history = useHistory(); // Initialize useHistory hook
 
     const getProjects = () => {
-        Axios.get(`http://localhost:3001/projects-acc/${codeclub}`).then((response) => {
+        Axios.get(`http://localhost:3001/student/project/getallcodeclub/${codeclub}`).then((response) => {
             setProjectList(response.data);
         });
     };

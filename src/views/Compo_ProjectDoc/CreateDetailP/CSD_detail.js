@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
+function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     const [projectList, setProjectList] = useState([]);
     const divition = "สภา"
     const years = "ปีการศึกษา 2566"
@@ -70,19 +70,19 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     const [problem3, setProblem3] = useState('');
     const [result3, setResult3] = useState('');
 
-    const[created_at,setCreated_At]=useState(new Date())
-    const[updated_at,setUpdated_at]=useState('')
-    const[onlymonthstart,setOnlyMonthStart]=useState('')
-    
+    const [created_at, setCreated_At] = useState(new Date())
+    const [updated_at, setUpdated_at] = useState('')
+    const [onlymonthstart, setOnlyMonthStart] = useState('')
+
 
     //
     const minDate = new Date();
-    
+
 
     // *********************************************************
     const [userList, setUserList] = useState([]);
     const getUsers = () => {
-        Axios.get('http://localhost:3001/users').then((response) => {
+        Axios.get('http://localhost:3001/student/users').then((response) => {
             setUserList(response.data);
         });
     };
@@ -220,7 +220,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     };
 
     const addBasicProject = () => {
-        Axios.get(`http://localhost:3001/projects-cc/${codeclub}`).then((response) => {
+        Axios.get(`http://localhost:3001/student/project/getcodeclub/${codeclub}`).then((response) => {
             const existingProject = response.data.find(project => project.codeclub === codeclub);
             if (existingProject) {
                 const currentYearlyCount = parseInt(existingProject.yearly_countsketch, 10);
@@ -241,7 +241,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
     };
 
     const createProject = (yearlyCountsketch) => {
-        Axios.post('http://localhost:3001/createProject', {
+        Axios.post('http://localhost:3001/student/project/create/', {
             id_student: id_student,
             project_name: project_name,
             project_number: project_number,
@@ -287,8 +287,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
             result2: result2,
             problem3: problem3,
             result3: result3,
-            created_at:created_at,
-            updated_at:updated_at
+            created_at: created_at,
+            updated_at: updated_at
         }).then(() => {
             // Assuming setProjectList is a state setter function for your projectList state
             setProjectList([
@@ -339,8 +339,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                     result2: result2,
                     problem3: problem3,
                     result3: result3,
-                    created_at:created_at,
-                    updated_at:updated_at
+                    created_at: created_at,
+                    updated_at: updated_at
                 }
             ]);
         });
@@ -537,7 +537,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                 </td>
                             </tr>
                             {/* อารจารย์ผู้ดูแลโครงการ */}
-                            <tr >
+                            {/* <tr >
                                 <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
                                 <td style={{ verticalAlign: "middle" }}>
                                     <Form.Control
@@ -549,7 +549,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                                         }}
                                     />
                                 </td>
-                            </tr>
+                            </tr> */}
                             {/* หลักการและเหตุผล */}
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td'>หลักการและเหตุผล</td>
@@ -973,7 +973,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson,setStartMonth }) {
                         </tbody>
                     </Table>
                     <div>
-                        
+
                         <Button onClick={addBasicProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
                     </div>
                 </Card>

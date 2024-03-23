@@ -20,12 +20,12 @@ function TableList() {
   const [userList, setUserList] = useState([]);
 
   const getUsers = () => {
-    Axios.get('http://localhost:3001/users').then((response) => {
+    Axios.get('http://localhost:3001/admin/users').then((response) => {
       setUserList(response.data);
     })
   }
   const deleteUser = (id) => {
-    Axios.delete(`http://localhost:3001/deleteUser/${id}`).then((response) => {
+    Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id}`).then((response) => {
       setUserList(
         userList.filter((val) => {
           return val.id !== id; // Use 'id' instead of 'idStudent'

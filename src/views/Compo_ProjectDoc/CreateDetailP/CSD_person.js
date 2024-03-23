@@ -19,7 +19,7 @@ function CSD_person({ id_projects,switchToCSDTimestep }) {
     const [pPersonData, setPPersonData] = useState([]);
 
     const getpPersonData = () => {
-        Axios.get('http://localhost:3001/p_person').then((response) => {
+        Axios.get('http://localhost:3001/student/project/p_person').then((response) => {
             setPPersonData(response.data);
         });
     };
@@ -269,7 +269,7 @@ function CSD_person({ id_projects,switchToCSDTimestep }) {
     }, [grandTotalExecutive, , grandTotalProfessor, grandTotalStudent, grandTotalExpert]);
 
     const createPerson = () => {
-        Axios.post('http://localhost:3001/createperson_project', {
+        Axios.post('http://localhost:3001/student/project/p_person/create/', {
             id_projects,
             codeclub,
             yearly_countsketch,
