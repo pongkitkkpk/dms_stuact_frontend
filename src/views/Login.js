@@ -1,29 +1,24 @@
+// Login.js
 import React, { useState } from "react";
 import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "Auth/AuthContext";
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const { handleLogin } = useAuth();
     const history = useHistory();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleLogin = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // Validate the username and password
-        if (username === 'admin' && password === 'admin') {
-            // Redirect to the admin page
-            history.push('/admin');
-            // Call the onLogin function passed from the parent component
-            
-        } else {
-            alert('Invalid username or password');
-        }
+        handleLogin(username, password, history);
     };
 
     return (
@@ -37,7 +32,7 @@ function Login() {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <Form className="mx-5 py-2" onSubmit={handleLogin}>
+                            <Form className="mx-5 py-2" onSubmit={handleSubmit}>
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -53,7 +48,7 @@ function Login() {
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </Form.Group>
-                                    
+
                                     <Button
                                         variant="link"
                                         className="position-absolute"
