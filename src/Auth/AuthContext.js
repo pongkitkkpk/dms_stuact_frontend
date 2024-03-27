@@ -1,4 +1,3 @@
-// AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -8,13 +7,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    // Check authentication status in localStorage on component mount
-    const isLogged = localStorage.getItem('isLogged');
+    // Check authentication status in sessionStorage on component mount
+    const isLogged = sessionStorage.getItem('isLogged');
     if (isLogged === 'true') {
       // If user is logged in, set isAuthenticated to true
       setIsAuthenticated(true);
-      // Retrieve user data from localStorage and set it in state
-      const storedUser = localStorage.getItem('user');
+      // Retrieve user data from sessionStorage and set it in state
+      const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
       }
@@ -29,9 +28,9 @@ export const AuthProvider = ({ children }) => {
       // Set user role to admin
       const adminUser = { username: 'admin', role: 'admin' };
       setUser(adminUser);
-      // Save authentication status and user data to localStorage
-      localStorage.setItem('isLogged', 'true');
-      localStorage.setItem('user', JSON.stringify(adminUser));
+      // Save authentication status and user data to sessionStorage
+      sessionStorage.setItem('isLogged', 'true');
+      sessionStorage.setItem('user', JSON.stringify(adminUser));
       // Redirect to the admin page
       history.push('/admin');
     } else {
@@ -40,14 +39,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogout = () => {
-    // Clear authentication status and user data from localStorage
-    localStorage.removeItem('isLogged');
-    localStorage.removeItem('user');
+    // Clear authentication status and user data from sessionStorage
+    sessionStorage.removeItem('isLogged');
+    sessionStorage.removeItem('user');
     // Set isAuthenticated to false and clear user data
     setIsAuthenticated(false);
     setUser({});
   };
-    console.log("isAuthenticated auth.js",isAuthenticated)
+  console.log("isAuthenticated auth.js", isAuthenticated)
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, handleLogin, handleLogout }}>
       {children}
@@ -58,3 +57,5 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => useContext(AuthContext);
 
 export default AuthContext;
+
+

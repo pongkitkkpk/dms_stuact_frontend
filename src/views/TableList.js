@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Axios from 'axios';
 // react-bootstrap components
 import {
@@ -33,7 +33,9 @@ function TableList() {
       );
     });
   };
-  getUsers()
+  useEffect(() => {
+    getUsers();
+  }, []);
   return (
     <>
       <TableAdd />

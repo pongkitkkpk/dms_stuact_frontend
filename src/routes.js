@@ -12,6 +12,7 @@ import ProjectDocument from "views/ProjectDocument";
 import AllProject from "views/AllProject";
 import NewProjectDocument from "views/NewProjectDocument";
 
+
 const dashboardRoutes = [
   // {
   //   upgrade: true,
@@ -21,6 +22,11 @@ const dashboardRoutes = [
   //   component: Upgrade,
   //   layout: "/admin"
   // },
+  {
+    path: "/project-doc/:id_project", // Add route parameter for id_project
+    component: ProjectDocument,
+    layout: "/admin"
+  },
   {
     path: "/login",
     name: "เข้าสู่ระบบ",

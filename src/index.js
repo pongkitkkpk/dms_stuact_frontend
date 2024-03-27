@@ -1,5 +1,5 @@
 // index.js
-import React from "react";
+import React, { useEffect } from 'react';
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,39 +14,28 @@ import { adminRoutes } from "routes";
 
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
   const { isAuthenticated, user } = useAuth();
-  console.log("isAuthenticated index.js:", isAuthenticated); // Example of using isAuthenticated
-  console.log("user:", user); // Example of using user
+
+  console.log("session index.js:", sessionStorage.getItem('isLogged')); // Example of using user
+  const storedUserData = sessionStorage.getItem('user');
+  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+  const storedUserRole = storedUser.role; // Accessing the role property
+
+  console.log("Stored user role:", storedUserRole);
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (!isAuthenticated) {
+        if (!sessionStorage.getItem('isLogged')) {
           // Redirect to guest login if not authenticated
           return <Redirect to="/guest/login" />;
         }
-
-        // Check if user has the required role
-        if (roles && roles.indexOf(user.role) === -1) {
-          // Redirect to unauthorized page if role doesn't match
-          return <Redirect to="/unauthorized" />;
-        }
-
-        // Authenticated and has required role, render the component
         return <Component {...props} />;
       }}
     />
   );
 };
 
-const RedirectByAuthStatus = () => {
-  const { isAuthenticated, user } = useAuth();
 
-  return isAuthenticated ? (
-    <Redirect to={`/${user.role}/dashboard`} />
-  ) : (
-    <Redirect to="/guest/login" />
-  );
-};
 
 const rootElement = document.getElementById("root");
 
@@ -70,10 +59,11 @@ ReactDOM.render(
         />
 
         {/* Redirect based on authentication status */}
-        {/* <Route path="/" component={RedirectByAuthStatus} /> */}
+        {/* <Redirect path="/" component={RedirectByAuthStatus} /> */}
 
         {/* Redirect any other routes to guest login */}
-        <Redirect to="/guest/login" />
+        {/* <Redirect to="guest/login" /> */}
+        {/* <Redirect to={`/${storedUserRole}/dashboard`} /> */}
       </Switch>
     </BrowserRouter>
   </AuthProvider>,
