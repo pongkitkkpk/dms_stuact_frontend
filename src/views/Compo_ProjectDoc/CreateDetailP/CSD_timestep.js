@@ -14,8 +14,8 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_timestep({ startMonth }) {
-    const [id_projects, setIDproject] = useState('1')
+function CSD_timestep({ id_projects, startMonth }) {
+
     const [codeClub, setCodeClub] = useState('');
     const [yearlyCountSketch, setYearlyCountSketch] = useState('');
 
@@ -278,6 +278,9 @@ function CSD_timestep({ startMonth }) {
     };
 
     useEffect(() => {
+        console.log("person1" + person1)
+        console.log("person2" + person2)
+        console.log("person3" + person3)
         // 'person1', 'person2', 'person3' will have the updated values here
         const names = [
             person1 !== '' ? person1 : null,
@@ -286,21 +289,29 @@ function CSD_timestep({ startMonth }) {
         ].filter(name => name !== null);
 
         setPersonNames(names);
-    }, [person1]);
+    }, [person1, person2, person3]);
 
     useEffect(() => {
         getProjectData();
     }, []);
-    // useEffect(() => {
-    //     console.log("Start1"+startDurationTable1)
-    //     console.log("en1"+endDurationTable1)
-    //     console.log("res1"+responsibleTable1)
-    // }, [startDurationTable1,endDurationTable1,responsibleTable1]);
-    // useEffect(() => {
-    //     console.log("Star2"+startDurationTable2)
-    //     console.log("en2"+endDurationTable2)
-    //     console.log("res2"+responsibleTable2)
-    // }, [startDurationTable2,endDurationTable2,responsibleTable2]);
+    useEffect(() => {
+        console.log("Start1111111111111111111")
+        console.log("Start1" + startDurationTable1)
+        console.log("en1" + endDurationTable1)
+        console.log("res1" + responsibleTable1)
+    }, [startDurationTable1, endDurationTable1, responsibleTable1]);
+    useEffect(() => {
+        console.log("Star22222222222222222222")
+        console.log("Star2" + startDurationTable2)
+        console.log("en2" + endDurationTable2)
+        console.log("res2" + responsibleTable2)
+    }, [startDurationTable2, endDurationTable2, responsibleTable2]);
+    useEffect(() => {
+        console.log("3333333333333333")
+        console.log("Star3" + startDurationTable3)
+        console.log("en3" + endDurationTable3)
+        console.log("res3" + responsibleTable3)
+    }, [startDurationTable3, endDurationTable3, responsibleTable3]);
     return (
         <>
             <Col md="9">
@@ -337,7 +348,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันเริ่มต้น"
                                                 className="form-control"
                                                 minDate={start_prepare}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsStart
@@ -354,7 +365,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันสิ้นสุด"
                                                 className="form-control"
                                                 minDate={startDurationTable1}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsEnd
@@ -362,8 +373,6 @@ function CSD_timestep({ startMonth }) {
                                                 endDate={endDurationTable1}
                                             />
                                         </div>
-
-
                                     </div>
                                     <br></br>
                                     <div style={{ display: 'inline-block' }}>
@@ -400,6 +409,7 @@ function CSD_timestep({ startMonth }) {
                                     <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
                                         <Form.Label>ระยะเวลา : </Form.Label>
                                         <div>
+
                                             <DatePicker
                                                 selected={startDurationTable2}
                                                 onChange={(date) => setStartDurationTable2(date)}
@@ -407,7 +417,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันเริ่มต้น"
                                                 className="form-control"
                                                 minDate={start_prepare}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsStart
@@ -424,7 +434,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันสิ้นสุด"
                                                 className="form-control"
                                                 minDate={startDurationTable2}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsEnd
@@ -450,6 +460,7 @@ function CSD_timestep({ startMonth }) {
                                             </div>
                                         ))}
                                     </div>
+
                                 </td>
                             </tr>
                             {/* หัวข้อที่ 3 */}
@@ -474,7 +485,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันเริ่มต้น"
                                                 className="form-control"
                                                 minDate={start_prepare}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsStart
@@ -491,7 +502,7 @@ function CSD_timestep({ startMonth }) {
                                                 placeholderText="เลือกวันสิ้นสุด"
                                                 className="form-control"
                                                 minDate={startDurationTable3}
-                                                maxDate={deadline}
+                                                maxDate={end_event}
                                                 popperPlacement="top-start"
                                                 isClearable
                                                 selectsEnd
@@ -519,6 +530,7 @@ function CSD_timestep({ startMonth }) {
                                     </div>
                                 </td>
                             </tr>
+
 
 
 
