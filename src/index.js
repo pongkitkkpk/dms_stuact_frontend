@@ -23,7 +23,7 @@ const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
   console.log("Stored user role:", storedUserRole);
   return (
     <Route
-      {...rest}
+      {...rest} 
       render={(props) => {
         if (!sessionStorage.getItem('isLogged')) {
           // Redirect to guest login if not authenticated

@@ -27,13 +27,7 @@ const dashboardRoutes = [
     component: ProjectDocument,
     layout: "/admin"
   },
-  {
-    path: "/login",
-    name: "เข้าสู่ระบบ",
-    icon: "nc-icon nc-badge",
-    component: Login,
-    layout: "/admin"
-  },
+ 
 
   {
     path: "/c-project-doc",

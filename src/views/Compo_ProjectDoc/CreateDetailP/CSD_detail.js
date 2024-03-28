@@ -47,6 +47,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     const [objective1, setObjective1] = useState('');
     const [objective2, setObjective2] = useState('');
     const [objective3, setObjective3] = useState('');
+    const [objective4, setObjective4] = useState('');
+    const [objective5, setObjective5] = useState('');
     const [project_type1, setProjectType1] = useState('');
     const [project_type2, setProjectType2] = useState('');
     const [project_type3, setProjectType3] = useState('');
@@ -57,6 +59,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     const [location1, setLocation1] = useState('');
     const [location2, setLocation2] = useState('');
     const [location3, setLocation3] = useState('');
+    const [location4, setLocation4] = useState('');
+    const [location5, setLocation5] = useState('');
     const [start_prepare, setStartPrepare] = useState('');
     const [end_prepare, setEndPrepare] = useState('');
     const [start_event, setStartEvent] = useState('');
@@ -135,7 +139,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     // วัตถุประสงค์
     const [itemCount, setItemCount] = useState(1);
     const increaseItemCount = () => {
-        if (itemCount < 3) {
+        if (itemCount < 5) {
             setItemCount(itemCount + 1);
         }
     };
@@ -144,6 +148,12 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
             setItemCount(itemCount - 1);
             // Reset corresponding studentTypeNumber state variables to 0
             switch (itemCount) {
+                case 4:
+                    setObjective5('');
+                    break;
+                case 3:
+                    setObjective4('');
+                    break;
                 case 2:
                     setObjective3('');
                     break;
@@ -162,7 +172,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
     // เพิ่มสถานที่
     const [locationCount, setLocationCount] = useState(1);
     const increaseLocationCount = () => {
-        if (locationCount < 3) {
+        if (locationCount < 5) {
             setLocationCount(locationCount + 1);
         }
     };
@@ -171,6 +181,12 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
             setLocationCount(locationCount - 1);
             // Reset corresponding studentTypeNumber state variables to 0
             switch (locationCount) {
+                case 4:
+                    setLocation5('');
+                    break;
+                case 3:
+                        setLocation4('');
+                        break;
                 case 2:
                     setLocation3('');
                     break;
@@ -266,6 +282,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
             objective1: objective1,
             objective2: objective2,
             objective3: objective3,
+            objective4: objective4,
+            objective5: objective5,
             project_type1: project_type1,
             project_type2: project_type2,
             project_type3: project_type3,
@@ -276,6 +294,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
             location1: location1,
             location2: location2,
             location3: location3,
+            location4: location4,
+            location5: location5,
             start_prepare: start_prepare,
             end_prepare: end_prepare,
             start_event: start_event,
@@ -318,6 +338,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                     objective1: objective1,
                     objective2: objective2,
                     objective3: objective3,
+                    objective4: objective4,
+                    objective5: objective5,
                     project_type1: project_type1,
                     project_type2: project_type2,
                     project_type3: project_type3,
@@ -328,6 +350,8 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                     location1: location1,
                     location2: location2,
                     location3: location3,
+                    location4: location4,
+                    location5: location5,
                     start_prepare: start_prepare,
                     end_prepare: end_prepare,
                     start_event: start_event,
@@ -621,6 +645,12 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                                                             case 2:
                                                                 setObjective3(event.target.value);
                                                                 break;
+                                                            case 3:
+                                                                setObjective4(event.target.value);
+                                                                break;
+                                                            case 4:
+                                                                setObjective5(event.target.value);
+                                                                break;
                                                             default:
                                                             // Handle other cases if needed
                                                         }
@@ -629,7 +659,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                                             </li>
                                         ))}
                                     </ul>
-                                    {itemCount < 3 && (
+                                    {itemCount < 5 && (
                                         <Button variant="primary" className="ml-5 mb-3" onClick={increaseItemCount}>
                                             เพิ่มวัตถุประสงค์
                                         </Button>
@@ -835,6 +865,12 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                                                             case 2:
                                                                 setLocation3(event.target.value);
                                                                 break;
+                                                            case 3:
+                                                                setLocation4(event.target.value);
+                                                                break;
+                                                            case 4:
+                                                                setLocation5(event.target.value);
+                                                                break;
                                                             default:
                                                             // Handle other cases if needed
                                                         }
@@ -843,7 +879,7 @@ function CSD_detail({ setIdProjects, switchToCSDPerson, setStartMonth }) {
                                             </li>
                                         ))}
                                     </ul>
-                                    {locationCount < 3 && (
+                                    {locationCount < 5 && (
                                         <Button variant="primary" className="ml-5 mb-3" onClick={increaseLocationCount}>
                                             เพิ่มสถานที่
                                         </Button>
