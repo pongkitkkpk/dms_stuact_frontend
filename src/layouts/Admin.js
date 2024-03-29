@@ -18,7 +18,9 @@ function Admin() {
   const [isMainpanelHovered, setIsMainpanelHovered] = useState(false); 
   const location = useLocation();
   const mainPanel = React.useRef(null);
- 
+  // useEffect(()=>{
+  //   setIsSidebarHovered("50%")
+  // },[])
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -79,6 +81,12 @@ function Admin() {
         color={color}
         image={hasImage ? image : ""}
         routes={routes}
+        style={{
+          transition: "margin-left 0.5s ease, width 0.5s ease",
+          // marginLeft: isMainpanelHovered ? "78%" : "0",
+          // width:  (isSidebarHovered ? "0%" : "-13%"),
+          
+        }}
         onMouseEnter={handleSidebarMouseEnter}
         onMouseLeave={handleSidebarMouseLeave}
       />
@@ -88,8 +96,8 @@ function Admin() {
           ref={mainPanel}
           style={{
             transition: "margin-left 0.5s ease, width 0.5s ease",
-            marginLeft: isMainpanelHovered ? "15%" : "0",
-            width:  (isMainpanelHovered ? "93%" : "83%"),
+            // marginLeft: isMainpanelHovered ? "78%" : "0",
+            width:  (isMainpanelHovered ? "96%" : "83%"),
             
           }}
           onMouseEnter={handleMainpanelMouseEnter}

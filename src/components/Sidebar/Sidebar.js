@@ -6,12 +6,14 @@ import logo from "assets/img/reactlogo.png";
 function Sidebar({ color, image, routes }) {
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
-  const [leftPosition, setLeftPosition] = useState("15%");
+  const [leftPosition, setLeftPosition] = useState("");
 
   useEffect(() => {
     const handleResize = () => {
       const isBigScreen = window.innerWidth >= 991;
-      setLeftPosition(isBigScreen ? (isHovered ? "0%" : "-10%") : "65%");
+      // 
+      // setLeftPosition(isBigScreen ? (isHovered ? "0%" : "-13%") : "65%");
+      setLeftPosition( (isHovered ? "0%" : "-13%") );
     };
 
     handleResize(); // Initial position based on screen size
@@ -22,6 +24,9 @@ function Sidebar({ color, image, routes }) {
       window.removeEventListener("resize", handleResize);
     };
   }, [isHovered]);
+  // useEffect(()=>{
+  //   setLeftPosition("0%")
+  // },[])
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -86,8 +91,8 @@ function Sidebar({ color, image, routes }) {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <span>{prop.name}</span>
-
-                    <i className={prop.icon} />
+                    <div style={{ marginRight:"-13%" }}><i className={prop.icon} /></div>
+                    
 
                   </NavLink>
                 </li>
