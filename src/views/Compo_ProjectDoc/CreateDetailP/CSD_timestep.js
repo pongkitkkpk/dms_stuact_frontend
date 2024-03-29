@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_timestep({ id_projects, startMonth }) {
+function CSD_timestep({ id_projects }) {
 
     const [codeClub, setCodeClub] = useState('');
     const [yearlyCountSketch, setYearlyCountSketch] = useState('');
