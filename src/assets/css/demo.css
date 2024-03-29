@@ -884,3 +884,21 @@
   top: 5%;
 }
 
+.btn-login {
+  /* font-weight: bold; */
+  border-color: #FF8B13;
+  color: #FF8B13;
+}
+
+.btn-login:hover {
+  /* font-weight: bold; */
+  border-color: #FF8B13;
+  background-color: #FF8B13;
+  color: #ffffff;
+}
+
+.light-text {
+  font-weight: light;
+}
+
+

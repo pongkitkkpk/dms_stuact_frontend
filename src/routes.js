@@ -34,7 +34,8 @@ const dashboardRoutes = [
     name: "สร้างโครงการใหม่",
     icon: "nc-icon nc-notes",
     component: NewProjectDocument,
-    layout: "/admin"
+    layout: "/admin",
+    className: "light-text"
   },
   {
     path: "/table",

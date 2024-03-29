@@ -73,7 +73,7 @@ function Sidebar({ color, image, routes }) {
             </div>
           </a>
           <a className="simple-text" href="http://www..com">
-            kkpk
+            DMS KMUTNB
           </a>
         </div>
         <Nav>
@@ -88,7 +88,7 @@ function Sidebar({ color, image, routes }) {
                     to={prop.layout + prop.path}
                     className="nav-link"
                     activeClassName="active"
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                    style={{ display: "flex", justifyContent: "space-between" ,fontWeight: "light"}}
                   >
                     <span>{prop.name}</span>
                     <div style={{ marginRight:"-13%" }}><i className={prop.icon} /></div>

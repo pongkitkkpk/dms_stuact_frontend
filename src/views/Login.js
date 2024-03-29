@@ -26,31 +26,43 @@ function Login() {
       <Row className="justify-content-center">
         <Col md={10}>
           <Card>
-            <Card.Header style={{backgroundColor: "#FF8B13", color: "white", paddingBottom: "5px", height: "63px"}}>
+            <Card.Header
+              style={{
+                backgroundColor: "#FF8B13",
+                color: "white",
+                paddingBottom: "5px",
+                height: "63px",
+              }}
+            >
               <Card.Title as="h4" className="text-center text-white">
-                <div style={{fontWeight: "bold", alignContent: "center"}}>
-                  <i className="nc-icon nc-circle-09" style={{fontWeight: "bold", marginRight: "10px"}}></i>กรุณาป้อน ICIT Account เพื่อเข้าสู่ระบบ</div>
+                <div style={{ fontWeight: "bold", alignContent: "center" }}>
+                  <i
+                    className="nc-icon nc-circle-09"
+                    style={{ fontWeight: "bold", marginRight: "10px" }}
+                  ></i>
+                  กรุณาป้อน ICIT Account เพื่อเข้าสู่ระบบ
+                </div>
                 {/* <div> Please Enter Your Credentials</div>  */}
               </Card.Title>
             </Card.Header>
             <Card.Body>
               <Form className="mx-5 py-2" onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>ICIT Account</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter username"
+                    placeholder="กรอก ICIT Account"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </Form.Group>
 
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative" , marginTop: "10px"}}>
                   <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>รหัสผ่าน</Form.Label>
                     <Form.Control
                       type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                      placeholder="กรอกรหัสผ่าน"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
@@ -74,9 +86,11 @@ function Login() {
                   </Button>
                 </div>
 
-                <Button variant="primary" type="submit">
-                  Login
-                </Button>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "15px"}}>
+                  <Button variant="primary" type="submit" className="btn-login">
+                    เข้าสู่ระบบ
+                  </Button>
+                </div>
               </Form>
             </Card.Body>
           </Card>
