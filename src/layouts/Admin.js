@@ -14,13 +14,11 @@ function Admin() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
-  const [isSidebarHovered, setIsSidebarHovered] = useState(false); 
-  const [isMainpanelHovered, setIsMainpanelHovered] = useState(false); 
+
+  const [isMainpanelHovered, setIsMainpanelHovered] = useState(false);
+  const [isMainpanelNormal, setIsMainpanelNormal] = useState(false);
   const location = useLocation();
   const mainPanel = React.useRef(null);
-  // useEffect(()=>{
-  //   setIsSidebarHovered("50%")
-  // },[])
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -53,27 +51,26 @@ function Admin() {
     }
   }, [location]);
 
-  const handleSidebarMouseEnter = () => {
-    setIsSidebarHovered(true);
 
-  };
-
-  const handleSidebarMouseLeave = () => {
-    setIsSidebarHovered(false);
-
-  };
   const handleMainpanelMouseEnter = () => {
+
     setIsMainpanelHovered(true);
-
+    setIsMainpanelNormal(false);
   };
-
-  const handleMainpanelMouseLeave = () => {
-    setIsMainpanelHovered(false);
-
-  };
-
-
   
+  const handleMainpanelMouseLeave = () => {
+
+    setIsMainpanelHovered(false);
+    setIsMainpanelNormal(false);
+  };
+  
+
+
+  // useEffect(() => {
+  //   console.log("Hover: " + isMainpanelHovered);
+  //   console.log("Normal: " + isMainpanelNormal);
+  // }, [isMainpanelHovered, isMainpanelNormal])
+
 
   return (
     <>
@@ -81,14 +78,7 @@ function Admin() {
         color={color}
         image={hasImage ? image : ""}
         routes={routes}
-        style={{
-          transition: "margin-left 0.5s ease, width 0.5s ease",
-          // marginLeft: isMainpanelHovered ? "78%" : "0",
-          // width:  (isSidebarHovered ? "0%" : "-13%"),
-          
-        }}
-        onMouseEnter={handleSidebarMouseEnter}
-        onMouseLeave={handleSidebarMouseLeave}
+
       />
       <div className="wrapper" style={{ overflow: "hidden" }}>
         <div
@@ -96,13 +86,22 @@ function Admin() {
           ref={mainPanel}
           style={{
             transition: "margin-left 0.5s ease, width 0.5s ease",
-            // marginLeft: isMainpanelHovered ? "78%" : "0",
-            width:  (isMainpanelHovered ? "96%" : "83%"),
-            
+            width: isMainpanelHovered && !isMainpanelNormal ? "96%" :
+            // isMainpanelHovered && isMainpanelNormal ? "90%" :
+            !isMainpanelHovered && isMainpanelNormal ? "83%" :
+            "96%"
+
+            // width: isMainpanelHovered ? "96%" : (isMainpanelNormal ? "83%" : "96%"),  //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelHovered ? "83%" : (isMainpanelNormal ? "96%" : "83%"), //not work for the first time but after use it's work 
+            // width: isMainpanelNormal ? "83%" : (isMainpanelHovered ? "96%" : "83%"), //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelNormal ? "96%" : (isMainpanelHovered ? "83%" : "96%"), //not work for the first time but after use it's work 
           }}
           onMouseEnter={handleMainpanelMouseEnter}
           onMouseLeave={handleMainpanelMouseLeave}
+
         >
+          <h1>{isMainpanelHovered.toString()}</h1>
+          <h1>{isMainpanelNormal.toString()}</h1>
           <AdminNavbar />
           <div className="content">
             <Switch>{getRoutes(routes)}</Switch>

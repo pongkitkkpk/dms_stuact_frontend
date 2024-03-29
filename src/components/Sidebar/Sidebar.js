@@ -24,9 +24,8 @@ function Sidebar({ color, image, routes }) {
       window.removeEventListener("resize", handleResize);
     };
   }, [isHovered]);
-  // useEffect(()=>{
-  //   setLeftPosition("0%")
-  // },[])
+
+
 
   const handleMouseEnter = () => {
     setIsHovered(true);

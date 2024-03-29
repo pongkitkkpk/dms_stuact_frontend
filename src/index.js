@@ -62,7 +62,7 @@ ReactDOM.render(
         {/* <Redirect path="/" component={RedirectByAuthStatus} /> */}
 
         {/* Redirect any other routes to guest login */}
-        {/* <Redirect to="guest/login" /> */}
+        <Redirect to="guest/login" />
         {/* <Redirect to={`/${storedUserRole}/dashboard`} /> */}
       </Switch>
     </BrowserRouter>
