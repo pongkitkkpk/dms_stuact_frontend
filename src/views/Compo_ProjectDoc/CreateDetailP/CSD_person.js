@@ -12,7 +12,7 @@ import {
     Table
 } from "react-bootstrap";
 
-function CSD_person({ id_projects,switchToCSDTimestep }) {
+function CSD_person({ id_projects,switchToCSDLocationTime }) {
     const [codeclub, setCodeClub] = useState('');
     const [yearly_countsketch, setYearlyCountSketch] = useState('');
 
@@ -327,7 +327,7 @@ function CSD_person({ id_projects,switchToCSDTimestep }) {
                 console.error('There was an error!', error);
                 // Handle error, if needed
             });
-            switchToCSDTimestep();
+            switchToCSDLocationTime();
     };
 
 
