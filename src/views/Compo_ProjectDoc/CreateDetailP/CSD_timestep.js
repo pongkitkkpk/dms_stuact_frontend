@@ -25,6 +25,7 @@ function CSD_timestep({ id_projects }) {
     const [startDurationTable1, setStartDurationTable1] = useState('');
     const [endDurationTable1, setEndDurationTable1] = useState('');
     const [responsibleTable1, setResponsibleTable1] = useState([]);
+
     const handleresponsibleTable1Change = (event) => {
         const name = event.target.value;
         if (responsibleTable1.includes(name)) {
@@ -300,22 +301,409 @@ function CSD_timestep({ id_projects }) {
         console.log("en1" + endDurationTable1)
         console.log("res1" + responsibleTable1)
     }, [startDurationTable1, endDurationTable1, responsibleTable1]);
+
     useEffect(() => {
-        console.log("Star22222222222222222222")
-        console.log("Star2" + startDurationTable2)
+        console.log("2222222222222222222222222222222222222222222")
+        console.log("Start2" + startDurationTable2)
         console.log("en2" + endDurationTable2)
         console.log("res2" + responsibleTable2)
     }, [startDurationTable2, endDurationTable2, responsibleTable2]);
+
     useEffect(() => {
-        console.log("3333333333333333")
-        console.log("Star3" + startDurationTable3)
+        console.log("Start333333")
+        console.log("Start3" + startDurationTable3)
         console.log("en3" + endDurationTable3)
         console.log("res3" + responsibleTable3)
     }, [startDurationTable3, endDurationTable3, responsibleTable3]);
+
+
+
+    const [TopictableCount, setTopictableCount] = useState(1);
+    const increasePrinciplesAndReasons = () => {
+        if (TopictableCount < 15) {
+            setTopictableCount(TopictableCount + 1);
+        }
+    };
+    const decreasePrinciplesAndReasons = () => {
+        if (TopictableCount > 1) {
+            setTopictableCount(TopictableCount - 1);
+            // Reset corresponding studentTypeNumber state variables to 0
+            switch (TopictableCount) {
+                case 0:
+                    setTable1Topic('');
+                    setStartDurationTable1(null);
+                    setEndDurationTable1(null);
+                    setResponsibleTable1('');
+                    break;
+                case 1:
+                    setTable2Topic('');
+                    setStartDurationTable2(null);
+                    setEndDurationTable2(null);
+                    setResponsibleTable2('');
+                    break;
+                case 2:
+                    setTable3Topic('');
+                    setStartDurationTable3(null);
+                    setEndDurationTable3(null);
+                    setResponsibleTable3('');
+                    break;
+                case 3:
+                    setTable4Topic('');
+                    setStartDurationTable4(null);
+                    setEndDurationTable4(null);
+                    setResponsibleTable4('');
+                    break;
+                case 4:
+                    setTable5Topic('');
+                    setStartDurationTable5(null);
+                    setEndDurationTable5(null);
+                    setResponsibleTable5('');
+                    break;
+                case 5:
+                    setTable6Topic('');
+                    setStartDurationTable6(null);
+                    setEndDurationTable6(null);
+                    setResponsibleTable6('');
+                    break;
+                case 6:
+                    setTable7Topic('');
+                    setStartDurationTable7(null);
+                    setEndDurationTable7(null);
+                    setResponsibleTable7('');
+                    break;
+                case 7:
+                    setTable8Topic('');
+                    setStartDurationTable8(null);
+                    setEndDurationTable8(null);
+                    setResponsibleTable8('');
+                    break;
+                case 8:
+                    setTable9Topic('');
+                    setStartDurationTable9(null);
+                    setEndDurationTable9(null);
+                    setResponsibleTable9('');
+                    break;
+                case 9:
+                    setTable10Topic('');
+                    setStartDurationTable10(null);
+                    setEndDurationTable10(null);
+                    setResponsibleTable10('');
+                    break;
+                case 10:
+                    setTable11Topic('');
+                    setStartDurationTable11(null);
+                    setEndDurationTable11(null);
+                    setResponsibleTable11('');
+                    break;
+                case 11:
+                    setTable12Topic('');
+                    setStartDurationTable12(null);
+                    setEndDurationTable12(null);
+                    setResponsibleTable12('');
+                    break;
+                case 12:
+                    setTable13Topic('');
+                    setStartDurationTable13(null);
+                    setEndDurationTable13(null);
+                    setResponsibleTable13('');
+                    break;
+                case 13:
+                    setTable14Topic('');
+                    setStartDurationTable14(null);
+                    setEndDurationTable14(null);
+                    setResponsibleTable14('');
+                    break;
+                case 14:
+                    setTable15Topic('');
+                    setStartDurationTable15(null);
+                    setEndDurationTable15(null);
+                    setResponsibleTable15('');
+                    break;
+                default:
+                // Handle other cases if needed
+            }
+
+        }
+    };
+
+    // **************************************************
+    const getResponsibleCheckedState = (index, name) => {
+        switch (index) {
+            case 0:
+                return responsibleTable1.includes(name);
+            case 1:
+                return responsibleTable2.includes(name);
+            case 2:
+                return responsibleTable3.includes(name);
+            case 3:
+                return responsibleTable4.includes(name);
+            case 4:
+                return responsibleTable5.includes(name);
+            case 5:
+                return responsibleTable6.includes(name);
+            case 6:
+                return responsibleTable7.includes(name);
+            case 7:
+                return responsibleTable8.includes(name);
+            case 8:
+                return responsibleTable9.includes(name);
+            case 9:
+                return responsibleTable10.includes(name);
+            case 10:
+                return responsibleTable11.includes(name);
+            case 11:
+                return responsibleTable12.includes(name);
+            case 12:
+                return responsibleTable13.includes(name);
+            case 13:
+                return responsibleTable14.includes(name);
+            case 14:
+                return responsibleTable15.includes(name);
+            default:
+                return false;
+        }
+    };
+    const handleResponsibleTableChange = (index, event) => {
+        switch (index) {
+            case 0:
+                handleresponsibleTable1Change(event);
+                break;
+            case 1:
+                handleresponsibleTable2Change(event);
+                break;
+            case 2:
+                handleresponsibleTable3Change(event);
+                break;
+            case 3:
+                handleresponsibleTable4Change(event);
+                break;
+            case 4:
+                handleresponsibleTable5Change(event);
+                break;
+            case 5:
+                handleresponsibleTable6Change(event);
+                break;
+            case 6:
+                handleresponsibleTable7Change(event);
+                break;
+            case 7:
+                handleresponsibleTable8Change(event);
+                break;
+            case 8:
+                handleresponsibleTable9Change(event);
+                break;
+            case 9:
+                handleresponsibleTable10Change(event);
+                break;
+            case 10:
+                handleresponsibleTable11Change(event);
+                break;
+            case 11:
+                handleresponsibleTable12Change(event);
+                break;
+            case 12:
+                handleresponsibleTable13Change(event);
+                break;
+            case 13:
+                handleresponsibleTable14Change(event);
+                break;
+            case 14:
+                handleresponsibleTable15Change(event);
+                break;
+            default:
+                break;
+        }
+    };
+    // **************************************************
+
+    const getStartDuration = (index) => {
+        switch (index) {
+            case 0:
+                return startDurationTable1;
+            case 1:
+                return startDurationTable2;
+            case 2:
+                return startDurationTable3;
+            case 3:
+                return startDurationTable4;
+            case 4:
+                return startDurationTable5;
+            case 5:
+                return startDurationTable6;
+            case 6:
+                return startDurationTable7;
+            case 7:
+                return startDurationTable8;
+            case 8:
+                return startDurationTable9;
+            case 9:
+                return startDurationTable10;
+            case 10:
+                return startDurationTable11;
+            case 11:
+                return startDurationTable12;
+            case 12:
+                return startDurationTable13;
+            case 13:
+                return startDurationTable14;
+            case 14:
+                return startDurationTable15;
+            default:
+                return null;
+        }
+    };
+
+
+    const setStartDuration = (index, date) => {
+        switch (index) {
+            case 0:
+                setStartDurationTable1(date);
+                break;
+            case 1:
+                setStartDurationTable2(date);
+                break;
+            case 2:
+                setStartDurationTable3(date);
+                break;
+            case 3:
+                setStartDurationTable4(date);
+                break;
+            case 4:
+                setStartDurationTable5(date);
+                break;
+            case 5:
+                setStartDurationTable6(date);
+                break;
+            case 6:
+                setStartDurationTable7(date);
+                break;
+            case 7:
+                setStartDurationTable8(date);
+                break;
+            case 8:
+                setStartDurationTable9(date);
+                break;
+            case 9:
+                setStartDurationTable10(date);
+                break;
+            case 10:
+                setStartDurationTable11(date);
+                break;
+            case 11:
+                setStartDurationTable12(date);
+                break;
+            case 12:
+                setStartDurationTable13(date);
+                break;
+            case 13:
+                setStartDurationTable14(date);
+                break;
+            case 14:
+                setStartDurationTable15(date);
+                break;
+            default:
+                // Handle default case if necessary
+                break;
+        }
+    };
+
+
+    const getEndDuration = (index) => {
+        switch (index) {
+            case 0:
+                return endDurationTable1;
+            case 1:
+                return endDurationTable2;
+            case 2:
+                return endDurationTable3;
+            case 3:
+                return endDurationTable4;
+            case 4:
+                return endDurationTable5;
+            case 5:
+                return endDurationTable6;
+            case 6:
+                return endDurationTable7;
+            case 7:
+                return endDurationTable8;
+            case 8:
+                return endDurationTable9;
+            case 9:
+                return endDurationTable10;
+            case 10:
+                return endDurationTable11;
+            case 11:
+                return endDurationTable12;
+            case 12:
+                return endDurationTable13;
+            case 13:
+                return endDurationTable14;
+            case 14:
+                return endDurationTable15;
+            default:
+                return null;
+        }
+    };
+
+
+    const setEndDuration = (index, date) => {
+        switch (index) {
+            case 0:
+                setEndDurationTable1(date);
+                break;
+            case 1:
+                setEndDurationTable2(date);
+                break;
+            case 2:
+                setEndDurationTable3(date);
+                break;
+            case 3:
+                setEndDurationTable4(date);
+                break;
+            case 4:
+                setEndDurationTable5(date);
+                break;
+            case 5:
+                setEndDurationTable6(date);
+                break;
+            case 6:
+                setEndDurationTable7(date);
+                break;
+            case 7:
+                setEndDurationTable8(date);
+                break;
+            case 8:
+                setEndDurationTable9(date);
+                break;
+            case 9:
+                setEndDurationTable10(date);
+                break;
+            case 10:
+                setEndDurationTable11(date);
+                break;
+            case 11:
+                setEndDurationTable12(date);
+                break;
+            case 12:
+                setEndDurationTable13(date);
+                break;
+            case 13:
+                setEndDurationTable14(date);
+                break;
+            case 14:
+                setEndDurationTable15(date);
+                break;
+            default:
+                // Handle default case if necessary
+                break;
+        }
+    };
+
+
+
     return (
         <>
             <Col md="9">
-
                 <Card>
                     <Table striped="columns">
                         <thead>
@@ -325,211 +713,163 @@ function CSD_timestep({ id_projects }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* หัวข้อ1 */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>หัวข้อที่ 1 </td>
-                                <td className='back-side-td'>
-                                    <Form.Label>การดำเนินงาน : </Form.Label>
-                                    <Form.Control
-                                        onChange={(event) => setTable1Topic(event.target.value)}
-                                        value={table1Topic}
-                                        size="sm"
-                                        type="text"
-                                        placeholder={`การดำเนินงาน ${1}`}
-                                    />
-                                    <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
-                                        <Form.Label>ระยะเวลา : </Form.Label>
-                                        <div>
+                            {/* หัวข้อ index */}
+                            {Array.from({ length: TopictableCount }).map((_, index) => (
+                                <tr style={{ backgroundColor: "white" }}>
+                                    <td className='head-side-td'>{`หัวข้อที่ ${index + 1}`} </td>
+                                    <td className='back-side-td'>
+                                        <Form.Label>การดำเนินงาน : </Form.Label>
+                                        <Form.Control
+                                            onChange={(event) => {
+                                                switch (index) {
+                                                    case 0:
+                                                        setTable1Topic(event.target.value);
+                                                        break;
+                                                    case 1:
+                                                        setTable2Topic(event.target.value);
+                                                        break;
+                                                    case 2:
+                                                        setTable3Topic(event.target.value);
+                                                        break;
+                                                    case 3:
+                                                        setTable4Topic(event.target.value);
+                                                        break;
+                                                    case 4:
+                                                        setTable5Topic(event.target.value);
+                                                        break;
+                                                    case 5:
+                                                        setTable6Topic(event.target.value);
+                                                        break;
+                                                    case 6:
+                                                        setTable7Topic(event.target.value);
+                                                        break;
+                                                    case 7:
+                                                        setTable8Topic(event.target.value);
+                                                        break;
+                                                    case 8:
+                                                        setTable9Topic(event.target.value);
+                                                        break;
+                                                    case 9:
+                                                        setTable10Topic(event.target.value);
+                                                        break;
+                                                    case 10:
+                                                        setTable11Topic(event.target.value);
+                                                        break;
+                                                    case 11:
+                                                        setTable12Topic(event.target.value);
+                                                        break;
+                                                    case 12:
+                                                        setTable13Topic(event.target.value);
+                                                        break;
+                                                    case 13:
+                                                        setTable14Topic(event.target.value);
+                                                        break;
+                                                    case 14:
+                                                        setTable15Topic(event.target.value);
+                                                        break;
+                                                    default:
+                                                        // Handle default case if necessary
+                                                        break;
+                                                }
 
-                                            <DatePicker
-                                                selected={startDurationTable1}
-                                                onChange={(date) => setStartDurationTable1(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันเริ่มต้น"
-                                                className="form-control"
-                                                minDate={start_prepare}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsStart
-                                                startDate={startDurationTable1}
-                                                endDate={endDurationTable1}
-                                            />
-                                        </div>
-                                        <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
-                                        <div>
-                                            <DatePicker
-                                                selected={endDurationTable1}
-                                                onChange={(date) => setEndDurationTable1(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันสิ้นสุด"
-                                                className="form-control"
-                                                minDate={startDurationTable1}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsEnd
-                                                startDate={startDurationTable1}
-                                                endDate={endDurationTable1}
-                                            />
-                                        </div>
-                                    </div>
-                                    <br></br>
-                                    <div style={{ display: 'inline-block' }}>
-                                        <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
-                                        {personNames.map((name, index) => (
-                                            <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={name}
-                                                        checked={responsibleTable1.includes(name)}
-                                                        onChange={handleresponsibleTable1Change}
-                                                    />
-                                                    {` ` + name}
-                                                </label>
+                                            }}
+                                            value={table1Topic}
+                                            size="sm"
+                                            type="text"
+                                            placeholder={`การดำเนินงาน ${index + 1}`}
+                                        />
+                                        <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
+                                            <Form.Label>ระยะเวลา : </Form.Label>
+                                            <div>
+                                                <DatePicker
+                                                    selected={getStartDuration(index)}
+                                                    onChange={(date) => setStartDuration(index, date)}
+                                                    dateFormat="dd/MM/yyyy"
+                                                    placeholderText="เลือกวันเริ่มต้น"
+                                                    className="form-control"
+                                                    minDate={start_prepare}
+                                                    maxDate={end_event}
+                                                    popperPlacement="top-start"
+                                                    isClearable
+                                                    selectsStart
+                                                    startDate={getStartDuration(index)}
+                                                    endDate={getEndDuration(index)}
+                                                />
                                             </div>
-                                        ))}
-                                    </div>
-
-                                </td>
-                            </tr>
-                            {/* หัวข้อ2 */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>หัวข้อที่ 2 </td>
-                                <td className='back-side-td'>
-                                    <Form.Label>การดำเนินงาน : </Form.Label>
-                                    <Form.Control
-                                        onChange={(event) => setTable2Topic(event.target.value)}
-                                        value={table2Topic}
-                                        size="sm"
-                                        type="text"
-                                        placeholder={`การดำเนินงาน ${2}`}
-                                    />
-                                    <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
-                                        <Form.Label>ระยะเวลา : </Form.Label>
-                                        <div>
-
-                                            <DatePicker
-                                                selected={startDurationTable2}
-                                                onChange={(date) => setStartDurationTable2(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันเริ่มต้น"
-                                                className="form-control"
-                                                minDate={start_prepare}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsStart
-                                                startDate={startDurationTable2}
-                                                endDate={endDurationTable2}
-                                            />
-                                        </div>
-                                        <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
-                                        <div>
-                                            <DatePicker
-                                                selected={endDurationTable2}
-                                                onChange={(date) => setEndDurationTable2(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันสิ้นสุด"
-                                                className="form-control"
-                                                minDate={startDurationTable2}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsEnd
-                                                startDate={startDurationTable2}
-                                                endDate={endDurationTable2}
-                                            />
-                                        </div>
-                                    </div>
-                                    <br></br>
-                                    <div style={{ display: 'inline-block' }}>
-                                        <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
-                                        {personNames.map((name, index) => (
-                                            <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={name}
-                                                        checked={responsibleTable2.includes(name)}
-                                                        onChange={handleresponsibleTable2Change}
-                                                    />
-                                                    {` ` + name}
-                                                </label>
+                                            <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
+                                            <div>
+                                                <DatePicker
+                                                    selected={getEndDuration(index)}
+                                                    onChange={(date) => setEndDuration(index, date)}
+                                                    dateFormat="dd/MM/yyyy"
+                                                    placeholderText="เลือกวันสิ้นสุด"
+                                                    className="form-control"
+                                                    minDate={getStartDuration(index)}
+                                                    maxDate={end_event}
+                                                    popperPlacement="top-start"
+                                                    isClearable
+                                                    selectsEnd
+                                                    startDate={getStartDuration(index)}
+                                                    endDate={getEndDuration(index)}
+                                                />
                                             </div>
-                                        ))}
-                                    </div>
+                                        </div>
 
-                                </td>
-                            </tr>
-                            {/* หัวข้อที่ 3 */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>หัวข้อที่ 3 </td>
-                                <td className='back-side-td'>
-                                    <Form.Label>การดำเนินงาน : </Form.Label>
-                                    <Form.Control
-                                        onChange={(event) => setTable3Topic(event.target.value)}
-                                        value={table3Topic}
-                                        size="sm"
-                                        type="text"
-                                        placeholder={`การดำเนินงาน ${3}`}
-                                    />
-                                    <div style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}>
-                                        <Form.Label>ระยะเวลา : </Form.Label>
-                                        <div>
-                                            <DatePicker
-                                                selected={startDurationTable3}
-                                                onChange={(date) => setStartDurationTable3(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันเริ่มต้น"
-                                                className="form-control"
-                                                minDate={start_prepare}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsStart
-                                                startDate={startDurationTable3}
-                                                endDate={endDurationTable3}
-                                            />
-                                        </div>
-                                        <span style={{ marginLeft: '1%', marginRight: '1%' }}>-</span>
-                                        <div>
-                                            <DatePicker
-                                                selected={endDurationTable3}
-                                                onChange={(date) => setEndDurationTable3(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันสิ้นสุด"
-                                                className="form-control"
-                                                minDate={startDurationTable3}
-                                                maxDate={end_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsEnd
-                                                startDate={startDurationTable3}
-                                                endDate={endDurationTable3}
-                                            />
-                                        </div>
-                                    </div>
-                                    <br></br>
-                                    <div style={{ display: 'inline-block' }}>
-                                        <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
-                                        {personNames.map((name, index) => (
-                                            <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={name}
-                                                        checked={responsibleTable3.includes(name)}
-                                                        onChange={handleresponsibleTable3Change}
-                                                    />
-                                                    {` ` + name}
-                                                </label>
+                                        <br></br>
+                                        {index == 0 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable1.includes(name)}
+                                                                onChange={handleresponsibleTable1Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
-                                    </div>
-                                </td>
-                            </tr>
+                                        }
+                                        {index == 1 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable2.includes(name)}
+                                                                onChange={handleresponsibleTable2Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+
+
+
+
+                                    </td>
+                                </tr>
+                            ))}
+
+                            {TopictableCount < 15 && (
+                                <Button variant="primary" className="ml-5 mb-3" onClick={increasePrinciplesAndReasons}>
+                                    เพิ่มหัวข้อ
+                                </Button>
+                            )}
+                            {TopictableCount > 1 && (
+                                <Button variant="danger" className="ml-5 mb-3" onClick={decreasePrinciplesAndReasons}>
+                                    ลดหัวข้อ
+                                </Button>
+                            )}
 
 
 
@@ -552,3 +892,4 @@ function CSD_timestep({ id_projects }) {
     );
 }
 export default CSD_timestep
+

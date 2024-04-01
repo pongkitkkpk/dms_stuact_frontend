@@ -89,7 +89,10 @@ function Sidebar({ color, image, routes }) {
                     activeClassName="active"
                     style={{ display: "flex", justifyContent: "space-between" ,fontWeight: "light"}}
                   >
-                    <span>{prop.name}</span>
+                   <span style={{ fontWeight: "light"}}>{prop.name}</span>
+
+
+
                     <div style={{ marginRight:"-13%" }}><i className={prop.icon} /></div>
                     
 

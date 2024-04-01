@@ -16,6 +16,7 @@ function Guest() {
   const [hasImage, setHasImage] = React.useState(true);
   const [isSidebarHovered, setIsSidebarHovered] = useState(false); 
   const [isMainpanelHovered, setIsMainpanelHovered] = useState(false); 
+  const [isMainpanelNormal, setIsMainpanelNormal] = useState(false);
   const location = useLocation();
   const mainPanel = React.useRef(null);
  
@@ -85,9 +86,15 @@ function Guest() {
           ref={mainPanel}
           style={{
             transition: "margin-left 0.5s ease, width 0.5s ease",
-            marginLeft: isMainpanelHovered ? "15%" : "0",
-            width:  (isMainpanelHovered ? "93%" : "83%"),
-            
+            width: isMainpanelHovered && !isMainpanelNormal ? "96%" :
+            // isMainpanelHovered && isMainpanelNormal ? "90%" :
+            !isMainpanelHovered && isMainpanelNormal ? "83%" :
+            "96%"
+
+            // width: isMainpanelHovered ? "96%" : (isMainpanelNormal ? "83%" : "96%"),  //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelHovered ? "83%" : (isMainpanelNormal ? "96%" : "83%"), //not work for the first time but after use it's work 
+            // width: isMainpanelNormal ? "83%" : (isMainpanelHovered ? "96%" : "83%"), //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelNormal ? "96%" : (isMainpanelHovered ? "83%" : "96%"), //not work for the first time but after use it's work 
           }}
           onMouseEnter={handleMainpanelMouseEnter}
           onMouseLeave={handleMainpanelMouseLeave}
