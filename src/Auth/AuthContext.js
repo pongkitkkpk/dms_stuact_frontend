@@ -1,13 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
+// Create a context to hold authentication-related data and functions
+export const AuthContext = createContext();
 
+// AuthProvider component manages authentication state and provides authentication-related functions
 export const AuthProvider = ({ children }) => {
+  // State variables to manage authentication status and user data
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
 
+  // useEffect hook to check authentication status on component mount
   useEffect(() => {
-    // Check authentication status in sessionStorage on component mount
+    // Check authentication status in sessionStorage
     const isLogged = sessionStorage.getItem('isLogged');
     if (isLogged === 'true') {
       // If user is logged in, set isAuthenticated to true
@@ -20,12 +24,13 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // Function to handle user login
   const handleLogin = (username, password, history) => {
-    // Validate the username and password
+    // Perform authentication logic here
     if (username === 'admin' && password === 'admin') {
-      // Set authentication status to true
+      // If credentials are valid, set isAuthenticated to true
       setIsAuthenticated(true);
-      // Set user role to admin
+      // Set user data (for demonstration purposes, setting a basic admin user)
       const adminUser = { username: 'admin', role: 'admin' };
       setUser(adminUser);
       // Save authentication status and user data to sessionStorage
@@ -34,10 +39,12 @@ export const AuthProvider = ({ children }) => {
       // Redirect to the admin page
       history.push('/admin');
     } else {
+      // If credentials are invalid, show an alert
       alert('Invalid username or password');
     }
   };
 
+  // Function to handle user logout
   const handleLogout = () => {
     // Clear authentication status and user data from sessionStorage
     sessionStorage.removeItem('isLogged');
@@ -46,7 +53,8 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUser({});
   };
-  console.log("isAuthenticated auth.js", isAuthenticated)
+
+  // Provide authentication context value to children components
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, handleLogin, handleLogout }}>
       {children}
@@ -54,8 +62,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Custom hook to access authentication context
 export const useAuth = () => useContext(AuthContext);
-
-export default AuthContext;
-
-

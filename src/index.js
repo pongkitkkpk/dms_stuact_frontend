@@ -15,7 +15,6 @@ import { adminRoutes } from "routes";
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
   const { isAuthenticated, user } = useAuth();
 
-  console.log("session index.js:", sessionStorage.getItem('isLogged')); // Example of using user
   const storedUserData = sessionStorage.getItem('user');
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.role; // Accessing the role property
