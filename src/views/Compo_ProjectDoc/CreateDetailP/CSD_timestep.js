@@ -14,13 +14,13 @@ import {
 } from "react-bootstrap";
 import Axios from 'axios';
 
-function CSD_timestep({ id_projects }) {
-
+function CSD_timestep({ id_projects, switchToCSDBudget }) {
+    const [projectList, setProjectList] = useState([]);
     const [codeClub, setCodeClub] = useState('');
     const [yearlyCountSketch, setYearlyCountSketch] = useState('');
 
 
-    const [table1Id, setTable1Id] = useState('');
+    const [table1Id, setTable1Id] = useState('1');
     const [table1Topic, setTable1Topic] = useState('');
     const [startDurationTable1, setStartDurationTable1] = useState('');
     const [endDurationTable1, setEndDurationTable1] = useState('');
@@ -35,7 +35,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table2Id, setTable2Id] = useState('');
+    const [table2Id, setTable2Id] = useState('2');
     const [table2Topic, setTable2Topic] = useState('');
     const [startDurationTable2, setStartDurationTable2] = useState(null);
     const [endDurationTable2, setEndDurationTable2] = useState(null);
@@ -49,7 +49,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table3Id, setTable3Id] = useState('');
+    const [table3Id, setTable3Id] = useState('3');
     const [table3Topic, setTable3Topic] = useState('');
     const [startDurationTable3, setStartDurationTable3] = useState(null);
     const [endDurationTable3, setEndDurationTable3] = useState(null);
@@ -63,7 +63,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table4Id, setTable4Id] = useState('');
+    const [table4Id, setTable4Id] = useState('4');
     const [table4Topic, setTable4Topic] = useState('');
     const [startDurationTable4, setStartDurationTable4] = useState(null);
     const [endDurationTable4, setEndDurationTable4] = useState(null);
@@ -77,7 +77,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table5Id, setTable5Id] = useState('');
+    const [table5Id, setTable5Id] = useState('5');
     const [table5Topic, setTable5Topic] = useState('');
     const [startDurationTable5, setStartDurationTable5] = useState(null);
     const [endDurationTable5, setEndDurationTable5] = useState(null);
@@ -91,7 +91,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table6Id, setTable6Id] = useState('');
+    const [table6Id, setTable6Id] = useState('6');
     const [table6Topic, setTable6Topic] = useState('');
     const [startDurationTable6, setStartDurationTable6] = useState(null);
     const [endDurationTable6, setEndDurationTable6] = useState(null);
@@ -105,7 +105,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table7Id, setTable7Id] = useState('');
+    const [table7Id, setTable7Id] = useState('7');
     const [table7Topic, setTable7Topic] = useState('');
     const [startDurationTable7, setStartDurationTable7] = useState(null);
     const [endDurationTable7, setEndDurationTable7] = useState(null);
@@ -119,7 +119,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table8Id, setTable8Id] = useState('');
+    const [table8Id, setTable8Id] = useState('8');
     const [table8Topic, setTable8Topic] = useState('');
     const [startDurationTable8, setStartDurationTable8] = useState(null);
     const [endDurationTable8, setEndDurationTable8] = useState(null);
@@ -133,7 +133,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table9Id, setTable9Id] = useState('');
+    const [table9Id, setTable9Id] = useState('9');
     const [table9Topic, setTable9Topic] = useState('');
     const [startDurationTable9, setStartDurationTable9] = useState(null);
     const [endDurationTable9, setEndDurationTable9] = useState(null);
@@ -147,7 +147,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table10Id, setTable10Id] = useState('');
+    const [table10Id, setTable10Id] = useState('10');
     const [table10Topic, setTable10Topic] = useState('');
     const [startDurationTable10, setStartDurationTable10] = useState(null);
     const [endDurationTable10, setEndDurationTable10] = useState(null);
@@ -161,7 +161,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table11Id, setTable11Id] = useState('');
+    const [table11Id, setTable11Id] = useState('11');
     const [table11Topic, setTable11Topic] = useState('');
     const [startDurationTable11, setStartDurationTable11] = useState(null);
     const [endDurationTable11, setEndDurationTable11] = useState(null);
@@ -175,7 +175,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table12Id, setTable12Id] = useState('');
+    const [table12Id, setTable12Id] = useState('12');
     const [table12Topic, setTable12Topic] = useState('');
     const [startDurationTable12, setStartDurationTable12] = useState(null);
     const [endDurationTable12, setEndDurationTable12] = useState(null);
@@ -189,7 +189,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table13Id, setTable13Id] = useState('');
+    const [table13Id, setTable13Id] = useState('13');
     const [table13Topic, setTable13Topic] = useState('');
     const [startDurationTable13, setStartDurationTable13] = useState(null);
     const [endDurationTable13, setEndDurationTable13] = useState(null);
@@ -203,7 +203,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table14Id, setTable14Id] = useState('');
+    const [table14Id, setTable14Id] = useState('14');
     const [table14Topic, setTable14Topic] = useState('');
     const [startDurationTable14, setStartDurationTable14] = useState(null);
     const [endDurationTable14, setEndDurationTable14] = useState(null);
@@ -217,7 +217,7 @@ function CSD_timestep({ id_projects }) {
         }
     };
 
-    const [table15Id, setTable15Id] = useState('');
+    const [table15Id, setTable15Id] = useState('15');
     const [table15Topic, setTable15Topic] = useState('');
     const [startDurationTable15, setStartDurationTable15] = useState(null);
     const [endDurationTable15, setEndDurationTable15] = useState(null);
@@ -242,8 +242,6 @@ function CSD_timestep({ id_projects }) {
     const [person1, setPerson1] = useState([]);
     const [person2, setPerson2] = useState([]);
     const [person3, setPerson3] = useState([]);
-
-
 
 
 
@@ -274,10 +272,172 @@ function CSD_timestep({ id_projects }) {
             setStartEvent(startEvent)
             setEndEvent(endEvent)
             setDeadLine(deadline)
-
         });
-    };
+    }
 
+    const createProject = () => {
+        let responsibleTable1str = '';
+        if (responsibleTable1 != '') {
+            responsibleTable1str = responsibleTable1.join(",");
+            responsibleTable1str = responsibleTable1str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable2str = '';
+        if (responsibleTable2 != '') {
+            responsibleTable2str = responsibleTable2.join(",");
+            responsibleTable2str = responsibleTable2str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable3str = '';
+        if (responsibleTable3 != '') {
+            responsibleTable3str = responsibleTable3.join(",");
+            responsibleTable3str = responsibleTable3str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable4str = '';
+        if (responsibleTable4 != '') {
+            responsibleTable4str = responsibleTable4.join(",");
+            responsibleTable4str = responsibleTable4str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable5str = '';
+        if (responsibleTable5 !== '') {
+            responsibleTable5str = responsibleTable5.join(",");
+            responsibleTable5str = responsibleTable5str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable6str = '';
+        if (responsibleTable6 !== '') {
+            responsibleTable6str = responsibleTable6.join(",");
+            responsibleTable6str = responsibleTable6str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable7str = '';
+        if (responsibleTable7 !== '') {
+            responsibleTable7str = responsibleTable7.join(",");
+            responsibleTable7str = responsibleTable7str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable8str = '';
+        if (responsibleTable8 !== '') {
+            responsibleTable8str = responsibleTable8.join(",");
+            responsibleTable8str = responsibleTable8str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable9str = '';
+        if (responsibleTable9 !== '') {
+            responsibleTable9str = responsibleTable9.join(",");
+            responsibleTable9str = responsibleTable9str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable10str = '';
+        if (responsibleTable10 !== '') {
+            responsibleTable10str = responsibleTable10.join(",");
+            responsibleTable10str = responsibleTable10str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+        let responsibleTable11str = '';
+        if (responsibleTable11 !== '') {
+            responsibleTable11str = responsibleTable11.join(",");
+            responsibleTable11str = responsibleTable11str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable12str = '';
+        if (responsibleTable12 !== '') {
+            responsibleTable12str = responsibleTable12.join(",");
+            responsibleTable12str = responsibleTable12str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable13str = '';
+        if (responsibleTable13 !== '') {
+            responsibleTable13str = responsibleTable13.join(",");
+            responsibleTable13str = responsibleTable13str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable14str = '';
+        if (responsibleTable14 !== '') {
+            responsibleTable14str = responsibleTable14.join(",");
+            responsibleTable14str = responsibleTable14str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+        let responsibleTable15str = '';
+        if (responsibleTable15 !== '') {
+            responsibleTable15str = responsibleTable15.join(",");
+            responsibleTable15str = responsibleTable15str.split(",").map(item => item.trim().split(" ")[0]).join(", ");
+        }
+
+
+
+        Axios.post(`http://localhost:3001/student/project/p_timestep/create/${id_projects}`, {
+            id_projects,
+            table1Topic,
+            startDurationTable1,
+            endDurationTable1,
+            responsibleTable1str,
+            table2Topic,
+            startDurationTable2,
+            endDurationTable2,
+            responsibleTable2str,
+            table3Topic,
+            startDurationTable3,
+            endDurationTable3,
+            responsibleTable3str,
+            table4Topic,
+            startDurationTable4,
+            endDurationTable4,
+            responsibleTable4str,
+            table5Topic,
+            startDurationTable5,
+            endDurationTable5,
+            responsibleTable5str,
+            table6Topic,
+            startDurationTable6,
+            endDurationTable6,
+            responsibleTable6str,
+            table7Topic,
+            startDurationTable7,
+            endDurationTable7,
+            responsibleTable7str,
+            table8Topic,
+            startDurationTable8,
+            endDurationTable8,
+            responsibleTable8str,
+            table9Topic,
+            startDurationTable9,
+            endDurationTable9,
+            responsibleTable9str,
+            table10Topic,
+            startDurationTable10,
+            endDurationTable10,
+            responsibleTable10str,
+            table11Topic,
+            startDurationTable11,
+            endDurationTable11,
+            responsibleTable11str,
+            table12Topic,
+            startDurationTable12,
+            endDurationTable12,
+            responsibleTable12str,
+            table13Topic,
+            startDurationTable13,
+            endDurationTable13,
+            responsibleTable13str,
+            table14Topic,
+            startDurationTable14,
+            endDurationTable14,
+            responsibleTable14str,
+            table15Topic,
+            startDurationTable15,
+            endDurationTable15,
+            responsibleTable15str
+
+
+        }).then(response => {
+            console.log(response.data);
+            // Handle success, if needed
+        })
+            .catch(error => {
+                console.error('There was an error!', error);
+                // Handle error, if needed
+            });
+        // switchToCSDBudget();
+
+
+    }
     useEffect(() => {
         console.log("person1" + person1)
         console.log("person2" + person2)
@@ -295,26 +455,6 @@ function CSD_timestep({ id_projects }) {
     useEffect(() => {
         getProjectData();
     }, []);
-    useEffect(() => {
-        console.log("Start1111111111111111111")
-        console.log("Start1" + startDurationTable1)
-        console.log("en1" + endDurationTable1)
-        console.log("res1" + responsibleTable1)
-    }, [startDurationTable1, endDurationTable1, responsibleTable1]);
-
-    useEffect(() => {
-        console.log("2222222222222222222222222222222222222222222")
-        console.log("Start2" + startDurationTable2)
-        console.log("en2" + endDurationTable2)
-        console.log("res2" + responsibleTable2)
-    }, [startDurationTable2, endDurationTable2, responsibleTable2]);
-
-    useEffect(() => {
-        console.log("Start333333")
-        console.log("Start3" + startDurationTable3)
-        console.log("en3" + endDurationTable3)
-        console.log("res3" + responsibleTable3)
-    }, [startDurationTable3, endDurationTable3, responsibleTable3]);
 
 
 
@@ -326,9 +466,11 @@ function CSD_timestep({ id_projects }) {
     };
     const decreasePrinciplesAndReasons = () => {
         if (TopictableCount > 1) {
+
             setTopictableCount(TopictableCount - 1);
             // Reset corresponding studentTypeNumber state variables to 0
-            switch (TopictableCount) {
+
+            switch (TopictableCount - 1) {
                 case 0:
                     setTable1Topic('');
                     setStartDurationTable1(null);
@@ -425,96 +567,6 @@ function CSD_timestep({ id_projects }) {
 
         }
     };
-
-    // **************************************************
-    const getResponsibleCheckedState = (index, name) => {
-        switch (index) {
-            case 0:
-                return responsibleTable1.includes(name);
-            case 1:
-                return responsibleTable2.includes(name);
-            case 2:
-                return responsibleTable3.includes(name);
-            case 3:
-                return responsibleTable4.includes(name);
-            case 4:
-                return responsibleTable5.includes(name);
-            case 5:
-                return responsibleTable6.includes(name);
-            case 6:
-                return responsibleTable7.includes(name);
-            case 7:
-                return responsibleTable8.includes(name);
-            case 8:
-                return responsibleTable9.includes(name);
-            case 9:
-                return responsibleTable10.includes(name);
-            case 10:
-                return responsibleTable11.includes(name);
-            case 11:
-                return responsibleTable12.includes(name);
-            case 12:
-                return responsibleTable13.includes(name);
-            case 13:
-                return responsibleTable14.includes(name);
-            case 14:
-                return responsibleTable15.includes(name);
-            default:
-                return false;
-        }
-    };
-    const handleResponsibleTableChange = (index, event) => {
-        switch (index) {
-            case 0:
-                handleresponsibleTable1Change(event);
-                break;
-            case 1:
-                handleresponsibleTable2Change(event);
-                break;
-            case 2:
-                handleresponsibleTable3Change(event);
-                break;
-            case 3:
-                handleresponsibleTable4Change(event);
-                break;
-            case 4:
-                handleresponsibleTable5Change(event);
-                break;
-            case 5:
-                handleresponsibleTable6Change(event);
-                break;
-            case 6:
-                handleresponsibleTable7Change(event);
-                break;
-            case 7:
-                handleresponsibleTable8Change(event);
-                break;
-            case 8:
-                handleresponsibleTable9Change(event);
-                break;
-            case 9:
-                handleresponsibleTable10Change(event);
-                break;
-            case 10:
-                handleresponsibleTable11Change(event);
-                break;
-            case 11:
-                handleresponsibleTable12Change(event);
-                break;
-            case 12:
-                handleresponsibleTable13Change(event);
-                break;
-            case 13:
-                handleresponsibleTable14Change(event);
-                break;
-            case 14:
-                handleresponsibleTable15Change(event);
-                break;
-            default:
-                break;
-        }
-    };
-    // **************************************************
 
     const getStartDuration = (index) => {
         switch (index) {
@@ -716,7 +768,11 @@ function CSD_timestep({ id_projects }) {
                             {/* หัวข้อ index */}
                             {Array.from({ length: TopictableCount }).map((_, index) => (
                                 <tr style={{ backgroundColor: "white" }}>
-                                    <td className='head-side-td'>{`หัวข้อที่ ${index + 1}`} </td>
+                                    <td className='head-side-td'>
+                                        <div>
+                                            {`หัวข้อที่ ${index + 1}`}
+                                        </div>
+                                    </td>
                                     <td className='back-side-td'>
                                         <Form.Label>การดำเนินงาน : </Form.Label>
                                         <Form.Control
@@ -773,7 +829,44 @@ function CSD_timestep({ id_projects }) {
                                                 }
 
                                             }}
-                                            value={table1Topic}
+                                            value={
+                                                (() => {
+                                                    switch (index) {
+                                                        case 0:
+                                                            return table1Topic;
+                                                        case 1:
+                                                            return table2Topic;
+                                                        case 2:
+                                                            return table3Topic;
+                                                        case 3:
+                                                            return table4Topic;
+                                                        case 4:
+                                                            return table5Topic;
+                                                        case 5:
+                                                            return table6Topic;
+                                                        case 6:
+                                                            return table7Topic;
+                                                        case 7:
+                                                            return table8Topic;
+                                                        case 8:
+                                                            return table9Topic;
+                                                        case 9:
+                                                            return table10Topic;
+                                                        case 10:
+                                                            return table11Topic;
+                                                        case 11:
+                                                            return table12Topic;
+                                                        case 12:
+                                                            return table13Topic;
+                                                        case 13:
+                                                            return table14Topic;
+                                                        case 14:
+                                                            return table15Topic;
+                                                        default:
+                                                            return '';
+                                                    }
+                                                })()
+                                            }
                                             size="sm"
                                             type="text"
                                             placeholder={`การดำเนินงาน ${index + 1}`}
@@ -853,12 +946,250 @@ function CSD_timestep({ id_projects }) {
                                             </div>
                                         }
 
+                                        {index == 2 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable3.includes(name)}
+                                                                onChange={handleresponsibleTable3Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
 
+                                        {index == 3 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable4.includes(name)}
+                                                                onChange={handleresponsibleTable4Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 4 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable5.includes(name)}
+                                                                onChange={handleresponsibleTable5Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
 
+                                        {index == 5 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable6.includes(name)}
+                                                                onChange={handleresponsibleTable6Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
 
+                                        {index == 6 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable7.includes(name)}
+                                                                onChange={handleresponsibleTable7Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+
+                                        {index == 7 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable8.includes(name)}
+                                                                onChange={handleresponsibleTable8Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+
+                                        {index == 8 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable9.includes(name)}
+                                                                onChange={handleresponsibleTable9Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+
+                                        {index == 9 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable10.includes(name)}
+                                                                onChange={handleresponsibleTable10Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 10 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable11.includes(name)}
+                                                                onChange={handleresponsibleTable11Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 11 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable12.includes(name)}
+                                                                onChange={handleresponsibleTable12Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 12 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable13.includes(name)}
+                                                                onChange={handleresponsibleTable13Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 13 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable14.includes(name)}
+                                                                onChange={handleresponsibleTable14Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {index == 14 &&
+                                            <div style={{ display: 'inline-block' }}>
+                                                <Form.Label style={{ marginRight: '10px' }}>ผู้รับผิดชอบ : </Form.Label>
+                                                {personNames.map((name, index) => (
+                                                    <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={responsibleTable15.includes(name)}
+                                                                onChange={handleresponsibleTable15Change}
+                                                            />
+                                                            {` ` + name}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
                                     </td>
                                 </tr>
                             ))}
+
 
                             {TopictableCount < 15 && (
                                 <Button variant="primary" className="ml-5 mb-3" onClick={increasePrinciplesAndReasons}>
@@ -878,13 +1209,10 @@ function CSD_timestep({ id_projects }) {
 
                         </tbody>
                     </Table>
-                    <Button
-                        // onClick={}
-                        type="submit"
-                        variant="info"
-                    >
-                        Update Profile
-                    </Button>
+                    <div>
+
+                        <Button onClick={createProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
+                    </div>
                 </Card>
             </Col>
         </>

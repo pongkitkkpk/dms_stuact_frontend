@@ -98,10 +98,8 @@ function Admin() {
           }}
           onMouseEnter={handleMainpanelMouseEnter}
           onMouseLeave={handleMainpanelMouseLeave}
-
         >
-          <h1>{isMainpanelHovered.toString()}</h1>
-          <h1>{isMainpanelNormal.toString()}</h1>
+
           <AdminNavbar />
           <div className="content">
             <Switch>{getRoutes(routes)}</Switch>
