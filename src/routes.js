@@ -14,14 +14,6 @@ import NewProjectDocument from "views/NewProjectDocument";
 
 
 const dashboardRoutes = [
-  // {
-  //   upgrade: true,
-  //   path: "/upgrade",
-  //   name: "Upgrade to PRO",
-  //   icon: "nc-icon nc-alien-33",
-  //   component: Upgrade,
-  //   layout: "/admin"
-  // },
   {
     path: "/project-doc/:id_project", // Add route parameter for id_project
     component: ProjectDocument,

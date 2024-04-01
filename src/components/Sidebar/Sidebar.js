@@ -91,8 +91,6 @@ function Sidebar({ color, image, routes }) {
                   >
                    <span style={{ fontWeight: "light"}}>{prop.name}</span>
 
-
-
                     <div style={{ marginRight:"-13%" }}><i className={prop.icon} /></div>
                     
 
