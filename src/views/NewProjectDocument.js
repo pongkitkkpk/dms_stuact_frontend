@@ -5,14 +5,16 @@ import CSD_detail2 from './Compo_ProjectDoc/CreateDetailP/CSD_detail2';
 import CSD_person from './Compo_ProjectDoc/CreateDetailP/CSD_person';
 import CSD_locationtime from './Compo_ProjectDoc/CreateDetailP/CSD_locationtime';
 import CSD_timestep from './Compo_ProjectDoc/CreateDetailP/CSD_timestep';
+import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
+  const [cSD_Detail, setCSD_Detail] = useState(false);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
   const [cSD_person, setCSD_Person] = useState(false);
   const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
+  const [cSD_budget, setCSD_budget] = useState(true);
   const containerRef = useRef(null);
 
   const CSD_DetailComponent = () => {
@@ -39,6 +41,11 @@ function NewProjectDocument() {
     if (cSD_person) {
       setCSD_timestep(true);
     }
+  };
+  const CSD_budgetComponent = () => {
+    // if (cSD_timestep) {
+      setCSD_budget(true);
+    // }
   };
   // Function to switch to CSD_person view and scroll to top
   const switchToCSDDetail2 = () => {
@@ -97,7 +104,9 @@ function NewProjectDocument() {
                     <a href="#" onClick={CSD_timestepComponent}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdt5</a>
                   </li>
                   
-                  <li className="list-group-item"><a href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</a></li>
+                  <li className="list-group-item">
+                  <a href="#" onClick={CSD_budgetComponent}>1.5 งบประมาณของโครงการ</a>
+                    </li>
                   <li className="list-group-item"><a href="#section1-5">1.5 ข้อมูลเพิ่มเติม</a></li>
                   <li className="list-group-item"><a href="#section1-6">1.6 เอกสารเพิ่มเติม</a></li>
                   {/* <li className="list-group-item"><a href="#section2">2. รายการเปลี่ยนแปลงแก้ไข</a></li>
@@ -113,6 +122,7 @@ function NewProjectDocument() {
         {cSD_person && <CSD_person id_projects={id_projects} switchToCSDLocationTime={switchToCSDLocationTime} />}
         {cSD_locationtime && <CSD_locationtime id_projects={id_projects} switchToCSDTimestep={switchToCSDTimestep} />}
         {cSD_timestep && <CSD_timestep id_projects={id_projects}  />}
+        {cSD_budget && <CSD_budget id_projects={id_projects}/>}
 
       </Row>
     </Container>
