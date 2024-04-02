@@ -12,12 +12,19 @@ import {
     Nav,
     Table
 } from "react-bootstrap";
-import Axios from 'axios';  
+import Axios from 'axios';
 
 function CSD_budget({ id_projects }) {
     const [projectList, setProjectList] = useState([]);
-    const [principles_and_reasons1, setPrinciplesAndReasons1] = useState('');
+    const [listA, setListA] = useState(Array.from({ length: 15 }, () => ''));
+    const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ''));
+    const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ''));
+    const [listTPA, setListTPA] = useState(Array.from({ length: 15 }, () => ''));
+    const [listSA, setListSA] = useState(Array.from({ length: 15 }, () => ''));
 
+
+
+    const [principles_and_reasons1, setPrinciplesAndReasons1] = useState('');
     const [principles_and_reasons2, setPrinciplesAndReasons2] = useState('');
     const [principles_and_reasons3, setPrinciplesAndReasons3] = useState('');
     const [principles_and_reasons4, setPrinciplesAndReasons4] = useState('');
@@ -46,36 +53,37 @@ function CSD_budget({ id_projects }) {
     //
     const minDate = new Date();
 
-    // หลักการและเหตุผล
-    const [PrinciplesAndReasonsCount, setPrinciplesAndReasonsount] = useState(1);
-    const increasePrinciplesAndReasons = () => {
-        if (PrinciplesAndReasonsCount < 5) {
-            setPrinciplesAndReasonsount(PrinciplesAndReasonsCount + 1);
+    const updateListA = (index, value) => {
+        setListA(prevListA => {
+            const newListA = [...prevListA];
+            newListA[index] = value;
+            return newListA;
+        });
+    };
+    const updateListNA = (index, value) => {
+        setListNA(prevListNA => {
+            const newListNA = [...prevListNA];
+            newListNA[index] = value;
+            return newListNA;
+        });
+    };
+    // Update the third element of listA
+
+    useEffect(() => {
+        console.log(listA)
+    }, [listA]);
+
+    const [TypeACount, setTypeACount] = useState(1);
+    const increaseTypeACount = () => {
+        if (TypeACount < 15) {
+            setTypeACount(TypeACount + 1);
         }
     };
-    const decreasePrinciplesAndReasons = () => {
-        if (PrinciplesAndReasonsCount > 1) {
-            setPrinciplesAndReasonsount(PrinciplesAndReasonsCount - 1);
+    const decreaseTypeACount = () => {
+        if (TypeACount > 1) {
+            setTypeACount(TypeACount - 1);
             // Reset corresponding studentTypeNumber state variables to 0
-            switch (PrinciplesAndReasonsCount) {
-                case 4:
-                    setPrinciplesAndReasons5('');
-                    break;
-                case 3:
-                    setPrinciplesAndReasons4('');
-                    break;
-                case 2:
-                    setPrinciplesAndReasons3('');
-                    break;
-                case 1:
-                    setPrinciplesAndReasons2('');
-                    break;
-                case 0:
-                    setPrinciplesAndReasons1('');
-                    break;
-                default:
-                // Handle other cases if needed
-            }
+            updateListA(TypeACount, '')
         }
     };
 
@@ -179,38 +187,30 @@ function CSD_budget({ id_projects }) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {Array.from({ length: PrinciplesAndReasonsCount }).map((_, index) => (
+                                            {Array.from({ length: TypeACount }).map((_, index) => (
                                                 <tr>
-                                                    {/* list_typeA */}
+                                                    {/* list_typeA ชื่อรายการ*/}
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`รายการหมวดค่าตอบแทนที่ ${index + 1}`}
                                                             onChange={(event) => {
-                                                                switch (index) {
-                                                                    case 0:
-                                                                        setLocation1(event.target.value);
-                                                                        break;
-                                                                    case 1:
-                                                                        setLocation2(event.target.value);
-                                                                        break;
-                                                                    case 2:
-                                                                        setLocation3(event.target.value);
-                                                                        break;
-                                                                    case 3:
-                                                                        setLocation4(event.target.value);
-                                                                        break;
-                                                                    case 4:
-                                                                        setLocation5(event.target.value);
-                                                                        break;
-                                                                    default:
-                                                                    // Handle other cases if needed
-                                                                }
+                                                                updateListA(index, event.target.value);
                                                             }}
-                                                            ></Form.Control>
+                                                        ></Form.Control>
                                                     </td>
-                                                    <td>2</td>
+                                                    {/* listNA  จำนวนคน*/}
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`จำนวน(คน) ช่องที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListNA(index, event.target.value);
+                                                            }}
+                                                        ></Form.Control>
+                                                    </td>
                                                     <td>3</td>
                                                     <td>4</td>
                                                     <td>5</td>
@@ -249,13 +249,13 @@ function CSD_budget({ id_projects }) {
                                         </tbody>
                                     </Table>
 
-                                    {PrinciplesAndReasonsCount < 5 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increasePrinciplesAndReasons}>
+                                    {TypeACount < 15 && (
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeACount}>
                                             เพิ่มหลักการและเหตุผล
                                         </Button>
                                     )}
-                                    {PrinciplesAndReasonsCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreasePrinciplesAndReasons}>
+                                    {TypeACount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeACount}>
                                             ลดหลักการและเหตุผล
                                         </Button>
                                     )}
