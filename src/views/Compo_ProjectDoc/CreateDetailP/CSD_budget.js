@@ -1,57 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-// react-bootstrap components
-import {
-    Button,
-    Card,
-    Form,
-    Container,
-    Row,
-    Col,
-    Nav,
-    Table
-} from "react-bootstrap";
-import Axios from 'axios';
+import React, { useState,useEffect } from 'react';
+import { Button, Card, Form, Col, Table } from "react-bootstrap";
 
-function CSD_budget({ id_projects }) {
-    const [projectList, setProjectList] = useState([]);
+function CSD_budget() {
     const [listA, setListA] = useState(Array.from({ length: 15 }, () => ''));
     const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ''));
     const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ''));
     const [listTPA, setListTPA] = useState(Array.from({ length: 15 }, () => ''));
     const [listSA, setListSA] = useState(Array.from({ length: 15 }, () => ''));
 
+    const [TypeACount, setTypeACount] = useState(1);
 
+    const increaseTypeACount = () => {
+        if (TypeACount < 15) {
+            setTypeACount(TypeACount + 1);
+        }
+    };
 
-    const [principles_and_reasons1, setPrinciplesAndReasons1] = useState('');
-    const [principles_and_reasons2, setPrinciplesAndReasons2] = useState('');
-    const [principles_and_reasons3, setPrinciplesAndReasons3] = useState('');
-    const [principles_and_reasons4, setPrinciplesAndReasons4] = useState('');
-    const [principles_and_reasons5, setPrinciplesAndReasons5] = useState('');
-    const [objective1, setObjective1] = useState('');
-    const [objective2, setObjective2] = useState('');
-    const [objective3, setObjective3] = useState('');
-    const [objective4, setObjective4] = useState('');
-    const [objective5, setObjective5] = useState('');
-    const [project_type1, setProjectType1] = useState('');
-    const [project_type2, setProjectType2] = useState('');
-    const [project_type3, setProjectType3] = useState('');
-    const [project_type4, setProjectType4] = useState('');
-    const [project_type5, setProjectType5] = useState('');
-    const [is_newproject, setIsNewProject] = useState(false); // Assuming is_newproject is a boolean
-    const [is_continueproject, setIsContinueProject] = useState(false); // Assuming is_continueproject is a boolean
-
-    const [problem1, setProblem1] = useState('');
-    const [result1, setResult1] = useState('');
-    const [problem2, setProblem2] = useState('');
-    const [result2, setResult2] = useState('');
-    const [problem3, setProblem3] = useState('');
-    const [result3, setResult3] = useState('');
-
-
-    //
-    const minDate = new Date();
+    const decreaseTypeACount = () => {
+        if (TypeACount > 1) {
+            setTypeACount(TypeACount - 1);
+            updateListA(TypeACount-1, '');
+            updateListNA(TypeACount-1, '');
+            updateListTA(TypeACount-1, '');
+            updateListTPA(TypeACount-1, '');
+            updateListSA(TypeACount-1, '');
+        }
+    };
 
     const updateListA = (index, value) => {
         setListA(prevListA => {
@@ -60,117 +34,59 @@ function CSD_budget({ id_projects }) {
             return newListA;
         });
     };
+
     const updateListNA = (index, value) => {
         setListNA(prevListNA => {
             const newListNA = [...prevListNA];
             newListNA[index] = value;
+            updateListSA(index, value, listTA[index], listTPA[index]);
             return newListNA;
         });
     };
-    // Update the third element of listA
 
+    const updateListTA = (index, value) => {
+        setListTA(prevListTA => {
+            const newListTA = [...prevListTA];
+            newListTA[index] = value;
+            updateListSA(index, listNA[index], value, listTPA[index]);
+            return newListTA;
+        });
+    };
+
+    const updateListTPA = (index, value) => {
+        setListTPA(prevListTPA => {
+            const newListTPA = [...prevListTPA];
+            newListTPA[index] = value;
+            updateListSA(index, listNA[index], listTA[index], value);
+            return newListTPA;
+        });
+    };
+
+    const updateListSA = (index, numPeople, numHours, pricePerHour) => {
+        const totalPrice = parseInt(numPeople) * parseInt(numHours) * parseInt(pricePerHour);
+        setListSA(prevListSA => {
+            const newListSA = [...prevListSA];
+            newListSA[index] = isNaN(totalPrice) ? '' : totalPrice;
+            return newListSA;
+        });
+    };
     useEffect(() => {
-        console.log(listA)
-    }, [listA]);
-
-    const [TypeACount, setTypeACount] = useState(1);
-    const increaseTypeACount = () => {
-        if (TypeACount < 15) {
-            setTypeACount(TypeACount + 1);
-        }
-    };
-    const decreaseTypeACount = () => {
-        if (TypeACount > 1) {
-            setTypeACount(TypeACount - 1);
-            // Reset corresponding studentTypeNumber state variables to 0
-            updateListA(TypeACount, '')
-        }
-    };
-
-    // วัตถุประสงค์
-    const [itemCount, setItemCount] = useState(1);
-    const increaseItemCount = () => {
-        if (itemCount < 5) {
-            setItemCount(itemCount + 1);
-        }
-    };
-    const decreaseItemCount = () => {
-        if (itemCount > 1) {
-            setItemCount(itemCount - 1);
-            // Reset corresponding studentTypeNumber state variables to 0
-            switch (itemCount) {
-                case 4:
-                    setObjective5('');
-                    break;
-                case 3:
-                    setObjective4('');
-                    break;
-                case 2:
-                    setObjective3('');
-                    break;
-                case 1:
-                    setObjective2('');
-                    break;
-                case 0:
-                    setObjective1('');
-                    break;
-                default:
-                // Handle other cases if needed
-            }
-        }
-    };
-
-    // เพิ่มลักษณะรูปแบบโครงการ
-    const [project_typeCount, setProjectTypeCount] = useState(1);
-    const increaseProjectTypeCount = () => {
-        if (project_typeCount < 5) {
-            setProjectTypeCount(project_typeCount + 1);
-        }
-    };
-    const decreaseProjectTypeCount = () => {
-        if (project_typeCount > 1) {
-            setProjectTypeCount(project_typeCount - 1);
-            // Reset corresponding studentTypeNumber state variables to 0
-            switch (project_typeCount) {
-                case 4:
-                    setProjectType5('');
-                    break;
-                case 3:
-                    setProjectType4('');
-                    break;
-                case 2:
-                    setProjectType3('');
-                    break;
-                case 1:
-                    setProjectType2('');
-                    break;
-                case 0:
-                    setProjectType1('');
-                    break;
-                default:
-                // Handle other cases if needed
-            }
-        }
-    };
-
-
-
-
+        console.log("TA"+listTA)
+        console.log("TPA"+listTPA)
+        console.log("SA"+listSA)
+    }, [listTA,listTPA,listSA]);
 
     return (
         <>
-            {/* วนค่าจากdatabase  */}
             <Col md="9">
                 <Card>
-                    <Table striped="columns">
+                    <Table striped>
                         <thead>
                             <tr>
                                 <th>งบประมาณ</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            {/* หมวดค่าตอบแทน */}
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td'>หมวดค่าตอบแทน</td>
                                 <td className='back-side-td'>
@@ -188,8 +104,7 @@ function CSD_budget({ id_projects }) {
                                         </thead>
                                         <tbody>
                                             {Array.from({ length: TypeACount }).map((_, index) => (
-                                                <tr>
-                                                    {/* list_typeA ชื่อรายการ*/}
+                                                <tr key={index}>
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
@@ -198,57 +113,52 @@ function CSD_budget({ id_projects }) {
                                                             onChange={(event) => {
                                                                 updateListA(index, event.target.value);
                                                             }}
-                                                        ></Form.Control>
+                                                        />
                                                     </td>
-                                                    {/* listNA  จำนวนคน*/}
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
-                                                            placeholder={`จำนวน(คน) ช่องที่ ${index + 1}`}
+                                                            placeholder={` ช่องที่ ${index + 1}`}
                                                             onChange={(event) => {
                                                                 updateListNA(index, event.target.value);
                                                             }}
-                                                        ></Form.Control>
+                                                        />
                                                     </td>
                                                     <td>3</td>
-                                                    <td>4</td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={` ช่องที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListTA(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
                                                     <td>5</td>
-                                                    <td>6</td>
-                                                    <td>7</td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={` ช่องที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListTPA(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            value={listSA[index]}
+                                                            disabled
+                                                        />
+                                                    </td>
                                                 </tr>
-                                                // <li key={index}>
-                                                //     <Form.Control
-                                                //         size="sm"
-                                                //         type="text"
-                                                //         placeholder={`เพิ่มหลักการและเหตุผล ${index + 1}`}
-                                                //         onChange={(event) => {
-                                                //             switch (index) {
-                                                //                 case 0:
-                                                //                     setPrinciplesAndReasons1(event.target.value);
-                                                //                     break;
-                                                //                 case 1:
-                                                //                     setPrinciplesAndReasons2(event.target.value);
-                                                //                     break;
-                                                //                 case 2:
-                                                //                     setPrinciplesAndReasons3(event.target.value);
-                                                //                     break;
-                                                //                 case 3:
-                                                //                     setPrinciplesAndReasons4(event.target.value);
-                                                //                     break;
-                                                //                 case 4:
-                                                //                     setPrinciplesAndReasons5(event.target.value);
-                                                //                     break;
-                                                //                 default:
-                                                //                 // Handle other cases if needed
-                                                //             }
-                                                //         }}
-                                                //     />
-                                                // </li>
                                             ))}
                                         </tbody>
                                     </Table>
-
                                     {TypeACount < 15 && (
                                         <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeACount}>
                                             เพิ่มหลักการและเหตุผล
@@ -261,111 +171,9 @@ function CSD_budget({ id_projects }) {
                                     )}
                                 </td>
                             </tr>
-                            {/* วัตถุประสงค์ */}
-                            <tr>
-                                <td className='head-side-td'>วัตถุประสงค์</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        {Array.from({ length: itemCount }).map((_, index) => (
-                                            <li key={index}>
-                                                <Form.Control
-                                                    size="sm"
-                                                    type="text"
-                                                    placeholder={`วัตถุประสงค์ ${index + 1}`}
-                                                    onChange={(event) => {
-                                                        switch (index) {
-                                                            case 0:
-                                                                setObjective1(event.target.value);
-                                                                break;
-                                                            case 1:
-                                                                setObjective2(event.target.value);
-                                                                break;
-                                                            case 2:
-                                                                setObjective3(event.target.value);
-                                                                break;
-                                                            case 3:
-                                                                setObjective4(event.target.value);
-                                                                break;
-                                                            case 4:
-                                                                setObjective5(event.target.value);
-                                                                break;
-                                                            default:
-                                                            // Handle other cases if needed
-                                                        }
-                                                    }}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {itemCount < 5 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseItemCount}>
-                                            เพิ่มวัตถุประสงค์
-                                        </Button>
-                                    )}
-                                    {itemCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseItemCount}>
-                                            ลดวัตถุประสงค์
-                                        </Button>
-                                    )}
-                                </td>
-                            </tr>
-                            {/* ลักษณะรูปแบบโครงการ */}
-                            <tr>
-                                <td className='head-side-td'>ลักษณะรูปแบบโครงการ</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        {Array.from({ length: project_typeCount }).map((_, index) => (
-                                            <li key={index}>
-                                                <Form.Control
-                                                    size="sm"
-                                                    type="text"
-                                                    placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${index + 1}`}
-                                                    onChange={(event) => {
-                                                        switch (index) {
-                                                            case 0:
-                                                                setProjectType1(event.target.value);
-                                                                break;
-                                                            case 1:
-                                                                setProjectType2(event.target.value);
-                                                                break;
-                                                            case 2:
-                                                                setProjectType3(event.target.value);
-                                                                break;
-                                                            case 3:
-                                                                setProjectType4(event.target.value);
-                                                                break;
-                                                            case 4:
-                                                                setProjectType5(event.target.value);
-                                                                break;
-
-                                                            default:
-                                                            // Handle other cases if needed
-                                                        }
-                                                    }}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {project_typeCount < 5 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseProjectTypeCount}>
-                                            เพิ่มลักษณะรูปแบบโครงการ
-                                        </Button>
-                                    )}
-                                    {project_typeCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseProjectTypeCount}>
-                                            ลดลักษณะรูปแบบโครงการ
-                                        </Button>
-                                    )}
-                                </td>
-                            </tr>
-
-
-
-
                         </tbody>
                     </Table>
                     <div>
-
                         <Button type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
                     </div>
                 </Card>
@@ -373,4 +181,5 @@ function CSD_budget({ id_projects }) {
         </>
     );
 }
-export default CSD_budget
+
+export default CSD_budget;
