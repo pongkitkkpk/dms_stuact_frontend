@@ -819,11 +819,14 @@
   width: 100%;
 }
 .head-side-td{
-  background-color: #9DBC98;
-  width: 20%;
+  /* background: linear-gradient( 180deg, #FF8B13, #d76d00, #9c4f00, #613200); */
+  background: linear-gradient( 180deg, #FF8B13, #ff9e3a, #ffb261, #ffc589);
+  width: 15%;
+  vertical-align: text-top;
 }
+
 .back-side-td{
-  background-color: white;
+  background-color: white; 
   width: 80%;
 }
 .detail-prodoc {

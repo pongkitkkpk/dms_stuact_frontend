@@ -70,10 +70,99 @@ function CSD_budget() {
             return newListSA;
         });
     };
+
+    const [listBT, setListBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listNBT, setListNBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listNNBT, setListNNBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTBT, setListTBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTNBT, setListTNBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTPBT, setListTPBT] = useState(Array.from({ length: 20 }, () => ''));
+    const [listSBT, setListSBT] = useState(Array.from({ length: 20 }, () => ''));
+
+    const [TypeBTCount, setTypeBTCount] = useState(1);
+
+    const increaseTypeBTCount = () => {
+        if (TypeBTCount < 20) {
+            setTypeBTCount(TypeBTCount + 1);
+        }
+    };
+
+    const decreaseTypeBTCount = () => {
+        if (TypeBTCount > 1) {
+            setTypeBTCount(TypeBTCount - 1);
+            updateListBT(TypeBTCount-1, '');
+            updateListNBT(TypeBTCount-1, '');
+            updateListNNBT(TypeBTCount-1, '');
+            updateListTBT(TypeBTCount-1, '');
+            updateListTNBT(TypeBTCount-1, '');
+            updateListTPBT(TypeBTCount-1, '');
+            updateListSBT(TypeBTCount-1, '');
+        }
+    };
+
+    const updateListBT = (index, value) => {
+        setListBT(prevListBT => {
+            const newListBT = [...prevListBT];
+            newListBT[index] = value;
+            return newListBT;
+        });
+    };
+
+    const updateListNBT = (index, value) => {
+        setListNBT(prevListNBT => {
+            const newListNBT = [...prevListNBT];
+            newListNBT[index] = value;
+            updateListSBT(index, value, listTBT[index], listTPBT[index]);
+            return newListNBT;
+        });
+    };
+
+    const updateListNNBT = (index, value) => {
+        setListNNBT(prevListNNBT => {
+            const newListNNBT = [...prevListNNBT];
+            newListNNBT[index] = value;
+            return newListNNBT;
+        });
+    };
+
+    const updateListTBT = (index, value) => {
+        setListTBT(prevListTBT => {
+            const newListTBT = [...prevListTBT];
+            newListTBT[index] = value;
+            updateListSBT(index, listNBT[index], value, listTPBT[index]);
+            return newListTBT;
+        });
+    };
+
+    const updateListTNBT = (index, value) => {
+        setListTNBT(prevListTNBT => {
+            const newListTNBT = [...prevListTNBT];
+            newListTNBT[index] = value;
+            return newListTNBT;
+        });
+    };
+
+    const updateListTPBT = (index, value) => {
+        setListTPBT(prevListTPBT => {
+            const newListTPBT = [...prevListTPBT];
+            newListTPBT[index] = value;
+            updateListSBT(index, listNBT[index], listTBT[index], value);
+            return newListTPBT;
+        });
+    };
+
+    const updateListSBT = (index, numPeople, numHours, pricePerHour) => {
+        const totalPrice = parseInt(numPeople) * parseInt(numHours) * parseInt(pricePerHour);
+        setListSBT(prevListSBT => {
+            const newListSBT = [...prevListSBT];
+            newListSBT[index] = isNaN(totalPrice) ? '' : totalPrice;
+            return newListSBT;
+        });
+    };
     useEffect(() => {
-        console.log("TA"+listTA)
-        console.log("TPA"+listTPA)
-        console.log("SA"+listSA)
+        console.log("TBT"+listTA)
+        console.log("TPBT"+listTPA)
+        console.log("SBT"+listSA)
     }, [listTA,listTPA,listSA]);
 
     return (
@@ -83,33 +172,34 @@ function CSD_budget() {
                     <Table striped>
                         <thead>
                             <tr>
-                                <th>งบประมาณ</th>
+                                <th style={{fontSize: "16px", color: "black"}}>งบประมาณของโครงการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>หมวดค่าตอบแทน</td>
+                                <td className='head-side-td'>
+                                    <div>หมวดค่าตอบแทน</div></td>
                                 <td className='back-side-td'>
                                     <Table striped="columns">
-                                        <thead>
-                                            <tr>
-                                                <th>รายการค่าใช้จ่าย</th>
-                                                <th>จำนวน(คน)</th>
-                                                <th></th>
-                                                <th>จำนวน(ชั่วโมง)</th>
-                                                <th></th>
-                                                <th>ราคา(ต่อชั่วโมง)</th>
-                                                <th>ราคาสุทธิ</th>
+                                        <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
+                                                <th style={{width: "30%", color: "black"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "10%", color: "black"}}>จำนวน(คน)</th>
+                                                <th style={{width: "2%"}}></th>
+                                                <th style={{width: "11%", color: "black"}}>จำนวน(ชั่วโมง)</th>
+                                                <th style={{width: "5%"}}></th>
+                                                <th style={{width: "19%", color: "black"}}>ราคา(ต่อชั่วโมง)(บาท)</th>
+                                                <th style={{width: "20%", color: "black"}}>ราคาสุทธิ(บาท)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {Array.from({ length: TypeACount }).map((_, index) => (
-                                                <tr key={index}>
+                                                <tr key={index} style={{ backgroundColor: "white" }}>
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
-                                                            placeholder={`รายการหมวดค่าตอบแทนที่ ${index + 1}`}
+                                                            placeholder={`รายการที่ ${index + 1}`}
                                                             onChange={(event) => {
                                                                 updateListA(index, event.target.value);
                                                             }}
@@ -119,29 +209,31 @@ function CSD_budget() {
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
-                                                            placeholder={` ช่องที่ ${index + 1}`}
+                                                            placeholder={`จำนวน`}
                                                             onChange={(event) => {
                                                                 updateListNA(index, event.target.value);
                                                             }}
                                                         />
                                                     </td>
-                                                    <td>3</td>
+                                                    <td>
+                                                        <div>คน</div></td>
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
-                                                            placeholder={` ช่องที่ ${index + 1}`}
+                                                            placeholder={`จำนวน`}
                                                             onChange={(event) => {
                                                                 updateListTA(index, event.target.value);
                                                             }}
                                                         />
                                                     </td>
-                                                    <td>5</td>
+                                                    <td>
+                                                        <div>ชั่วโมง</div></td>
                                                     <td>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
-                                                            placeholder={` ช่องที่ ${index + 1}`}
+                                                            placeholder={`ราคารายการที่ ${index + 1}`}
                                                             onChange={(event) => {
                                                                 updateListTPA(index, event.target.value);
                                                             }}
@@ -161,12 +253,118 @@ function CSD_budget() {
                                     </Table>
                                     {TypeACount < 15 && (
                                         <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeACount}>
-                                            เพิ่มหลักการและเหตุผล
+                                            <div>เพิ่มรายการค่าตอบแทน</div>
                                         </Button>
                                     )}
                                     {TypeACount > 1 && (
                                         <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeACount}>
-                                            ลดหลักการและเหตุผล
+                                            <div>ลดรายการค่าตอบแทน</div>
+                                        </Button>
+                                    )}
+                                </td>
+                            </tr>
+
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td'>
+                                    <div>หมวดค่าใช้สอย</div>
+                                    <div>(มีจำนวนเวลา)</div></td>
+                                
+                                <td className='back-side-td'>
+                                    <Table striped="columns">
+                                        <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
+                                                <th style={{width: "30%", color: "black"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "11%", color: "black"}}>จำนวน(หน่วย)</th>
+                                                <th style={{width: "10%", color: "black"}}>หน่วย</th>
+                                                <th style={{width: "10%", color: "black"}}>จำนวน(เวลา)</th>
+                                                <th style={{width: "10%", color: "black"}}>หน่วย</th>
+                                                <th style={{width: "16%", color: "black"}}>ราคา(ต่อหน่วย)(บาท)</th>
+                                                <th style={{width: "25%", color: "black"}}>ราคาสุทธิ(บาท)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.from({ length: TypeBTCount }).map((_, index) => (
+                                                <tr key={index} style={{ backgroundColor: "white" }}>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`รายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`จำนวน`}
+                                                            onChange={(event) => {
+                                                                updateListNBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`หน่วย`}
+                                                            onChange={(event) => {
+                                                                updateListNNBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`จำนวน`}
+                                                            onChange={(event) => {
+                                                                updateListTBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`หน่วย`}
+                                                            onChange={(event) => {
+                                                                updateListTNBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`ราคารายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListTPBT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            value={listSBT[index]}
+                                                            disabled
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                    {TypeBTCount < 15 && (
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeBTCount}>
+                                            <div>เพิ่มรายการค่าใช้สอย</div>
+                                        </Button>
+                                    )}
+                                    {TypeBTCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeBTCount}>
+                                            <div>ลดรายการค่าใช้สอย</div>
                                         </Button>
                                     )}
                                 </td>
