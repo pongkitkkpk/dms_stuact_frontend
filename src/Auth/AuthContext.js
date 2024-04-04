@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     // ***************************admin****************************************
     if (username === 'admin' && password === 'admin') {
       setIsAuthenticated(true);
-      const adminUser = { username: 'admin', role: 'admin' };
+      const adminUser = { username: 'admin', account_type: 'admin' };
       setUser(adminUser);
       sessionStorage.setItem('isLogged', 'true');
       sessionStorage.setItem('user', JSON.stringify(adminUser));

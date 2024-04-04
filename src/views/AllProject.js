@@ -4,8 +4,12 @@ import Axios from 'axios';
 import { Card, Container, Row, Col, Button, InputGroup, Form } from "react-bootstrap";
 
 function AllProject() {
+    const storedUserData = sessionStorage.getItem('user');
+    const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    const studentuser = storedUser.username
+    // console.log("asdfasdf"+studentuser)
     const [projectList, setProjectList] = useState([]);
-    const [id_student, setIDStudent] = useState('s6');
+    const [id_student, setIDStudent] = useState(studentuser);
     const [codeclub, setCodeClub] = useState('B660420200');
     const history = useHistory(); // Initialize useHistory hook
 

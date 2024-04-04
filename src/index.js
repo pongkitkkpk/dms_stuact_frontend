@@ -12,12 +12,12 @@ import StudentLayout from 'layouts/Student.js';
 import { AuthProvider } from 'Auth/AuthContext'; // Import AuthProvider
 
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
-// 
+  // s
   const storedUserData = sessionStorage.getItem('user');
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.account_type; // Accessing the account_type property
-// 
-console.log(storedUser)
+  // 
+  console.log(storedUser)
   return (
     <Route
       {...rest}
