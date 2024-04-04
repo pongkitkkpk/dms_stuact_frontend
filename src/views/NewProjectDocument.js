@@ -9,12 +9,12 @@ import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
+  const [cSD_Detail, setCSD_Detail] = useState(false);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
-  const [cSD_person, setCSD_Person] = useState(true);
+  const [cSD_person, setCSD_Person] = useState(false);
   const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
-  const [cSD_budget, setCSD_budget] = useState(false);
+  const [cSD_budget, setCSD_budget] = useState(true);
   const containerRef = useRef(null);
 
   const CSD_DetailComponent = () => {
@@ -87,7 +87,7 @@ function NewProjectDocument() {
     <Container fluid ref={containerRef}>
       <h1>{id_projects}</h1>
       <Row>
-        <Col md="3">
+        <div style={{width: "20%"}}>
           <div className="sticky-sidebar">
             <Card>
               <Card.Header className="bg-secondary text-white">เมนูจัดการโครงการ</Card.Header>
@@ -121,7 +121,7 @@ function NewProjectDocument() {
 
             </Card>
           </div>
-        </Col>
+        </div>
 
         {cSD_Detail && <CSD_detail setIdProjects={setIdProjects} switchToCSDDetail2={switchToCSDDetail2} />}
         {cSD_Detail2 && <CSD_detail2 id_projects={id_projects} switchToCSDPerson={switchToCSDPerson} />}

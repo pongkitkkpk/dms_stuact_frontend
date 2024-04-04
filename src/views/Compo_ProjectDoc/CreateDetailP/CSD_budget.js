@@ -167,7 +167,7 @@ function CSD_budget() {
 
     return (
         <>
-            <Col md="9">
+            <div style={{width: "79%", marginLeft: "1%"}}>
                 <Card>
                     <Table striped>
                         <thead>
@@ -177,19 +177,19 @@ function CSD_budget() {
                         </thead>
                         <tbody>
                             <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าตอบแทน</div></td>
                                 <td className='back-side-td'>
                                     <Table striped="columns">
                                         <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
                                             <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
-                                                <th style={{width: "30%", color: "black"}}>รายการค่าใช้จ่าย</th>
-                                                <th style={{width: "10%", color: "black"}}>จำนวน(คน)</th>
+                                                <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>จำนวน(คน)</th>
                                                 <th style={{width: "2%"}}></th>
-                                                <th style={{width: "11%", color: "black"}}>จำนวน(ชั่วโมง)</th>
+                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(ชั่วโมง)</th>
                                                 <th style={{width: "5%"}}></th>
-                                                <th style={{width: "19%", color: "black"}}>ราคา(ต่อชั่วโมง)(บาท)</th>
-                                                <th style={{width: "20%", color: "black"}}>ราคาสุทธิ(บาท)</th>
+                                                <th style={{width: "19%", color: "white", fontWeight: "bold"}}>ราคา(ต่อชั่วโมง)(บาท)</th>
+                                                <th style={{width: "20%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -265,7 +265,7 @@ function CSD_budget() {
                             </tr>
 
                             <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าใช้สอย</div>
                                     <div>(มีจำนวนเวลา)</div></td>
                                 
@@ -273,13 +273,13 @@ function CSD_budget() {
                                     <Table striped="columns">
                                         <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
                                             <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
-                                                <th style={{width: "30%", color: "black"}}>รายการค่าใช้จ่าย</th>
-                                                <th style={{width: "11%", color: "black"}}>จำนวน(หน่วย)</th>
-                                                <th style={{width: "10%", color: "black"}}>หน่วย</th>
-                                                <th style={{width: "10%", color: "black"}}>จำนวน(เวลา)</th>
-                                                <th style={{width: "10%", color: "black"}}>หน่วย</th>
-                                                <th style={{width: "16%", color: "black"}}>ราคา(ต่อหน่วย)(บาท)</th>
-                                                <th style={{width: "25%", color: "black"}}>ราคาสุทธิ(บาท)</th>
+                                                <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(หน่วย)</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>หน่วยนับ</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>จำนวน(เวลา)</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>หน่วยนับ</th>
+                                                <th style={{width: "16%", color: "white", fontWeight: "bold"}}>ราคา(ต่อหน่วย)(บาท)</th>
+                                                <th style={{width: "25%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -375,7 +375,7 @@ function CSD_budget() {
                         <Button type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
                     </div>
                 </Card>
-            </Col>
+            </div>
         </>
     );
 }

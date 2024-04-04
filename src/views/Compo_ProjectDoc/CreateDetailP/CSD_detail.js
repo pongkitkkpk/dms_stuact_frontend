@@ -139,7 +139,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2}) {
     return (
         <>
             {/* วนค่าจากdatabase  */}
-            <Col md="9">
+            <div style={{width: "79%", marginLeft: "1%"}}>
                 <Card>
                     <Table striped="columns">
                         <thead>
@@ -318,7 +318,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2}) {
                         <Button onClick={addBasicProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
                     </div>
                 </Card>
-            </Col>
+            </div>
         </>
     );
 }
