@@ -887,7 +887,6 @@
   top: 5%;
 }
 
-
 .btn-login {
   /* font-weight: bold; */
   border-color: #FF8B13;
@@ -901,5 +900,25 @@
   color: #ffffff;
 }
 
+.btn-budget-increase {
+  transition: background-color 0.3s ease;
+}
+
+.btn-budget-increase:hover {
+  border-color: #28a745;
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.btn-budget-decrease {
+  transition: background-color 0.3s ease;
+  color: #F33E3E;
+}
+
+.btn-budget-decrease:hover {
+  border-color: #F33E3E;
+  background-color: #F33E3E;
+  color: #ffffff;
+}
 
 
