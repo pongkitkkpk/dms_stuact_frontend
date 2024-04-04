@@ -159,11 +159,156 @@ function CSD_budget() {
             return newListSBT;
         });
     };
+
+    const [listBNT, setListBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listNBNT, setListNBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listNNBNT, setListNNBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listTBNT, setListTBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listTNBNT, setListTNBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listTPBNT, setListTPBNT] = useState(Array.from({ length: 10 }, () => ''));
+    const [listSBNT, setListSBNT] = useState(Array.from({ length: 10 }, () => ''));
+
+    const [TypeBNTCount, setTypeBNTCount] = useState(1);
+
+    const increaseTypeBNTCount = () => {
+        if (TypeBNTCount < 10) {
+            setTypeBNTCount(TypeBNTCount + 1);
+        }
+    };
+
+    const decreaseTypeBNTCount = () => {
+        if (TypeBNTCount > 1) {
+            setTypeBNTCount(TypeBNTCount - 1);
+            updateListBNT(TypeBNTCount-1, '');
+            updateListNBNT(TypeBNTCount-1, '');
+            updateListNNBNT(TypeBNTCount-1, '');
+            updateListTPBNT(TypeBNTCount-1, '');
+            updateListSBNT(TypeBNTCount-1, '');
+        }
+    };
+
+    const updateListBNT = (index, value) => {
+        setListBNT(prevListBNT => {
+            const newListBNT = [...prevListBNT];
+            newListBNT[index] = value;
+            return newListBNT;
+        });
+    };
+
+    const updateListNBNT = (index, value) => {
+        setListNBNT(prevListNBNT => {
+            const newListNBNT = [...prevListNBNT];
+            newListNBNT[index] = value;
+            updateListSBNT(index, value, listTBNT[index], listTPBNT[index]);
+            return newListNBNT;
+        });
+    };
+
+    const updateListNNBNT = (index, value) => {
+        setListNNBNT(prevListNNBNT => {
+            const newListNNBNT = [...prevListNNBNT];
+            newListNNBNT[index] = value;
+            return newListNNBNT;
+        });
+    };
+
+    const updateListTPBNT = (index, value) => {
+        setListTPBNT(prevListTPBNT => {
+            const newListTPBNT = [...prevListTPBNT];
+            newListTPBNT[index] = value;
+            updateListSBNT(index, listNBNT[index], listTBNT[index], value);
+            return newListTPBNT;
+        });
+    };
+
+    const updateListSBNT = (index, numPeople, numHours, pricePerHour) => {
+        const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
+        setListSBNT(prevListSBNT => {
+            const newListSBNT = [...prevListSBNT];
+            newListSBNT[index] = isNaN(totalPrice) ? '' : totalPrice;
+            return newListSBNT;
+        });
+    };
+
+    const [listC, setListC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listNC, setListNC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listNNC, setListNNC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTC, setListTC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTNC, setListTNC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listTPC, setListTPC] = useState(Array.from({ length: 20 }, () => ''));
+    const [listSC, setListSC] = useState(Array.from({ length: 20 }, () => ''));
+
+    const [TypeCCount, setTypeCCount] = useState(1);
+
+    const increaseTypeCCount = () => {
+        if (TypeCCount < 20) {
+            setTypeCCount(TypeCCount + 1);
+        }
+    };
+
+    const decreaseTypeCCount = () => {
+        if (TypeCCount > 1) {
+            setTypeCCount(TypeCCount - 1);
+            updateListC(TypeCCount-1, '');
+            updateListNC(TypeCCount-1, '');
+            updateListNNC(TypeCCount-1, '');
+            updateListTPC(TypeCCount-1, '');
+            updateListSC(TypeCCount-1, '');
+        }
+    };
+
+    const updateListC = (index, value) => {
+        setListC(prevListC => {
+            const newListC = [...prevListC];
+            newListC[index] = value;
+            return newListC;
+        });
+    };
+
+    const updateListNC = (index, value) => {
+        setListNC(prevListNC => {
+            const newListNC = [...prevListNC];
+            newListNC[index] = value;
+            updateListSC(index, value, listTC[index], listTPC[index]);
+            return newListNC;
+        });
+    };
+
+    const updateListNNC = (index, value) => {
+        setListNNC(prevListNNC => {
+            const newListNNC = [...prevListNNC];
+            newListNNC[index] = value;
+            return newListNNC;
+        });
+    };
+
+    const updateListTPC = (index, value) => {
+        setListTPC(prevListTPC => {
+            const newListTPC = [...prevListTPC];
+            newListTPC[index] = value;
+            updateListSC(index, listNC[index], listTC[index], value);
+            return newListTPC;
+        });
+    };
+
+    const updateListSC = (index, numPeople, numHours, pricePerHour) => {
+        const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
+        setListSC(prevListSC => {
+            const newListSC = [...prevListSC];
+            newListSC[index] = isNaN(totalPrice) ? '' : totalPrice;
+            return newListSC;
+        });
+    };
+
+    const [listETC, setListETC] = useState(Array.from({ length: 1 }, () => ''));
+    const [listSETC, setListSETC] = useState(Array.from({ length: 1 }, () => ''));
+    
+
     useEffect(() => {
-        console.log("TBT"+listTA)
-        console.log("TPBT"+listTPA)
-        console.log("SBT"+listSA)
-    }, [listTA,listTPA,listSA]);
+        console.log("ETC"+listETC)
+        console.log("SETC"+listSETC)
+        // console.log("SBT"+listSA)
+    }, [listETC,listSETC]);
 
     return (
         <>
@@ -176,6 +321,7 @@ function CSD_budget() {
                             </tr>
                         </thead>
                         <tbody>
+                            {/* ค่าตอบแทน */}
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าตอบแทน</div></td>
@@ -184,12 +330,12 @@ function CSD_budget() {
                                         <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
                                             <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
                                                 <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
-                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>จำนวน(คน)</th>
-                                                <th style={{width: "2%"}}></th>
-                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(ชั่วโมง)</th>
-                                                <th style={{width: "5%"}}></th>
-                                                <th style={{width: "19%", color: "white", fontWeight: "bold"}}>ราคา(ต่อชั่วโมง)(บาท)</th>
-                                                <th style={{width: "20%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
+                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(คน)</th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>จำนวน(ชั่วโมง)</th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "16%", color: "white", fontWeight: "bold"}}>ราคา(ต่อชั่วโมง)(บาท)</th>
+                                                <th style={{width: "25%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -264,6 +410,7 @@ function CSD_budget() {
                                 </td>
                             </tr>
 
+                            {/* ค่าใช้สอย(มีจำนวนเวลา) */}
                             <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าใช้สอย</div>
@@ -369,6 +516,238 @@ function CSD_budget() {
                                     )}
                                 </td>
                             </tr>
+
+                            {/* ค่าใช้สอย(ไม่มีจำนวนเวลา) */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
+                                    <div>หมวดค่าใช้สอย</div>
+                                    <div>(ไม่มีจำนวนเวลา)</div></td>
+                                
+                                <td className='back-side-td'>
+                                    <Table striped="columns">
+                                        <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
+                                                <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(หน่วย)</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>หน่วยนับ</th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "16%", color: "white", fontWeight: "bold"}}>ราคา(ต่อหน่วย)(บาท)</th>
+                                                <th style={{width: "25%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.from({ length: TypeBNTCount }).map((_, index) => (
+                                                <tr key={index} style={{ backgroundColor: "white" }}>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`รายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListBNT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`จำนวน`}
+                                                            onChange={(event) => {
+                                                                updateListNBNT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`หน่วย`}
+                                                            onChange={(event) => {
+                                                                updateListNNBNT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`ราคารายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListTPBNT(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            value={listSBNT[index]}
+                                                            disabled
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                    {TypeBNTCount < 10 && (
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeBNTCount}>
+                                            <div>เพิ่มรายการค่าใช้สอย</div>
+                                        </Button>
+                                    )}
+                                    {TypeBNTCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeBNTCount}>
+                                            <div>ลดรายการค่าใช้สอย</div>
+                                        </Button>
+                                    )}
+                                </td>
+                            </tr>
+
+                            {/* ค่าวัสดุ  */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
+                                    <div>หมวดค่าวัสดุ</div>
+                                </td>
+                                
+                                <td className='back-side-td'>
+                                    <Table striped="columns">
+                                        <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
+                                                <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "11%", color: "white", fontWeight: "bold"}}>จำนวน(หน่วย)</th>
+                                                <th style={{width: "10%", color: "white", fontWeight: "bold"}}>หน่วยนับ</th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "16%", color: "white", fontWeight: "bold"}}>ราคา(ต่อหน่วย)(บาท)</th>
+                                                <th style={{width: "25%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Array.from({ length: TypeCCount }).map((_, index) => (
+                                                <tr key={index} style={{ backgroundColor: "white" }}>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`รายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListC(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`จำนวน`}
+                                                            onChange={(event) => {
+                                                                updateListNC(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`หน่วย`}
+                                                            onChange={(event) => {
+                                                                updateListNNC(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            placeholder={`ราคารายการที่ ${index + 1}`}
+                                                            onChange={(event) => {
+                                                                updateListTPC(index, event.target.value);
+                                                            }}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            size="sm"
+                                                            type="text"
+                                                            value={listSC[index]}
+                                                            disabled
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                    {TypeCCount < 20 && (
+                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeCCount}>
+                                            <div>เพิ่มรายการค่าวัสดุ</div>
+                                        </Button>
+                                    )}
+                                    {TypeCCount > 1 && (
+                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeCCount}>
+                                            <div>ลดรายการค่าวัสดุ</div>
+                                        </Button>
+                                    )}
+                                </td>
+                            </tr>
+                            
+                            {/* ค่าอื่นๆ */}
+                            <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
+                                    <div>หมวดอื่นๆ</div>
+                                </td>
+                                
+                                <td className='back-side-td'>
+                                    <Table striped="columns">
+                                        <thead style={{backgroundColor: "rgba(255, 139, 19, 0)"}}>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, 1)"}}>
+                                                <th style={{width: "30%", color: "white", fontWeight: "bold"}}>รายการค่าใช้จ่าย</th>
+                                                <th style={{width: "11%"}}></th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "10%"}}></th>
+                                                <th style={{width: "16%"}}></th>
+                                                <th style={{width: "25%", color: "white", fontWeight: "bold"}}>ราคาสุทธิ(บาท)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style={{ backgroundColor: "white" }}>
+                                                <td>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`รายการอื่นๆ`}
+                                                        onChange={(event) => {
+                                                            setListETC(event.target.value);
+                                                        }}
+                                                    />
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <Form.Control
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ราคา`}
+                                                        onChange={(event) => {
+                                                            setListSETC(event.target.value);
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </Table>
+                                </td>
+                            </tr>
+                            
                         </tbody>
                     </Table>
                     <div>
