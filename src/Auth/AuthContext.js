@@ -30,11 +30,10 @@ export const AuthProvider = ({ children }) => {
     } else {
       // If credentials are invalid, show an alert
 
-
       try {
 
         const response = await axios.post(
-          "/api/authen",
+          "http://localhost:3001/api/authen",
           {
             username,
             password,
@@ -48,21 +47,23 @@ export const AuthProvider = ({ children }) => {
           }
         );
 
-        console.log("asdfasdfasdfasdfasssssssssssssssss" + response)
+        console.log(response)
+        console.log(response.data.status)
         // Check if the authentication was successful
 
-        // if (response.data.api_status === 'success') {
-        //   setIsAuthenticated(true);
-        //   // Set user data from the response
-        //   setUser(response.data.userInfo);
-        //   // Save authentication status and user data to sessionStorage
-        //   sessionStorage.setItem('isLogged', 'true');
-        //   sessionStorage.setItem('user', JSON.stringify(response.data.userInfo));
-        //   // Redirect to the appropriate page
-        //   history.push('/user/dashboard'); // Change to the appropriate route
-        // } else {
-        //   alert('Authentication failed. Please check your credentials.');
-        // }
+        if (response.data.status === 'success') {
+          console.log(response.data.message.username)
+          setIsAuthenticated(true);
+          setUser(response.data.message);
+          // 
+          const studentUser = { username: response.data.message.username, role: 'student' };
+          setUser(studentUser);
+          sessionStorage.setItem('isLogged', 'true');
+          sessionStorage.setItem('user', JSON.stringify(response.data.message));
+          history.replace('/admin/allproject');
+        } else {
+          alert('Authentication failed. Please check your credentials.');
+        }
       } catch (error) {
         console.error('Error during login:', error);
         alert('An error occurred during login. Please try again later.');

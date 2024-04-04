@@ -47,3 +47,29 @@ const ArrowProgressBar = ({ steps, currentStep }) => {
 };
 
 export default ArrowProgressBar;
+// 
+// Function to handle next step
+// const handleNextStep = () => {
+//     setStepState(prevState => ({
+//       ...prevState,
+//       currentStep: Math.min(prevState.currentStep + 1, totalSteps)
+//     }));
+//   };
+
+//   // Function to handle previous step
+//   const handlePrevStep = () => {
+//     setStepState(prevState => ({
+//       ...prevState,
+//       currentStep: Math.max(prevState.currentStep - 1, 1)
+//     }));
+//   };
+// how to use EXsample in return
+{/* <ArrowProgressBar steps={totalSteps} currentStep={stepState.currentStep} />
+<div>
+  <button onClick={handlePrevStep} disabled={stepState.currentStep === 1}>
+    Previous Step
+  </button>
+  <button onClick={handleNextStep} disabled={stepState.currentStep === totalSteps}>
+    Next Step
+  </button>
+</div> */}

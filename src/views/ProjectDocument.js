@@ -1,90 +1,60 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams hook
-import { Card, Container, Row, Col, Nav } from "react-bootstrap";
-import ArrowProgressBar from './Compo_ProjectDoc/ArrowProgressBar';
+import { useParams } from 'react-router-dom';
+import { Card, Container, Row, Col } from "react-bootstrap";
 import SD_detail from './Compo_ProjectDoc/ShowDetailP/SD_detail';
+import SD_detail2 from './Compo_ProjectDoc/ShowDetailP/SD_detail2';
 import SD_plan from './Compo_ProjectDoc/ShowDetailP/SD_plan';
 import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
+import SD_locationtime from './Compo_ProjectDoc/ShowDetailP/SD_locationtime';
 
 function ProjectDocument() {
-  const totalSteps = 7;
-  const { id_project } = useParams(); // Get id_project from URL params
+  const { id_project } = useParams();
+  const [currentStep, setCurrentStep] = useState('SD_Detail'); // Default step is SD_Detail
 
-  // State to manage current step and step component visibility
-  const [stepState, setStepState] = useState({
-    currentStep: 1,
-    steps: {
-      SD_Detail: true,
-      SD_Plan: false,
-      SD_Budget: false
-      // Add more steps as needed
-    }
-  });
-
-  // Function to handle next step
-  const handleNextStep = () => {
-    setStepState(prevState => ({
-      ...prevState,
-      currentStep: Math.min(prevState.currentStep + 1, totalSteps)
-    }));
-  };
-
-  // Function to handle previous step
-  const handlePrevStep = () => {
-    setStepState(prevState => ({
-      ...prevState,
-      currentStep: Math.max(prevState.currentStep - 1, 1)
-    }));
-  };
-
-  // Function to toggle step component visibility
-  const toggleStep = (stepName) => {
-    setStepState(prevState => ({
-      ...prevState,
-      steps: {
-        ...prevState.steps,
-        [stepName]: true
-      }
-    }));
+  // Function to toggle between steps
+  const toggleStep = (step) => {
+    setCurrentStep(step);
   };
 
   return (
     <>
-      {/* Render id_project */}
       <h1>{id_project}</h1>
-
-      <ArrowProgressBar steps={totalSteps} currentStep={stepState.currentStep} />
-      <div>
-        <button onClick={handlePrevStep} disabled={stepState.currentStep === 1}>
-          Previous Step
-        </button>
-        <button onClick={handleNextStep} disabled={stepState.currentStep === totalSteps}>
-          Next Step
-        </button>
-      </div>
 
       <Container fluid>
         <Row>
-          <Col md="2">
-            <Card className="bg-dark text-white">
+          <Col md="3">
+            <Card >
               <Card.Header className="bg-secondary text-white">เมนูจัดการโครงการ</Card.Header>
               <Card.Body>
-                <Nav.Link href="#section1" onClick={() => toggleStep('SD_Detail')}>1. แบบขออนุมัติโครงการ</Nav.Link>
-                <Nav.Link href="#" onClick={() => toggleStep('SD_Plan')}>1.1 ข้อมูลพื้นฐานโครงการ</Nav.Link>
-                <Nav.Link href="#" onClick={() => toggleStep('SD_Plan')}>1.2 แผนการดำเนินงาน</Nav.Link>
-                <Nav.Link href="#" onClick={() => toggleStep('SD_Budget')}>1.3 งบประมาณ</Nav.Link>
-                <Nav.Link href="#section1-4">1.4 เป้าหมาย / ตัวชี้วัดความสำเร็จ</Nav.Link>
-                <Nav.Link href="#section1-5">1.5 ข้อมูลเพิ่มเติม</Nav.Link>
-                <Nav.Link href="#section1-6">1.6 เอกสารเพิ่มเติม</Nav.Link>
-                <Nav.Link href="#section2">2. รายการเปลี่ยนแปลงแก้ไข</Nav.Link>
-                <Nav.Link href="#pr-1">3. สรุปและประเมินผลโครงการ</Nav.Link>
+                <ul className="list-group">
+                  <li className="list-group-item">
+                    <a href="#section1">1. แบบขออนุมัติโครงการ</a>
+                  </li>
+                  <li className={currentStep === 'SD_Detail' ? "list-group-item active" : "list-group-item"}>
+                    <a href="#" onClick={() => toggleStep('SD_Detail')}>1.1 ข้อมูลพื้นฐานโครงการ dd1</a>
+                  </li>
+                  <li className={currentStep === 'SD_Detail2' ? "list-group-item active" : "list-group-item"}>
+                    <a href="#" onClick={() => toggleStep('SD_Detail2')}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdd2</a>
+                  </li>
+                  <li className={currentStep === 'SD_locationtime' ? "list-group-item active" : "list-group-item "}>
+                    <a href="#" onClick={() => toggleStep('SD_locationtime')}>1.2 SD_locationtime</a>
+                  </li>
+                  <li className={currentStep === 'SD_Budget' ? "list-group-item active" : "list-group-item"}>
+                    <a href="#" onClick={() => toggleStep('SD_Budget')}>1.5 งบประมาณของโครงการ</a>
+                  </li>
+                  <li className="list-group-item"><a href="#section1-5">1.5 ข้อมูลเพิ่มเติม</a></li>
+                  <li className="list-group-item"><a href="#section1-6">1.6 เอกสารเพิ่มเติม</a></li>
+                </ul>
               </Card.Body>
             </Card>
           </Col>
 
-          {stepState.steps.SD_Detail && <SD_detail id_project={id_project}/>}
-          {stepState.steps.SD_Plan && <SD_plan />}
-          {stepState.steps.SD_Budget && <SD_budget />}
+          {/* Conditionally render components based on currentStep */}
+          {currentStep === 'SD_Detail' && <SD_detail id_project={id_project} />}
+          {currentStep === 'SD_Detail2' && <SD_detail2 id_project={id_project} />}
+          {currentStep === 'SD_locationtime' && <SD_locationtime id_project={id_project} />}
+          {currentStep === 'SD_Plan' && <SD_plan />}
+          {currentStep === 'SD_Budget' && <SD_budget />}
         </Row>
       </Container>
     </>
