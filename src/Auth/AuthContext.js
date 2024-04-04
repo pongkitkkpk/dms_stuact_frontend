@@ -1,18 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    // Check authentication status in sessionStorage on component mount
     const isLogged = sessionStorage.getItem('isLogged');
     if (isLogged === 'true') {
-      // If user is logged in, set isAuthenticated to true
       setIsAuthenticated(true);
-      // Retrieve user data from sessionStorage and set it in state
       const storedUser = sessionStorage.getItem('user');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
@@ -20,33 +18,67 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const handleLogin = (username, password, history) => {
-    // Validate the username and password
+  const handleLogin = async (username, password, history) => {
+    // ***************************admin****************************************
     if (username === 'admin' && password === 'admin') {
-      // Set authentication status to true
       setIsAuthenticated(true);
-      // Set user role to admin
       const adminUser = { username: 'admin', role: 'admin' };
       setUser(adminUser);
-      // Save authentication status and user data to sessionStorage
       sessionStorage.setItem('isLogged', 'true');
       sessionStorage.setItem('user', JSON.stringify(adminUser));
-      // Redirect to the admin page
       history.push('/admin');
     } else {
-      alert('Invalid username or password');
+      // If credentials are invalid, show an alert
+
+
+      try {
+
+        const response = await axios.post(
+          "/api/authen",
+          {
+            username,
+            password,
+          },
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            maxBodyLength: Infinity,
+          }
+        );
+
+        console.log("asdfasdfasdfasdfasssssssssssssssss" + response)
+        // Check if the authentication was successful
+
+        // if (response.data.api_status === 'success') {
+        //   setIsAuthenticated(true);
+        //   // Set user data from the response
+        //   setUser(response.data.userInfo);
+        //   // Save authentication status and user data to sessionStorage
+        //   sessionStorage.setItem('isLogged', 'true');
+        //   sessionStorage.setItem('user', JSON.stringify(response.data.userInfo));
+        //   // Redirect to the appropriate page
+        //   history.push('/user/dashboard'); // Change to the appropriate route
+        // } else {
+        //   alert('Authentication failed. Please check your credentials.');
+        // }
+      } catch (error) {
+        console.error('Error during login:', error);
+        alert('An error occurred during login. Please try again later.');
+      }
     }
   };
 
+
+
   const handleLogout = () => {
-    // Clear authentication status and user data from sessionStorage
     sessionStorage.removeItem('isLogged');
     sessionStorage.removeItem('user');
-    // Set isAuthenticated to false and clear user data
     setIsAuthenticated(false);
     setUser({});
   };
-  console.log("isAuthenticated auth.js", isAuthenticated)
+
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, handleLogin, handleLogout }}>
       {children}
@@ -55,7 +87,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
-export default AuthContext;
-
-

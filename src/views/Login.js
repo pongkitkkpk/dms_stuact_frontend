@@ -16,9 +16,14 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(username, password, history);
+    try {
+      await handleLogin(username, password, history);
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Handle login error, e.g., show an alert to the user
+    }
   };
 
   return (

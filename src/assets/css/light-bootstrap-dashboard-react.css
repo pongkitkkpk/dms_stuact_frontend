@@ -3871,6 +3871,7 @@ License - nucleoapp.com/license/
 
 @media (max-width: 991px) {
   .sidebar .nav > li.active.active-pro {
+    
     position: relative;
     bottom: unset; } }
 

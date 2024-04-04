@@ -7,13 +7,17 @@ function Sidebar({ color, image, routes }) {
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
   const [leftPosition, setLeftPosition] = useState("");
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const isBigScreen = window.innerWidth >= 991;
-      // 
-      // setLeftPosition(isBigScreen ? (isHovered ? "0%" : "-13%") : "65%");
-      setLeftPosition( (isHovered ? "0%" : "-13%") );
+      const isTabletScreen = window.innerWidth >= 768 && window.innerWidth < 991;
+      setIsTablet(isTabletScreen);
+
+      // Adjust sidebar position based on screen size
+      // setLeftPosition(isHovered ? "0%" : "-13%");
+      setLeftPosition(isBigScreen ? (isHovered ? "0%" : "-13%") : "-58%");
     };
 
     handleResize(); // Initial position based on screen size
@@ -24,8 +28,6 @@ function Sidebar({ color, image, routes }) {
       window.removeEventListener("resize", handleResize);
     };
   }, [isHovered]);
-
-
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -87,13 +89,19 @@ function Sidebar({ color, image, routes }) {
                     to={prop.layout + prop.path}
                     className="nav-link"
                     activeClassName="active"
-                    style={{ display: "flex", justifyContent: "space-between" ,fontWeight: "light"}}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontWeight: "light",
+                    }}
                   >
-                   <span style={{ fontWeight: "light"}}>{prop.name}</span>
+                    <span style={{ fontWeight: "light" }}>{prop.name}</span>
 
-                    <div style={{ marginRight:"-13%" }}><i className={prop.icon} /></div>
-                    
-
+                   
+                      <div style={{ marginRight: "-13%" }}>
+                        <i className={prop.icon} />
+                      </div>
+                   
                   </NavLink>
                 </li>
               );
