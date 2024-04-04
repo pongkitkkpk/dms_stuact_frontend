@@ -403,16 +403,20 @@ function CSD_budget() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                    {TypeACount < 15 && (
-                                        <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeACount}>
-                                            <div>เพิ่มรายการค่าตอบแทน</div>
-                                        </Button>
-                                    )}
-                                    {TypeACount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeACount}>
-                                            <div>ลดรายการค่าตอบแทน</div>
-                                        </Button>
-                                    )}
+                                    
+                                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        {TypeACount < 15 && (
+                                            <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeACount}>
+                                                <div style={{fontSize: "14px"}}>เพิ่มรายการค่าตอบแทน</div>
+                                            </Button>
+                                        )}
+                                        {TypeACount > 1 && (
+                                            <Button variant="danger" className="ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeACount}>
+                                                <div style={{fontSize: "14px"}}>ลดรายการค่าตอบแทน</div>
+                                            </Button>
+                                        )}
+                                    </div>
+                                    
                                 </td>
                             </tr>
 
@@ -510,16 +514,18 @@ function CSD_budget() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                    {TypeBTCount < 15 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeBTCount}>
-                                            <div>เพิ่มรายการค่าใช้สอย</div>
-                                        </Button>
-                                    )}
-                                    {TypeBTCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeBTCount}>
-                                            <div>ลดรายการค่าใช้สอย</div>
-                                        </Button>
-                                    )}
+                                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        {TypeBTCount < 20 && (
+                                            <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeBTCount}>
+                                                <div style={{fontSize: "14px"}}>เพิ่มรายการค่าใช้สอย</div>
+                                            </Button>
+                                        )}
+                                        {TypeBTCount > 1 && (
+                                            <Button variant="danger" className="ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeBTCount}>
+                                                <div style={{fontSize: "14px"}}>ลดรายการค่าใช้สอย</div>
+                                            </Button>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
 
@@ -599,16 +605,18 @@ function CSD_budget() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                    {TypeBNTCount < 10 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeBNTCount}>
-                                            <div>เพิ่มรายการค่าใช้สอย</div>
-                                        </Button>
-                                    )}
-                                    {TypeBNTCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeBNTCount}>
-                                            <div>ลดรายการค่าใช้สอย</div>
-                                        </Button>
-                                    )}
+                                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        {TypeBNTCount < 10 && (
+                                            <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeBNTCount}>
+                                                <div style={{fontSize: "14px"}}>เพิ่มรายการค่าใช้สอย</div>
+                                            </Button>
+                                        )}
+                                        {TypeBNTCount > 1 && (
+                                            <Button variant="danger" className="ml-5 mb-3 ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeBNTCount}>
+                                                <div style={{fontSize: "14px"}}>ลดรายการค่าใช้สอย</div>
+                                            </Button>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
 
@@ -688,16 +696,18 @@ function CSD_budget() {
                                             ))}
                                         </tbody>
                                     </Table>
-                                    {TypeCCount < 20 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseTypeCCount}>
-                                            <div>เพิ่มรายการค่าวัสดุ</div>
-                                        </Button>
-                                    )}
-                                    {TypeCCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseTypeCCount}>
-                                            <div>ลดรายการค่าวัสดุ</div>
-                                        </Button>
-                                    )}
+                                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        {TypeCCount < 20 && (
+                                            <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeCCount}>
+                                                <div>เพิ่มรายการค่าวัสดุ</div>
+                                            </Button>
+                                        )}
+                                        {TypeCCount > 1 && (
+                                            <Button variant="danger" className="ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeCCount}>
+                                                <div>ลดรายการค่าวัสดุ</div>
+                                            </Button>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
                             

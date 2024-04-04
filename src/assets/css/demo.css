@@ -902,6 +902,7 @@
 
 .btn-budget-increase {
   transition: background-color 0.3s ease;
+  border-radius: 20px;
 }
 
 .btn-budget-increase:hover {
@@ -913,6 +914,8 @@
 .btn-budget-decrease {
   transition: background-color 0.3s ease;
   color: #F33E3E;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 .btn-budget-decrease:hover {
