@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 // react-bootstrap components
 import {
@@ -39,7 +39,6 @@ function TableList() {
   return (
     <>
       <TableAdd />
-
       <Container fluid>
         <Row>
           <Col md="12">

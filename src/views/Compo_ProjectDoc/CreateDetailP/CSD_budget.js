@@ -2,6 +2,12 @@ import React, { useState,useEffect } from 'react';
 import { Button, Card, Form, Col, Table } from "react-bootstrap";
 
 function CSD_budget() {
+
+    // const storedUserData = sessionStorage.getItem('user');
+    // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    // const studentuser = storedUser.username
+    // console.log("asdfasdf"+studentuser)
+
     const [listA, setListA] = useState(Array.from({ length: 15 }, () => ''));
     const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ''));
     const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ''));

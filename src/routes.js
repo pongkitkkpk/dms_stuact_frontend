@@ -19,8 +19,6 @@ const dashboardRoutes = [
     component: ProjectDocument,
     layout: "/admin"
   },
- 
-
   {
     path: "/c-project-doc",
     name: "สร้างโครงการใหม่",
@@ -86,7 +84,7 @@ const dashboardRoutes = [
     layout: "/user"
   }
 ];
-const adminRoutes =[];
+
 const GuestRoutes =[
   {
     path: "/login",
@@ -104,21 +102,28 @@ const GuestRoutes =[
 
 ];
 
-const userRoutes =[
+const StudentRoutes =[
   {
     path: "/c-project-doc",
     name: "สร้างโครงการใหม่",
     icon: "nc-icon nc-notes",
     component: NewProjectDocument,
-    layout: "/user"
+    layout: "/students"
   },
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
     icon: "nc-icon nc-notes",
     component: AllProject,
-    layout: "/user"
+    layout: "/students"
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: "nc-icon nc-chart-pie-35",
+    component: Dashboard,
+    layout: "/students"
   },
 ];
-export {adminRoutes, userRoutes,GuestRoutes};
+export { StudentRoutes,GuestRoutes};
 export default dashboardRoutes;
