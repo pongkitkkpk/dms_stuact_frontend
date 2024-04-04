@@ -20,10 +20,13 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2}) {
     const years = "ปีการศึกษา 2566"
     const ad_name = "aaaaaaaaaaaa"
     //ตัวแปรรับค่าจาก database
-
-
+    const storedUserData = sessionStorage.getItem('user');
+    const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    const studentuser = storedUser.username
+    console.log("asdfasdf"+studentuser)
+    
     // ตัวแปรส่งค่าไปยัง database
-    const [id_student, setId_student] = useState('s6');
+    const [id_student, setId_student] = useState(studentuser);
     const [project_name, setProjectName] = useState('');
     const [project_number, setProjectNumber] = useState('');
     const [codeclub, setCodeClub] = useState('');//code_some

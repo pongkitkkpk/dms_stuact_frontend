@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     // ***************************admin****************************************
     if (username === 'admin' && password === 'admin') {
       setIsAuthenticated(true);
-      const adminUser = { username: 'admin', role: 'admin' };
+      const adminUser = { username: 'admin', account_type: 'admin' };
       setUser(adminUser);
       sessionStorage.setItem('isLogged', 'true');
       sessionStorage.setItem('user', JSON.stringify(adminUser));
@@ -47,20 +47,22 @@ export const AuthProvider = ({ children }) => {
           }
         );
 
-        console.log(response)
-        console.log(response.data.status)
+        // console.log(response)
+        // console.log(response.data.status)
         // Check if the authentication was successful
 
         if (response.data.status === 'success') {
-          console.log(response.data.message.username)
+          // console.log(response.data.message.username)
           setIsAuthenticated(true);
           setUser(response.data.message);
-          // 
-          const studentUser = { username: response.data.message.username, role: 'student' };
+          
+          // console.log(response.data.message.account_type)
+          const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
           setUser(studentUser);
           sessionStorage.setItem('isLogged', 'true');
           sessionStorage.setItem('user', JSON.stringify(response.data.message));
-          history.replace('/admin/allproject');
+          history.replace(`/${response.data.message.account_type}/allproject`);
+
         } else {
           alert('Authentication failed. Please check your credentials.');
         }
