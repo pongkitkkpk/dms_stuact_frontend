@@ -52,19 +52,28 @@ export const AuthProvider = ({ children }) => {
         // Check if the authentication was successful
 
         if (response.data.status === 'success') {
+          const studentUsersResponse = await axios.get("http://localhost:3001/student/users");
+          const studentUsersData = studentUsersResponse.data;
+          const matchingStudent = studentUsersData.find(student => student.id_student === response.data.message.username);
+          if (matchingStudent){
+            setIsAuthenticated(true);
+            setUser(response.data.message);
+            
+            // console.log(response.data.message.account_type)
+            const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
+            setUser(studentUser);
+            sessionStorage.setItem('isLogged', 'true');
+            sessionStorage.setItem('user', JSON.stringify(response.data.message));
+            history.replace(`/${response.data.message.account_type}/allproject`);
+          }
+          else{
+            alert('ไม่มีข้อมูล ในระบบ dms โปรดติดต่อเจ้าหน้าที่');
+          }
           // console.log(response.data.message.username)
-          setIsAuthenticated(true);
-          setUser(response.data.message);
-          
-          // console.log(response.data.message.account_type)
-          const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
-          setUser(studentUser);
-          sessionStorage.setItem('isLogged', 'true');
-          sessionStorage.setItem('user', JSON.stringify(response.data.message));
-          history.replace(`/${response.data.message.account_type}/allproject`);
+         
 
         } else {
-          alert('Authentication failed. Please check your credentials.');
+          alert('Authentication failed. รหัสicitผิดผลาด');
         }
       } catch (error) {
         console.error('Error during login:', error);
