@@ -50,39 +50,54 @@ function TableListPersonel() {
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
-
                 <Table className="table-hover table-striped">
                   <thead>
-                    <tr>
-                      <th className="border-0">รหัสนักศึกษา</th>
-                      <th className="border-0">ชื่อ</th>
-                      <th className="border-0">ตำแหน่ง</th>
-                      <th className="border-0">หน่วยงาน/ชมรม</th>
-                      <th className="border-0">City</th>
+                    <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
+                      <th style={{ width: "10%", color: "white", fontWeight: "bold" }}>ICIT Account</th>
+                      <th style={{ width: "13%", color: "white", fontWeight: "bold" }}>ชื่อ-นามสกุล</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>email</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>วิทยาเขต</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>กลุ่มงาน</th>
+
+
+
+                      <th style={{ width: "5%", color: "white", fontWeight: "bold" }}></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((val, key) => {
-                      return (
-                        <tr>
-                          <td> {val.id_student}</td>
-                          <td>{val.name_student}</td>
-                          <td>
-                            {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
-                            {val.position === "SH" ? (
-                              val.clubName.includes("สภา") ? 'ประธานสภา' :
-                                val.clubName.includes("องค์การ") ? 'นายกองค์การ' :
-                                  'ประธานชมรม'
-                            ) : null}
-                            {val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : null}
-                            {val.position === "Stuact" ? 'บุคลการกองกิจการนักศึกษา' : null}
-                          </td>
-                          {/* <td> {val.codeclub}</td> */}
-                          <td> {val.clubName}</td>
-                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
-                        </tr>
-                      )
-                    })}
+                    {userList
+                      .filter(val => val.position === "Stuact")
+                      .map((val, key) => {
+                        return (
+                          <tr key={key}>
+                            {/* ICIT */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
+                            {/* ชื่อ */}
+                            <td>{val.name_student}</td>
+                            {/* email */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
+
+                            {/* วิทยาเขต */}
+                            <td>{val.campus}</td>
+                            {/* ตำแหน่ง */}
+                            <td>
+                              {val.position === "Stuact" ? 'บุคลากร' : null}
+                            </td>
+                            {/* หน่วยงาน */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+
+                            {/* กลุ่มงาน */}
+                            <td>{val.WorkGroup}</td>
+
+
+
+
+                            <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </Table>
               </Card.Body>

@@ -14,16 +14,18 @@ import {
   Form
 } from "react-bootstrap";
 import TableAddStudent from "./TableAddStudent";
-import setCode from "./setCode.json"
+import setCode from "./setCode.json";
 
 function TableListStudent() {
   const [userList, setUserList] = useState([]);
 
   const getUsers = () => {
     Axios.get('http://localhost:3001/admin/users').then((response) => {
+      console.log(response.data);
       setUserList(response.data);
-    })
-  }
+    });
+  };
+
   const deleteUser = (id) => {
     Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id}`).then((response) => {
       setUserList(
@@ -33,9 +35,11 @@ function TableListStudent() {
       );
     });
   };
+
   useEffect(() => {
     getUsers();
   }, []);
+
   return (
     <>
       <TableAddStudent />
@@ -50,39 +54,52 @@ function TableListStudent() {
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
-
                 <Table className="table-hover table-striped">
                   <thead>
-                    <tr>
-                      <th className="border-0">รหัสนักศึกษา</th>
-                      <th className="border-0">ชื่อ</th>
-                      <th className="border-0">ตำแหน่ง</th>
-                      <th className="border-0">หน่วยงาน/ชมรม</th>
-                      <th className="border-0">City</th>
+                    <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
+                      <th style={{ width: "10%", color: "white", fontWeight: "bold" }}>ICIT Account</th>
+                      <th style={{ width: "13%", color: "white", fontWeight: "bold" }}>ชื่อ-นามสกุล</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>email</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>วิทยาเขต</th>
+                      
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>คณะ/มหาวิทยาลัย</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน/คณะสโมสร</th>
+                      <th style={{ width: "5%", color: "white", fontWeight: "bold" }}></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((val, key) => {
-                      return (
-                        <tr>
-                          <td> {val.id_student}</td>
-                          <td>{val.name_student}</td>
-                          <td>
-                            {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
-                            {val.position === "SH" ? (
-                              val.clubName.includes("สภา") ? 'ประธานสภา' :
-                                val.clubName.includes("องค์การ") ? 'นายกองค์การ' :
-                                  'ประธานชมรม'
-                            ) : null}
-                            {val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : null}
-                            {val.position === "Stuact" ? 'บุคลการกองกิจการนักศึกษา' : null}
-                          </td>
-                          {/* <td> {val.codeclub}</td> */}
-                          <td> {val.clubName}</td>
-                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
-                        </tr>
-                      )
-                    })}
+                    {userList
+                      .filter(val => val.position === "S" || val.position === "SH" || val.position === "Ad")
+                      .map((val, key) => {
+                        return (
+                          <tr key={key}>
+                            {/* ICIT */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
+                            {/* ชื่อนามสกุล */}
+                            <td>{val.name_student}</td>
+                            {/* email */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
+                            {/* วิทยาเขต */}
+                            <td>{val.campus}</td>
+                            {/* วิทยาลัย */}
+                            <td>{val.department}</td>
+                            {/* ตำแหน่ง */}
+                            <td>
+                              {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
+                              {val.position === "SH" ? (
+                                val.clubName.includes("สภา") ? 'ประธานสภา' :
+                                  val.clubName.includes("องค์การ") ? 'นายกองค์การ' :
+                                    'ประธานชมรม'
+                              ) : null}
+                              {val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : null}
+                            </td>
+                            {/* หน่วยงาน/คณะสโมสร */}
+                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+                            <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </Table>
               </Card.Body>
