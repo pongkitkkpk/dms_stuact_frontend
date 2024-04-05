@@ -90,14 +90,14 @@ function NewProjectDocument() {
         <div style={{width: "20%"}}>
           <div className="sticky-sidebar">
             <Card>
-              <Card.Header className="bg-secondary text-white">เมนูจัดการโครงการ</Card.Header>
-              <Card.Body>
+              <Card.Header className="text-white" style={{backgroundColor: "#535353"}}>เมนูจัดการโครงการ</Card.Header>
+              <Card.Body style={{backgroundColor: "#d2d2d2"}}>
                 <ul className="list-group">
                   <li className="list-group-item">
-                    <a href="#section1">1. แบบขออนุมัติโครงการ</a>
+                    <a href="#section1"><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1. แบบขออนุมัติโครงการ</div></a>
                   </li>
                   <li className={cSD_Detail ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}>1.1 ข้อมูลพื้นฐานโครงการ dd1</a>
+                    <a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.1 ข้อมูลพื้นฐานโครงการ dd1</div></a>
                   </li>
                   <li className={cSD_Detail2 ? "list-group-item active" : "list-group-item"}>
                     <a href="#" onClick={cSD_Detail2 ? CSD_Detail2Component : null} style={{ display: "inline-block", width: "100%" }}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdd2</a>
@@ -112,7 +112,7 @@ function NewProjectDocument() {
                     <a href="#" onClick={cSD_timestep ? CSD_timestepComponent : null} style={{ display: "inline-block", width: "100%" }}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdt5</a>
                   </li>
                   <li className={cSD_budget ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}>1.5 งบประมาณของโครงการ</a>
+                    <a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.5 งบประมาณของโครงการ</div></a>
                   </li>
                   <li className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}>1.5 ข้อมูลเพิ่มเติม</a></li>
                   <li className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}>1.6 เอกสารเพิ่มเติม</a></li>
