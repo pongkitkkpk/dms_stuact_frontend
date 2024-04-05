@@ -13,10 +13,10 @@ import {
   Col,
   Form
 } from "react-bootstrap";
-import TableAdd from "./TableAdd";
+import TableAddStudent from "./TableAddStudent";
 import setCode from "./setCode.json"
 
-function TableList() {
+function TableListStudent() {
   const [userList, setUserList] = useState([]);
 
   const getUsers = () => {
@@ -38,7 +38,7 @@ function TableList() {
   }, []);
   return (
     <>
-      <TableAdd />
+      <TableAddStudent />
       <Container fluid>
         <Row>
           <Col md="12">
@@ -94,4 +94,4 @@ function TableList() {
   );
 }
 
-export default TableList;
+export default TableListStudent;

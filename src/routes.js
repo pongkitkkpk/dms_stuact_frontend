@@ -1,7 +1,8 @@
 
 import Dashboard from "views/Dashboard.js";
 import UserProfile from "views/UserProfile.js";
-import TableList from "views/TableList.js";
+import TableListStudent from "views/TableListStudent.js";
+import TableListPersonel from "views/TableListPersonel.js";
 import Typography from "views/Typography.js";
 import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
@@ -27,10 +28,17 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/table",
-    name: "ตารางจัดการบทบาท",
+    path: "/tablestudent",
+    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
     icon: "nc-icon nc-notes",
-    component: TableList,
+    component: TableListStudent,
+    layout: "/admin"
+  },
+  {
+    path: "/tablepersonal",
+    name: "ตารางจัดการบทบาท(บุคลากร)",
+    icon: "nc-icon nc-notes",
+    component: TableListPersonel,
     layout: "/admin"
   },
   {
