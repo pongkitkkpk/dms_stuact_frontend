@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Button, Card, Form, Col, Table } from "react-bootstrap";
+import CardHeader from 'react-bootstrap/esm/CardHeader';
+import { CardBody, CardFooter } from 'reactstrap';
 
 function CSD_budget() {
 
@@ -14,6 +16,7 @@ function CSD_budget() {
     const [listTPA, setListTPA] = useState(Array.from({ length: 15 }, () => ''));
     const [listSA, setListSA] = useState(Array.from({ length: 15 }, () => ''));
 
+    const [listSSA, setListSSA] = useState(1);
     const [TypeACount, setTypeACount] = useState(1);
 
     const increaseTypeACount = () => {
@@ -77,6 +80,15 @@ function CSD_budget() {
         });
     };
 
+    useEffect(()=>{
+            // Convert string values to numbers and filter out non-numeric values
+            const numericValues = listSA.map(value => parseFloat(value)).filter(value => !isNaN(value));
+            // Calculate sum using reduce method
+            const sumA = numericValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+            // console.log(sumA);
+            setListSSA(sumA);
+    },[listSA])
+
     const [listBT, setListBT] = useState(Array.from({ length: 20 }, () => ''));
     const [listNBT, setListNBT] = useState(Array.from({ length: 20 }, () => ''));
     const [listNNBT, setListNNBT] = useState(Array.from({ length: 20 }, () => ''));
@@ -85,6 +97,7 @@ function CSD_budget() {
     const [listTPBT, setListTPBT] = useState(Array.from({ length: 20 }, () => ''));
     const [listSBT, setListSBT] = useState(Array.from({ length: 20 }, () => ''));
 
+    const [listSSBT, setListSSBT] = useState(1);
     const [TypeBTCount, setTypeBTCount] = useState(1);
 
     const increaseTypeBTCount = () => {
@@ -166,6 +179,15 @@ function CSD_budget() {
         });
     };
 
+    useEffect(()=>{
+        // Convert string values to numbers and filter out non-numeric values
+        const numericValues = listSBT.map(value => parseFloat(value)).filter(value => !isNaN(value));
+        // Calculate sum using reduce method
+        const sumBT = numericValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        // console.log(sumBT);
+        setListSSBT(sumBT);
+    },[listSBT])
+
     const [listBNT, setListBNT] = useState(Array.from({ length: 10 }, () => ''));
     const [listNBNT, setListNBNT] = useState(Array.from({ length: 10 }, () => ''));
     const [listNNBNT, setListNNBNT] = useState(Array.from({ length: 10 }, () => ''));
@@ -174,6 +196,7 @@ function CSD_budget() {
     const [listTPBNT, setListTPBNT] = useState(Array.from({ length: 10 }, () => ''));
     const [listSBNT, setListSBNT] = useState(Array.from({ length: 10 }, () => ''));
 
+    const [listSSBNT, setListSSBNT] = useState(1);
     const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
     const increaseTypeBNTCount = () => {
@@ -236,6 +259,15 @@ function CSD_budget() {
         });
     };
 
+    useEffect(()=>{
+        // Convert string values to numbers and filter out non-numeric values
+        const numericValues = listSBNT.map(value => parseFloat(value)).filter(value => !isNaN(value));
+        // Calculate sum using reduce method
+        const sumBNT = numericValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        // console.log(sumBNT);
+        setListSSBNT(sumBNT);
+    },[listSBNT])
+
     const [listC, setListC] = useState(Array.from({ length: 20 }, () => ''));
     const [listNC, setListNC] = useState(Array.from({ length: 20 }, () => ''));
     const [listNNC, setListNNC] = useState(Array.from({ length: 20 }, () => ''));
@@ -244,6 +276,7 @@ function CSD_budget() {
     const [listTPC, setListTPC] = useState(Array.from({ length: 20 }, () => ''));
     const [listSC, setListSC] = useState(Array.from({ length: 20 }, () => ''));
 
+    const [listSSC, setListSSC] = useState(1);
     const [TypeCCount, setTypeCCount] = useState(1);
 
     const increaseTypeCCount = () => {
@@ -306,29 +339,59 @@ function CSD_budget() {
         });
     };
 
-    const [listETC, setListETC] = useState(Array.from({ length: 1 }, () => ''));
-    const [listSETC, setListSETC] = useState(Array.from({ length: 1 }, () => ''));
-    
+    useEffect(()=>{
+        // Convert string values to numbers and filter out non-numeric values
+        const numericValues = listSC.map(value => parseFloat(value)).filter(value => !isNaN(value));
+        // Calculate sum using reduce method
+        const sumC = numericValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        // console.log(sumC);
+        setListSSC(sumC);
+    },[listSC])
 
+    const [listETC, setListETC] = useState(0);
+    const [listSETC, setListSETC] = useState(0);
+    
     useEffect(() => {
         console.log("ETC"+listETC)
         console.log("SETC"+listSETC)
         // console.log("SBT"+listSA)
     }, [listETC,listSETC]);
 
+    const [listSAll, setListSAll] = useState(0);
+
+    useEffect(() => {
+        // Convert string values to integers and filter out non-numeric values for each list
+        const numericValuesSA = listSA.map(value => parseInt(value)).filter(value => !isNaN(value));
+        const numericValuesSBT = listSBT.map(value => parseInt(value)).filter(value => !isNaN(value));
+        const numericValuesSBNT = listSBNT.map(value => parseInt(value)).filter(value => !isNaN(value));
+        const numericValuesSC = listSC.map(value => parseInt(value)).filter(value => !isNaN(value));
+    
+        // Calculate sum for each list
+        const sumSA = numericValuesSA.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const sumSBT = numericValuesSBT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const sumSBNT = numericValuesSBNT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const sumSC = numericValuesSC.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        
+        // Calculate total sum
+        const totalSum = sumSA + sumSBT + sumSBNT + sumSC + parseInt(listSETC);
+        setListSAll(totalSum);
+    }, [listSA, listSBT, listSBNT, listSC, listSETC]);
+    
+
+
     return (
         <>
             <div style={{width: "79%", marginLeft: "1%"}}>
-                <Card>
-                    <Table striped>
-                        <thead>
-                            <tr>
-                                <th style={{fontSize: "16px", color: "black"}}>งบประมาณของโครงการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* ค่าตอบแทน */}
-                            <tr style={{ backgroundColor: "white" }}>
+                <Card> 
+                    <CardHeader style={{ backgroundColor: "#797979", display: "flex", alignItems: "center" }}>
+                        <div style={{marginRight: "auto",fontSize: "16px", color: "black"}}>งบประมาณของโครงการ</div>
+                    </CardHeader>
+
+                    <CardBody>
+                        <Table striped>
+                            <tbody>
+                                {/* ค่าตอบแทน */}
+                                <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าตอบแทน</div></td>
                                 <td className='back-side-td'>
@@ -349,6 +412,7 @@ function CSD_budget() {
                                                 <tr key={index} style={{ backgroundColor: "white" }}>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`รายการที่ ${index + 1}`}
@@ -359,6 +423,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -371,6 +436,7 @@ function CSD_budget() {
                                                         <div>คน</div></td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -383,6 +449,7 @@ function CSD_budget() {
                                                         <div>ชั่วโมง</div></td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`ราคารายการที่ ${index + 1}`}
@@ -393,6 +460,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             value={listSA[index]}
@@ -401,6 +469,25 @@ function CSD_budget() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr  style={{backgroundColor: "rgba(255, 139, 19, .3)"}}>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style={{textAlignLast: "right"}}>
+                                                    <div style={{color: "#FF8B13", fontWeight: "bold"}}>รวมเป็นเงิน</div>
+                                                </td> 
+                                                <td>
+                                                    <Form.Control
+                                                        className="font-form-control"
+                                                        size="sm"
+                                                        type="text"
+                                                        value={listSSA}
+                                                        disabled
+                                                    />
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                     
@@ -418,10 +505,10 @@ function CSD_budget() {
                                     </div>
                                     
                                 </td>
-                            </tr>
+                                </tr>
 
-                            {/* ค่าใช้สอย(มีจำนวนเวลา) */}
-                            <tr style={{ backgroundColor: "white" }}>
+                                {/* ค่าใช้สอย(มีจำนวนเวลา) */}
+                                <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าใช้สอย</div>
                                     <div>(มีจำนวนเวลา)</div></td>
@@ -444,6 +531,7 @@ function CSD_budget() {
                                                 <tr key={index} style={{ backgroundColor: "white" }}>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`รายการที่ ${index + 1}`}
@@ -454,6 +542,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -464,6 +553,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`หน่วย`}
@@ -474,6 +564,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -484,6 +575,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`หน่วย`}
@@ -494,6 +586,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`ราคารายการที่ ${index + 1}`}
@@ -504,6 +597,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             value={listSBT[index]}
@@ -512,6 +606,25 @@ function CSD_budget() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr  style={{backgroundColor: "rgba(255, 139, 19, .3)"}}>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style={{textAlignLast: "right"}}>
+                                                    <div style={{color: "#FF8B13", fontWeight: "bold"}}>รวมเป็นเงิน</div>
+                                                </td> 
+                                                <td>
+                                                    <Form.Control
+                                                        className="font-form-control"
+                                                        size="sm"
+                                                        type="text"
+                                                        value={listSSBT}
+                                                        disabled
+                                                    />
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -527,10 +640,10 @@ function CSD_budget() {
                                         )}
                                     </div>
                                 </td>
-                            </tr>
+                                </tr>
 
-                            {/* ค่าใช้สอย(ไม่มีจำนวนเวลา) */}
-                            <tr style={{ backgroundColor: "white" }}>
+                                {/* ค่าใช้สอย(ไม่มีจำนวนเวลา) */}
+                                <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าใช้สอย</div>
                                     <div>(ไม่มีจำนวนเวลา)</div></td>
@@ -553,6 +666,7 @@ function CSD_budget() {
                                                 <tr key={index} style={{ backgroundColor: "white" }}>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`รายการที่ ${index + 1}`}
@@ -563,6 +677,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -573,6 +688,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`หน่วย`}
@@ -585,6 +701,7 @@ function CSD_budget() {
                                                     <td></td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`ราคารายการที่ ${index + 1}`}
@@ -595,6 +712,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             value={listSBNT[index]}
@@ -603,6 +721,25 @@ function CSD_budget() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr  style={{backgroundColor: "rgba(255, 139, 19, .3)"}}>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style={{textAlignLast: "right"}}>
+                                                    <div style={{color: "#FF8B13", fontWeight: "bold"}}>รวมเป็นเงิน</div>
+                                                </td> 
+                                                <td>
+                                                    <Form.Control
+                                                        className="font-form-control"
+                                                        size="sm"
+                                                        type="text"
+                                                        value={listSSBNT}
+                                                        disabled
+                                                    />
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -618,10 +755,10 @@ function CSD_budget() {
                                         )}
                                     </div>
                                 </td>
-                            </tr>
+                                </tr>
 
-                            {/* ค่าวัสดุ  */}
-                            <tr style={{ backgroundColor: "white" }}>
+                                {/* ค่าวัสดุ  */}
+                                <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดค่าวัสดุ</div>
                                 </td>
@@ -644,6 +781,7 @@ function CSD_budget() {
                                                 <tr key={index} style={{ backgroundColor: "white" }}>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`รายการที่ ${index + 1}`}
@@ -654,6 +792,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`จำนวน`}
@@ -664,6 +803,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`หน่วย`}
@@ -676,6 +816,7 @@ function CSD_budget() {
                                                     <td></td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             placeholder={`ราคารายการที่ ${index + 1}`}
@@ -686,6 +827,7 @@ function CSD_budget() {
                                                     </td>
                                                     <td>
                                                         <Form.Control
+                                                            className="font-form-control"
                                                             size="sm"
                                                             type="text"
                                                             value={listSC[index]}
@@ -694,25 +836,44 @@ function CSD_budget() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, .3)"}}>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style={{textAlignLast: "right"}}>
+                                                    <div style={{color: "#FF8B13", fontWeight: "bold"}}>รวมเป็นเงิน</div>
+                                                </td> 
+                                                <td>
+                                                    <Form.Control
+                                                        className="font-form-control"
+                                                        size="sm"
+                                                        type="text"
+                                                        value={listSSC}
+                                                        disabled
+                                                    />
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                         {TypeCCount < 20 && (
                                             <Button variant="success" className="ml-5 mb-3 btn-budget-increase border-success" onClick={increaseTypeCCount}>
-                                                <div>เพิ่มรายการค่าวัสดุ</div>
+                                                <div style={{fontSize: "14px"}}>เพิ่มรายการค่าวัสดุ</div>
                                             </Button>
                                         )}
                                         {TypeCCount > 1 && (
                                             <Button variant="danger" className="ml-5 mb-3 btn-budget-decrease border-danger" onClick={decreaseTypeCCount}>
-                                                <div>ลดรายการค่าวัสดุ</div>
+                                                <div style={{fontSize: "14px"}}>ลดรายการค่าวัสดุ</div>
                                             </Button>
                                         )}
                                     </div>
                                 </td>
-                            </tr>
-                            
-                            {/* ค่าอื่นๆ */}
-                            <tr style={{ backgroundColor: "white" }}>
+                                </tr>
+                                            
+                                {/* ค่าอื่นๆ */}
+                                <tr style={{ backgroundColor: "white" }}>
                                 <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
                                     <div>หมวดอื่นๆ</div>
                                 </td>
@@ -734,6 +895,7 @@ function CSD_budget() {
                                             <tr style={{ backgroundColor: "white" }}>
                                                 <td>
                                                     <Form.Control
+                                                        className="font-form-control"
                                                         size="sm"
                                                         type="text"
                                                         placeholder={`รายการอื่นๆ`}
@@ -749,6 +911,7 @@ function CSD_budget() {
                                                 <td></td>
                                                 <td>
                                                     <Form.Control
+                                                        className="font-form-control"
                                                         size="sm"
                                                         type="text"
                                                         placeholder={`ราคา`}
@@ -758,17 +921,58 @@ function CSD_budget() {
                                                     />
                                                 </td>
                                             </tr>
+                                            <tr style={{backgroundColor: "rgba(255, 139, 19, .3)"}}>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style={{textAlignLast: "right"}}>
+                                                    <div style={{color: "#FF8B13", fontWeight: "bold"}}>รวมเป็นเงิน</div>
+                                                </td> 
+                                                <td>
+                                                    <Form.Control
+                                                        className="font-form-control"
+                                                        size="sm"
+                                                        type="text"
+                                                        value={listSETC}
+                                                        disabled
+                                                    />
+                                                </td>
+                                            </tr>
                                             
                                         </tbody>
                                     </Table>
                                 </td>
-                            </tr>
-                            
-                        </tbody>
-                    </Table>
-                    <div>
-                        <Button type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
-                    </div>
+                                </tr>
+                                                        
+                                {/* ยอดงบประมาณรวม */}
+                                <tr style={{ backgroundColor: "white" }}>
+                                <td className='head-side-td' style={{color: "white", fontWeight: "bold"}}>
+                                    <div>งบประมาณสุทธิ</div>
+                                </td>
+                                
+                                <td className='back-side-td'>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <div style={{ color: "#FF8B13", fontWeight: "bold", width: "40%", textAlignLast: "right"}}>รวมเป็นเงิน</div>
+                                        <Form.Control
+                                            style={{ marginLeft: "10px", marginRight: "10px", width: "20%" }} // Adjust margin as needed
+                                            size="sm"
+                                            type="text"
+                                            value={listSAll}
+                                            disabled
+                                        />
+                                        <div style={{ color: "#FF8B13", fontWeight: "bold", width: "40%" }}>บาท</div>
+                                    </div>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </CardBody>
+                    
+                    <CardFooter style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <Button type="submit" variant="info" className='btn-dataupdate' style={{fontSize: "14px"}}>อัพขึ้นสู่ระบบ</Button>
+                    </CardFooter>
                 </Card>
             </div>
         </>
