@@ -17,6 +17,8 @@ function NewProjectDocument() {
   const [cSD_budget, setCSD_budget] = useState(false);
   const containerRef = useRef(null);
 
+  
+
   const CSD_DetailComponent = () => {
     setCSD_Detail(true);
   };

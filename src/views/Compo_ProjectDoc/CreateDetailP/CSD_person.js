@@ -345,7 +345,7 @@ function CSD_person({ id_projects,switchToCSDLocationTime }) {
                         <tbody>
                             {/* ผู้บริหาร executive */}
                             <tr>
-                                <td className='head-side-td'>ประเภทผู้บริหาร</td>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>ประเภทผู้บริหาร</td>
                                 <td className='back-side-td'>
                                     <label>ผู้บริหาร จำนวน {grandTotalExecutive} คน</label>
 
@@ -440,7 +440,7 @@ function CSD_person({ id_projects,switchToCSDLocationTime }) {
                             </tr>
                             {/* คณาจารย์ / บุคลากร  / */}
                             <tr>
-                                <td className='head-side-td'>ประเภท คณาจารย์ / บุคลากร</td>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>ประเภท คณาจารย์ / บุคลากร</td>
                                 <td className='back-side-td'>
                                     <label>คณาจารย์ / บุคลากร จำนวน {grandTotalProfessor} คน</label>
                                     <Table striped="columns">
@@ -529,7 +529,7 @@ function CSD_person({ id_projects,switchToCSDLocationTime }) {
                             </tr>
                             {/* ประเภทนักศึกษา */}
                             <tr>
-                                <td className='head-side-td'>ประเภทนักศึกษา</td>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>ประเภทนักศึกษา</td>
                                 <td className='back-side-td'>
                                     <label>นักศึกษา จำนวน  {grandTotalStudent}   คน</label>
                                     <Table striped="columns">
@@ -621,7 +621,7 @@ function CSD_person({ id_projects,switchToCSDLocationTime }) {
                             </tr>
                             {/* ประเภทวิทยากร */}
                             <tr>
-                                <td className='head-side-td'>ประเภทวิทยากร</td>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>ประเภทวิทยากร</td>
                                 <td className='back-side-td'>
                                     <label>วิทยากร จำนวน  {grandTotalExpert}   คน</label>
                                     <Table striped="columns">

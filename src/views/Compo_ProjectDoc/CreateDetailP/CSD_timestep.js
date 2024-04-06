@@ -768,7 +768,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                             {/* หัวข้อ index */}
                             {Array.from({ length: TopictableCount }).map((_, index) => (
                                 <tr style={{ backgroundColor: "white" }}>
-                                    <td className='head-side-td'>
+                                    <td className='head-side-td' style={{ verticalAlign: "top" }}>
                                         <div>
                                             {`หัวข้อที่ ${index + 1}`}
                                         </div>

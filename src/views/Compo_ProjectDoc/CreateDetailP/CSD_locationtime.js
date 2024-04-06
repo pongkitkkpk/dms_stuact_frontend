@@ -178,7 +178,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep}) {
 
                             {/* สถานที่จัดโครงการ */}
                             <tr>
-                                <td className='head-side-td'>สถานที่จัดโครงการ</td>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>สถานที่จัดโครงการ</td>
                                 <td className='back-side-td'>
                                     <ul>
                                         {Array.from({ length: locationCount }).map((_, index) => (
@@ -226,7 +226,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep}) {
                             </tr>
                             {/* ช่วงจัดเตรียมโครงการ */}
                             <tr>
-                                <td className='head-side-td'>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
                                     วันจัดเตรียมโครงการ
                                     <p className='detail-prodoc'>
                                         ระบุช่วงเวลาเตรียมงาน
@@ -272,7 +272,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep}) {
                             </tr>
                             {/* วันดำเนินโครงการ */}
                             <tr>
-                                <td className='head-side-td'>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
                                     วันดำเนินโครงการ
                                     <p className='detail-prodoc'>
                                         กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
@@ -319,7 +319,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep}) {
                             </tr>
                             {/* วันกำหนดส่งโครงการ */}
                             <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>
+                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
                                     วันกำหนดส่งโครงการ
                                     <p className='detail-prodoc'>
                                         กำหนด 30 วัน หลังจากวันดำเนินงาน

@@ -465,7 +465,7 @@ function CSD_budget() {
                 {/* ค่าตอบแทน */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td"
+                    className="head-side-td" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าตอบแทน</div>
                   </td>
@@ -654,7 +654,7 @@ function CSD_budget() {
                 {/* ค่าใช้สอย(มีจำนวนเวลา) */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าใช้สอย</div>
                     <div>(มีจำนวนเวลา)</div>
@@ -876,7 +876,7 @@ function CSD_budget() {
                 {/* ค่าใช้สอย(ไม่มีจำนวนเวลา) */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td"
+                    className="head-side-td" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าใช้สอย</div>
                     <div>(ไม่มีจำนวนเวลา)</div>
@@ -1067,7 +1067,7 @@ function CSD_budget() {
                 {/* ค่าวัสดุ  */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าวัสดุ</div>
                   </td>
@@ -1251,8 +1251,8 @@ function CSD_budget() {
 
                 {/* ค่าอื่นๆ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td
-                    className="head-side-td"
+                  <td 
+                    className="head-side-td" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดอื่นๆ</div>
                   </td>
@@ -1353,7 +1353,7 @@ function CSD_budget() {
                 {/* ยอดงบประมาณรวม */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"    
+                    className="head-side-td-swp"     style={{ verticalAlign: "top" }}
                   >
                     <div>งบประมาณสุทธิ</div>
                   </td>

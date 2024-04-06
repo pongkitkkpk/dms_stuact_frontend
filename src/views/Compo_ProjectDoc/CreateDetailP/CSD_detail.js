@@ -25,7 +25,8 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
-  console.log("asdfasdf" + studentuser);
+  // console.log( storedUser);
+
 
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
@@ -53,6 +54,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const getUsers = () => {
     Axios.get("http://localhost:3001/student/users").then((response) => {
       setUserList(response.data);
+      console.log(response.data)
     });
   };
 
@@ -191,7 +193,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* หน่วยงานที่รับผิดชอบ db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp">
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
                     <div>หน่วยงานที่รับผิดชอบ</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -207,7 +209,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* ปีการศึกษา db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td">
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>ปีการศึกษา</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -223,7 +225,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* ที่อาจารย์ปรึกษา  db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp">
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
                     <div>อาจารย์ปรึกษา</div>
                     {/* <p className="detail-prodoc">
                       ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
@@ -242,7 +244,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td">
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
