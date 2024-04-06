@@ -9,12 +9,12 @@ import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(false);//fix edit
+  const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
   const [cSD_person, setCSD_Person] = useState(false);
   const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
-  const [cSD_budget, setCSD_budget] = useState(true);
+  const [cSD_budget, setCSD_budget] = useState(false);
   const containerRef = useRef(null);
 
   const CSD_DetailComponent = () => {
@@ -94,10 +94,10 @@ function NewProjectDocument() {
               <Card.Body style={{backgroundColor: "#d2d2d2", paddingBottom: "15px"}}>
                 <table className="list-group">
                   <tr className="list-group-item" style={{backgroundColor: "#535353"}}>
-                    <th><a href="#section1"><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1. แบบขออนุมัติโครงการ</div></a></th>
+                    <th><a href="#section1"><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>แบบขออนุมัติโครงการ</div></a></th>
                   </tr>
                   <tr className={cSD_Detail ? "list-group-item active" : "list-group-item"}>
-                    <td><a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.1 ข้อมูลพื้นฐานโครงการ dd1</div></a></td>
+                    <td><a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.1 ข้อมูลพื้นฐานโครงการ</div></a></td>
                   </tr>
                   <tr className={cSD_Detail2 ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={cSD_Detail2 ? CSD_Detail2Component : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdd2</div></a></td>
