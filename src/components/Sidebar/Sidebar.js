@@ -11,13 +11,54 @@ function Sidebar({ color, image, routes }) {
 
   useEffect(() => {
     const handleResize = () => {
-      const isBigScreen = window.innerWidth >= 991;
-      const isTabletScreen = window.innerWidth >= 768 && window.innerWidth < 991;
-      setIsTablet(isTabletScreen);
+      // Get the screen width
+      const screenWidth = window.innerWidth;
+      console.log(screenWidth)
 
-      // Adjust sidebar position based on screen size
-      // setLeftPosition(isHovered ? "0%" : "-13%");
-      setLeftPosition(isBigScreen ? (isHovered ? "0%" : "-13%") : "-58%");
+      // Check if the screen width is less than or equal to 768px (iPad portrait mode width)
+      // ipadMini
+      if (screenWidth <= 768) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "-35%" : "-61%");
+        setIsTablet(true);
+      }
+      
+      else if (screenWidth >= 770 && screenWidth <= 800) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-19.5%");
+        setIsTablet(true);
+      } 
+      else if (screenWidth >= 801 && screenWidth <= 999) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-57%");
+        setIsTablet(true);
+      } 
+      else if (screenWidth >= 1000 && screenWidth <= 1024) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-20%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 1101 && screenWidth <= 1200) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-17%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 1201 && screenWidth <= 1400) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-15%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 1401 && screenWidth <= 1680) {
+        // Adjust sidebar position for tablet and mobile view
+        setLeftPosition(isHovered ? "0%" : "-13%");
+        setIsTablet(true);
+      }
+      
+      else {
+        // Adjust sidebar position for desktop view
+        setLeftPosition(isHovered ? "0%" : "-9.6%");
+        setIsTablet(false);
+      }
     };
 
     handleResize(); // Initial position based on screen size
@@ -97,11 +138,11 @@ function Sidebar({ color, image, routes }) {
                   >
                     <span style={{ fontWeight: "light" }}>{prop.name}</span>
 
-                   
-                      <div style={{ marginRight: "-13%" }}>
-                        <i className={prop.icon} />
-                      </div>
-                   
+
+                    <div style={{ marginRight: "-13%" }}>
+                      <i className={prop.icon} />
+                    </div>
+
                   </NavLink>
                 </li>
               );
