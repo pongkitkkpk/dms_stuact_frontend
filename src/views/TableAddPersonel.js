@@ -20,7 +20,7 @@ import Axios from 'axios';
 function TableAddPersonel() {
     const [userList, setUserList] = useState([]);
 
-    const [is_student, setIs_student] = useState(false);//แก้ตรงนี้
+    const [is_personel, setIs_personel] = useState(false);//แก้ตรงนี้
     const [is_centeragency, setIs_centeragency] = useState(false);
     const [positionagency, setPositionagency] = useState(false);
 
@@ -142,7 +142,16 @@ function TableAddPersonel() {
     }
 
 
-
+    useEffect(() => {
+        if (getuserapi !== null && getuserapi.message) {
+            if (getuserapi.message.account_type === "personel") {
+                setIs_personel(true);
+            } else {
+                setIs_personel(false);
+                alert("ICIT Account นี้ไม่ใช่บุคลากร");
+            }
+        }
+    }, [getuserapi]);
     const addUser = () => {
         const campusAbbreviation = campus.substring(0, 1);
         const numericCodedivision = codedivision.replace(/\D/g, '');
@@ -224,24 +233,38 @@ function TableAddPersonel() {
                             >
                                 ค้นหารหัส icit
                             </Button>
-                            <Modal show={showModal} onHide={() => setShowModal(false)} centered >
-                                <Modal.Header >
-                                    <Modal.Title>ข้อมูลลายละเอียดของ icit account</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <div>
-                                        <p>Account Type: {account_type}</p>
-                                        <p>Username: {username}</p>
-                                        <p>Display Name: {name_student}</p>
-                                        <p>First Name (English): {firstname_en}</p>
-                                        <p>Last Name (English): {lastname_en}</p>
-                                        <p>Email: {email}</p>
-                                        <p>CAMPUS_NAME: {CAMPUS_NAME}</p>
-                                        <p>STU_STATUS_DESC: {STU_STATUS_DESC}</p>
-                                        <p>LEVEL_DESC: {LEVEL_DESC}</p>
-                                        <p>FAC_NAME_THAI: {FAC_NAME_THAI}</p>
-                                    </div>
-                                    {!is_student && (
+                            {is_personel && (
+                                <Modal show={showModal} onHide={() => setShowModal(false)} centered >
+                                    <Modal.Header >
+                                        <Modal.Title>ข้อมูลลายละเอียดของ icit account</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div>
+                                            <p>Account Type: {account_type}</p>
+                                            <p>Username: {username}</p>
+                                            <p>Display Name: {name_student}</p>
+                                            <p>First Name (English): {firstname_en}</p>
+                                            <p>Last Name (English): {lastname_en}</p>
+                                            <p>Email: {email}</p>
+                                            <p>CAMPUS_NAME: {CAMPUS_NAME}</p>
+                                            <p>STU_STATUS_DESC: {STU_STATUS_DESC}</p>
+                                            <p>LEVEL_DESC: {LEVEL_DESC}</p>
+                                            <p>FAC_NAME_THAI: {FAC_NAME_THAI}</p>
+                                        </div>
+
+                                        <div>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต xxxxxxxxxxxxxxxx</div>
+                                        <div className="mb-3 d-flex align-items-center">
+                                            <Form.Label htmlFor="yearly" className="form-label me-3">ปีการศึกษาที่ดูแล : </Form.Label>
+                                            <Form.Control
+                                                type="number"
+                                                id="yearly"
+                                                value={yearly}
+                                                onChange={(e) => setYearly(e.target.value)}
+                                                placeholder="Enter Yearly Value"
+                                                style={{ width: '55%', marginLeft: "1%" }}
+                                            />
+                                        </div>
+
                                         <div>
                                             <p>เลือกตำแหน่งและหน่วยงานที่ดูแล</p>
                                             <Form.Label htmlFor="position" className="form-label" style={{ marginRight: '1%' }}>
@@ -454,18 +477,19 @@ function TableAddPersonel() {
                                         </div>
 
 
-                                    )}
 
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" onClick={addUser}>
-                                        Save changes
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
+
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                                            Close
+                                        </Button>
+                                        <Button variant="primary" onClick={addUser}>
+                                            Save changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            )}
 
                         </Form.Group>
                     </Card.Body>

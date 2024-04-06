@@ -235,9 +235,21 @@ function TableAddStudent() {
                                         <p>LEVEL_DESC: {LEVEL_DESC}</p>
                                         <p>FAC_NAME_THAI: {FAC_NAME_THAI}</p>
                                     </div>
+                                    <div>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต xxxxxxxxxxxxxxxx</div>
+                                    <div className="mb-3 d-flex align-items-center">
+                                        <Form.Label htmlFor="yearly" className="form-label me-3">ปีการศึกษาที่ดูแล : </Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="yearly"
+                                            value={yearly}
+                                            onChange={(e) => setYearly(e.target.value)}
+                                            placeholder="Enter Yearly Value"
+                                            style={{ width: '55%' ,marginLeft:"1%"}}
+                                        />
+                                    </div>
                                     {account_type === "students" &&
                                         <>
-                                            <p>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต</p>
+                                            
                                             <Form.Label htmlFor="position" className="form-label" style={{ marginRight: '1%' }}>
                                                 ตำแหน่ง :
                                             </Form.Label>
