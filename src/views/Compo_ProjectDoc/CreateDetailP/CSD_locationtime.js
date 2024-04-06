@@ -1,354 +1,360 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // react-bootstrap components
 import {
-    Button,
-    Card,
-    Form,
-    Container,
-    Row,
-    Col,
-    Nav,
-    Table
+  Button,
+  Card,
+  Form,
+  Container,
+  Row,
+  Col,
+  Nav,
+  Table,
 } from "react-bootstrap";
-import Axios from 'axios';
+import Axios from "axios";
 
-function CSD_locationtime({ id_projects, switchToCSDTimestep}) {
-    const [projectList, setProjectList] = useState([]);
-    
-    const [location1, setLocation1] = useState('');
-    const [location2, setLocation2] = useState('');
-    const [location3, setLocation3] = useState('');
-    const [location4, setLocation4] = useState('');
-    const [location5, setLocation5] = useState('');
-    const [start_prepare, setStartPrepare] = useState('');
-    const [end_prepare, setEndPrepare] = useState('');
-    const [start_event, setStartEvent] = useState('');
-    const [end_event, setEndEvent] = useState('');
-    const [deadline, setDeadLine] = useState('');
+function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
+  const [projectList, setProjectList] = useState([]);
 
-    const [problem1, setProblem1] = useState('');
-    const [result1, setResult1] = useState('');
-    const [problem2, setProblem2] = useState('');
-    const [result2, setResult2] = useState('');
-    const [problem3, setProblem3] = useState('');
-    const [result3, setResult3] = useState('');
+  const [location1, setLocation1] = useState("");
+  const [location2, setLocation2] = useState("");
+  const [location3, setLocation3] = useState("");
+  const [location4, setLocation4] = useState("");
+  const [location5, setLocation5] = useState("");
+  const [start_prepare, setStartPrepare] = useState("");
+  const [end_prepare, setEndPrepare] = useState("");
+  const [start_event, setStartEvent] = useState("");
+  const [end_event, setEndEvent] = useState("");
+  const [deadline, setDeadLine] = useState("");
 
-    const [created_at, setCreated_At] = useState(new Date())
-    const [updated_at, setUpdated_at] = useState('')
-    const [onlymonthstart, setOnlyMonthStart] = useState('')
-    const [showdeadline, setShowDeadLine] = useState('');
+  const [problem1, setProblem1] = useState("");
+  const [result1, setResult1] = useState("");
+  const [problem2, setProblem2] = useState("");
+  const [result2, setResult2] = useState("");
+  const [problem3, setProblem3] = useState("");
+  const [result3, setResult3] = useState("");
 
-    //
-    const minDate = new Date();
+  const [created_at, setCreated_At] = useState(new Date());
+  const [updated_at, setUpdated_at] = useState("");
+  const [onlymonthstart, setOnlyMonthStart] = useState("");
+  const [showdeadline, setShowDeadLine] = useState("");
 
+  //
+  const minDate = new Date();
 
-
-
-   
-    // เพิ่มสถานที่
-    const [locationCount, setLocationCount] = useState(1);
-    const increaseLocationCount = () => {
-        if (locationCount < 5) {
-            setLocationCount(locationCount + 1);
-        }
-    };
-    const decreaseLocationCount = () => {
-        if (locationCount > 1) {
-            setLocationCount(locationCount - 1);
-            // Reset corresponding studentTypeNumber state variables to 0
-            switch (locationCount) {
-                case 4:
-                    setLocation5('');
-                    break;
-                case 3:
-                        setLocation4('');
-                        break;
-                case 2:
-                    setLocation3('');
-                    break;
-                case 1:
-                    setLocation2('');
-                    break;
-                case 0:
-                    setLocation1('');
-                    break;
-                default:
-                // Handle other cases if needed
-            }
-        }
-    };
-
-
-    
-
-    const createProject = (yearlyCountsketch) => {
-        Axios.put(`http://localhost:3001/student/project/create3/${id_projects}`, {
-            location1: location1,
-            location2: location2,
-            location3: location3,
-            location4: location4,
-            location5: location5,
-            start_prepare: start_prepare,
-            end_prepare: end_prepare,
-            start_event: start_event,
-            end_event: end_event,
-            deadline: deadline,
-            problem1: problem1,
-            result1: result1,
-            problem2: problem2,
-            result2: result2,
-            problem3: problem3,
-            result3: result3,
-            created_at: created_at,
-            updated_at: updated_at
-        }).then(() => {
-            // Assuming setProjectList is a state setter function for your projectList state
-            setProjectList([
-                ...projectList,
-                {
-                    location1: location1,
-                    location2: location2,
-                    location3: location3,
-                    location4: location4,
-                    location5: location5,
-                    start_prepare: start_prepare,
-                    end_prepare: end_prepare,
-                    start_event: start_event,
-                    end_event: end_event,
-                    deadline: deadline,
-                    problem1: problem1,
-                    result1: result1,
-                    problem2: problem2,
-                    result2: result2,
-                    problem3: problem3,
-                    result3: result3,
-                    created_at: created_at,
-                    updated_at: updated_at
-                }
-            ]);
-        });
-        setStartPrepare('');
-        setEndPrepare('');
-        setStartEvent('');
-        setEndEvent('');
-        // window.scrollTo({ top: 0, behavior: 'smooth' });
-        switchToCSDTimestep();
-
-
+  // เพิ่มสถานที่
+  const [locationCount, setLocationCount] = useState(1);
+  const increaseLocationCount = () => {
+    if (locationCount < 5) {
+      setLocationCount(locationCount + 1);
     }
+  };
+  const decreaseLocationCount = () => {
+    if (locationCount > 1) {
+      setLocationCount(locationCount - 1);
+      // Reset corresponding studentTypeNumber state variables to 0
+      switch (locationCount) {
+        case 4:
+          setLocation5("");
+          break;
+        case 3:
+          setLocation4("");
+          break;
+        case 2:
+          setLocation3("");
+          break;
+        case 1:
+          setLocation2("");
+          break;
+        case 0:
+          setLocation1("");
+          break;
+        default:
+        // Handle other cases if needed
+      }
+    }
+  };
 
-    // Split month start_prepare
-    useEffect(() => {
-        if (start_prepare) {
-            const start = new Date(start_prepare);
-            const month = (start.getMonth() + 1).toString().padStart(2, '0');
-            setOnlyMonthStart(`${month}`);
-        }
-    }, [start_prepare]);
-    // Calculate end date for วันส่งรายงาน
-    useEffect(() => {
-        if (end_event) {
-            const endReportDate = new Date(end_event);
-            endReportDate.setDate(endReportDate.getDate() + 30);
+  const createProject = (yearlyCountsketch) => {
+    Axios.put(`http://localhost:3001/student/project/create3/${id_projects}`, {
+      location1: location1,
+      location2: location2,
+      location3: location3,
+      location4: location4,
+      location5: location5,
+      start_prepare: start_prepare,
+      end_prepare: end_prepare,
+      start_event: start_event,
+      end_event: end_event,
+      deadline: deadline,
+      problem1: problem1,
+      result1: result1,
+      problem2: problem2,
+      result2: result2,
+      problem3: problem3,
+      result3: result3,
+      created_at: created_at,
+      updated_at: updated_at,
+    }).then(() => {
+      // Assuming setProjectList is a state setter function for your projectList state
+      setProjectList([
+        ...projectList,
+        {
+          location1: location1,
+          location2: location2,
+          location3: location3,
+          location4: location4,
+          location5: location5,
+          start_prepare: start_prepare,
+          end_prepare: end_prepare,
+          start_event: start_event,
+          end_event: end_event,
+          deadline: deadline,
+          problem1: problem1,
+          result1: result1,
+          problem2: problem2,
+          result2: result2,
+          problem3: problem3,
+          result3: result3,
+          created_at: created_at,
+          updated_at: updated_at,
+        },
+      ]);
+    });
+    setStartPrepare("");
+    setEndPrepare("");
+    setStartEvent("");
+    setEndEvent("");
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    switchToCSDTimestep();
+  };
 
-            const day = endReportDate.getDate().toString().padStart(2, '0');
-            const month = (endReportDate.getMonth() + 1).toString().padStart(2, '0');
-            const year = endReportDate.getFullYear();
+  // Split month start_prepare
+  useEffect(() => {
+    if (start_prepare) {
+      const start = new Date(start_prepare);
+      const month = (start.getMonth() + 1).toString().padStart(2, "0");
+      setOnlyMonthStart(`${month}`);
+    }
+  }, [start_prepare]);
+  // Calculate end date for วันส่งรายงาน
+  useEffect(() => {
+    if (end_event) {
+      const endReportDate = new Date(end_event);
+      endReportDate.setDate(endReportDate.getDate() + 30);
 
-            setDeadLine(`${year}-${month}-${day}`);
-            setShowDeadLine(`${day}/${month}/${year}`);
-        }
-    }, [end_event]);
+      const day = endReportDate.getDate().toString().padStart(2, "0");
+      const month = (endReportDate.getMonth() + 1).toString().padStart(2, "0");
+      const year = endReportDate.getFullYear();
 
+      setDeadLine(`${year}-${month}-${day}`);
+      setShowDeadLine(`${day}/${month}/${year}`);
+    }
+  }, [end_event]);
 
-    return (
-        <>
-            {/* วนค่าจากdatabase  */}
-            <Col md="9">
-                <Card>
-                    <Table striped="columns">
-                        <thead>
-                            <tr>
-                                <th>ข้อมูลพื้นฐานโครงการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {/* สถานที่จัดโครงการ */}
-                            <tr>
-                                <td className='head-side-td' style={{ verticalAlign: "top" }}>สถานที่จัดโครงการ</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        {Array.from({ length: locationCount }).map((_, index) => (
-                                            <li key={index}>
-                                                <Form.Control
-                                                    size="sm"
-                                                    type="text"
-                                                    placeholder={`สถานที่จัดโครงการ ${index + 1}`}
-                                                    onChange={(event) => {
-                                                        switch (index) {
-                                                            case 0:
-                                                                setLocation1(event.target.value);
-                                                                break;
-                                                            case 1:
-                                                                setLocation2(event.target.value);
-                                                                break;
-                                                            case 2:
-                                                                setLocation3(event.target.value);
-                                                                break;
-                                                            case 3:
-                                                                setLocation4(event.target.value);
-                                                                break;
-                                                            case 4:
-                                                                setLocation5(event.target.value);
-                                                                break;
-                                                            default:
-                                                            // Handle other cases if needed
-                                                        }
-                                                    }}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    {locationCount < 5 && (
-                                        <Button variant="primary" className="ml-5 mb-3" onClick={increaseLocationCount}>
-                                            เพิ่มสถานที่
-                                        </Button>
-                                    )}
-                                    {locationCount > 1 && (
-                                        <Button variant="danger" className="ml-5 mb-3" onClick={decreaseLocationCount}>
-                                            ลดสถานที่
-                                        </Button>
-                                    )}
-                                </td>
-                            </tr>
-                            {/* ช่วงจัดเตรียมโครงการ */}
-                            <tr>
-                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
-                                    วันจัดเตรียมโครงการ
-                                    <p className='detail-prodoc'>
-                                        ระบุช่วงเวลาเตรียมงาน
-                                    </p>
-                                </td>
-                                <td className='back-side-td'>
-                                    <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                        <div style={{ marginRight: '20px' }}>
-                                            <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
-                                            <DatePicker
-                                                selected={start_prepare}
-                                                onChange={(date) => setStartPrepare(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันเริ่มต้น"
-                                                className="form-control"
-                                                minDate={minDate}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsStart
-                                                startDate={start_prepare}
-                                                endDate={end_prepare}
-                                            />
-                                        </div>
-                                        <div>
-                                            <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
-                                            <DatePicker
-                                                selected={end_prepare}
-                                                onChange={(date) => setEndPrepare(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันสิ้นสุด"
-                                                className="form-control"
-                                                minDate={start_prepare}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsEnd
-                                                startDate={start_prepare}
-                                                endDate={end_prepare}
-                                            />
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            {/* วันดำเนินโครงการ */}
-                            <tr>
-                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
-                                    วันดำเนินโครงการ
-                                    <p className='detail-prodoc'>
-                                        กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
-                                    </p>
-                                </td>
-                                <td className='back-side-td'>
-                                    <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                        <div style={{ marginRight: '20px' }}>
-                                            <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
-                                            <DatePicker
-                                                selected={start_event}
-                                                onChange={(date) => setStartEvent(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันเริ่มต้น"
-                                                className="form-control"
-                                                minDate={end_prepare}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsStart
-                                                startDate={start_event}
-                                                endDate={end_event}
-                                            />
-
-                                        </div>
-                                        <div>
-                                            <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
-                                            <DatePicker
-                                                selected={end_event}
-                                                onChange={(date) => setEndEvent(date)}
-                                                dateFormat="dd/MM/yyyy"
-                                                placeholderText="เลือกวันสิ้นสุด"
-                                                className="form-control"
-                                                minDate={start_event}
-                                                popperPlacement="top-start"
-                                                isClearable
-                                                selectsEnd
-                                                startDate={start_event}
-                                                endDate={end_event}
-                                            />
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            {/* วันกำหนดส่งโครงการ */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td' style={{ verticalAlign: "top" }}>
-                                    วันกำหนดส่งโครงการ
-                                    <p className='detail-prodoc'>
-                                        กำหนด 30 วัน หลังจากวันดำเนินงาน
-                                    </p>
-                                </td>
-                                <td>
-                                    <div className="d-flex align-items-center">
-                                        <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
-
-
-                                        <input
-                                            type="text"
-                                            value={showdeadline}
-                                            className="form-control"
-                                            readOnly
-                                        />
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </Table>
-                    <div>
-
-                        <Button onClick={createProject} type="submit" variant="info">อัพขึ้นสู่ระบบ</Button>
+  return (
+    <>
+      {/* วนค่าจากdatabase  */}
+      <Col md="9">
+        <Card>
+          <Table striped="columns">
+            <thead>
+              <tr>
+                <th>ข้อมูลพื้นฐานโครงการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* สถานที่จัดโครงการ */}
+              <tr>
+                <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  สถานที่จัดโครงการ
+                </td>
+                <td className="back-side-td">
+                  <Table>
+                    <thead>
+                      <tr></tr>
+                    </thead>
+                    <tbody>
+                      {Array.from({ length: locationCount }).map((_, index) => (
+                        <tr key={index} style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการ ${index + 1}`}
+                            onChange={(event) => {
+                              switch (index) {
+                                case 0:
+                                  setLocation1(event.target.value);
+                                  break;
+                                case 1:
+                                  setLocation2(event.target.value);
+                                  break;
+                                case 2:
+                                  setLocation3(event.target.value);
+                                  break;
+                                case 3:
+                                  setLocation4(event.target.value);
+                                  break;
+                                case 4:
+                                  setLocation5(event.target.value);
+                                  break;
+                                default:
+                                // Handle other cases if needed
+                              }
+                            }}
+                          />
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {locationCount < 5 && (
+                      <Button
+                        variant="success"
+                        className="ml-5 mb-3 btn-budget-increase border-success"
+                        onClick={increaseLocationCount}
+                      >
+                        <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
+                      </Button>
+                    )}
+                    {locationCount > 1 && (
+                      <Button
+                        variant="danger"
+                        className="ml-5 mb-3 btn-budget-decrease border-danger"
+                        onClick={decreaseLocationCount}
+                      >
+                        <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
+                      </Button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+              {/* ช่วงจัดเตรียมโครงการ */}
+              <tr>
+                <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  วันจัดเตรียมโครงการ
+                  <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p>
+                </td>
+                <td className="back-side-td">
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ marginRight: "20px" }}>
+                      <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
+                      <DatePicker
+                        selected={start_prepare}
+                        onChange={(date) => setStartPrepare(date)}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="เลือกวันเริ่มต้น"
+                        className="form-control"
+                        minDate={minDate}
+                        popperPlacement="top-start"
+                        isClearable
+                        selectsStart
+                        startDate={start_prepare}
+                        endDate={end_prepare}
+                      />
                     </div>
-                </Card>
-            </Col>
-        </>
-    );
+                    <div>
+                      <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
+                      <DatePicker
+                        selected={end_prepare}
+                        onChange={(date) => setEndPrepare(date)}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="เลือกวันสิ้นสุด"
+                        className="form-control"
+                        minDate={start_prepare}
+                        popperPlacement="top-start"
+                        isClearable
+                        selectsEnd
+                        startDate={start_prepare}
+                        endDate={end_prepare}
+                      />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {/* วันดำเนินโครงการ */}
+              <tr>
+                <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  วันดำเนินโครงการ
+                  <p className="detail-prodoc">
+                    กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
+                  </p>
+                </td>
+                <td className="back-side-td">
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ marginRight: "20px" }}>
+                      <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
+                      <DatePicker
+                        selected={start_event}
+                        onChange={(date) => setStartEvent(date)}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="เลือกวันเริ่มต้น"
+                        className="form-control"
+                        minDate={end_prepare}
+                        popperPlacement="top-start"
+                        isClearable
+                        selectsStart
+                        startDate={start_event}
+                        endDate={end_event}
+                      />
+                    </div>
+                    <div>
+                      <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
+                      <DatePicker
+                        selected={end_event}
+                        onChange={(date) => setEndEvent(date)}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="เลือกวันสิ้นสุด"
+                        className="form-control"
+                        minDate={start_event}
+                        popperPlacement="top-start"
+                        isClearable
+                        selectsEnd
+                        startDate={start_event}
+                        endDate={end_event}
+                      />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {/* วันกำหนดส่งโครงการ */}
+              <tr style={{ backgroundColor: "white" }}>
+                <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  วันกำหนดส่งโครงการ
+                  <p className="detail-prodoc">
+                    กำหนด 30 วัน หลังจากวันดำเนินงาน
+                  </p>
+                </td>
+                <td>
+                  <div className="d-flex align-items-center">
+                    <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
+
+                    <input
+                      type="text"
+                      value={showdeadline}
+                      className="form-control"
+                      readOnly
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+          <div>
+            <Button onClick={createProject} type="submit" variant="info">
+              อัพขึ้นสู่ระบบ
+            </Button>
+          </div>
+        </Card>
+      </Col>
+    </>
+  );
 }
-export default CSD_locationtime
+export default CSD_locationtime;

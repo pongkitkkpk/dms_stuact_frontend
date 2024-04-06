@@ -18,22 +18,25 @@ import Axios from "axios";
 
 function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [projectList, setProjectList] = useState([]);
-  const divition = "สภา";
-  const years = "ปีการศึกษา 2566";
+  // const divition = "สภา";
+
   const ad_name = "aaaaaaaaaaaa";
   //ตัวแปรรับค่าจาก database
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
-  // console.log( storedUser);
 
+  console.log(storedUser);
+  // console.log( storedUser);
 
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
   const [project_number, setProjectNumber] = useState("");
+  const [divition, setDivition] = useState("");
+  const [years, setYears] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
-  const [yearly, setYearly] = useState(66); // Assuming yearly is a number
+  const [yearly, setYearly] = useState(""); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
   const [yearly_countsketch, setYearlyCountSketch] = useState(""); // Assuming yearly_countsketch is a number
   const [responsible_agency, setResponsibleAgency] = useState("");
@@ -54,7 +57,6 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const getUsers = () => {
     Axios.get("http://localhost:3001/student/users").then((response) => {
       setUserList(response.data);
-      console.log(response.data)
     });
   };
 
@@ -65,6 +67,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   useEffect(() => {
     const user = userList.find((user) => user.id_student === id_student);
     if (user) {
+      console.log("user");
+      console.log(user);
+      // console.log()
+      const yearstr = "ปีการศึกษา 25" + user.yearly;
+      setYearly(yearstr);
+      setDivition(user.clubName);
       setCodeClub(user.codebooksome);
     }
   }, [userList, id_student]);
@@ -176,7 +184,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
               <tbody>
                 {/* ชื่อโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td">
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>ชื่อโครงการ</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -193,7 +201,10 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* หน่วยงานที่รับผิดชอบ db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>หน่วยงานที่รับผิดชอบ</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -218,14 +229,17 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={years}
+                      value={yearly}
                       disabled
                     />
                   </td>
                 </tr>
                 {/* ที่อาจารย์ปรึกษา  db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>อาจารย์ปรึกษา</div>
                     {/* <p className="detail-prodoc">
                       ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
@@ -244,10 +258,16 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
+                  
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
+
+           
+                  <button >เพิ่ม</button>
+                  
+
                     <Table striped="columns">
                       <thead
                         style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}

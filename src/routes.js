@@ -12,6 +12,7 @@ import Login from "views/Login";
 import ProjectDocument from "views/ProjectDocument";
 import AllProject from "views/AllProject";
 import NewProjectDocument from "views/NewProjectDocument";
+import test from "views/test";
 
 
 const dashboardRoutes = [
@@ -82,6 +83,13 @@ const dashboardRoutes = [
     name: "Maps",
     icon: "nc-icon nc-pin-3",
     component: Maps,
+    layout: "/admin"
+  },
+  {
+    path: "/test",
+    name: "test",
+    icon: "nc-icon nc-pin-3",
+    component: test,
     layout: "/admin"
   },
   {

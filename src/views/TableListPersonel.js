@@ -49,6 +49,7 @@ function TableListPersonel() {
       (user.campus && user.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.clubName && user.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.WorkGroup && user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.ClubGroup && user.ClubGroup.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
     );
   });
@@ -86,6 +87,7 @@ function TableListPersonel() {
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>กลุ่มงาน</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ฝ่าย</th>
                       <th style={{ width: "5%", color: "white", fontWeight: "bold" }}></th>
                     </tr>
                   </thead>
@@ -109,6 +111,7 @@ function TableListPersonel() {
                           <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
                           {/* กลุ่มงาน */}
                           <td>{val.WorkGroup}</td>
+                          <td>{val.ClubGroup}</td>
                           <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
                         </tr>
                       );
