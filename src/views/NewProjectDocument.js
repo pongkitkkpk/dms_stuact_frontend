@@ -90,33 +90,37 @@ function NewProjectDocument() {
         <div style={{width: "20%"}}>
           <div className="sticky-sidebar">
             <Card>
-              <Card.Header className="text-white" style={{backgroundColor: "#535353"}}>เมนูจัดการโครงการ</Card.Header>
-              <Card.Body style={{backgroundColor: "#d2d2d2"}}>
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <a href="#section1"><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1. แบบขออนุมัติโครงการ</div></a>
-                  </li>
-                  <li className={cSD_Detail ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.1 ข้อมูลพื้นฐานโครงการ dd1</div></a>
-                  </li>
-                  <li className={cSD_Detail2 ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_Detail2 ? CSD_Detail2Component : null} style={{ display: "inline-block", width: "100%" }}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdd2</a>
-                  </li>
-                  <li className={cSD_person ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_person ? CSD_personComponent : null} style={{ display: "inline-block", width: "100%" }}>1.2 กลุ่มเป้าหมายผู้เข้าร่วมโครงการdp3</a>
-                  </li>
-                  <li className={cSD_locationtime ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_locationtime ? CSD_LocationtimeComponent : null} style={{ display: "inline-block", width: "100%" }}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการLT4</a>
-                  </li>
-                  <li className={cSD_timestep ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_timestep ? CSD_timestepComponent : null} style={{ display: "inline-block", width: "100%" }}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdt5</a>
-                  </li>
-                  <li className={cSD_budget ? "list-group-item active" : "list-group-item"}>
-                    <a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.5 งบประมาณของโครงการ</div></a>
-                  </li>
-                  <li className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}>1.5 ข้อมูลเพิ่มเติม</a></li>
-                  <li className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}>1.6 เอกสารเพิ่มเติม</a></li>
-                </ul>
+              <Card.Header className="text-white" style={{backgroundColor:"#535353", paddingBottom: "10px"}}>เมนูจัดการโครงการ</Card.Header>
+              <Card.Body style={{backgroundColor: "#d2d2d2", paddingBottom: "15px"}}>
+                <table className="list-group">
+                  <tr className="list-group-item" style={{backgroundColor: "#535353"}}>
+                    <th><a href="#section1"><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1. แบบขออนุมัติโครงการ</div></a></th>
+                  </tr>
+                  <tr className={cSD_Detail ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_Detail ? CSD_DetailComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.1 ข้อมูลพื้นฐานโครงการ dd1</div></a></td>
+                  </tr>
+                  <tr className={cSD_Detail2 ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_Detail2 ? CSD_Detail2Component : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdd2</div></a></td>
+                  </tr>
+                  <tr className={cSD_person ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_person ? CSD_personComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.2 กลุ่มเป้าหมายผู้เข้าร่วมโครงการdp3</div></a></td>
+                  </tr>
+                  <tr className={cSD_locationtime ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_locationtime ? CSD_LocationtimeComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการLT4</div></a></td>
+                  </tr>
+                  <tr className={cSD_timestep ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_timestep ? CSD_timestepComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdt5</div></a></td>
+                  </tr>
+                  <tr className={cSD_budget ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.5 งบประมาณโครงการ</div></a></td>
+                  </tr>
+                  <tr>
+                    <td className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.5 ข้อมูลเพิ่มเติม</div></a></td>
+                  </tr>
+                  <tr>
+                    <td className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.6 เอกสารเพิ่มเติม</div></a></td>
+                  </tr>
+                </table>
               </Card.Body>
 
             </Card>

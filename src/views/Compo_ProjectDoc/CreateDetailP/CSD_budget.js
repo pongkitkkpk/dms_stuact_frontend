@@ -450,13 +450,12 @@ function CSD_budget() {
             <div
               style={{
                 marginRight: "auto",
+                marginBottom: "10px",
                 fontSize: "16px",
-                color: "white",
-                
+                color: "white",                
               }}
             >
-               งบประมาณของโครงการ
-               {/* <p >งบประมาณของโครงการ</p> */}
+               งบประมาณโครงการ
             </div>
           </CardHeader>
 
@@ -1407,11 +1406,11 @@ function CSD_budget() {
           >
             <Button
               type="submit"
-              variant="info"
+              variant="warning"
               className="btn-dataupdate"
               style={{ fontSize: "14px" }}
             >
-              อัพขึ้นสู่ระบบ
+              บันทึกข้อมูล
             </Button>
           </CardFooter>
         </Card>
