@@ -224,7 +224,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                 color: "white",
               }}
             >
-              ข้อมูลพื้นฐานโครงการ
+              ลักษณะโครงการ
             </div>
           </CardHeader>
 
@@ -325,7 +325,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
 
                 {/* วัตถุประสงค์ */}
                 <tr>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>วัตถุประสงค์ของโครงการ</div>
                   </td>
                   <td className="back-side-td">
@@ -482,19 +485,33 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                 </tr>
                 {/* ลักษณะโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>ลักษณะโครงการ</div>
-                </td>
+                  </td>
                   <td className="back-side-td">
-                    <div style={{ display: "flex", alignItems: "center" ,marginBottom:"1%",marginTop:"1%"}}>
-                        
-                      <div style={{ flex: "1", marginRight: "15%" ,paddingLeft:"10%"}}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: "1%",
+                        marginTop: "1%",
+                      }}
+                    >
+                      <div
+                        style={{
+                          flex: "1",
+                          marginRight: "15%",
+                          paddingLeft: "10%",
+                        }}
+                      >
                         <Form.Check
                           type="radio"
                           id="newProjectRadio"
                           label="โครงการใหม่"
                           checked={is_newproject}
-                          
                           onChange={() => {
                             setIsNewProject(true);
                             setIsContinueProject(false);
@@ -521,10 +538,30 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                     {is_continueproject && (
                       <>
                         <Table striped="columns">
-                          <thead>
-                            <tr>
-                              <th>ปัญหาและอุปสรรคในปีที่ผ่านมา</th>
-                              <th>
+                          <thead
+                            style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}
+                          >
+                            <tr
+                              style={{
+                                backgroundColor: "rgba(255, 139, 19, 1)",
+                              }}
+                            >
+                              <th
+                                style={{
+                                  color: "white",
+                                  fontWeight: "bold",
+                                  fontSize: "14px",
+                                }}
+                              >
+                                ปัญหาและอุปสรรคในปีที่ผ่านมา
+                              </th>
+                              <th
+                                style={{
+                                  color: "white",
+                                  fontWeight: "bold",
+                                  fontSize: "14px",
+                                }}
+                              >
                                 แนวทางการปรับปรุงแก้ไขปัญหา และอุปสรรคในครั้งนี้
                               </th>
                             </tr>
@@ -535,9 +572,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* ปัญหาข้อ 1  */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="ปัญหาข้อ 1"
+                                  placeholder="ปัญหาและอุปสรรคที่ 1"
                                   onChange={(event) => {
                                     setProblem1(event.target.value);
                                   }}
@@ -546,9 +584,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* แนวทางข้อ 1 */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="แนวทางข้อ 1 "
+                                  placeholder="แนวทางการปรับปรุงแก้ไขปัญหาที่ 1 "
                                   onChange={(event) => {
                                     setResult1(event.target.value);
                                   }}
@@ -560,9 +599,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* ปัญหาข้อ 2  */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="ปัญหาข้อ 2"
+                                  placeholder="ปัญหาและอุปสรรคที่ 2"
                                   onChange={(event) => {
                                     setProblem2(event.target.value);
                                   }}
@@ -571,9 +611,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* แนวทางข้อ 2 */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="แนวทางข้อ 2 "
+                                  placeholder="แนวทางการปรับปรุงแก้ไขปัญหาที่ 2 "
                                   onChange={(event) => {
                                     setResult2(event.target.value);
                                   }}
@@ -585,9 +626,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* ปัญหาข้อ 3  */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="ปัญหาข้อ 3"
+                                  placeholder="ปัญหาและอุปสรรคที่ 3"
                                   onChange={(event) => {
                                     setProblem3(event.target.value);
                                   }}
@@ -596,9 +638,10 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               {/* แนวทางข้อ 3 */}
                               <td style={{ verticalAlign: "middle" }}>
                                 <Form.Control
+                                  className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder="แนวทางข้อ 3 "
+                                  placeholder="แนวทางการปรับปรุงแก้ไขปัญหาที่ 3 "
                                   onChange={(event) => {
                                     setResult3(event.target.value);
                                   }}
