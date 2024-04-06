@@ -18,12 +18,14 @@ import setCode from "./setCode.json"
 
 function TableListPersonel() {
   const [userList, setUserList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const getUsers = () => {
-    Axios.get('http://localhost:3001/admin/users').then((response) => {
+    Axios.get('http://localhost:3001/admin/stuactusers').then((response) => {
       setUserList(response.data);
     })
   }
+  
   const deleteUser = (id) => {
     Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id}`).then((response) => {
       setUserList(
@@ -33,9 +35,22 @@ function TableListPersonel() {
       );
     });
   };
+
   useEffect(() => {
     getUsers();
   }, []);
+
+  // Filter userList based on searchQuery
+  const filteredUserList = userList.filter((user) => {
+    return (
+      user.id_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.name_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.campus.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.clubName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase()) 
+    );
+  });
+
   return (
     <>
       <TableAddPersonel />
@@ -50,6 +65,14 @@ function TableListPersonel() {
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
+                <Form.Group controlId="search">
+                  <Form.Control
+                    type="text"
+                    placeholder="Search by clubName or WorkGroup"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </Form.Group>
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
@@ -57,47 +80,36 @@ function TableListPersonel() {
                       <th style={{ width: "13%", color: "white", fontWeight: "bold" }}>ชื่อ-นามสกุล</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>email</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>วิทยาเขต</th>
-                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
+                      <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>กลุ่มงาน</th>
-
-
-
                       <th style={{ width: "5%", color: "white", fontWeight: "bold" }}></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList
-                      .filter(val => val.position === "Stuact")
-                      .map((val, key) => {
-                        return (
-                          <tr key={key}>
-                            {/* ICIT */}
-                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
-                            {/* ชื่อ */}
-                            <td>{val.name_student}</td>
-                            {/* email */}
-                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
-
-                            {/* วิทยาเขต */}
-                            <td>{val.campus}</td>
-                            {/* ตำแหน่ง */}
-                            <td>
-                              {val.position === "Stuact" ? 'บุคลากร' : null}
-                            </td>
-                            {/* หน่วยงาน */}
-                            <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
-
-                            {/* กลุ่มงาน */}
-                            <td>{val.WorkGroup}</td>
-
-
-
-
-                            <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
-                          </tr>
-                        );
-                      })}
+                    {filteredUserList.map((val, key) => {
+                      return (
+                        <tr key={key}>
+                          {/* ICIT */}
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
+                          {/* ชื่อ */}
+                          <td>{val.name_student}</td>
+                          {/* email */}
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
+                          {/* วิทยาเขต */}
+                          <td>{val.campus}</td>
+                          {/* ตำแหน่ง */}
+                          <td>
+                            {val.position === "Stuact" ? 'บุคลากร' : null}
+                          </td>
+                          {/* หน่วยงาน */}
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+                          {/* กลุ่มงาน */}
+                          <td>{val.WorkGroup}</td>
+                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </Table>
               </Card.Body>
