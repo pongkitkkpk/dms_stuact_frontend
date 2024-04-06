@@ -42,14 +42,17 @@ function TableListPersonel() {
 
   // Filter userList based on searchQuery
   const filteredUserList = userList.filter((user) => {
+    const yearlyString = user.yearly ? user.yearly.toString() : ""; // Convert yearly to string, handle null case
     return (
-      user.id_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.name_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.campus.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.clubName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase()) 
+      (user.id_student && user.id_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.name_student && user.name_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.campus && user.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.clubName && user.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.WorkGroup && user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
     );
   });
+  
 
   return (
     <>

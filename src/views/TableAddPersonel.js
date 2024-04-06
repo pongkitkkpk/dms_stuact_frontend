@@ -20,7 +20,7 @@ import Axios from 'axios';
 function TableAddPersonel() {
     const [userList, setUserList] = useState([]);
 
-    const [is_personel, setIs_personel] = useState(true);//แก้ตรงนี้
+    const [is_personel, setIs_personel] = useState(false);//แก้ตรงนี้
     const [is_centeragency, setIs_centeragency] = useState(false);
     const [positionagency, setPositionagency] = useState(false);
 
@@ -143,13 +143,15 @@ function TableAddPersonel() {
 
 
     useEffect(() => {
-        if (account_type === "personel") {
-            setIs_personel(true);
-        } else {
-            setIs_personel(false);
-            alert("ICIT Account นี้ไม่ใช้บุคลากร")
+        if (getuserapi !== null && getuserapi.message) {
+            if (getuserapi.message.account_type === "personel") {
+                setIs_personel(true);
+            } else {
+                setIs_personel(false);
+                alert("ICIT Account นี้ไม่ใช่บุคลากร");
+            }
         }
-    }, [account_type]);
+    }, [getuserapi]);
     const addUser = () => {
         const campusAbbreviation = campus.substring(0, 1);
         const numericCodedivision = codedivision.replace(/\D/g, '');
@@ -248,6 +250,19 @@ function TableAddPersonel() {
                                             <p>STU_STATUS_DESC: {STU_STATUS_DESC}</p>
                                             <p>LEVEL_DESC: {LEVEL_DESC}</p>
                                             <p>FAC_NAME_THAI: {FAC_NAME_THAI}</p>
+                                        </div>
+
+                                        <div>ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต xxxxxxxxxxxxxxxx</div>
+                                        <div className="mb-3 d-flex align-items-center">
+                                            <Form.Label htmlFor="yearly" className="form-label me-3">ปีการศึกษาที่ดูแล : </Form.Label>
+                                            <Form.Control
+                                                type="number"
+                                                id="yearly"
+                                                value={yearly}
+                                                onChange={(e) => setYearly(e.target.value)}
+                                                placeholder="Enter Yearly Value"
+                                                style={{ width: '55%', marginLeft: "1%" }}
+                                            />
                                         </div>
 
                                         <div>

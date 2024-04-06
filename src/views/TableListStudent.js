@@ -40,14 +40,17 @@ function TableListStudent() {
   }, []);
 
   const filteredUserList = userList.filter((user) => {
+    const yearlyString = user.yearly ? user.yearly.toString() : ""; // Convert yearly to string, handle null case
     return (
-      user.id_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.name_student.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.campus.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.clubName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase()) 
+      (user.id_student && user.id_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.name_student && user.name_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.campus && user.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.clubName && user.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.WorkGroup && user.WorkGroup.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
     );
   });
+  
 
   return (
     <>
@@ -81,6 +84,7 @@ function TableListStudent() {
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>คณะ/มหาวิทยาลัย</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน/คณะสโมสร</th>
+                      <th style={{ width: "5%", color: "white", fontWeight: "bold" }}>ปีการศึกษาที่ดูแล</th>
                       <th style={{ width: "5%", color: "white", fontWeight: "bold" }}></th>
                     </tr>
                   </thead>
@@ -109,6 +113,9 @@ function TableListStudent() {
                           </td>
                           {/* หน่วยงาน/คณะ */}
                           <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+                          {/* ปีการศึกษาที่ดูแล */}
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.yearly}</td>
+                          
                           <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
                         </tr>
                       );
