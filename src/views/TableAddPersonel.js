@@ -239,15 +239,18 @@ function TableAddPersonel() {
               >
                 ค้นหารหัส icit
               </Button>
+              {/* is_personel */}
               {true && (
                 <Modal
-                show={showModal}
-                onHide={() => setShowModal(false)}
-                style={{ top: "-20%", maxHeight: "100vh" }}
-                dialogClassName="custom-modal"
+                  show={showModal}
+                  onHide={() => setShowModal(false)}
+                  style={{ top: "-20%", maxHeight: "100vh" }}
+                  dialogClassName="custom-modal"
                 >
                   <Modal.Header>
-                    <Modal.Title>ข้อมูลลายละเอียดของ icit account</Modal.Title>
+                    <Modal.Title>
+                      ข้อมูลลายละเอียดของ icit account รอแก้ลายละเอียดงับบบ
+                    </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <div>
@@ -375,22 +378,11 @@ function TableAddPersonel() {
                       xxxxxxxxxxxxxxxx
                     </div>
 
-                    <table>
+                    <Table>
                       <tbody>
                         <tr>
                           <td>
-                            <p>เลือกตำแหน่งและหน่วยงานที่ดูแล</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <label
-                              htmlFor="position"
-                              className="form-label"
-                              style={{ marginRight: "1%" }}
-                            >
-                              ตำแหน่ง :
-                            </label>
+                            <div>ตำแหน่ง</div>
                           </td>
                           <td>
                             <select
@@ -410,13 +402,7 @@ function TableAddPersonel() {
                         </tr>
                         <tr>
                           <td>
-                            <label
-                              htmlFor="position"
-                              className="form-label"
-                              style={{ marginRight: "1%" }}
-                            >
-                              ฝ่าย :
-                            </label>
+                            <div>ฝ่าย</div>
                           </td>
                           <td>
                             <select
@@ -454,13 +440,7 @@ function TableAddPersonel() {
                         {codedivision === "D01" && (
                           <tr>
                             <td>
-                              <label
-                                htmlFor="position"
-                                className="form-label"
-                                style={{ marginRight: "1%" }}
-                              >
-                                หน่วยงาน :
-                              </label>
+                              <div>หน่วยงาน </div>
                             </td>
                             <td>
                               <select
@@ -507,13 +487,7 @@ function TableAddPersonel() {
                         {codedivision === "D02" && (
                           <tr>
                             <td>
-                              <label
-                                htmlFor="position"
-                                className="form-label"
-                                style={{ marginRight: "1%" }}
-                              >
-                                หน่วยงาน :
-                              </label>
+                              <div>หน่วยงาน</div>
                             </td>
                             <td>
                               <select
@@ -528,7 +502,7 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "80%" }}
+                                style={{ width: "70%" }}
                               >
                                 <option>กรุณาเลือก</option>
                                 {setCode.Divison.D02.Agency.map(
@@ -560,13 +534,7 @@ function TableAddPersonel() {
                         {codedivision === "D03" && (
                           <tr>
                             <td>
-                              <label
-                                htmlFor="position"
-                                className="form-label"
-                                style={{ marginRight: "1%" }}
-                              >
-                                หน่วยงาน :
-                              </label>
+                              <div>หน่วยงาน</div>
                             </td>
                             <td>
                               <select
@@ -581,7 +549,7 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "80%" }}
+                                style={{ width: "70%" }}
                               >
                                 <option>กรุณาเลือก</option>
                                 {setCode.Divison.D03.Agency.map(
@@ -611,13 +579,7 @@ function TableAddPersonel() {
                         {codedivision === "D05" && (
                           <tr>
                             <td>
-                              <label
-                                htmlFor="position"
-                                className="form-label"
-                                style={{ marginRight: "1%" }}
-                              >
-                                หน่วยงาน :
-                              </label>
+                              <div>หน่วยงาน</div>
                             </td>
                             <td>
                               <select
@@ -632,7 +594,7 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "80%" }}
+                                style={{ width: "70%" }}
                               >
                                 <option>กรุณาเลือก</option>
                                 {Object.keys(setCode.Divison.D05.Agency).map(
@@ -654,12 +616,7 @@ function TableAddPersonel() {
                               agencyGroup[codeagency]?.WorkGroup && (
                                 <tr key={index}>
                                   <td>
-                                    <label
-                                      htmlFor="position"
-                                      className="form-label"
-                                    >
-                                      กลุ่มงาน :
-                                    </label>
+                                    <div>กลุ่มงาน </div>
                                   </td>
                                   <td>
                                     <select
@@ -674,7 +631,7 @@ function TableAddPersonel() {
                                         console.log("workgrop" + codeworkgroup);
                                       }}
                                       required
-                                      style={{ width: "80%" }} // Set the width to fit the container
+                                      style={{ width: "70%" }} // Set the width to fit the container
                                     >
                                       <option value="">กรุณาเลือก</option>
                                       {Object.keys(
@@ -695,9 +652,7 @@ function TableAddPersonel() {
                         {codedivision === "D01" && codeworkgroup === "G01" && (
                           <tr>
                             <td>
-                              <label htmlFor="position" className="form-label">
-                                ฝ่ายงาน :
-                              </label>
+                              <div>ฝ่ายงาน</div>
                             </td>
                             <td>
                               <select
@@ -708,7 +663,7 @@ function TableAddPersonel() {
                                   setClubGroup(selectedText);
                                 }}
                                 required
-                                style={{ width: "80%" }} // Set the width to fit the container
+                                style={{ width: "70%" }} // Set the width to fit the container
                               >
                                 <option>กรุณาเลือก</option>
                                 <option value="องค์กรนักศึกษาส่วนกลาง">
@@ -731,7 +686,7 @@ function TableAddPersonel() {
                           </tr>
                         )}
                       </tbody>
-                    </table>
+                    </Table>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
