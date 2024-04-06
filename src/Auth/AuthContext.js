@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         // Check if the authentication was successful
 
         if (response.data.status === 'success') {
+          console.log(response.data)
           const studentUsersResponse = await axios.get("http://localhost:3001/student/users");
           const studentUsersData = studentUsersResponse.data;
           const matchingStudent = studentUsersData.find(student => student.id_student === response.data.message.username);
@@ -62,8 +63,10 @@ export const AuthProvider = ({ children }) => {
             // console.log(response.data.message.account_type)
             const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
             setUser(studentUser);
+            const combinedUserData = { ...response.data.message, ...response.data.message2 };
             sessionStorage.setItem('isLogged', 'true');
-            sessionStorage.setItem('user', JSON.stringify(response.data.message));
+            sessionStorage.setItem('user', JSON.stringify(combinedUserData));
+            console.log(sessionStorage)
             history.replace(`/${response.data.message.account_type}/allproject`);
           }
           else{
