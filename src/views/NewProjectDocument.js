@@ -85,6 +85,13 @@ function NewProjectDocument() {
     containerRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const switchToCSDBudget = () => {
+    setCSD_budget(true);
+    setCSD_timestep(false);
+    // Scroll to the top of the Container
+    containerRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Container fluid ref={containerRef}>
       <h1>{id_projects}</h1>
@@ -133,7 +140,7 @@ function NewProjectDocument() {
         {cSD_Detail2 && <CSD_detail2 id_projects={id_projects} switchToCSDPerson={switchToCSDPerson} />}
         {cSD_person && <CSD_person id_projects={id_projects} switchToCSDLocationTime={switchToCSDLocationTime} />}
         {cSD_locationtime && <CSD_locationtime id_projects={id_projects} switchToCSDTimestep={switchToCSDTimestep} />}
-        {cSD_timestep && <CSD_timestep id_projects={id_projects} />}
+        {cSD_timestep && <CSD_timestep id_projects={id_projects} switchToCSDBudget={switchToCSDBudget}/>}
         {cSD_budget && <CSD_budget id_projects={id_projects} />}
       </Row>
     </Container>

@@ -251,7 +251,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                               <Form.Control
                                 className="table-margin"
                                 size="sm"
-                                type="text"
+                                as="textarea" rows={3}
                                 placeholder={`ย่อหน้าที่ ${index + 1}`}
                                 onChange={(event) => {
                                   switch (index) {

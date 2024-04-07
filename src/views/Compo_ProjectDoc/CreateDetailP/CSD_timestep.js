@@ -434,7 +434,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                 console.error('There was an error!', error);
                 // Handle error, if needed
             });
-        // switchToCSDBudget();
+        switchToCSDBudget();
 
 
     }

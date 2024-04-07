@@ -13,7 +13,6 @@ function Sidebar({ color, image, routes }) {
     const handleResize = () => {
       // Get the screen width
       const screenWidth = window.innerWidth;
-      console.log(screenWidth)
 
       // Check if the screen width is less than or equal to 768px (iPad portrait mode width)
       if (screenWidth <= 374) {

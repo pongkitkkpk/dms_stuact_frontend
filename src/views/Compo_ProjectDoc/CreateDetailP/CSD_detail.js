@@ -19,13 +19,11 @@ import Axios from "axios";
 function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [projectList, setProjectList] = useState([]);
 
-  const ad_name = "aaaaaaaaaaaa";
   //ตัวแปรรับค่าจาก database
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
 
-  console.log(storedUser);
   // console.log( storedUser);
 
   // ตัวแปรส่งค่าไปยัง database
@@ -72,13 +70,33 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   useEffect(() => {
     const user = userList.find((user) => user.id_student === id_student);
     if (user) {
-      console.log("user");
-      console.log(user);
       setYearly(user.yearly);
       setResponsibleAgency(user.clubName);
       setCodeClub(user.codebooksome);
     }
   }, [userList, id_student]);
+
+  // หาอาจารย์ที่ปรึกษา
+  useEffect(() => {
+   
+    const user = userList.find((user) =>user.clubName === storedUser.clubName  &&
+      user.yearly == storedUser.yearly &&
+      user.position === "Ad"
+    );
+    
+    if (user) {
+      console.log("ASDFASDFASDF")
+      console.log(user)
+      setAdvisorName(user.name_student);
+
+    } else {
+      // If no matching user is found, you might want to reset the state variables
+      // setYearly("");
+      // setResponsibleAgency("");
+      // setCodeClub("");
+    }
+  }, [userList, studentuser, storedUser]);
+
   // *********************************************************
 
   const addBasicProject = () => {
@@ -111,7 +129,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       project_name: project_name,
       project_number: project_number,
       codeclub: codeclub,
-      project_phase:project_phase,
+      project_phase: project_phase,
       yearly: yearly,
       yearly_count: yearly_count,
       yearly_countsketch: yearlyCountsketch,
@@ -138,7 +156,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           project_name: project_name,
           project_number: project_number,
           codeclub: codeclub,
-          project_phase:project_phase,
+          project_phase: project_phase,
           yearly: yearly,
           yearly_count: yearly_count,
           yearly_countsketch: yearly_countsketch,
@@ -238,7 +256,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={"ปีการศึกษา 25"+yearly}
+                      value={"ปีการศึกษา 25" + yearly}
                       disabled
                     />
                   </td>
@@ -260,7 +278,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={ad_name}
+                      value={advisor_name}
                       disabled
                     />
                   </td>
