@@ -84,11 +84,16 @@ function Header() {
                 >
                   {screenWidth < 500 ? (
                     <span className="mobileno-icon">{storedUser.displayname}</span>
-                  ) : screenWidth > 500 && screenWidth < 900 ? (
+                  ) : screenWidth > 500 && screenWidth < 800 ? (
                     <span className="ipadno-icon">
                       {storedUser.displayname}
                     </span>
-                  ) : (
+                  ): screenWidth > 801 && screenWidth < 935 ? (
+                    <span className="mobilelandno-icon">
+                      {storedUser.displayname}
+                    </span>
+                  ) 
+                  : (
                     <span>{storedUser.displayname}</span>
                   )}
                 </Nav.Link>

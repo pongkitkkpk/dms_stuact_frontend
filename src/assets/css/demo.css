@@ -992,3 +992,9 @@
   width: auto; /* Reset width for mobile devices */
   margin-top: -40%; /* Reset margin top for mobile devices */
 }
+.mobilelandno-icon{
+  position: relative;
+  left: 430%; /* Adjust as needed for mobile devices */
+  width: auto; /* Reset width for mobile devices */
+  margin-top: -20%; /* Reset margin top for mobile devices */
+}
