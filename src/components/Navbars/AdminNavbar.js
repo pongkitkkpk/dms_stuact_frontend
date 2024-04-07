@@ -1,4 +1,3 @@
-
 import React, { Component, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -13,17 +12,31 @@ function Header() {
   const { isAuthenticated, handleLogout } = useAuth();
   const [screenWidth, setScreenWidth] = useState();
 
-  const storedUserData = sessionStorage.getItem('user');
+  const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.account_type; // Accessing the account_type property
 
   useEffect(() => {
-    const screenWidth = window.innerWidth;
-    setScreenWidth(screenWidth)
-  }, [window.innerWidth])
+    const handleResize = () => {
+        const newScreenWidth = window.innerWidth;
+        setScreenWidth(newScreenWidth);
+    };
+
+    // Set initial screen width
+    const initialScreenWidth = window.innerWidth;
+    setScreenWidth(initialScreenWidth);
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up by removing event listener
+    return () => {
+        window.removeEventListener('resize', handleResize);
+    };
+}, []);
   const logout = () => {
     handleLogout(); // Call handleLogout function
-    history.push('/guest/login'); // Redirect to login page after logout
+    history.push("/guest/login"); // Redirect to login page after logout
   };
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -38,11 +51,11 @@ function Header() {
   };
 
   const getBrandText = () => {
-    const currentRoute = routes.find(route => location.pathname.includes(route.path));
+    const currentRoute = routes.find((route) =>
+      location.pathname.includes(route.path)
+    );
     return currentRoute ? currentRoute.name : "Home";
   };
-
-
 
   return (
     <>
@@ -57,11 +70,10 @@ function Header() {
               <div>ระบบขออนุมัติและจัดการกิจกรรม</div>
             </Navbar.Brand>
           </div>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              {/* Your Nav.Link components */}
-            </Nav>
+            <Nav className="mr-auto">{/* Your Nav.Link components */}</Nav>
             <Nav className="ml-auto" style={{ marginRight: "3%" }}>
               <Nav.Item style={{ marginTop: "1%" }}>
                 {/* Your Account Nav.Link */}
@@ -70,23 +82,25 @@ function Header() {
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
                 >
-                  {screenWidth < 1000 ? (
-                    // ในมือถือ
-                    // style={{ position: "relative", left: "0%", width: "300px",marginTop:"-5%" }}
-                    <span className="no-icon" >
+                  {screenWidth < 500 ? (
+                    <span className="mobileno-icon">{storedUser.displayname}</span>
+                  ) : screenWidth > 500 && screenWidth < 900 ? (
+                    <span className="ipadno-icon">
                       {storedUser.displayname}
                     </span>
                   ) : (
-                    <span className="no-icon">{storedUser.displayname}</span>
+                    <span>{storedUser.displayname}</span>
                   )}
-
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 {/* Your Dropdown or Login Button */}
                 {isAuthenticated ? (
-                  <Dropdown as={Nav.Item} style={{ marginTop: "1%", position: "relative", }} drop="down">
-
+                  <Dropdown
+                    as={Nav.Item}
+                    style={{ marginTop: "1%", position: "relative" }}
+                    drop="down"
+                  >
                     {screenWidth < 1000 ? (
                       // ในมือถือ
                       <Dropdown.Toggle
@@ -98,9 +112,7 @@ function Header() {
                         variant="default"
                         className="m-0 no-iconx"
                       >
-                        <span className="" >
-                          menu
-                        </span>
+                        <span className="">menu</span>
                       </Dropdown.Toggle>
                     ) : (
                       <Dropdown.Toggle
@@ -117,21 +129,30 @@ function Header() {
                     )}
 
                     {screenWidth < 1000 ? (
-                      <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink"
-                      >
-
+                      <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink">
                         {/* icon sex */}
                         <Dropdown.Item
                           href="#pablo"
                           disabled // Disable this item
                           className="text-center" // Add this class to center the text
                         >
-                          {storedUser.SEX === 'M' ? (
-                            <span role="img" aria-label="Man" style={{ marginRight: "0.5rem" }}>👨</span>
-                          ) : storedUser.SEX === 'W' ? (
-                            <span role="img" aria-label="Woman" style={{ marginRight: "0.5rem" }}>👩</span>
+                          {storedUser.SEX === "M" ? (
+                            <span
+                              role="img"
+                              aria-label="Man"
+                              style={{ marginRight: "0.5rem" }}
+                            >
+                              👨
+                            </span>
+                          ) : storedUser.SEX === "W" ? (
+                            <span
+                              role="img"
+                              aria-label="Woman"
+                              style={{ marginRight: "0.5rem" }}
+                            >
+                              👩
+                            </span>
                           ) : null}
-
                         </Dropdown.Item>
                         {/* account_type */}
                         <Dropdown.Item
@@ -145,7 +166,7 @@ function Header() {
                         {/* username */}
                         <Dropdown.Item
                           href="#pablo"
-                          style={{ marginTop: "-5%" }}
+                          style={{ marginTop: "-2%" }}
                           disabled // Disable this item
                           className="text-center" // Add this class to center the text
                         >
@@ -154,7 +175,7 @@ function Header() {
                         {/* username_eng */}
                         <Dropdown.Item
                           href="#pablo"
-                          style={{ marginTop: "-5%" }}
+                          style={{ marginTop: "-2%" }}
                           disabled // Disable this item
                           className="text-center" // Add this class to center the text
                         >
@@ -174,7 +195,7 @@ function Header() {
                         {/* หน่วยงาน */}
                         <Dropdown.Item
                           href="#pablo"
-                          style={{ marginTop: "0%" }}
+                          style={{ marginTop: "-2%" }}
                           disabled // Disable this item
                           className="text-center" // Add this class to center the text
                         >
@@ -192,27 +213,38 @@ function Header() {
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     ) : (
-                      <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink"
+                      <Dropdown.Menu
+                        aria-labelledby="navbarDropdownMenuLink"
                         style={{
                           marginTop: "-8px",
                           position: "absolute",
                           left: "-30%",
                           transform: "translateX(-50%)",
-
-                        }} >
-
+                        }}
+                      >
                         {/* icon sex */}
                         <Dropdown.Item
                           href="#pablo"
                           disabled // Disable this item
                           className="text-center" // Add this class to center the text
                         >
-                          {storedUser.SEX === 'M' ? (
-                            <span role="img" aria-label="Man" style={{ marginRight: "0.5rem" }}>👨</span>
-                          ) : storedUser.SEX === 'W' ? (
-                            <span role="img" aria-label="Woman" style={{ marginRight: "0.5rem" }}>👩</span>
+                          {storedUser.SEX === "M" ? (
+                            <span
+                              role="img"
+                              aria-label="Man"
+                              style={{ marginRight: "0.5rem" }}
+                            >
+                              👨
+                            </span>
+                          ) : storedUser.SEX === "W" ? (
+                            <span
+                              role="img"
+                              aria-label="Woman"
+                              style={{ marginRight: "0.5rem" }}
+                            >
+                              👩
+                            </span>
                           ) : null}
-
                         </Dropdown.Item>
                         {/* account_type */}
                         <Dropdown.Item
@@ -290,12 +322,16 @@ function Header() {
           onClick={(e) => e.preventDefault()}
           className="p-4"
         >
-          Home <i className="nc-icon nc-stre-right" style={{ transform: "scale(0.)" }}></i> {getBrandText()}
+          Home{" "}
+          <i
+            className="nc-icon nc-stre-right"
+            style={{ transform: "scale(0.)" }}
+          ></i>{" "}
+          {getBrandText()}
         </Navbar.Brand>
       </div>
     </>
   );
-
 }
 
 export default Header;

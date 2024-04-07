@@ -972,17 +972,23 @@
   margin-right: auto;
 }
 
-@media (max-width: 768px) {
-  .no-icon {
-    position: relative;
-    left: 125%; /* Adjust as needed for mobile devices */
-    width: auto; /* Reset width for mobile devices */
-    margin-top: -20%; /* Reset margin top for mobile devices */
-  }
-  .no-iconx {
-    position: relative;
-    left: 80%; /* Adjust as needed for mobile devices */
-    width: auto; /* Reset width for mobile devices */
-    margin-top: -40%; /* Reset margin top for mobile devices */
-  }
+
+.mobileno-icon {
+  position: relative;
+  left: 135%; /* Adjust as needed for mobile devices */
+  width: auto; /* Reset width for mobile devices */
+  margin-top: -10%; /* Reset margin top for mobile devices */
+}
+
+.ipadno-icon {
+  position: relative;
+  left: 350%; /* Adjust as needed for mobile devices */
+  width: auto; /* Reset width for mobile devices */
+  margin-top: -20%; /* Reset margin top for mobile devices */
+}
+.no-iconx {
+  position: relative;
+  left: 80%; /* Adjust as needed for mobile devices */
+  width: auto; /* Reset width for mobile devices */
+  margin-top: -40%; /* Reset margin top for mobile devices */
 }

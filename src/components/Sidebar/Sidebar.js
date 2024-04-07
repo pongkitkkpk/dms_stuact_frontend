@@ -16,8 +16,16 @@ function Sidebar({ color, image, routes }) {
       console.log(screenWidth)
 
       // Check if the screen width is less than or equal to 768px (iPad portrait mode width)
-      if (screenWidth >= 375 && screenWidth <= 410) {
-        setLeftPosition(isHovered ? "-75%" : "-132%");
+      if (screenWidth <= 374) {
+        setLeftPosition(isHovered ? "-75%" : "-135%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 375 && screenWidth <= 380) {
+        setLeftPosition(isHovered ? "-75%" : "-130.5%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 381 && screenWidth <= 410) {
+        setLeftPosition(isHovered ? "-70%" : "-127%");
         setIsTablet(true);
       }
       else if (screenWidth >= 411 && screenWidth <= 429) {
@@ -25,19 +33,31 @@ function Sidebar({ color, image, routes }) {
         setIsTablet(true);
       }
       else if (screenWidth >= 430 && screenWidth <= 539) {
-        setLeftPosition(isHovered ? "-65%" : "-110%");
+        setLeftPosition(isHovered ? "-65%" : "-115%");
         setIsTablet(true);
       }
-      else if (screenWidth >= 540 && screenWidth <= 768) {
-        setLeftPosition(isHovered ? "-35%" : "-61%");
+      else if (screenWidth >= 540 && screenWidth <= 670) {
+        setLeftPosition(isHovered ? "-40%" : "-75%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 661 && screenWidth <= 768) {
+        setLeftPosition(isHovered ? "-35%" : "-61.5%");
         setIsTablet(true);
       }
       else if (screenWidth >= 770 && screenWidth <= 800) {
         setLeftPosition(isHovered ? "0%" : "-19.5%");
         setIsTablet(true);
       }
-      else if (screenWidth >= 801 && screenWidth <= 999) {
-        setLeftPosition(isHovered ? "-34%" : "-57%");
+      else if (screenWidth >= 801 && screenWidth <= 845) {
+        setLeftPosition(isHovered ? "-33%" : "-55.5%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 846 && screenWidth <= 870) {
+        setLeftPosition(isHovered ? "-30%" : "-50.5%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 871 && screenWidth <= 999) {
+        setLeftPosition(isHovered ? "-30%" : "-52.5%");
         setIsTablet(true);
       }
       else if (screenWidth >= 1000 && screenWidth <= 1024) {
