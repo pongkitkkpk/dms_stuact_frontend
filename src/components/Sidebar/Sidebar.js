@@ -16,44 +16,47 @@ function Sidebar({ color, image, routes }) {
       console.log(screenWidth)
 
       // Check if the screen width is less than or equal to 768px (iPad portrait mode width)
-      // ipadMini
-      if (screenWidth <= 768) {
-        // Adjust sidebar position for tablet and mobile view
+      if (screenWidth >= 375 && screenWidth <= 410) {
+        setLeftPosition(isHovered ? "-75%" : "-132%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 411 && screenWidth <= 429) {
+        setLeftPosition(isHovered ? "-65%" : "-120%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 430 && screenWidth <= 539) {
+        setLeftPosition(isHovered ? "-65%" : "-110%");
+        setIsTablet(true);
+      }
+      else if (screenWidth >= 540 && screenWidth <= 768) {
         setLeftPosition(isHovered ? "-35%" : "-61%");
         setIsTablet(true);
       }
-      
       else if (screenWidth >= 770 && screenWidth <= 800) {
-        // Adjust sidebar position for tablet and mobile view
         setLeftPosition(isHovered ? "0%" : "-19.5%");
         setIsTablet(true);
-      } 
+      }
       else if (screenWidth >= 801 && screenWidth <= 999) {
-        // Adjust sidebar position for tablet and mobile view
-        setLeftPosition(isHovered ? "0%" : "-57%");
+        setLeftPosition(isHovered ? "-34%" : "-57%");
         setIsTablet(true);
-      } 
+      }
       else if (screenWidth >= 1000 && screenWidth <= 1024) {
-        // Adjust sidebar position for tablet and mobile view
-        setLeftPosition(isHovered ? "0%" : "-20%");
+        setLeftPosition(isHovered ? "0%" : "-20.5%");
         setIsTablet(true);
       }
       else if (screenWidth >= 1101 && screenWidth <= 1200) {
-        // Adjust sidebar position for tablet and mobile view
         setLeftPosition(isHovered ? "0%" : "-17%");
         setIsTablet(true);
       }
       else if (screenWidth >= 1201 && screenWidth <= 1400) {
-        // Adjust sidebar position for tablet and mobile view
         setLeftPosition(isHovered ? "0%" : "-15%");
         setIsTablet(true);
       }
       else if (screenWidth >= 1401 && screenWidth <= 1680) {
-        // Adjust sidebar position for tablet and mobile view
         setLeftPosition(isHovered ? "0%" : "-13%");
         setIsTablet(true);
       }
-      
+
       else {
         // Adjust sidebar position for desktop view
         setLeftPosition(isHovered ? "0%" : "-9.6%");
@@ -125,6 +128,7 @@ function Sidebar({ color, image, routes }) {
                 <li
                   className={prop.upgrade ? "active active-pro" : ""}
                   key={key}
+                  style={{borderRight: `4px solid ${prop.color}`,position: "relative"}}
                 >
                   <NavLink
                     to={prop.layout + prop.path}
@@ -136,12 +140,14 @@ function Sidebar({ color, image, routes }) {
                       fontWeight: "light",
                     }}
                   >
-                    <span style={{ fontWeight: "light" }}>{prop.name}</span>
+                    
+                      <span style={{ fontWeight: "light" }}>{prop.name}</span>
 
 
-                    <div style={{ marginRight: "-13%" }}>
-                      <i className={prop.icon} />
-                    </div>
+                      <div style={{ marginRight: "-13%" }}>
+                        <i className={prop.icon} />
+                      </div>
+                    
 
                   </NavLink>
                 </li>

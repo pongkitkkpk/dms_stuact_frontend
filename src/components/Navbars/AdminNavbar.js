@@ -41,10 +41,9 @@ function Header() {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" >
+      <Navbar bg="light" expand="lg">
         <Container fluid>
           <div className="d-flex justify-content-center align-items-center ml-2 ml-lg-0">
-
             <Navbar.Brand
               href="#home"
               onClick={(e) => e.preventDefault()}
@@ -53,14 +52,14 @@ function Header() {
               <div>ระบบขออนุมัติและจัดการกิจกรรม</div>
             </Navbar.Brand>
           </div>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="nav mr-auto" navbar>
-
-
-
+            <Nav className="mr-auto">
+              {/* Your Nav.Link components */}
             </Nav>
-            <Nav className="ml-auto" navbar style={{ marginRight: "10%" }}>
+            <Nav className="ml-auto" style={{ marginRight: "10%" }}>
               <Nav.Item style={{ marginTop: "1%" }}>
+                {/* Your Account Nav.Link */}
                 <Nav.Link
                   className="m-0"
                   href="#pablo"
@@ -69,10 +68,10 @@ function Header() {
                   <span className="no-icon">Account</span>
                 </Nav.Link>
               </Nav.Item>
-
               <Nav.Item>
+                {/* Your Dropdown or Login Button */}
                 {isAuthenticated ? (
-                    <Dropdown as={Nav.Item} style={{ marginTop: "1%" }}>
+                  <Dropdown as={Nav.Item} style={{ marginTop: "1%" }}>
                     <Dropdown.Toggle
                       aria-expanded={false}
                       aria-haspopup={true}
@@ -85,35 +84,35 @@ function Header() {
                       <span className="no-icon">{storedUser.displayname}</span>
                     </Dropdown.Toggle>
                     <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink" style={{ marginTop: "-8px" }}>
-                      
-                      {/* account_type */}
+
+                      {/* icon sex */}
                       <Dropdown.Item
                         href="#pablo"
                         disabled // Disable this item
                         className="text-center" // Add this class to center the text
                       >
-                        
+
                         {storedUser.SEX === 'M' ? (
                           <span role="img" aria-label="Man" style={{ marginRight: "0.5rem" }}>👨</span>
                         ) : storedUser.SEX === 'W' ? (
                           <span role="img" aria-label="Woman" style={{ marginRight: "0.5rem" }}>👩</span>
                         ) : null}
-                    
+
                       </Dropdown.Item>
                       {/* account_type */}
                       <Dropdown.Item
                         href="#pablo"
-                        style={{marginTop:"-5%"}}
+                        style={{ marginTop: "-5%" }}
                         disabled // Disable this item
                         className="text-center" // Add this class to center the text
                       >
-                      
+
                         {storedUser.account_type}
                       </Dropdown.Item>
                       {/* username */}
                       <Dropdown.Item
                         href="#pablo"
-                        style={{marginTop:"-5%"}}
+                        style={{ marginTop: "-5%" }}
                         disabled // Disable this item
                         className="text-center" // Add this class to center the text
                       >
@@ -122,22 +121,35 @@ function Header() {
                       {/* username_eng */}
                       <Dropdown.Item
                         href="#pablo"
-                        style={{marginTop:"-5%"}}
+                        style={{ marginTop: "-5%" }}
                         disabled // Disable this item
                         className="text-center" // Add this class to center the text
                       >
                         {storedUser.firstname_en} {storedUser.lastname_en}
                       </Dropdown.Item>
-                      <div className="divider" style={{marginTop:"0%"}}></div>
+                      {/* ------------------------ */}
+                      <div className="divider" style={{ marginTop: "0%" }}></div>
+                      {/* campus */}
                       <Dropdown.Item
                         href="#pablo"
-                        style={{marginTop:"0%"}}
+                        style={{ marginTop: "0%" }}
                         disabled // Disable this item
                         className="text-center" // Add this class to center the text
                       >
                         {storedUser.CAMPUS_NAME}
                       </Dropdown.Item>
+                      {/* หน่วยงาน */}
+                      <Dropdown.Item
+                        href="#pablo"
+                        style={{ marginTop: "0%" }}
+                        disabled // Disable this item
+                        className="text-center" // Add this class to center the text
+                      >
+                        {storedUser.clubName}
+                      </Dropdown.Item>
+                      {/* ------------------------ */}
                       <div className="divider"></div>
+                      {/* logout */}
                       <Dropdown.Item
                         href="#pablo"
                         onClick={logout}
@@ -147,7 +159,6 @@ function Header() {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-
                 ) : (
                   <Button variant="primary" href="/guest/login">
                     เข้าสู่ระบบ
@@ -169,6 +180,7 @@ function Header() {
       </div>
     </>
   );
+
 }
 
 export default Header;

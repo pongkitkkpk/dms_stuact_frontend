@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             // console.log(response.data.message.account_type)
             const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
             setUser(studentUser);
-            const combinedUserData = { ...response.data.message, ...response.data.message2 };
+            const combinedUserData = { ...response.data.message, ...response.data.message2,...matchingStudent };
             sessionStorage.setItem('isLogged', 'true');
             sessionStorage.setItem('user', JSON.stringify(combinedUserData));
             console.log(sessionStorage)

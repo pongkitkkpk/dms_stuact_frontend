@@ -124,21 +124,24 @@ const StudentRoutes =[
     name: "สร้างโครงการใหม่",
     icon: "nc-icon nc-notes",
     component: NewProjectDocument,
-    layout: "/students"
+    layout: "/students",
+    color:"#ffc404"
   },
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
     icon: "nc-icon nc-notes",
     component: AllProject,
-    layout: "/students"
+    layout: "/students",
+    color:"#ffff"
   },
   {
     path: "/dashboard",
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
-    layout: "/students"
+    layout: "/students",
+    color:"#2365"
   },
 ];
 export { StudentRoutes,GuestRoutes};
