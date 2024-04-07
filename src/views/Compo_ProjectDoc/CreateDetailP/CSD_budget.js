@@ -2,13 +2,49 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Form, Col, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
-
-function CSD_budget() {
+import Axios from 'axios';
+function CSD_budget(id_projects) {
   // const storedUserData = sessionStorage.getItem('user');
   // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   // const studentuser = storedUser.username
   // console.log("asdfasdf"+studentuser)
+  const [projectList, setProjectList] = useState([]);
+  const [codeclub, setCodeclub] = useState('');
+  const [yearly_countsketch, setYearlyCountSketch] = useState('');
+  const [pPersonData, setPPersonData] = useState([]);
 
+  const getpPersonData = () => {
+    Axios.get(`http://localhost:3001/student/project/getidproject/${id_projects}`).then((response) => {
+      console.log("sdafasdddddddddddddddddddddd")
+      console.log(response.data)
+      setPPersonData(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getpPersonData();
+  }, []);
+
+  useEffect(() => {
+    console.log("ADFASDFASDFASDasdfasdFASDFASD")
+    console.log(pPersonData)
+    console.log(id_projects)
+
+    const idinperson = pPersonData.filter(person => person.id_projects === id_projects);
+    console.log("id" + idinperson); // Issue: This will concatenate "id" with the array idinperson
+    console.log(idinperson);
+
+    // Assuming idinperson is an array and you want to get data from the first element
+    if (idinperson.length > 0) {
+      const { codeclub, yearly_countsketch } = idinperson[0];
+      setCodeclub(codeclub);
+      setYearlyCountSketch(yearly_countsketch);
+    }
+
+}, [id_projects, pPersonData]);
+  // 
+  //                          ListA
+  // 
   const [listA, setListA] = useState(Array.from({ length: 15 }, () => ""));
   const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ""));
   const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ""));
@@ -17,6 +53,46 @@ function CSD_budget() {
 
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
+
+
+  const createProject = () => {
+    Axios.post(`http://localhost:3001/student/project/p_budget/create/${id_projects}`, {
+      codeclub:codeclub,
+      yearly_countsketch:yearly_countsketch,
+      listA1: listA[0],
+      listA2: listA[1],
+      listA3: listA[2],
+      // Add data for other lists as needed
+      // listNA1: listNA[0],
+      // listNA2: listNA[1],
+      // listNA3: listNA[2],
+      // Add data for other lists as needed
+    }).then(() => {
+      // Assuming setProjectList is a state setter function for your projectList state
+      setProjectList([
+        ...projectList,
+        {
+          codeclub:codeclub,
+          yearly_countsketch:yearly_countsketch,
+          listA1: listA[0],
+          listA2: listA[1],
+          listA3: listA[2],
+          // Add data for other lists as needed
+        },
+      ]);
+    }).catch((error) => {
+      console.error('Error creating project:', error);
+    });
+  };
+
+  // useEffect(()=>{
+  //   console.log(listA)
+  //   console.log(listNA)
+  //   console.log(listTA)
+  //   console.log(listTPA)
+  //   console.log(listSA)
+  //   console.log(listSSA)
+  // },[listA,listNA,listTA,listTPA,listSA,listSSA])
 
   const increaseTypeACount = () => {
     if (TypeACount < 15) {
@@ -94,22 +170,31 @@ function CSD_budget() {
     setListSSA(sumA);
   }, [listSA]);
 
+  // 
+  //                      ListBT
+  // 
   const [listBT, setListBT] = useState(Array.from({ length: 20 }, () => ""));
   const [listNBT, setListNBT] = useState(Array.from({ length: 20 }, () => ""));
-  const [listNNBT, setListNNBT] = useState(
-    Array.from({ length: 20 }, () => "")
-  );
+  const [listNNBT, setListNNBT] = useState(Array.from({ length: 20 }, () => ""));
   const [listTBT, setListTBT] = useState(Array.from({ length: 20 }, () => ""));
-  const [listTNBT, setListTNBT] = useState(
-    Array.from({ length: 20 }, () => "")
-  );
-  const [listTPBT, setListTPBT] = useState(
-    Array.from({ length: 20 }, () => "")
-  );
+  const [listTNBT, setListTNBT] = useState(Array.from({ length: 20 }, () => ""));
+  const [listTPBT, setListTPBT] = useState(Array.from({ length: 20 }, () => ""));
   const [listSBT, setListSBT] = useState(Array.from({ length: 20 }, () => ""));
 
   const [listSSBT, setListSSBT] = useState(1);
   const [TypeBTCount, setTypeBTCount] = useState(1);
+
+
+  // useEffect(()=>{
+  //   console.log(listBT)
+  //   console.log(listNBT)
+  //   console.log(listNNBT)
+  //   console.log(listTBT)
+  //   console.log(listTNBT)
+  //   console.log(listTPBT)
+  //   console.log(listSBT)
+  //   console.log(listSSBT)
+  // },[listBT,listNBT,listNNBT,listTBT,listTNBT,listTPBT,listSBT,listSSBT])
 
   const increaseTypeBTCount = () => {
     if (TypeBTCount < 20) {
@@ -198,36 +283,31 @@ function CSD_budget() {
       .filter((value) => !isNaN(value));
     // Calculate sum using reduce method
     const sumBT = numericValues.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
+      (accumulator, currentValue) => accumulator + currentValue, 0);
     // console.log(sumBT);
     setListSSBT(sumBT);
   }, [listSBT]);
 
+  // 
+  //                        ListBNT
+  // 
   const [listBNT, setListBNT] = useState(Array.from({ length: 10 }, () => ""));
-  const [listNBNT, setListNBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
-  const [listNNBNT, setListNNBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
-  const [listTBNT, setListTBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
-  const [listTNBNT, setListTNBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
-  const [listTPBNT, setListTPBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
-  const [listSBNT, setListSBNT] = useState(
-    Array.from({ length: 10 }, () => "")
-  );
+  const [listNBNT, setListNBNT] = useState(Array.from({ length: 10 }, () => ""));
+  const [listNNBNT, setListNNBNT] = useState(Array.from({ length: 10 }, () => ""));
+  const [listTPBNT, setListTPBNT] = useState(Array.from({ length: 10 }, () => ""));
+  const [listSBNT, setListSBNT] = useState(Array.from({ length: 10 }, () => ""));
 
   const [listSSBNT, setListSSBNT] = useState(1);
   const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
+  // useEffect(()=>{
+  //   console.log(listBNT)
+  //   console.log(listNBNT)
+  //   console.log(listNNBNT)
+  //   console.log(listTPBNT)
+  //   console.log(listSBNT)
+  //   console.log(listSSBNT)
+  // },[listBNT,listNBNT,listNNBNT,listTPBNT,listSBNT,listSSBNT])
   const increaseTypeBNTCount = () => {
     if (TypeBNTCount < 10) {
       setTypeBNTCount(TypeBNTCount + 1);
@@ -257,7 +337,7 @@ function CSD_budget() {
     setListNBNT((prevListNBNT) => {
       const newListNBNT = [...prevListNBNT];
       newListNBNT[index] = value;
-      updateListSBNT(index, value, listTBNT[index], listTPBNT[index]);
+      updateListSBNT(index, value, listTPBNT[index]);
       return newListNBNT;
     });
   };
@@ -274,12 +354,12 @@ function CSD_budget() {
     setListTPBNT((prevListTPBNT) => {
       const newListTPBNT = [...prevListTPBNT];
       newListTPBNT[index] = value;
-      updateListSBNT(index, listNBNT[index], listTBNT[index], value);
+      updateListSBNT(index, listNBNT[index], value);
       return newListTPBNT;
     });
   };
 
-  const updateListSBNT = (index, numPeople, numHours, pricePerHour) => {
+  const updateListSBNT = (index, numPeople, pricePerHour) => {
     const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
     setListSBNT((prevListSBNT) => {
       const newListSBNT = [...prevListSBNT];
@@ -302,17 +382,26 @@ function CSD_budget() {
     setListSSBNT(sumBNT);
   }, [listSBNT]);
 
+  // 
+  //                    ListC
+  // 
   const [listC, setListC] = useState(Array.from({ length: 20 }, () => ""));
   const [listNC, setListNC] = useState(Array.from({ length: 20 }, () => ""));
   const [listNNC, setListNNC] = useState(Array.from({ length: 20 }, () => ""));
-  const [listTC, setListTC] = useState(Array.from({ length: 20 }, () => ""));
-  const [listTNC, setListTNC] = useState(Array.from({ length: 20 }, () => ""));
   const [listTPC, setListTPC] = useState(Array.from({ length: 20 }, () => ""));
   const [listSC, setListSC] = useState(Array.from({ length: 20 }, () => ""));
 
   const [listSSC, setListSSC] = useState(1);
   const [TypeCCount, setTypeCCount] = useState(1);
 
+  // useEffect(()=>{
+  //   console.log(listC)
+  //   console.log(listNC)
+  //   console.log(listNNC)
+  //   console.log(listTPC)
+  //   console.log(listSC)
+  //   console.log(listSSC)
+  // },[listC,listNC,listNNC,listTPC,listSC,listSSC])
   const increaseTypeCCount = () => {
     if (TypeCCount < 20) {
       setTypeCCount(TypeCCount + 1);
@@ -342,7 +431,7 @@ function CSD_budget() {
     setListNC((prevListNC) => {
       const newListNC = [...prevListNC];
       newListNC[index] = value;
-      updateListSC(index, value, listTC[index], listTPC[index]);
+      updateListSC(index, value, listTPC[index]);
       return newListNC;
     });
   };
@@ -359,12 +448,12 @@ function CSD_budget() {
     setListTPC((prevListTPC) => {
       const newListTPC = [...prevListTPC];
       newListTPC[index] = value;
-      updateListSC(index, listNC[index], listTC[index], value);
+      updateListSC(index, listNC[index], value);
       return newListTPC;
     });
   };
 
-  const updateListSC = (index, numPeople, numHours, pricePerHour) => {
+  const updateListSC = (index, numPeople, pricePerHour) => {
     const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
     setListSC((prevListSC) => {
       const newListSC = [...prevListSC];
@@ -414,22 +503,10 @@ function CSD_budget() {
       .filter((value) => !isNaN(value));
 
     // Calculate sum for each list
-    const sumSA = numericValuesSA.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
-    const sumSBT = numericValuesSBT.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
-    const sumSBNT = numericValuesSBNT.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
-    const sumSC = numericValuesSC.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
+    const sumSA = numericValuesSA.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const sumSBT = numericValuesSBT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const sumSBNT = numericValuesSBNT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const sumSC = numericValuesSC.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
     // Calculate total sum
     const totalSum = sumSA + sumSBT + sumSBNT + sumSC + parseInt(listSETC);
@@ -452,10 +529,10 @@ function CSD_budget() {
                 marginRight: "auto",
                 marginBottom: "10px",
                 fontSize: "16px",
-                color: "white",                
+                color: "white",
               }}
             >
-               งบประมาณโครงการ
+              งบประมาณโครงการ
             </div>
           </CardHeader>
 
@@ -1251,7 +1328,7 @@ function CSD_budget() {
 
                 {/* ค่าอื่นๆ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td 
+                  <td
                     className="head-side-td" style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดอื่นๆ</div>
@@ -1353,7 +1430,7 @@ function CSD_budget() {
                 {/* ยอดงบประมาณรวม */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"     style={{ verticalAlign: "top" }}
+                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
                   >
                     <div>งบประมาณสุทธิ</div>
                   </td>
@@ -1409,6 +1486,7 @@ function CSD_budget() {
               variant="warning"
               className="btn-dataupdate"
               style={{ fontSize: "14px" }}
+              onClick={createProject}
             >
               บันทึกข้อมูล
             </Button>
