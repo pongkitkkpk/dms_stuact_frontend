@@ -18,7 +18,6 @@ import Axios from "axios";
 
 function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [projectList, setProjectList] = useState([]);
-  // const divition = "สภา";
 
   const ad_name = "aaaaaaaaaaaa";
   //ตัวแปรรับค่าจาก database
@@ -32,9 +31,8 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
-  const [project_number, setProjectNumber] = useState("");
-  const [divition, setDivition] = useState("");
-  const [years, setYears] = useState("");
+  const [project_phase, setProject_phase] = useState("0");
+  const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
   const [yearly, setYearly] = useState(""); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
@@ -50,20 +48,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [person3_contact, setPerson3Contact] = useState("");
 
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [is_1side, setIs_1side] = useState(false);
+  const [is_2side, setIs_2side] = useState(false);
+  const [is_3side, setIs_3side] = useState(false);
+  const [is_4side, setIs_4side] = useState(false);
+  const [is_5side, setIs_5side] = useState(false);
 
-  useEffect(()=>{
-    console.log(selectedOptions)
-  },[selectedOptions])
-  const handleCheckboxChange = (value) => {
-    // Check if the value is already in selectedOptions
-    if (selectedOptions.includes(value)) {
-      // If it is, remove it from the array
-      setSelectedOptions(selectedOptions.filter((option) => option !== value));
-    } else {
-      // If it's not, add it to the array
-      setSelectedOptions([...selectedOptions, value]);
-    }
-  };
   //
   const minDate = new Date();
 
@@ -84,10 +74,8 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
     if (user) {
       console.log("user");
       console.log(user);
-      // console.log()
-      const yearstr = "ปีการศึกษา 25" + user.yearly;
-      setYearly(yearstr);
-      setDivition(user.clubName);
+      setYearly(user.yearly);
+      setResponsibleAgency(user.clubName);
       setCodeClub(user.codebooksome);
     }
   }, [userList, id_student]);
@@ -101,15 +89,9 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
         (project) => project.codeclub === codeclub
       );
       if (existingProject) {
-        const currentYearlyCount = parseInt(
-          existingProject.yearly_countsketch,
-          10
-        );
+        const currentYearlyCount = parseInt(existingProject.yearly_countsketch, 10);
         const updatedYearlyCount = currentYearlyCount + 1;
-        const formattedYearlyCount = String(updatedYearlyCount).padStart(
-          2,
-          "0"
-        );
+        const formattedYearlyCount = String(updatedYearlyCount).padStart(2, "0");
         // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
         // setProjectNumber(codeclub+formattedYearlyCount)
 
@@ -129,6 +111,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       project_name: project_name,
       project_number: project_number,
       codeclub: codeclub,
+      project_phase:project_phase,
       yearly: yearly,
       yearly_count: yearly_count,
       yearly_countsketch: yearlyCountsketch,
@@ -141,6 +124,11 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       person2_contact: person2_contact,
       person3_name: person3_name,
       person3_contact: person3_contact,
+      is_1side: is_1side,
+      is_2side: is_2side,
+      is_3side: is_3side,
+      is_4side: is_4side,
+      is_5side: is_5side
     }).then(() => {
       // Assuming setProjectList is a state setter function for your projectList state
       setProjectList([
@@ -150,6 +138,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           project_name: project_name,
           project_number: project_number,
           codeclub: codeclub,
+          project_phase:project_phase,
           yearly: yearly,
           yearly_count: yearly_count,
           yearly_countsketch: yearly_countsketch,
@@ -162,6 +151,11 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           person2_contact: person2_contact,
           person3_name: person3_name,
           person3_contact: person3_contact,
+          is_1side: is_1side,
+          is_2side: is_2side,
+          is_3side: is_3side,
+          is_4side: is_4side,
+          is_5side: is_5side
         },
       ]);
     });
@@ -228,7 +222,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={divition}
+                      value={responsible_agency}
                       disabled
                     />
                   </td>
@@ -244,7 +238,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={yearly}
+                      value={"ปีการศึกษา 25"+yearly}
                       disabled
                     />
                   </td>
@@ -277,8 +271,6 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
-                    <button>เพิ่ม</button>
-
                     <Table striped="columns">
                       <thead
                         style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}
@@ -401,88 +393,62 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     <div>
                       โครงการนี้อยู่ภายใต้แผนยุทธศาสตร์กสนพัฒนาของมหาวิทยาลัยที่ส่งเสริมกิจกรรมพัฒนานักศึกษา
                     </div>
-                    {/* <p className="detail-prodoc">
-                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
-                    </p> */}
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <label style={{ marginLeft: "10px" }}>
                       <input
                         type="checkbox"
                         value="1"
-                        checked={selectedOptions.includes("1")}
-                        onChange={() => handleCheckboxChange("1")}
-                        
+                        checked={is_1side}
+                        onChange={() => setIs_1side(!is_1side)}
+
                       />
-                      ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
+                      {`    `}ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
                     </label>
                     <br />
-                    <label>
+                    <label style={{ marginLeft: "10px" }}>
                       <input
                         type="checkbox"
                         value="2"
-                        checked={selectedOptions.includes("2")}
-                        onChange={() => handleCheckboxChange("2")}
+                        checked={is_2side}
+                        onChange={() => setIs_2side(!is_2side)}
                       />
-                      ด้านกีฬาหรือการส่งเสริมสุขภาพ
+                      {`    `}ด้านกีฬาหรือการส่งเสริมสุขภาพ
                     </label>
                     <br />
-                    <label>
+                    <label style={{ marginLeft: "10px" }}>
                       <input
                         type="checkbox"
                         value="3"
-                        checked={selectedOptions.includes("3")}
-                        onChange={() => handleCheckboxChange("3")}
+                        checked={is_3side}
+                        onChange={() => setIs_3side(!is_3side)}
                       />
-                      ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
+                      {`    `}ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
                     </label>
                     <br />
-                    <label>
+                    <label style={{ marginLeft: "10px" }}>
                       <input
                         type="checkbox"
                         value="4"
-                        checked={selectedOptions.includes("4")}
-                        onChange={() => handleCheckboxChange("4")}
+                        checked={is_4side}
+                        onChange={() => setIs_4side(!is_4side)}
                       />
-                      ด้านเสริมสร้างคุณธรรมและจริยธรรม
+                      {`    `}ด้านเสริมสร้างคุณธรรมและจริยธรรม
                     </label>
                     <br />
-                    <label>
+                    <label style={{ marginLeft: "10px" }}>
                       <input
                         type="checkbox"
                         value="5"
-                        checked={selectedOptions.includes("5")}
-                        onChange={() => handleCheckboxChange("5")}
+                        checked={is_5side}
+                        onChange={() => setIs_5side(!is_5side)}
                       />
-                      ด้านส่งเสริมศิลปะและวัฒนธรรม
+                      {`    `}ด้านส่งเสริมศิลปะและวัฒนธรรม
                     </label>
                     {/* Add more checkboxes as needed */}
                   </td>
                 </tr>
-                {/* ความเชื่อมโยงสอดคล้องกับแผน */}
-                <tr style={{ backgroundColor: "white" }}>
-                  <td
-                    className="head-side-td-swp"
-                    style={{ verticalAlign: "top" }}
-                  >
-                    <div>
-                      ความเชื่อมโยงสอดคล้องกับแผนกลยุทธ์การพัฒนากองกิจการนักศึกษา
-                      5 ปี (พ.ศ.2560 - พ.ศ.2565)
-                    </div>
-                    {/* <p className="detail-prodoc">
-                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
-                    </p> */}
-                  </td>
-                  <td style={{ verticalAlign: "middle" }}>
-                    <Form.Control
-                      className="font-form-control"
-                      size="sm"
-                      type="text"
-                      placeholder="Enter ID Code"
-                      disabled
-                    />
-                  </td>
-                </tr>
+
                 {/* อารจารย์ผู้ดูแลโครงการ */}
                 {/* <tr >
                                     <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
