@@ -231,50 +231,126 @@ function TableAddStudent() {
                 style={{ top: "-20%", maxHeight: "100vh" }}
                 dialogClassName="custom-modal"
               >
-                <Modal.Header >
-                  <Modal.Title>ข้อมูลลายละเอียดของ icit account (ตารางเอาแบบมีเส้นหรือไม่มีเส้น)</Modal.Title>
+                <Modal.Header>
+                  <Modal.Title>
+                    ข้อมูลลายละเอียดของ icit account
+                    (ตารางเอาแบบมีเส้นหรือไม่มีเส้น)
+                  </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <div>
-                    <Table className="table" >
+                    <Table className="table">
                       <tbody>
                         <tr>
-                          <td style={{ width: '25%',backgroundColor: '#FF8B13' ,border: 'none',color:"#fff"}}>Account Type</td>
-                          <td style={{ border: 'none' }}>{account_type}</td>
+                          <td
+                            style={{
+                              width: "25%",
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            Account Type
+                          </td>
+                          <td style={{ border: "none" }}>{account_type}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>Username</td>
-                          <td style={{ border: 'none' }}>{username}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            Username
+                          </td>
+                          <td style={{ border: "none" }}>{username}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>Display Name</td>
-                          <td style={{ border: 'none' }}>{name_student}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            Display Name
+                          </td>
+                          <td style={{ border: "none" }}>{name_student}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>First Name (English)</td>
-                          <td style={{ border: 'none' }}>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            First Name (English)
+                          </td>
+                          <td style={{ border: "none" }}>
                             {firstname_en} {lastname_en}
                           </td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>Email</td>
-                          <td style={{ border: 'none' }}>{email}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            Email
+                          </td>
+                          <td style={{ border: "none" }}>{email}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>คณะ</td>
-                          <td style={{ border: 'none' }}>{FAC_NAME_THAI}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            คณะ
+                          </td>
+                          <td style={{ border: "none" }}>{FAC_NAME_THAI}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>วิทยาเขต</td>
-                          <td style={{ border: 'none' }}>{CAMPUS_NAME}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            วิทยาเขต
+                          </td>
+                          <td style={{ border: "none" }}>{CAMPUS_NAME}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>สถานะ</td>
-                          <td style={{ border: 'none' }}>{STU_STATUS_DESC}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            สถานะ
+                          </td>
+                          <td style={{ border: "none" }}>{STU_STATUS_DESC}</td>
                         </tr>
                         <tr>
-                          <td style={{ backgroundColor: '#FF8B13',border: 'none',color:"#fff"}}>หลักสูตร</td>
-                          <td style={{ border: 'none' }}>{LEVEL_DESC}</td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          >
+                            หลักสูตร
+                          </td>
+                          <td style={{ border: "none" }}>{LEVEL_DESC}</td>
                         </tr>
                       </tbody>
                     </Table>
@@ -283,7 +359,9 @@ function TableAddStudent() {
                   <Table className="table">
                     <tbody>
                       <tr>
-                        <td>ปีการศึกษาที่ดูแล </td>
+                        <td>
+                          <div>ปีการศึกษาที่ดูแล</div>{" "}
+                        </td>
                         <td>
                           <input
                             type="number"
@@ -298,7 +376,9 @@ function TableAddStudent() {
                       </tr>
                       {account_type === "students" && (
                         <tr>
-                          <td>ตำแหน่ง </td>
+                          <td>
+                            <div>ตำแหน่ง</div>{" "}
+                          </td>
                           <td>
                             <select
                               onChange={(event) => {
@@ -308,18 +388,24 @@ function TableAddStudent() {
                               style={{ width: "70%" }}
                               className="form-select"
                             >
-                              <option value="">โปรดเลือกตำแหน่ง</option>
-                              <option value="SH">
-                                ประธานสภา/นายกองค์การ/ประธานชมรม
+                              <option value="">
+                                <div>โปรดเลือกตำแหน่ง</div>
                               </option>
-                              <option value="S">นักศึกษาประสานงาน</option>
+                              <option value="SH">
+                                <div>ประธานสภา/นายกองค์การ/ประธานชมรม</div>
+                              </option>
+                              <option value="S">
+                                <div>นักศึกษาประสานงาน</div>
+                              </option>
                             </select>
                           </td>
                         </tr>
                       )}
                       {account_type === "personel" && (
                         <tr>
-                          <td>ตำแหน่ง </td>
+                          <td>
+                            <div>ตำแหน่ง</div>{" "}
+                          </td>
                           <td>
                             <select
                               onChange={(event) => {
@@ -329,14 +415,20 @@ function TableAddStudent() {
                               style={{ width: "70%" }}
                               className="form-select"
                             >
-                              <option value="">โปรดเลือกตำแหน่ง</option>
-                              <option value="AD">อาจารย์ที่ปรึกษา</option>
+                              <option value="">
+                                <div>โปรดเลือกตำแหน่ง</div>
+                              </option>
+                              <option value="AD">
+                                <div>อาจารย์ที่ปรึกษา</div>
+                              </option>
                             </select>
                           </td>
                         </tr>
                       )}
                       <tr>
-                        <td>เป็นหน่วยงาน </td>
+                        <td>
+                          <div>หน่วยงาน</div>{" "}
+                        </td>
                         <td>
                           <select
                             onChange={(event) => {
@@ -346,17 +438,27 @@ function TableAddStudent() {
                             style={{ width: "70%" }}
                             className="form-select"
                           >
-                            <option value="">โปรดเลือกหน่วยงาน</option>
-                            <option value="center">หน่วยงานกลาง</option>
-                            <option value="smo">สโมสรนักศึกษา</option>
-                            <option value="etc">อื่นๆ</option>
+                            <option value="">
+                              <div>โปรดเลือกหน่วยงาน</div>
+                            </option>
+                            <option value="center">
+                              <div>หน่วยงานกลาง</div>
+                            </option>
+                            <option value="smo">
+                              <div>สโมสรนักศึกษา</div>
+                            </option>
+                            <option value="etc">
+                              <div>อื่นๆ</div>
+                            </option>
                           </select>
                         </td>
                       </tr>
                       {positionagency === "center" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td>ชมรม/หน่วยงาน/องค์กร </td>
+                          <td>
+                            <div>ชมรม/หน่วยงาน/องค์กร</div>{" "}
+                          </td>
                           <td>
                             <select
                               onChange={(event) => {
@@ -408,7 +510,7 @@ function TableAddStudent() {
                       {positionagency === "smo" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td>สโมสรนักศึกษา</td>
+                          <td><div>สโมสรนักศึกษา</div></td>
                           <td>
                             <select
                               onChange={(event) => {
@@ -453,7 +555,7 @@ function TableAddStudent() {
                       {positionagency === "etc" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td>หน่วยงาน</td>
+                          <td><div>หน่วยงาน</div></td>
                           <td>
                             <select
                               onChange={(event) => {

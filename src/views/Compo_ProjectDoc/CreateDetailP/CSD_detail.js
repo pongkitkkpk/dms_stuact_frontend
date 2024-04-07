@@ -381,6 +381,28 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     </Table>
                   </td>
                 </tr>
+                 {/* ที่อาจารย์ปรึกษา  db */}
+                 <tr style={{ backgroundColor: "white" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
+                    <div>ความเชื่อมโยงสอดคล้องกับแผน</div>
+                    {/* <p className="detail-prodoc">
+                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
+                    </p> */}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    <Form.Control
+                      className="font-form-control"
+                      size="sm"
+                      type="text"
+                      placeholder="Enter ID Code"
+                      value={ad_name}
+                      disabled
+                    />
+                  </td>
+                </tr>
                 {/* อารจารย์ผู้ดูแลโครงการ */}
                 {/* <tr >
                                     <td className='head-side-td'>อารจารย์ผู้ดูแลโครงการ<p className='detail-prodoc'>กรณีที่ผู้ดูแลโครงการไม่ใช่อาจารย์ที่ปรึกษา</p></td>
