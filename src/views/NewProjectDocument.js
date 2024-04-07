@@ -9,10 +9,10 @@ import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
+  const [cSD_Detail, setCSD_Detail] = useState(false);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
   const [cSD_person, setCSD_Person] = useState(false);
-  const [cSD_locationtime, setCSD_LocationTime] = useState(false);
+  const [cSD_locationtime, setCSD_LocationTime] = useState(true);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
   const [cSD_budget, setCSD_budget] = useState(false);
   const containerRef = useRef(null);
@@ -105,10 +105,10 @@ function NewProjectDocument() {
                     <td><a href="#" onClick={cSD_Detail2 ? CSD_Detail2Component : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.2 ลักษณะโครงการ</div></a></td>
                   </tr>
                   <tr className={cSD_person ? "list-group-item active" : "list-group-item"}>
-                    <td><a href="#" onClick={cSD_person ? CSD_personComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.2 กลุ่มเป้าหมายผู้เข้าร่วมโครงการdp3</div></a></td>
+                    <td><a href="#" onClick={cSD_person ? CSD_personComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 กลุ่มเป้าหมายโครงการ</div></a></td>
                   </tr>
                   <tr className={cSD_locationtime ? "list-group-item active" : "list-group-item"}>
-                    <td><a href="#" onClick={cSD_locationtime ? CSD_LocationtimeComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการLT4</div></a></td>
+                    <td><a href="#" onClick={cSD_locationtime ? CSD_LocationtimeComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.4 สถานที่และเวลาดำเนินการ</div></a></td>
                   </tr>
                   <tr className={cSD_timestep ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={cSD_timestep ? CSD_timestepComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.3 ขั้นตอนการดำเนินงาน และแผนการดำเนินโครงการdt5</div></a></td>
