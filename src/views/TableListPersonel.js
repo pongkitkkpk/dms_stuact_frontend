@@ -96,23 +96,23 @@ function TableListPersonel() {
                       return (
                         <tr key={key}>
                           {/* ICIT */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.id_student}</div></td>
                           {/* ชื่อ */}
                           <td>{val.name_student}</td>
                           {/* email */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}><div>{val.email}</div></td>
                           {/* วิทยาเขต */}
-                          <td>{val.campus}</td>
+                          <td><div>{val.campus}</div></td>
                           {/* ตำแหน่ง */}
                           <td>
-                            {val.position === "Stuact" ? 'บุคลากร' : null}
+                            {val.position === "Stuact" ? <div>บุคลากร</div> : null}
                           </td>
                           {/* หน่วยงาน */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.clubName}</div></td>
                           {/* กลุ่มงาน */}
-                          <td>{val.WorkGroup}</td>
-                          <td>{val.ClubGroup}</td>
-                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
+                          <td><div>{val.WorkGroup}</div></td>
+                          <td><div>{val.ClubGroup}</div></td>
+                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}><div>ลบ</div></button></td>
                         </tr>
                       );
                     })}

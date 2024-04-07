@@ -92,31 +92,31 @@ function TableListStudent() {
                     {filteredUserList.map((val, key) => {
                       return (
                         <tr key={key}>
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.id_student}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.id_student}</div></td>
                           {/* ชื่อ */}
-                          <td>{val.name_student}</td>
+                          <td><div>{val.name_student}</div></td>
                           {/* email */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}>{val.email}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}><div>{val.email}</div></td>
                           {/* วิทยาเขต */}
-                          <td>{val.campus}</td>
+                          <td><div>{val.campus}</div></td>
                           {/* คณะ/มหาวิทยาลัย */}
-                          <td>{val.department}</td>
+                          <td><div>{val.department}</div></td>
                           {/* ตำแหน่ง */}
                           <td>
-                            {val.position === "S" ? 'นักศึกษาประสานงาน' : null}
+                            {val.position === "S" ? <div>นักศึกษาประสานงาน</div> : null}
                             {val.position === "SH" ? (
-                              val.clubName.includes("สภา") ? 'ประธานสภา' :
-                                val.clubName.includes("องค์การ") ? 'นายกองค์การ' :
-                                  'ประธานชมรม'
+                              val.clubName.includes("สภา") ? <div>ประธานสภา</div> :
+                                val.clubName.includes("องค์การ") ? <div>นายกองค์การ</div>:
+                                <div>ประธานชมรม</div>
                             ) : null}
-                            {val.position === "Ad" ? 'อาจารย์ที่ปรึกษา' : null}
+                            {val.position === "Ad" ? <div>อาจารย์ที่ปรึกษา</div> : null}
                           </td>
                           {/* หน่วยงาน/คณะ */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.clubName}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.clubName}</div></td>
                           {/* ปีการศึกษาที่ดูแล */}
-                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> {val.yearly}</td>
+                          <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.yearly}</div></td>
                           
-                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}>ลบ</button></td>
+                          <td> <button className='btn btn-danger' onClick={() => deleteUser(val.id)}><div>ลบ</div></button></td>
                         </tr>
                       );
                     })}
