@@ -16,8 +16,8 @@ import Axios from 'axios';
 
 function CSD_timestep({ id_projects, switchToCSDBudget }) {
     const [projectList, setProjectList] = useState([]);
-    const [codeClub, setCodeClub] = useState('');
-    const [yearlyCountSketch, setYearlyCountSketch] = useState('');
+    const [codeclub, setCodeclub] = useState('');
+    const [yearly_countsketch, setYearlyCountSketch] = useState('');
 
 
     const [table1Id, setTable1Id] = useState('1');
@@ -274,7 +274,30 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
             setDeadLine(deadline)
         });
     }
+    const [pPersonData, setPPersonData] = useState([]);
 
+    const getpPersonData = () => {
+        Axios.get('http://localhost:3001/student/project/p_person').then((response) => {
+            setPPersonData(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getpPersonData();
+    }, []);
+
+    useEffect(() => {
+        const idinperson = pPersonData.filter(person => person.id_projects === id_projects);
+        console.log("id" + id_projects);
+
+        // Assuming idinperson is an array and you want to get data from the first element
+        if (idinperson.length > 0) {
+            const { codeclub, yearly_countsketch } = idinperson[0];
+            setCodeclub(codeclub);
+            setYearlyCountSketch(yearly_countsketch);
+        }
+
+    }, [id_projects, pPersonData]);
     const createProject = () => {
         let responsibleTable1str = '';
         if (responsibleTable1 != '') {
@@ -364,6 +387,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
 
         Axios.post(`http://localhost:3001/student/project/p_timestep/create/${id_projects}`, {
             id_projects,
+            codeclub,
+            yearly_countsketch,
             table1Topic,
             startDurationTable1,
             endDurationTable1,
