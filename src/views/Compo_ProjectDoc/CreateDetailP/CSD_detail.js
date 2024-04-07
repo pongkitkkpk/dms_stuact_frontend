@@ -49,6 +49,21 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [person3_name, setPerson3Name] = useState("");
   const [person3_contact, setPerson3Contact] = useState("");
 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(()=>{
+    console.log(selectedOptions)
+  },[selectedOptions])
+  const handleCheckboxChange = (value) => {
+    // Check if the value is already in selectedOptions
+    if (selectedOptions.includes(value)) {
+      // If it is, remove it from the array
+      setSelectedOptions(selectedOptions.filter((option) => option !== value));
+    } else {
+      // If it's not, add it to the array
+      setSelectedOptions([...selectedOptions, value]);
+    }
+  };
   //
   const minDate = new Date();
 
@@ -258,15 +273,11 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                 </tr>
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
-
-           
-                  <button >เพิ่ม</button>
-                  
+                    <button>เพิ่ม</button>
 
                     <Table striped="columns">
                       <thead
@@ -381,13 +392,83 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     </Table>
                   </td>
                 </tr>
-                 {/* ที่อาจารย์ปรึกษา  db */}
-                 <tr style={{ backgroundColor: "white" }}>
+                {/* ข้อ 5 เลือก 5 ด้าน  db */}
+                <tr style={{ backgroundColor: "white" }}>
                   <td
                     className="head-side-td-swp"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div>ความเชื่อมโยงสอดคล้องกับแผน</div>
+                    <div>
+                      โครงการนี้อยู่ภายใต้แผนยุทธศาสตร์กสนพัฒนาของมหาวิทยาลัยที่ส่งเสริมกิจกรรมพัฒนานักศึกษา
+                    </div>
+                    {/* <p className="detail-prodoc">
+                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
+                    </p> */}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    <label style={{ marginLeft: "10px" }}>
+                      <input
+                        type="checkbox"
+                        value="1"
+                        checked={selectedOptions.includes("1")}
+                        onChange={() => handleCheckboxChange("1")}
+                        
+                      />
+                      ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
+                    </label>
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        value="2"
+                        checked={selectedOptions.includes("2")}
+                        onChange={() => handleCheckboxChange("2")}
+                      />
+                      ด้านกีฬาหรือการส่งเสริมสุขภาพ
+                    </label>
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        value="3"
+                        checked={selectedOptions.includes("3")}
+                        onChange={() => handleCheckboxChange("3")}
+                      />
+                      ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
+                    </label>
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        value="4"
+                        checked={selectedOptions.includes("4")}
+                        onChange={() => handleCheckboxChange("4")}
+                      />
+                      ด้านเสริมสร้างคุณธรรมและจริยธรรม
+                    </label>
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        value="5"
+                        checked={selectedOptions.includes("5")}
+                        onChange={() => handleCheckboxChange("5")}
+                      />
+                      ด้านส่งเสริมศิลปะและวัฒนธรรม
+                    </label>
+                    {/* Add more checkboxes as needed */}
+                  </td>
+                </tr>
+                {/* ความเชื่อมโยงสอดคล้องกับแผน */}
+                <tr style={{ backgroundColor: "white" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
+                    <div>
+                      ความเชื่อมโยงสอดคล้องกับแผนกลยุทธ์การพัฒนากองกิจการนักศึกษา
+                      5 ปี (พ.ศ.2560 - พ.ศ.2565)
+                    </div>
                     {/* <p className="detail-prodoc">
                       ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
                     </p> */}
@@ -398,7 +479,6 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={ad_name}
                       disabled
                     />
                   </td>
