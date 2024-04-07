@@ -967,3 +967,22 @@
   max-width: 50%; /* Adjust as needed */
   max-height: 70%; /* Adjust as needed */
 }
+
+.navbar-collapse.show .navbar-nav {
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .no-icon {
+    position: relative;
+    left: 125%; /* Adjust as needed for mobile devices */
+    width: auto; /* Reset width for mobile devices */
+    margin-top: -20%; /* Reset margin top for mobile devices */
+  }
+  .no-iconx {
+    position: relative;
+    left: 80%; /* Adjust as needed for mobile devices */
+    width: auto; /* Reset width for mobile devices */
+    margin-top: -40%; /* Reset margin top for mobile devices */
+  }
+}
