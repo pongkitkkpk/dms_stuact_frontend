@@ -264,20 +264,20 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
 
                 {/* ช่วงจัดเตรียมโครงการ */}
                 <tr>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    <div>วันจัดเตรียมโครงการ</div>
-                    <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                    <div>ช่วงจัดเตรียมโครงการ</div>
+                    {/* <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p> */}
                   </td>
                   <td className="back-side-td">
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div style={{ marginRight: "20px" }}>
-                        <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
+                      <td style={{borderColor: "white", width: "50%"}}>
+                        <Form.Label>วันเริ่มต้น (จัดเตรียม) :</Form.Label>
                         <DatePicker
                           selected={start_prepare}
                           onChange={(date) => setStartPrepare(date)}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันเริ่มต้น"
-                          className="form-control"
+                          className="form-control margin-form-control"
                           minDate={minDate}
                           popperPlacement="top-start"
                           isClearable
@@ -285,15 +285,15 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           startDate={start_prepare}
                           endDate={end_prepare}
                         />
-                      </div>
-                      <div>
-                        <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
+                      </td>
+                      <td style={{borderColor: "white", width: "50%"}}>
+                        <Form.Label>วันสิ้นสุด (จัดเตรียม) :</Form.Label>
                         <DatePicker
                           selected={end_prepare}
                           onChange={(date) => setEndPrepare(date)}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันสิ้นสุด"
-                          className="form-control"
+                          className="form-control margin-form-control"
                           minDate={start_prepare}
                           popperPlacement="top-start"
                           isClearable
@@ -301,17 +301,17 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           startDate={start_prepare}
                           endDate={end_prepare}
                         />
-                      </div>
+                      </td>
                     </div>
                   </td>
                 </tr>
                 {/* วันดำเนินโครงการ */}
                 <tr>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    วันดำเนินโครงการ
-                    <p className="detail-prodoc">
+                    <div>ช่วงดำเนินโครงการ</div>
+                    {/* <p className="detail-prodoc">
                       กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
-                    </p>
+                    </p> */}
                   </td>
                   <td className="back-side-td">
                     <div style={{ display: "flex", flexDirection: "row" }}>
@@ -322,7 +322,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           onChange={(date) => setStartEvent(date)}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันเริ่มต้น"
-                          className="form-control"
+                          className="form-control margin-form-control"
                           minDate={end_prepare}
                           popperPlacement="top-start"
                           isClearable
@@ -338,7 +338,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           onChange={(date) => setEndEvent(date)}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันสิ้นสุด"
-                          className="form-control"
+                          className="form-control margin-form-control"
                           minDate={start_event}
                           popperPlacement="top-start"
                           isClearable
@@ -353,10 +353,10 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                 {/* วันกำหนดส่งโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    วันกำหนดส่งโครงการ
-                    <p className="detail-prodoc">
+                    <div>วันกำหนดส่งโครงการ</div>
+                    {/* <p className="detail-prodoc">
                       กำหนด 30 วัน หลังจากวันดำเนินงาน
-                    </p>
+                    </p> */}
                   </td>
                   <td>
                     <div className="d-flex align-items-center">
