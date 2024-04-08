@@ -203,7 +203,9 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                                 className="table-margin"
                                 size="sm"
                                 type="text"
-                                placeholder={`สถานที่จัดโครงการที่ ${index + 1}`}
+                                placeholder={`สถานที่จัดโครงการที่ ${
+                                  index + 1
+                                }`}
                                 onChange={(event) => {
                                   switch (index) {
                                     case 0:
@@ -262,13 +264,16 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
 
                 {/* ช่วงจัดเตรียมโครงการ */}
                 <tr>
-                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>ช่วงจัดเตรียมโครงการ</div>
                     {/* <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p> */}
                   </td>
                   <td className="back-side-td">
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                      <td style={{borderColor: "white", width: "50%"}}>
+                      <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันเริ่มต้น (จัดเตรียม) :</Form.Label>
                         <DatePicker
                           selected={start_prepare}
@@ -284,7 +289,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           endDate={end_prepare}
                         />
                       </td>
-                      <td style={{borderColor: "white", width: "50%"}}>
+                      <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันสิ้นสุด (จัดเตรียม) :</Form.Label>
                         <DatePicker
                           selected={end_prepare}
@@ -303,6 +308,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                     </div>
                   </td>
                 </tr>
+
                 {/* วันดำเนินโครงการ */}
                 <tr>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
@@ -313,8 +319,8 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                   </td>
                   <td className="back-side-td">
                     <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div style={{ marginRight: "20px" }}>
-                        <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
+                      <td style={{ borderColor: "white", width: "50%" }}>
+                        <Form.Label>วันเริ่มต้น (ดำเนินงาน) : </Form.Label>
                         <DatePicker
                           selected={start_event}
                           onChange={(date) => setStartEvent(date)}
@@ -328,9 +334,9 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           startDate={start_event}
                           endDate={end_event}
                         />
-                      </div>
-                      <div>
-                        <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
+                      </td>
+                      <td style={{ borderColor: "white", width: "50%" }}>
+                        <Form.Label>วันสิ้นสุด (ดำเนินงาน) : </Form.Label>
                         <DatePicker
                           selected={end_event}
                           onChange={(date) => setEndEvent(date)}
@@ -344,13 +350,14 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                           startDate={start_event}
                           endDate={end_event}
                         />
-                      </div>
+                      </td>
                     </div>
                   </td>
                 </tr>
+
                 {/* วันกำหนดส่งโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
                     <div>วันกำหนดส่งโครงการ</div>
                     {/* <p className="detail-prodoc">
                       กำหนด 30 วัน หลังจากวันดำเนินงาน
@@ -358,8 +365,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                   </td>
                   <td>
                     <div className="d-flex align-items-center">
-                      <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
-
+                      {/* <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label> */}
                       <input
                         type="text"
                         value={showdeadline}
@@ -373,11 +379,23 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
             </Table>
           </CardBody>
 
-          <div>
-            <Button onClick={createProject} type="submit" variant="info">
-              อัพขึ้นสู่ระบบ
+          <CardFooter
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              onClick={createProject}
+              type="submit"
+              variant="warning"
+              className="btn-dataupdate"
+              style={{ fontSize: "14px" }}
+            >
+              บันทึกข้อมูล
             </Button>
-          </div>
+          </CardFooter>
         </Card>
       </Col>
     </>
