@@ -8,32 +8,25 @@ function CSD_budget(id_projects) {
   // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   // const studentuser = storedUser.username
   // console.log("asdfasdf"+studentuser)
-  const [projectList, setProjectList] = useState([]);
+
+  const [id_project, setIdProject] = useState('');
   const [codeclub, setCodeclub] = useState('');
   const [yearly_countsketch, setYearlyCountSketch] = useState('');
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {
-    Axios.get(`http://localhost:3001/student/project/getidproject/${id_projects}`).then((response) => {
-      console.log("sdafasdddddddddddddddddddddd")
-      console.log(response.data)
+    Axios.get(`http://localhost:3001/student/project/getidproject/${id_project}`).then((response) => {
       setPPersonData(response.data);
     });
   };
 
   useEffect(() => {
+    setIdProject(id_projects.id_projects)
     getpPersonData();
   }, []);
 
   useEffect(() => {
-    console.log("ADFASDFASDFASDasdfasdFASDFASD")
-    console.log(pPersonData)
-    console.log(id_projects)
-
-    const idinperson = pPersonData.filter(person => person.id_projects === id_projects);
-    console.log("id" + idinperson); // Issue: This will concatenate "id" with the array idinperson
-    console.log(idinperson);
-
+    const idinperson = pPersonData.filter(person => person.id === id_project);
     // Assuming idinperson is an array and you want to get data from the first element
     if (idinperson.length > 0) {
       const { codeclub, yearly_countsketch } = idinperson[0];
@@ -41,7 +34,7 @@ function CSD_budget(id_projects) {
       setYearlyCountSketch(yearly_countsketch);
     }
 
-}, [id_projects, pPersonData]);
+  }, [id_projects, pPersonData]);
   // 
   //                          ListA
   // 
@@ -56,30 +49,96 @@ function CSD_budget(id_projects) {
 
 
   const createProject = () => {
-    Axios.post(`http://localhost:3001/student/project/p_budget/create/${id_projects}`, {
-      codeclub:codeclub,
-      yearly_countsketch:yearly_countsketch,
+    Axios.put(`http://localhost:3001/student/project/p_budget/create/${id_project}`, {
+      id_project,
+      codeclub,
+      yearly_countsketch,
+      // A
       listA1: listA[0],
       listA2: listA[1],
       listA3: listA[2],
-      // Add data for other lists as needed
-      // listNA1: listNA[0],
-      // listNA2: listNA[1],
-      // listNA3: listNA[2],
-      // Add data for other lists as needed
-    }).then(() => {
-      // Assuming setProjectList is a state setter function for your projectList state
-      setProjectList([
-        ...projectList,
-        {
-          codeclub:codeclub,
-          yearly_countsketch:yearly_countsketch,
-          listA1: listA[0],
-          listA2: listA[1],
-          listA3: listA[2],
-          // Add data for other lists as needed
-        },
-      ]);
+      listA4: listA[3],
+      listA5: listA[4],
+      listA6: listA[5],
+      listA7: listA[6],
+      listA8: listA[7],
+      listA9: listA[8],
+      listA10: listA[9],
+      listA11: listA[10],
+      listA12: listA[11],
+      listA13: listA[12],
+      listA14: listA[13],
+      listA15: listA[14],
+      // NA
+      listNA1: listNA[0],
+      listNA2: listNA[1],
+      listNA3: listNA[2],
+      listNA4: listNA[3],
+      listNA5: listNA[4],
+      listNA6: listNA[5],
+      listNA7: listNA[6],
+      listNA8: listNA[7],
+      listNA9: listNA[8],
+      listNA10: listNA[9],
+      listNA11: listNA[10],
+      listNA12: listNA[11],
+      listNA13: listNA[12],
+      listNA14: listNA[13],
+      listNA15: listNA[14],
+      // TA
+      listTA1: listTA[0],
+      listTA2: listTA[1],
+      listTA3: listTA[2],
+      listTA4: listTA[3],
+      listTA5: listTA[4],
+      listTA6: listTA[5],
+      listTA7: listTA[6],
+      listTA8: listTA[7],
+      listTA9: listTA[8],
+      listTA10: listTA[9],
+      listTA11: listTA[10],
+      listTA12: listTA[11],
+      listTA13: listTA[12],
+      listTA14: listTA[13],
+      listTA15: listTA[14],
+      // TPA
+      listTPA1: listTPA[0],
+      listTPA2: listTPA[1],
+      listTPA3: listTPA[2],
+      listTPA4: listTPA[3],
+      listTPA5: listTPA[4],
+      listTPA6: listTPA[5],
+      listTPA7: listTPA[6],
+      listTPA8: listTPA[7],
+      listTPA9: listTPA[8],
+      listTPA10: listTPA[9],
+      listTPA11: listTPA[10],
+      listTPA12: listTPA[11],
+      listTPA13: listTPA[12],
+      listTPA14: listTPA[13],
+      listTPA15: listTPA[14],
+      // SA
+      listSA1: listSA[0],
+      listSA2: listSA[1],
+      listSA3: listSA[2],
+      listSA4: listSA[3],
+      listSA5: listSA[4],
+      listSA6: listSA[5],
+      listSA7: listSA[6],
+      listSA8: listSA[7],
+      listSA9: listSA[8],
+      listSA10: listSA[9],
+      listSA11: listSA[10],
+      listSA12: listSA[11],
+      listSA13: listSA[12],
+      listSA14: listSA[13],
+      listSA15: listSA[14],
+      listSSA:listSSA
+
+
+    }).then(response => {
+      console.log(response.data);
+
     }).catch((error) => {
       console.error('Error creating project:', error);
     });
