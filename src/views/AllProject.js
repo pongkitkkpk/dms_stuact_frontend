@@ -7,14 +7,20 @@ function AllProject() {
     const storedUserData = sessionStorage.getItem('user');
     const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
     const studentuser = storedUser.username
+    console.log("storedUser")
+    console.log(storedUser.codebooksomeoutyear)
+    const strcodebooksomeoutyear=storedUser.codebooksomeoutyear
     // console.log("asdfasdf"+studentuser)
     const [projectList, setProjectList] = useState([]);
     const [id_student, setIDStudent] = useState(studentuser);
     const [codeclub, setCodeClub] = useState('B660420200');
+    const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(strcodebooksomeoutyear);
     const history = useHistory(); // Initialize useHistory hook
 
     const getProjects = () => {
-        Axios.get(`http://localhost:3001/student/project/getallcodeclub/${codeclub}`).then((response) => {
+        Axios.get(`http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`).then((response) => {
+            console.log("asdfresponse.data")
+            console.log(response.data)
             setProjectList(response.data);
         });
     };
@@ -37,6 +43,7 @@ function AllProject() {
 
     return (
         <>
+        <h1>allrpo</h1>
             <Container fluid>
                 <Row>
                     <Col md="12">
@@ -53,12 +60,12 @@ function AllProject() {
                         {projectList.map((project, index) => (
                             <Card
                                 key={index}
-                                className={`card-with-border-${project.yearly_count === "" ? 'secondary' : 'warning'}`}
+                                className={`card-with-border-${project.project_phase === "0" ? 'secondary' : 'warning'}`}
                                 style={{ margin: '0% 0' }}
                             >
                                 <Card.Body>
                                     <div className="status-tag">
-                                        <span className={`badge badge-${project.yearly_count === "" ? 'secondary' : 'warning'}`}>ฉบับ ร่าง</span>
+                                        <span className={`badge badge-${project.project_phase === "0" ? 'secondary' : 'warning'}`}>ฉบับ ร่าง</span>
                                     </div>
                                     <Card.Title as="h4">{project.project_name}</Card.Title>
                                     <p className="card-category">{project.project_number}</p>
@@ -70,8 +77,8 @@ function AllProject() {
                                         {project.id_student}
                                     </div>
                                     <Button
-                                        variant={project.yearly_count === "" ? 'secondary' : 'warning'}
-                                        className={`show-detail-button-${project.yearly_count === "" ? 'secondary' : 'warning'}`}
+                                        variant={project.project_phase === "0" ? 'secondary' : 'warning'}
+                                        className={`show-detail-button-${project.project_phase === "0" ? 'secondary' : 'warning'}`}
                                         onClick={() => handleShowDetail(project.id)}
                                     >
                                         Show Detail
