@@ -409,11 +409,11 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     style={{ verticalAlign: "top" }}
                   >
                     <div>
-                      โครงการนี้อยู่ภายใต้แผนยุทธศาสตร์กสนพัฒนาของมหาวิทยาลัยที่ส่งเสริมกิจกรรมพัฒนานักศึกษา
+                      โครงการนี้อยู่ภายใต้แผนยุทธศาสตร์การพัฒนาของมหาวิทยาลัยที่ส่งเสริมกิจกรรมพัฒนานักศึกษา
                     </div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    <label style={{ marginLeft: "10px" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "16px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="1"
