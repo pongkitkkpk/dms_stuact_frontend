@@ -18,6 +18,14 @@ function CSD_budget(id_projects) {
     Axios.get(`http://localhost:3001/student/project/getidproject/${id_project}`).then((response) => {
       setPPersonData(response.data);
     });
+    const idinperson = pPersonData.filter(person => person.id === id_project);
+
+    // Assuming idinperson is an array and you want to get data from the first element
+    if (idinperson.length > 0) {
+      const { codeclub, yearly_countsketch } = idinperson[0];
+      setCodeclub(codeclub);
+      setYearlyCountSketch(yearly_countsketch);
+    }
   };
 
   useEffect(() => {
@@ -25,16 +33,7 @@ function CSD_budget(id_projects) {
     getpPersonData();
   }, []);
 
-  useEffect(() => {
-    const idinperson = pPersonData.filter(person => person.id === id_project);
-    // Assuming idinperson is an array and you want to get data from the first element
-    if (idinperson.length > 0) {
-      const { codeclub, yearly_countsketch } = idinperson[0];
-      setCodeclub(codeclub);
-      setYearlyCountSketch(yearly_countsketch);
-    }
 
-  }, [id_projects, pPersonData]);
   // 
   //                          ListA
   // 
@@ -51,8 +50,8 @@ function CSD_budget(id_projects) {
   const createProject = () => {
     Axios.put(`http://localhost:3001/student/project/p_budget/create/${id_project}`, {
       id_project,
-      codeclub,
-      yearly_countsketch,
+      // codeclub,
+      // yearly_countsketch,
       // A
       listA1: listA[0],
       listA2: listA[1],
@@ -133,7 +132,323 @@ function CSD_budget(id_projects) {
       listSA13: listSA[12],
       listSA14: listSA[13],
       listSA15: listSA[14],
-      listSSA:listSSA
+      listSSA: listSSA,
+      // BT
+      listBT1: listBT[0],
+      listBT2: listBT[1],
+      listBT3: listBT[2],
+      listBT4: listBT[3],
+      listBT5: listBT[4],
+      listBT6: listBT[5],
+      listBT7: listBT[6],
+      listBT8: listBT[7],
+      listBT9: listBT[8],
+      listBT10: listBT[9],
+      listBT11: listBT[10],
+      listBT12: listBT[11],
+      listBT13: listBT[12],
+      listBT14: listBT[13],
+      listBT15: listBT[14],
+      listBT16: listBT[15],
+      listBT17: listBT[16],
+      listBT18: listBT[17],
+      listBT19: listBT[18],
+      listBT20: listBT[19],
+      // NBT
+      listNBT1: listNBT[0],
+      listNBT2: listNBT[1],
+      listNBT3: listNBT[2],
+      listNBT4: listNBT[3],
+      listNBT5: listNBT[4],
+      listNBT6: listNBT[5],
+      listNBT7: listNBT[6],
+      listNBT8: listNBT[7],
+      listNBT9: listNBT[8],
+      listNBT10: listNBT[9],
+      listNBT11: listNBT[10],
+      listNBT12: listNBT[11],
+      listNBT13: listNBT[12],
+      listNBT14: listNBT[13],
+      listNBT15: listNBT[14],
+      listNBT16: listNBT[15],
+      listNBT17: listNBT[16],
+      listNBT18: listNBT[17],
+      listNBT19: listNBT[18],
+      listNBT20: listNBT[19],
+      // NNBT
+      listNNBT1: listNNBT[0],
+      listNNBT2: listNNBT[1],
+      listNNBT3: listNNBT[2],
+      listNNBT4: listNNBT[3],
+      listNNBT5: listNNBT[4],
+      listNNBT6: listNNBT[5],
+      listNNBT7: listNNBT[6],
+      listNNBT8: listNNBT[7],
+      listNNBT9: listNNBT[8],
+      listNNBT10: listNNBT[9],
+      listNNBT11: listNNBT[10],
+      listNNBT12: listNNBT[11],
+      listNNBT13: listNNBT[12],
+      listNNBT14: listNNBT[13],
+      listNNBT15: listNNBT[14],
+      listNNBT16: listNNBT[15],
+      listNNBT17: listNNBT[16],
+      listNNBT18: listNNBT[17],
+      listNNBT19: listNNBT[18],
+      listNNBT20: listNNBT[19],
+      // TBT
+      listTBT1: listTBT[0],
+      listTBT2: listTBT[1],
+      listTBT3: listTBT[2],
+      listTBT4: listTBT[3],
+      listTBT5: listTBT[4],
+      listTBT6: listTBT[5],
+      listTBT7: listTBT[6],
+      listTBT8: listTBT[7],
+      listTBT9: listTBT[8],
+      listTBT10: listTBT[9],
+      listTBT11: listTBT[10],
+      listTBT12: listTBT[11],
+      listTBT13: listTBT[12],
+      listTBT14: listTBT[13],
+      listTBT15: listTBT[14],
+      listTBT16: listTBT[15],
+      listTBT17: listTBT[16],
+      listTBT18: listTBT[17],
+      listTBT19: listTBT[18],
+      listTBT20: listTBT[19],
+      // TNBT
+      listTNBT1: listTNBT[0],
+      listTNBT2: listTNBT[1],
+      listTNBT3: listTNBT[2],
+      listTNBT4: listTNBT[3],
+      listTNBT5: listTNBT[4],
+      listTNBT6: listTNBT[5],
+      listTNBT7: listTNBT[6],
+      listTNBT8: listTNBT[7],
+      listTNBT9: listTNBT[8],
+      listTNBT10: listTNBT[9],
+      listTNBT11: listTNBT[10],
+      listTNBT12: listTNBT[11],
+      listTNBT13: listTNBT[12],
+      listTNBT14: listTNBT[13],
+      listTNBT15: listTNBT[14],
+      listTNBT16: listTNBT[15],
+      listTNBT17: listTNBT[16],
+      listTNBT18: listTNBT[17],
+      listTNBT19: listTNBT[18],
+      listTNBT20: listTNBT[19],
+      // TPBT
+      listTPBT1: listTPBT[0],
+      listTPBT2: listTPBT[1],
+      listTPBT3: listTPBT[2],
+      listTPBT4: listTPBT[3],
+      listTPBT5: listTPBT[4],
+      listTPBT6: listTPBT[5],
+      listTPBT7: listTPBT[6],
+      listTPBT8: listTPBT[7],
+      listTPBT9: listTPBT[8],
+      listTPBT10: listTPBT[9],
+      listTPBT11: listTPBT[10],
+      listTPBT12: listTPBT[11],
+      listTPBT13: listTPBT[12],
+      listTPBT14: listTPBT[13],
+      listTPBT15: listTPBT[14],
+      listTPBT16: listTPBT[15],
+      listTPBT17: listTPBT[16],
+      listTPBT18: listTPBT[17],
+      listTPBT19: listTPBT[18],
+      listTPBT20: listTPBT[19],
+      // SBT
+      listSBT1: listSBT[0],
+      listSBT2: listSBT[1],
+      listSBT3: listSBT[2],
+      listSBT4: listSBT[3],
+      listSBT5: listSBT[4],
+      listSBT6: listSBT[5],
+      listSBT7: listSBT[6],
+      listSBT8: listSBT[7],
+      listSBT9: listSBT[8],
+      listSBT10: listSBT[9],
+      listSBT11: listSBT[10],
+      listSBT12: listSBT[11],
+      listSBT13: listSBT[12],
+      listSBT14: listSBT[13],
+      listSBT15: listSBT[14],
+      listSBT16: listSBT[15],
+      listSBT17: listSBT[16],
+      listSBT18: listSBT[17],
+      listSBT19: listSBT[18],
+      listSBT20: listSBT[19],
+
+      listSSBT: listSSBT,
+      // BNT
+      listBNT1: listBNT[0],
+      listBNT2: listBNT[1],
+      listBNT3: listBNT[2],
+      listBNT4: listBNT[3],
+      listBNT5: listBNT[4],
+      listBNT6: listBNT[5],
+      listBNT7: listBNT[6],
+      listBNT8: listBNT[7],
+      listBNT9: listBNT[8],
+      listBNT10: listBNT[9],
+      // NBNT
+      listNBNT1: listNBNT[0],
+      listNBNT2: listNBNT[1],
+      listNBNT3: listNBNT[2],
+      listNBNT4: listNBNT[3],
+      listNBNT5: listNBNT[4],
+      listNBNT6: listNBNT[5],
+      listNBNT7: listNBNT[6],
+      listNBNT8: listNBNT[7],
+      listNBNT9: listNBNT[8],
+      listNBNT10: listNBNT[9],
+      // NNBNT
+      listNNBNT1: listNNBNT[0],
+      listNNBNT2: listNNBNT[1],
+      listNNBNT3: listNNBNT[2],
+      listNNBNT4: listNNBNT[3],
+      listNNBNT5: listNNBNT[4],
+      listNNBNT6: listNNBNT[5],
+      listNNBNT7: listNNBNT[6],
+      listNNBNT8: listNNBNT[7],
+      listNNBNT9: listNNBNT[8],
+      listNNBNT10: listNNBNT[9],
+      // TPBNT
+      listTPBNT1: listTPBNT[0],
+      listTPBNT2: listTPBNT[1],
+      listTPBNT3: listTPBNT[2],
+      listTPBNT4: listTPBNT[3],
+      listTPBNT5: listTPBNT[4],
+      listTPBNT6: listTPBNT[5],
+      listTPBNT7: listTPBNT[6],
+      listTPBNT8: listTPBNT[7],
+      listTPBNT9: listTPBNT[8],
+      listTPBNT10: listTPBNT[9],
+      // SBNT
+      listSBNT1: listSBNT[0],
+      listSBNT2: listSBNT[1],
+      listSBNT3: listSBNT[2],
+      listSBNT4: listSBNT[3],
+      listSBNT5: listSBNT[4],
+      listSBNT6: listSBNT[5],
+      listSBNT7: listSBNT[6],
+      listSBNT8: listSBNT[7],
+      listSBNT9: listSBNT[8],
+      listSBNT10: listSBNT[9],
+
+      listSSBNT: listSSBNT,
+      // C
+      listC1: listC[0],
+      listC2: listC[1],
+      listC3: listC[2],
+      listC4: listC[3],
+      listC5: listC[4],
+      listC6: listC[5],
+      listC7: listC[6],
+      listC8: listC[7],
+      listC9: listC[8],
+      listC10: listC[9],
+      listC11: listC[10],
+      listC12: listC[11],
+      listC13: listC[12],
+      listC14: listC[13],
+      listC15: listC[14],
+      listC16: listC[15],
+      listC17: listC[16],
+      listC18: listC[17],
+      listC19: listC[18],
+      listC20: listC[19],
+      // NC
+      listNC1: listNC[0],
+      listNC2: listNC[1],
+      listNC3: listNC[2],
+      listNC4: listNC[3],
+      listNC5: listNC[4],
+      listNC6: listNC[5],
+      listNC7: listNC[6],
+      listNC8: listNC[7],
+      listNC9: listNC[8],
+      listNC10: listNC[9],
+      listNC11: listNC[10],
+      listNC12: listNC[11],
+      listNC13: listNC[12],
+      listNC14: listNC[13],
+      listNC15: listNC[14],
+      listNC16: listNC[15],
+      listNC17: listNC[16],
+      listNC18: listNC[17],
+      listNC19: listNC[18],
+      listNC20: listNC[19],
+      //NNC
+      listNNC1: listNNC[0],
+      listNNC2: listNNC[1],
+      listNNC3: listNNC[2],
+      listNNC4: listNNC[3],
+      listNNC5: listNNC[4],
+      listNNC6: listNNC[5],
+      listNNC7: listNNC[6],
+      listNNC8: listNNC[7],
+      listNNC9: listNNC[8],
+      listNNC10: listNNC[9],
+      listNNC11: listNNC[10],
+      listNNC12: listNNC[11],
+      listNNC13: listNNC[12],
+      listNNC14: listNNC[13],
+      listNNC15: listNNC[14],
+      listNNC16: listNNC[15],
+      listNNC17: listNNC[16],
+      listNNC18: listNNC[17],
+      listNNC19: listNNC[18],
+      listNNC20: listNNC[19],
+      //TPC
+      listTPC1: listTPC[0],
+      listTPC2: listTPC[1],
+      listTPC3: listTPC[2],
+      listTPC4: listTPC[3],
+      listTPC5: listTPC[4],
+      listTPC6: listTPC[5],
+      listTPC7: listTPC[6],
+      listTPC8: listTPC[7],
+      listTPC9: listTPC[8],
+      listTPC10: listTPC[9],
+      listTPC11: listTPC[10],
+      listTPC12: listTPC[11],
+      listTPC13: listTPC[12],
+      listTPC14: listTPC[13],
+      listTPC15: listTPC[14],
+      listTPC16: listTPC[15],
+      listTPC17: listTPC[16],
+      listTPC18: listTPC[17],
+      listTPC19: listTPC[18],
+      listTPC20: listTPC[19],
+      //SC
+      listSC1: listSC[0],
+      listSC2: listSC[1],
+      listSC3: listSC[2],
+      listSC4: listSC[3],
+      listSC5: listSC[4],
+      listSC6: listSC[5],
+      listSC7: listSC[6],
+      listSC8: listSC[7],
+      listSC9: listSC[8],
+      listSC10: listSC[9],
+      listSC11: listSC[10],
+      listSC12: listSC[11],
+      listSC13: listSC[12],
+      listSC14: listSC[13],
+      listSC15: listSC[14],
+      listSC16: listSC[15],
+      listSC17: listSC[16],
+      listSC18: listSC[17],
+      listSC19: listSC[18],
+      listSC20: listSC[19],
+
+      listSSC: listSSC,
+      listETC: listETC,
+      listSETC: listSETC,
+      listSAll: listSAll
 
 
     }).then(response => {
@@ -143,7 +458,6 @@ function CSD_budget(id_projects) {
       console.error('Error creating project:', error);
     });
   };
-
   // useEffect(()=>{
   //   console.log(listA)
   //   console.log(listNA)
@@ -359,14 +673,14 @@ function CSD_budget(id_projects) {
   const [listSSBNT, setListSSBNT] = useState(1);
   const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
-  // useEffect(()=>{
-  //   console.log(listBNT)
-  //   console.log(listNBNT)
-  //   console.log(listNNBNT)
-  //   console.log(listTPBNT)
-  //   console.log(listSBNT)
-  //   console.log(listSSBNT)
-  // },[listBNT,listNBNT,listNNBNT,listTPBNT,listSBNT,listSSBNT])
+  useEffect(() => {
+    console.log(listBNT)
+    console.log(listNBNT)
+    console.log(listNNBNT)
+    console.log(listTPBNT)
+    console.log(listSBNT)
+    console.log(listSSBNT)
+  }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT])
   const increaseTypeBNTCount = () => {
     if (TypeBNTCount < 10) {
       setTypeBNTCount(TypeBNTCount + 1);
