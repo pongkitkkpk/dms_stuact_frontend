@@ -958,6 +958,10 @@
   font-weight: normal;
 }
 
+.margin-form-control{
+  margin-left: 5px;
+}
+
 .table-margin {
   margin-bottom: 7px;
 }
