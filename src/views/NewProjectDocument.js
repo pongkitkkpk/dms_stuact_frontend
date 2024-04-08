@@ -9,7 +9,7 @@ import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
-  const [cSD_Detail, setCSD_Detail] = useState(false);//fix edit
+  const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
   const [cSD_person, setCSD_Person] = useState(false);
   const [cSD_locationtime, setCSD_LocationTime] = useState(true);

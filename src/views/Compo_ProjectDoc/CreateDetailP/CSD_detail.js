@@ -23,7 +23,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
-  const strcodebooksomeoutyear =storedUser.codebooksomeoutyear
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear
 
   // console.log( storedUser);
 
@@ -57,6 +57,35 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   //
   const minDate = new Date();
 
+  // เพิ่มสถานที่
+  const [personCount, setPersonCount] = useState(1);
+  const increasePersonCount = () => {
+    if (personCount < 3) {
+      setPersonCount(personCount + 1);
+    }
+  };
+  const decreasePersonCount = () => {
+    if (personCount > 1) {
+      setPersonCount(personCount - 1);
+      // Reset corresponding studentTypeNumber state variables to 0
+      switch (personCount) {
+        case 2:
+          setPerson3Name("")
+          setPerson3Contact("")
+          break;
+        case 1:
+          setPerson2Name("")
+          setPerson2Contact("")
+          break;
+        case 0:
+          setPerson1Name("")
+          setPerson1Contact("")
+          break;
+        default:
+        // Handle other cases if needed
+      }
+    }
+  };
   // *********************************************************
   const [userList, setUserList] = useState([]);
   const getUsers = () => {
@@ -80,12 +109,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
 
   // หาอาจารย์ที่ปรึกษา
   useEffect(() => {
-   
-    const user = userList.find((user) =>user.clubName === storedUser.clubName  &&
+
+    const user = userList.find((user) => user.clubName === storedUser.clubName &&
       user.yearly == storedUser.yearly &&
       user.position === "Ad"
     );
-    
+
     if (user) {
       console.log("ASDFASDFASDF")
       console.log(user)
@@ -131,7 +160,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       project_name: project_name,
       project_number: project_number,
       codeclub: codeclub,
-      codebooksomeoutyear:codebooksomeoutyear,
+      codebooksomeoutyear: codebooksomeoutyear,
       project_phase: project_phase,
       yearly: yearly,
       yearly_count: yearly_count,
@@ -159,7 +188,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           project_name: project_name,
           project_number: project_number,
           codeclub: codeclub,
-          codebooksomeoutyear:codebooksomeoutyear,
+          codebooksomeoutyear: codebooksomeoutyear,
           project_phase: project_phase,
           yearly: yearly,
           yearly_count: yearly_count,
@@ -321,91 +350,93 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {/* คนที่ 1 */}
-                        <tr style={{ backgroundColor: "white" }}>
-                          {/* ชื่อ คนที่ 1  */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 1"
-                              onChange={(event) => {
-                                setPerson1Name(event.target.value);
-                              }}
-                            />
-                          </td>
-                          {/* เบอร์ คนที่ 1 */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
-                              onChange={(event) => {
-                                setPerson1Contact(event.target.value);
-                              }}
-                            />
-                          </td>
-                        </tr>
-                        {/* คนที่ 2 */}
-                        <tr>
-                          {/* ชื่อ คนที่ 2 */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 2"
-                              onChange={(event) => {
-                                setPerson2Name(event.target.value);
-                              }}
-                            />
-                          </td>
-                          {/* เบอร์ คนที่ 2 */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 2"
-                              onChange={(event) => {
-                                setPerson2Contact(event.target.value);
-                              }}
-                            />
-                          </td>
-                        </tr>
-                        {/* คนที่ 3 */}
-                        <tr style={{ backgroundColor: "white" }}>
-                          {/* ชื่อ คนที่ 3 */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 3"
-                              onChange={(event) => {
-                                setPerson3Name(event.target.value);
-                              }}
-                            />
-                          </td>
-                          {/* เบอร์ คนที่ 3 */}
-                          <td style={{ verticalAlign: "middle" }}>
-                            <Form.Control
-                              className="font-form-control"
-                              size="sm"
-                              type="text"
-                              placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 3"
-                              onChange={(event) => {
-                                setPerson3Contact(event.target.value);
-                              }}
-                            />
-                          </td>
-                        </tr>
+                        {Array.from({ length: personCount }).map(
+                          (_, index) => (
+                            <tr tr key={index} style={{ backgroundColor: "white" }}>
+
+                              <td style={{ verticalAlign: "middle" }}>
+                                <Form.Control
+                                  className="font-form-control"
+                                  size="sm"
+                                  type="text"
+                                  placeholder={`ชื่อ ผู้รับผิดชอบโครงการ คนที่ ${index + 1}`}
+                                  onChange={(event) => {
+                                    switch (index) {
+                                      case 0:
+                                        setPerson1Name(event.target.value);
+                                        break;
+                                      case 1:
+                                        setPerson2Name(event.target.value);
+                                        break;
+                                      case 2:
+                                        setPerson3Name(event.target.value);
+                                        break;
+                                      default:
+                                      // Handle other cases if needed
+                                    }
+                                  }
+                                  }
+                                />
+                              </td>
+                              {/* เบอร์ คนที่ */}
+                              <td style={{ verticalAlign: "middle" }}>
+                                <Form.Control
+                                  className="font-form-control"
+                                  size="sm"
+                                  type="text"
+                                  placeholder={`เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ ${index + 1}`}
+                                  onChange={(event) => {
+                                    switch (index) {
+                                      case 0:
+                                        setPerson1Contact(event.target.value);
+                                        break;
+                                      case 1:
+                                        setPerson2Contact(event.target.value);
+                                        break;
+                                      case 2:
+                                        setPerson3Contact(event.target.value);
+                                        break;
+                                      default:
+                                      // Handle other cases if needed
+                                    }
+                                  }}
+                                />
+                              </td>
+                            </tr>
+                          ))}
+
                       </tbody>
                     </Table>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {personCount < 3 && (
+                        <Button
+                          variant="success"
+                          className="ml-5 mb-3 btn-budget-increase border-success"
+                          onClick={increasePersonCount}
+                        >
+                          <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
+                        </Button>
+                      )}
+                      {personCount > 1 && (
+                        <Button
+                          variant="danger"
+                          className="ml-5 mb-3 btn-budget-decrease border-danger"
+                          onClick={decreasePersonCount}
+                        >
+                          <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
+                        </Button>
+                      )}
+                    </div>
                   </td>
                 </tr>
+
+
                 {/* ข้อ 5 เลือก 5 ด้าน  db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
@@ -418,7 +449,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     <div>การพัฒนา</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                       <input
                         type="checkbox"
                         value="1"
@@ -429,7 +460,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                       <input
                         type="checkbox"
                         value="2"
@@ -439,7 +470,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านกีฬาหรือการส่งเสริมสุขภาพ
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                       <input
                         type="checkbox"
                         value="3"
@@ -449,7 +480,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                       <input
                         type="checkbox"
                         value="4"
@@ -459,7 +490,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านเสริมสร้างคุณธรรมและจริยธรรม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                       <input
                         type="checkbox"
                         value="5"
@@ -508,7 +539,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
             </Button>
           </CardFooter>
         </Card>
-      </div>
+      </div >
     </>
   );
 }

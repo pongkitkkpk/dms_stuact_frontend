@@ -203,9 +203,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                                 className="table-margin"
                                 size="sm"
                                 type="text"
-                                placeholder={`สถานที่จัดโครงการที่ ${
-                                  index + 1
-                                }`}
+                                placeholder={`สถานที่จัดโครงการที่ ${index + 1}`}
                                 onChange={(event) => {
                                   switch (index) {
                                     case 0:
