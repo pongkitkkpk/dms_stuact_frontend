@@ -60,8 +60,10 @@ function Header() {
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <div className="d-flex justify-content-center align-items-center ml-2 ml-lg-0">
+        <Container fluid
+        style={{ marginTop: "-0.6%", marginBottom: "-0.6%" }}>
+          <div className="d-flex justify-content-center align-items-center ml-2 ml-lg-0 "
+          >
             <Navbar.Brand
               href="#home"
               onClick={(e) => e.preventDefault()}
