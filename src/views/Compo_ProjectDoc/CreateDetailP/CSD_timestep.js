@@ -875,10 +875,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                 {/* หัวข้อ index */}
                 {Array.from({ length: TopictableCount }).map((_, index) => (
                   <tr style={{ backgroundColor: "white" }}>
-                    <td
-                      className="head-side-td"
-                      style={{ verticalAlign: "top" }}
-                    >
+                    <td className={`head-side-td ${index % 2 === 0 ? 'even' : ''}`} style={{ verticalAlign: "top" }}>
                       <div>{`ขั้นตอนที่ ${index + 1}`}</div>
                     </td>
                     <td className="back-side-td">

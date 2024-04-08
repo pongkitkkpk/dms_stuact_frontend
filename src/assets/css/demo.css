@@ -828,6 +828,13 @@
   color: white;
   /* vertical-align: text-top; */
 }
+.head-side-td.even{
+  /* background: linear-gradient( 180deg, #FF8B13, #d76d00, #9c4f00, #613200); */
+  /* background: linear-gradient( 180deg, #FF8B13, #ff9e3a, #ffb261, #ffc589); */
+  /* background: linear-gradient( 180deg, #797979, #FF8B13); */
+  background: linear-gradient( 180deg, #ffad59, #FF8B13);
+
+}
 
 .head-side-td-swp{
   /* background: linear-gradient( 180deg, #FF8B13, #d76d00, #9c4f00, #613200); */
