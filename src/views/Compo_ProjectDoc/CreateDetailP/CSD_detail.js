@@ -413,11 +413,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     style={{ verticalAlign: "top" }}
                   >
                     <div>
-                      โครงการนี้อยู่ภายใต้แผนยุทธศาสตร์การพัฒนาของมหาวิทยาลัยที่ส่งเสริมกิจกรรมพัฒนานักศึกษา
+                      แผนยุทธศาสตร์
                     </div>
+                    <div>การพัฒนา</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    <label style={{ marginLeft: "10px", fontSize: "16px",color: "black" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="1"
@@ -428,7 +429,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="2"
@@ -438,7 +439,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านกีฬาหรือการส่งเสริมสุขภาพ
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="3"
@@ -448,7 +449,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="4"
@@ -458,7 +459,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านเสริมสร้างคุณธรรมและจริยธรรม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px" }}>
+                    <label style={{ marginLeft: "10px", fontSize: "14px",color: "black" }}>
                       <input
                         type="checkbox"
                         value="5"

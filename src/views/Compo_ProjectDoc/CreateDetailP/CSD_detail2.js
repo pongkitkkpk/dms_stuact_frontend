@@ -464,7 +464,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                           onClick={increaseProjectTypeCount}
                         >
                           <div style={{ fontSize: "14px" }}>
-                            เพิ่มลักษณะรูปแบบโครงการ
+                            เพิ่มลักษณะ
                           </div>
                         </Button>
                       )}
@@ -476,7 +476,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                           onClick={decreaseProjectTypeCount}
                         >
                           <div style={{ fontSize: "14px" }}>
-                            ลดลักษณะรูปแบบโครงการ
+                            ลดลักษณะ
                           </div>
                         </Button>
                       )}

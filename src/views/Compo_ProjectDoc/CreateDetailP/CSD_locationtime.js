@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // react-bootstrap components
+import CardHeader from "react-bootstrap/esm/CardHeader";
+import { CardBody, CardFooter } from "reactstrap";
 import {
   Button,
   Card,
@@ -158,195 +160,221 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
       {/* วนค่าจากdatabase  */}
       <Col md="9">
         <Card>
-          <Table striped="columns">
-            <thead>
-              <tr>
-                <th>ข้อมูลพื้นฐานโครงการ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* สถานที่จัดโครงการ */}
-              <tr>
-                <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                  สถานที่จัดโครงการ
-                </td>
-                <td className="back-side-td">
-                  <Table>
-                    <thead>
-                      <tr></tr>
-                    </thead>
-                    <tbody>
-                      {Array.from({ length: locationCount }).map((_, index) => (
-                        <tr key={index} style={{ backgroundColor: "white" }}>
-                          <Form.Control
-                            size="sm"
-                            type="text"
-                            placeholder={`สถานที่จัดโครงการ ${index + 1}`}
-                            onChange={(event) => {
-                              switch (index) {
-                                case 0:
-                                  setLocation1(event.target.value);
-                                  break;
-                                case 1:
-                                  setLocation2(event.target.value);
-                                  break;
-                                case 2:
-                                  setLocation3(event.target.value);
-                                  break;
-                                case 3:
-                                  setLocation4(event.target.value);
-                                  break;
-                                case 4:
-                                  setLocation5(event.target.value);
-                                  break;
-                                default:
-                                // Handle other cases if needed
-                              }
-                            }}
-                          />
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    {locationCount < 5 && (
-                      <Button
-                        variant="success"
-                        className="ml-5 mb-3 btn-budget-increase border-success"
-                        onClick={increaseLocationCount}
-                      >
-                        <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
-                      </Button>
-                    )}
-                    {locationCount > 1 && (
-                      <Button
-                        variant="danger"
-                        className="ml-5 mb-3 btn-budget-decrease border-danger"
-                        onClick={decreaseLocationCount}
-                      >
-                        <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
-                      </Button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-              {/* ช่วงจัดเตรียมโครงการ */}
-              <tr>
-                <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                  วันจัดเตรียมโครงการ
-                  <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p>
-                </td>
-                <td className="back-side-td">
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div style={{ marginRight: "20px" }}>
-                      <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
-                      <DatePicker
-                        selected={start_prepare}
-                        onChange={(date) => setStartPrepare(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="เลือกวันเริ่มต้น"
-                        className="form-control"
-                        minDate={minDate}
-                        popperPlacement="top-start"
-                        isClearable
-                        selectsStart
-                        startDate={start_prepare}
-                        endDate={end_prepare}
-                      />
-                    </div>
-                    <div>
-                      <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
-                      <DatePicker
-                        selected={end_prepare}
-                        onChange={(date) => setEndPrepare(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="เลือกวันสิ้นสุด"
-                        className="form-control"
-                        minDate={start_prepare}
-                        popperPlacement="top-start"
-                        isClearable
-                        selectsEnd
-                        startDate={start_prepare}
-                        endDate={end_prepare}
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              {/* วันดำเนินโครงการ */}
-              <tr>
-                <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                  วันดำเนินโครงการ
-                  <p className="detail-prodoc">
-                    กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
-                  </p>
-                </td>
-                <td className="back-side-td">
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div style={{ marginRight: "20px" }}>
-                      <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
-                      <DatePicker
-                        selected={start_event}
-                        onChange={(date) => setStartEvent(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="เลือกวันเริ่มต้น"
-                        className="form-control"
-                        minDate={end_prepare}
-                        popperPlacement="top-start"
-                        isClearable
-                        selectsStart
-                        startDate={start_event}
-                        endDate={end_event}
-                      />
-                    </div>
-                    <div>
-                      <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
-                      <DatePicker
-                        selected={end_event}
-                        onChange={(date) => setEndEvent(date)}
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="เลือกวันสิ้นสุด"
-                        className="form-control"
-                        minDate={start_event}
-                        popperPlacement="top-start"
-                        isClearable
-                        selectsEnd
-                        startDate={start_event}
-                        endDate={end_event}
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              {/* วันกำหนดส่งโครงการ */}
-              <tr style={{ backgroundColor: "white" }}>
-                <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                  วันกำหนดส่งโครงการ
-                  <p className="detail-prodoc">
-                    กำหนด 30 วัน หลังจากวันดำเนินงาน
-                  </p>
-                </td>
-                <td>
-                  <div className="d-flex align-items-center">
-                    <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
+          <CardHeader
+            style={{
+              backgroundColor: "#535353",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                marginRight: "auto",
+                marginBottom: "10px",
+                fontSize: "16px",
+                color: "white",
+              }}
+            >
+              สถานที่และเวลาดำเนินการ
+            </div>
+          </CardHeader>
 
-                    <input
-                      type="text"
-                      value={showdeadline}
-                      className="form-control"
-                      readOnly
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+          <CardBody>
+            <Table striped="columns">
+              <tbody>
+                {/* สถานที่จัดโครงการ */}
+                <tr>
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                    <div>สถานที่จัดโครงการ</div>
+                  </td>
+                  <td className="back-side-td">
+                    <Table>
+                      <thead>
+                        <tr></tr>
+                      </thead>
+                      <tbody>
+                        {Array.from({ length: locationCount }).map(
+                          (_, index) => (
+                            <tr
+                              key={index}
+                              style={{ backgroundColor: "white" }}
+                            >
+                              <Form.Control
+                                className="table-margin"
+                                size="sm"
+                                type="text"
+                                placeholder={`สถานที่จัดโครงการที่ ${
+                                  index + 1
+                                }`}
+                                onChange={(event) => {
+                                  switch (index) {
+                                    case 0:
+                                      setLocation1(event.target.value);
+                                      break;
+                                    case 1:
+                                      setLocation2(event.target.value);
+                                      break;
+                                    case 2:
+                                      setLocation3(event.target.value);
+                                      break;
+                                    case 3:
+                                      setLocation4(event.target.value);
+                                      break;
+                                    case 4:
+                                      setLocation5(event.target.value);
+                                      break;
+                                    default:
+                                    // Handle other cases if needed
+                                  }
+                                }}
+                              />
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </Table>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {locationCount < 5 && (
+                        <Button
+                          variant="success"
+                          className="ml-5 mb-3 btn-budget-increase border-success"
+                          onClick={increaseLocationCount}
+                        >
+                          <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
+                        </Button>
+                      )}
+                      {locationCount > 1 && (
+                        <Button
+                          variant="danger"
+                          className="ml-5 mb-3 btn-budget-decrease border-danger"
+                          onClick={decreaseLocationCount}
+                        >
+                          <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
+                        </Button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+
+                {/* ช่วงจัดเตรียมโครงการ */}
+                <tr>
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                    <div>วันจัดเตรียมโครงการ</div>
+                    <p className="detail-prodoc">ระบุช่วงเวลาเตรียมงาน</p>
+                  </td>
+                  <td className="back-side-td">
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <div style={{ marginRight: "20px" }}>
+                        <Form.Label>วันเริ่มต้น(จัดเตรียม) :</Form.Label>
+                        <DatePicker
+                          selected={start_prepare}
+                          onChange={(date) => setStartPrepare(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="เลือกวันเริ่มต้น"
+                          className="form-control"
+                          minDate={minDate}
+                          popperPlacement="top-start"
+                          isClearable
+                          selectsStart
+                          startDate={start_prepare}
+                          endDate={end_prepare}
+                        />
+                      </div>
+                      <div>
+                        <Form.Label>วันสิ้นสุด(จัดเตรียม) :</Form.Label>
+                        <DatePicker
+                          selected={end_prepare}
+                          onChange={(date) => setEndPrepare(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="เลือกวันสิ้นสุด"
+                          className="form-control"
+                          minDate={start_prepare}
+                          popperPlacement="top-start"
+                          isClearable
+                          selectsEnd
+                          startDate={start_prepare}
+                          endDate={end_prepare}
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {/* วันดำเนินโครงการ */}
+                <tr>
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                    วันดำเนินโครงการ
+                    <p className="detail-prodoc">
+                      กรณีจัดโครงการเพียงหนึ่งวันให้เลือกวันเริ่มต้นและวันสิ้นสุดเป็นวันเดียวกัน
+                    </p>
+                  </td>
+                  <td className="back-side-td">
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <div style={{ marginRight: "20px" }}>
+                        <Form.Label>วันเริ่มต้น(ดำเนิน) : </Form.Label>
+                        <DatePicker
+                          selected={start_event}
+                          onChange={(date) => setStartEvent(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="เลือกวันเริ่มต้น"
+                          className="form-control"
+                          minDate={end_prepare}
+                          popperPlacement="top-start"
+                          isClearable
+                          selectsStart
+                          startDate={start_event}
+                          endDate={end_event}
+                        />
+                      </div>
+                      <div>
+                        <Form.Label>วันสิ้นสุด(ดำเนิน) : </Form.Label>
+                        <DatePicker
+                          selected={end_event}
+                          onChange={(date) => setEndEvent(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="เลือกวันสิ้นสุด"
+                          className="form-control"
+                          minDate={start_event}
+                          popperPlacement="top-start"
+                          isClearable
+                          selectsEnd
+                          startDate={start_event}
+                          endDate={end_event}
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {/* วันกำหนดส่งโครงการ */}
+                <tr style={{ backgroundColor: "white" }}>
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                    วันกำหนดส่งโครงการ
+                    <p className="detail-prodoc">
+                      กำหนด 30 วัน หลังจากวันดำเนินงาน
+                    </p>
+                  </td>
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label>
+
+                      <input
+                        type="text"
+                        value={showdeadline}
+                        className="form-control"
+                        readOnly
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </CardBody>
+
           <div>
             <Button onClick={createProject} type="submit" variant="info">
               อัพขึ้นสู่ระบบ
