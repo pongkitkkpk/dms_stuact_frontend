@@ -12,7 +12,7 @@ function NewProjectDocument() {
   const [cSD_Detail, setCSD_Detail] = useState(true);//fix edit
   const [cSD_Detail2, setCSD_Detail2] = useState(false);//fix edit
   const [cSD_person, setCSD_Person] = useState(false);
-  const [cSD_locationtime, setCSD_LocationTime] = useState(true);
+  const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
   const [cSD_budget, setCSD_budget] = useState(false);
   const containerRef = useRef(null);
@@ -124,7 +124,7 @@ function NewProjectDocument() {
                     <td><a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.6 งบประมาณโครงการ</div></a></td>
                   </tr>
                   <tr>
-                    <td className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ข้อมูลเพิ่มเติม</div></a></td>
+                    <td className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
                   </tr>
                   <tr>
                     <td className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>

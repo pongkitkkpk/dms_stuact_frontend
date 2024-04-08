@@ -420,7 +420,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                           className="ml-5 mb-3 btn-budget-increase border-success"
                           onClick={increasePersonCount}
                         >
-                          <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
+                          <div style={{ fontSize: "14px" }}>เพิ่มบุคคล</div>
                         </Button>
                       )}
                       {personCount > 1 && (
@@ -429,7 +429,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                           className="ml-5 mb-3 btn-budget-decrease border-danger"
                           onClick={decreasePersonCount}
                         >
-                          <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
+                          <div style={{ fontSize: "14px" }}>ลดบุคคล</div>
                         </Button>
                       )}
                     </div>

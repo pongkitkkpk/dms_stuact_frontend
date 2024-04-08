@@ -120,6 +120,7 @@ function Sidebar({ color, image, routes }) {
         flexDirection: "column",
         justifyContent: "space-between",
         height: "100%",
+        // backgroundColor: "red"
       }}
     >
       <div
@@ -147,7 +148,7 @@ function Sidebar({ color, image, routes }) {
                 <li
                   className={prop.upgrade ? "active active-pro" : ""}
                   key={key}
-                  style={{borderRight: `4px solid ${prop.color}`,position: "relative"}}
+                  style={{borderRight: `4px solid ${prop.color}`,position: "relative"}} //สีขอบเส้นเล็กใน side bar
                 >
                   <NavLink
                     to={prop.layout + prop.path}
