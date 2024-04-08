@@ -6,6 +6,7 @@ import CSD_person from './Compo_ProjectDoc/CreateDetailP/CSD_person';
 import CSD_locationtime from './Compo_ProjectDoc/CreateDetailP/CSD_locationtime';
 import CSD_timestep from './Compo_ProjectDoc/CreateDetailP/CSD_timestep';
 import CSD_budget from './Compo_ProjectDoc/CreateDetailP/CSD_budget';
+import CSD_indicator from './Compo_ProjectDoc/CreateDetailP/CSD_indicator';
 
 function NewProjectDocument() {
   const [id_projects, setIdProjects] = useState('');
@@ -15,6 +16,7 @@ function NewProjectDocument() {
   const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
   const [cSD_budget, setCSD_budget] = useState(false);
+  const [cSD_indicator, setCSD_indicator] = useState(false);
   const containerRef = useRef(null);
 
   
@@ -45,14 +47,23 @@ function NewProjectDocument() {
   };
 
   const CSD_timestepComponent = () => {
-    if (cSD_person) {
+    if (cSD_locationtime) {
       setCSD_timestep(true);
       setCSD_LocationTime(false);
     }
   };
 
   const CSD_budgetComponent = () => {
-    setCSD_budget(true);
+    if (cSD_timestep) {
+      setCSD_budget(true);
+      setCSD_timestep(false);
+    }
+  };
+  const CSD_indicatorComponent = () => {
+    if (cSD_budget) {
+      setCSD_indicator(true);
+      setCSD_budget(false);
+    }
   };
 
   // Function to switch to CSD_person view and scroll to top
@@ -79,6 +90,7 @@ function NewProjectDocument() {
   };
 
   const switchToCSDTimestep = () => {
+    console.log("switchtime")
     setCSD_timestep(true);
     setCSD_LocationTime(false);
     // Scroll to the top of the Container
@@ -86,8 +98,16 @@ function NewProjectDocument() {
   };
 
   const switchToCSDBudget = () => {
+    console.log("switchBud")
     setCSD_budget(true);
     setCSD_timestep(false);
+    // Scroll to the top of the Container
+    containerRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  const switchToCSDindicator = () => {
+    console.log("switchtoindi")
+    setCSD_indicator(true);
+    setCSD_budget(false);
     // Scroll to the top of the Container
     containerRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -123,8 +143,8 @@ function NewProjectDocument() {
                   <tr className={cSD_budget ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={cSD_budget ? CSD_budgetComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.6 งบประมาณโครงการ</div></a></td>
                   </tr>
-                  <tr>
-                    <td className="list-group-item"><a href="#section1-5" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
+                  <tr className={cSD_indicator ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={cSD_indicator ? CSD_indicatorComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
                   </tr>
                   <tr>
                     <td className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>
@@ -141,7 +161,8 @@ function NewProjectDocument() {
         {cSD_person && <CSD_person id_projects={id_projects} switchToCSDLocationTime={switchToCSDLocationTime} />}
         {cSD_locationtime && <CSD_locationtime id_projects={id_projects} switchToCSDTimestep={switchToCSDTimestep} />}
         {cSD_timestep && <CSD_timestep id_projects={id_projects} switchToCSDBudget={switchToCSDBudget}/>}
-        {cSD_budget && <CSD_budget id_projects={id_projects} />}
+        {cSD_budget && <CSD_budget  id_projects={id_projects} switchToCSDindicator={switchToCSDindicator} />}
+        {cSD_indicator && <CSD_indicator id_projects={id_projects} />}
       </Row>
     </Container>
   );

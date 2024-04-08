@@ -3,11 +3,13 @@ import { Button, Card, Form, Col, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import Axios from 'axios';
-function CSD_budget(id_projects) {
+function CSD_budget({id_projects, switchToCSDindicator}) {
   // const storedUserData = sessionStorage.getItem('user');
   // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   // const studentuser = storedUser.username
   // console.log("asdfasdf"+studentuser)
+
+  
 
   const [id_project, setIdProject] = useState('');
   const [codeclub, setCodeclub] = useState('');
@@ -453,6 +455,7 @@ function CSD_budget(id_projects) {
 
     }).then(response => {
       console.log(response.data);
+      switchToCSDindicator();
 
     }).catch((error) => {
       console.error('Error creating project:', error);

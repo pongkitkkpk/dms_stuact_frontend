@@ -17,6 +17,9 @@ import {
 import Axios from "axios";
 
 function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
+
+  console.log("switchToCSDTimestep")
+  console.log(switchToCSDTimestep)
   const [projectList, setProjectList] = useState([]);
 
   const [location1, setLocation1] = useState("");
