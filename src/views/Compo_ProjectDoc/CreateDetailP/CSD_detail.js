@@ -23,6 +23,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
+  const strcodebooksomeoutyear =storedUser.codebooksomeoutyear
 
   // console.log( storedUser);
 
@@ -32,6 +33,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [project_phase, setProject_phase] = useState("0");
   const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
+  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(strcodebooksomeoutyear);
   const [yearly, setYearly] = useState(""); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
   const [yearly_countsketch, setYearlyCountSketch] = useState(""); // Assuming yearly_countsketch is a number
@@ -129,6 +131,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       project_name: project_name,
       project_number: project_number,
       codeclub: codeclub,
+      codebooksomeoutyear:codebooksomeoutyear,
       project_phase: project_phase,
       yearly: yearly,
       yearly_count: yearly_count,
@@ -156,6 +159,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           project_name: project_name,
           project_number: project_number,
           codeclub: codeclub,
+          codebooksomeoutyear:codebooksomeoutyear,
           project_phase: project_phase,
           yearly: yearly,
           yearly_count: yearly_count,

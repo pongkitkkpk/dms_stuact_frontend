@@ -38,6 +38,7 @@ function TableAddPersonel() {
   const [codeagency, setCodeagency] = useState("");
   const [codeworkgroup, setCodeworkgroup] = useState("00");
   const [codebooksome, setCodebooksome] = useState("");
+  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState("");
 
   const [getuserapi, setGetuserapi] = useState("");
   const [username, setUsername] = useState("");
@@ -163,7 +164,9 @@ function TableAddPersonel() {
     const numericCodeworkgroup = codeworkgroup.replace(/\D/g, "");
 
     const newCodebooksome = `${campusAbbreviation}${yearly}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
+    const newCodebooksomeoutyear = `${campusAbbreviation}${"yy"}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
     setCodebooksome(newCodebooksome);
+    setCodebooksomeoutyear(newCodebooksomeoutyear);
     Axios.post("http://localhost:3001/admin/user/createUser", {
       id_student: username,
       name_student: name_student,
@@ -182,6 +185,7 @@ function TableAddPersonel() {
       codeagency: codeagency,
       codeworkgroup: codeworkgroup,
       codebooksome: newCodebooksome,
+      codebooksomeoutyear:newCodebooksomeoutyear
     })
       .then(() => {
         setUserList([
@@ -204,6 +208,7 @@ function TableAddPersonel() {
             codeagency: codeagency,
             codeworkgroup: codeworkgroup,
             codebooksome: newCodebooksome,
+            codebooksomeoutyear:newCodebooksomeoutyear
           },
         ]);
         // Reload the page after adding a user
