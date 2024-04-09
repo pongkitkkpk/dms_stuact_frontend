@@ -9,9 +9,8 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   // const studentuser = storedUser.username
   // console.log("asdfasdf"+studentuser)
 
-  
 
-  const [id_project, setIdProject] = useState('');
+  // const [id_project, setIdProject] = useState('');
   const [codeclub, setCodeclub] = useState('');
   const [yearly_countsketch, setYearlyCountSketch] = useState('');
   const [pPersonData, setPPersonData] = useState([]);
@@ -31,7 +30,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   };
 
   useEffect(() => {
-    setIdProject(id_projects.id_projects)
+
     getpPersonData();
   }, []);
 
@@ -50,10 +49,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
 
 
   const createProject = () => {
-    Axios.put(`http://localhost:3001/student/project/p_budget/create/${id_project}`, {
-      id_project,
-      // codeclub,
-      // yearly_countsketch,
+    Axios.put(`http://localhost:3001/student/project/p_budget/create/${id_projects}`, {
       // A
       listA1: listA[0],
       listA2: listA[1],

@@ -116,8 +116,6 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
     );
 
     if (user) {
-      console.log("ASDFASDFASDF")
-      console.log(user)
       setAdvisorName(user.name_student);
 
     } else {
