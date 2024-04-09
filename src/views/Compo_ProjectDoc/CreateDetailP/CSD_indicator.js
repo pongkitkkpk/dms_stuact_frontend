@@ -58,36 +58,33 @@ function CSD_indicator({ id_projects }) {
                       }}
                     />
                     <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginTop: "10px"
-                    }}
-                  >
-                    {/* {TypeBNTCount < 10 && ( */}
-                    <Button
-                      variant="success"
-                      className="ml-5 mb-3 btn-budget-increase border-success"
-                      // onClick={increaseTypeBNTCount}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginTop: "10px",
+                      }}
                     >
-                      <div style={{ fontSize: "14px" }}>
-                        เพิ่มรายการค่าใช้สอย
-                      </div>
-                    </Button>
-                    {/* )} */}
-                    {/* {TypeBNTCount > 1 && ( */}
-                    <Button
-                      variant="danger"
-                      className="ml-5 mb-3 btn-budget-decrease border-danger"
-                      // onClick={decreaseTypeBNTCount}
-                    >
-                      <div style={{ fontSize: "14px" }}>ลดรายการค่าใช้สอย</div>
-                    </Button>
-                    {/* )} */}
-                  </div>
+                      {/* {TypeBNTCount < 10 && ( */}
+                      <Button
+                        variant="success"
+                        className="ml-5 mb-3 btn-budget-increase border-success"
+                        // onClick={increaseTypeBNTCount}
+                      >
+                        <div style={{ fontSize: "14px" }}>เพิ่มตัวชี้วัด</div>
+                      </Button>
+                      {/* )} */}
+                      {/* {TypeBNTCount > 1 && ( */}
+                      <Button
+                        variant="danger"
+                        className="ml-5 mb-3 btn-budget-decrease border-danger"
+                        // onClick={decreaseTypeBNTCount}
+                      >
+                        <div style={{ fontSize: "14px" }}>ลดตัวชี้วัด</div>
+                      </Button>
+                      {/* )} */}
+                    </div>
                   </td>
-                  
                 </tr>
 
                 <tr style={{ backgroundColor: "white" }}>
