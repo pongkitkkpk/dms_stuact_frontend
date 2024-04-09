@@ -290,6 +290,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                         )}
                       </tbody>
                     </Table>
+                    {/* button */}
                     <div
                       style={{
                         display: "flex",
@@ -499,7 +500,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                         marginTop: "1%",
                       }}
                     >
-                      <div style={{  marginRight: "10px" }}>
+                      <div style={{ marginRight: "10px" }}>
                         <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                           <input
                             type="radio"
@@ -514,7 +515,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                           {`    `}โครงการใหม่
                         </label>
                       </div>
-                      <div style={{  marginRight: "10%" }}>
+                      <div style={{ marginRight: "10%" }}>
                         <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
                           <input
                             type="radio"

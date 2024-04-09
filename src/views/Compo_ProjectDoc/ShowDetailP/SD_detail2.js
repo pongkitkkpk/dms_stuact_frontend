@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios';
+import CardHeader from "react-bootstrap/esm/CardHeader";
+import { CardBody, CardFooter } from "reactstrap";
 // react-bootstrap components
 import {
     Button,
@@ -14,6 +16,11 @@ import {
 } from "react-bootstrap";
 
 function SD_detail({ id_project }) {
+    const storedUserData = sessionStorage.getItem("user");
+    const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    const studentuser = storedUser.username;
+    const strcodebooksomeoutyear = storedUser.codebooksomeoutyear
+
     const [principles_and_reasons1, setPrinciplesAndReasons1] = useState('');
     const [principles_and_reasons2, setPrinciplesAndReasons2] = useState('');
     const [principles_and_reasons3, setPrinciplesAndReasons3] = useState('');
@@ -87,7 +94,7 @@ function SD_detail({ id_project }) {
     const handleSaveClick = () => {
         // Save data here
         setIsEditMode(false);
-       
+
         if (window.confirm("Do you want to save changes?")) {
 
             Axios.put(`http://localhost:3001/student/project/edit/${id_project}`, editData)
@@ -113,7 +120,7 @@ function SD_detail({ id_project }) {
             setEditData(originalData);
         }
     };
-    
+
 
     return (
         <>
@@ -122,365 +129,449 @@ function SD_detail({ id_project }) {
                     {!isEditMode && (
                         <Button variant="primary" onClick={handleEditClick}>Edit</Button>
                     )}
-                    
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>ข้อมูลพื้นฐานโครงการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <CardHeader
+                        style={{
+                            backgroundColor: "#535353",
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <div
+                            style={{
+                                marginRight: "auto",
+                                marginBottom: "10px",
+                                fontSize: "16px",
+                                color: "white",
+                            }}
+                        >
+                            ลักษณะโครงการ
+                        </div>
+                    </CardHeader>
+                    <CardBody>
+                        <Table striped="columns">
 
-                            {/* หลักการและเหตุผล */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>หลักการและเหตุผล</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`เพิ่มหลักการและเหตุผล ${1}`}
-                                                value={isEditMode ? editData.principles_and_reasons1 : principles_and_reasons1}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, principles_and_reasons1: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`เพิ่มหลักการและเหตุผล ${2}`}
-                                                value={isEditMode ? editData.principles_and_reasons2 : principles_and_reasons2}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, principles_and_reasons2: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`เพิ่มหลักการและเหตุผล ${3}`}
-                                                value={isEditMode ? editData.principles_and_reasons3 : principles_and_reasons3}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, principles_and_reasons3: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`เพิ่มหลักการและเหตุผล ${4}`}
-                                                value={isEditMode ? editData.principles_and_reasons4 : principles_and_reasons4}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, principles_and_reasons4: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`เพิ่มหลักการและเหตุผล ${5}`}
-                                                value={isEditMode ? editData.principles_and_reasons5 : principles_and_reasons5}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, principles_and_reasons5: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                    </ul>
-
-                                </td>
-                            </tr>
-                            {/* วัตถุประสงค์ */}
-                            <tr>
-                                <td className='head-side-td'>วัตถุประสงค์</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`วัตถุประสงค์ ${1}`}
-                                                value={isEditMode ? editData.objective1 : objective1}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, objective1: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`วัตถุประสงค์ ${2}`}
-                                                value={isEditMode ? editData.objective2 : objective2}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, objective2: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`วัตถุประสงค์ ${3}`}
-                                                value={isEditMode ? editData.objective3 : objective3}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, objective3: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`วัตถุประสงค์ ${4}`}
-                                                value={isEditMode ? editData.objective4 : objective3}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, objective4: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`วัตถุประสงค์ ${5}`}
-                                                value={isEditMode ? editData.objective5 : objective3}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, objective5: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-
-                                    </ul>
-
-                                </td>
-                            </tr>
-                            {/* ลักษณะรูปแบบโครงการ */}
-                            <tr>
-                                <td className='head-side-td'>ลักษณะรูปแบบโครงการ</td>
-                                <td className='back-side-td'>
-                                    <ul>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${1}`}
-                                                value={isEditMode ? editData.project_type1 : project_type1}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, project_type1: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${2}`}
-                                                value={isEditMode ? editData.project_type2 : project_type2}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, project_type2: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${3}`}
-                                                value={isEditMode ? editData.project_type3 : project_type3}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, project_type3: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${4}`}
-                                                value={isEditMode ? editData.project_type4 : project_type4}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, project_type4: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-                                        <li >
-                                            <Form.Control
-                                                size="sm"
-                                                type="text"
-                                                placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${5}`}
-                                                value={isEditMode ? editData.project_type5 : project_type5}
-                                                readOnly={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, project_type5: event.target.value });
-                                                }}
-                                            />
-                                        </li>
-
-                                    </ul>
-
-                                </td>
-                            </tr>
-                            {/* ลักษณะโครงการ */}
-                            <tr style={{ backgroundColor: "white" }}>
-                                <td className='head-side-td'>ลักษณะโครงการ</td>
-                                <td className='back-side-td' >
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <div style={{ flex: '1', marginRight: '5%' }}>
-                                            <Form.Check
-                                                type="radio"
-                                                id="newProjectRadio"
-                                                name="projectType"
-                                                label="โครงการใหม่"
-                                                checked={isEditMode ? editData.is_newproject : is_newproject}
-                                                readOnly={!isEditMode}
-                                                disabled={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, is_newproject: true, is_continueproject: false, problem1: null, result1: null, problem2: null, result2: null, problem3: null, result3: null });
-                                                }}
-                                            />
-                                        </div>
-                                        <div style={{ flex: '1', marginRight: '20%' }}>
-                                            <Form.Check
-                                                type="radio"
-                                                id="continueProjectRadio"
-                                                name="projectType"
-                                                label="โครงการต่อเนื่อง"
-                                                checked={isEditMode ? editData.is_continueproject : is_continueproject}
-                                                readOnly={!isEditMode}
-                                                disabled={!isEditMode}
-                                                onChange={(event) => {
-                                                    setEditData({ ...editData, is_newproject: false, is_continueproject: event.target.checked });
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    {editData.is_continueproject && (
-
-                                        <Table striped="columns">
-                                            <thead>
-                                                <tr>
-                                                    <th>ปัญหาและอุปสรรคในปีที่ผ่านมา</th>
-                                                    <th>แนวทางการปรับปรุงแก้ไขปัญหา และอุปสรรคในครั้งนี้</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {/* ข้อ 1 */}
+                            <tbody>
+                                {/* หลักการและเหตุผล */}
+                                <tr style={{ backgroundColor: "white" }}>
+                                    <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                                        <div>หลักการและเหตุผล</div>
+                                    </td>
+                                    <td className='back-side-td'>
+                                        <Table>
+                                            <tbody >
                                                 <tr style={{ backgroundColor: "white" }}>
-                                                    {/* ปัญหาข้อ 1  */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="ปัญหาข้อ 1"
-                                                            value={isEditMode ? editData.problem1 : problem1}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, problem1: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    {/* แนวทางข้อ 1 */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="แนวทางข้อ 1 "
-                                                            value={isEditMode ? editData.result1 : result1}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, result1: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        as="textarea" rows={3}
+                                                        placeholder={`เพิ่มหลักการและเหตุผล ${1}`}
+                                                        value={isEditMode ? editData.principles_and_reasons1 : principles_and_reasons1}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, principles_and_reasons1: event.target.value });
+                                                        }}
+                                                    />
                                                 </tr>
-                                                {/* ข้อ 2 */}
                                                 <tr style={{ backgroundColor: "white" }}>
-                                                    {/* ปัญหาข้อ 2  */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="ปัญหาข้อ 2"
-                                                            value={isEditMode ? editData.problem2 : problem2}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, problem2: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    {/* แนวทางข้อ 2 */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="แนวทางข้อ 2 "
-                                                            value={isEditMode ? editData.result2 : result2}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, result2: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        as="textarea" rows={3}
+                                                        placeholder={`เพิ่มหลักการและเหตุผล ${2}`}
+                                                        value={isEditMode ? editData.principles_and_reasons2 : principles_and_reasons2}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, principles_and_reasons2: event.target.value });
+                                                        }}
+                                                    />
                                                 </tr>
-                                                {/* ข้อ 3 */}
                                                 <tr style={{ backgroundColor: "white" }}>
-                                                    {/* ปัญหาข้อ 3  */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="ปัญหาข้อ 3"
-                                                            value={isEditMode ? editData.problem3 : problem3}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, problem3: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    {/* แนวทางข้อ 3 */}
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            placeholder="แนวทางข้อ 3 "
-                                                            value={isEditMode ? editData.result3 : result3}
-                                                            readOnly={!isEditMode}
-                                                            onChange={(event) => {
-                                                                setEditData({ ...editData, result3: event.target.value });
-                                                            }}
-                                                        />
-                                                    </td>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        as="textarea" rows={3}
+                                                        placeholder={`เพิ่มหลักการและเหตุผล ${3}`}
+                                                        value={isEditMode ? editData.principles_and_reasons3 : principles_and_reasons3}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, principles_and_reasons3: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        as="textarea" rows={3}
+                                                        placeholder={`เพิ่มหลักการและเหตุผล ${4}`}
+                                                        value={isEditMode ? editData.principles_and_reasons4 : principles_and_reasons4}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, principles_and_reasons4: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        as="textarea" rows={3}
+                                                        placeholder={`เพิ่มหลักการและเหตุผล ${5}`}
+                                                        value={isEditMode ? editData.principles_and_reasons5 : principles_and_reasons5}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, principles_and_reasons5: event.target.value });
+                                                        }}
+                                                    />
                                                 </tr>
                                             </tbody>
                                         </Table>
 
-                                    )}
+                                    </td>
+                                </tr>
+                                {/* วัตถุประสงค์ */}
+                                <tr>
+                                    <td
+                                        className="head-side-td-swp"
+                                        style={{ verticalAlign: "top" }}
+                                    >
+                                        <div>วัตถุประสงค์ของโครงการ</div>
+                                    </td>
+                                    <td className='back-side-td'>
+                                        <Table>
+                                            <thead>
+                                                <tr></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`วัตถุประสงค์ ${1}`}
+                                                        value={isEditMode ? editData.objective1 : objective1}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, objective1: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`วัตถุประสงค์ ${2}`}
+                                                        value={isEditMode ? editData.objective2 : objective2}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, objective2: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`วัตถุประสงค์ ${3}`}
+                                                        value={isEditMode ? editData.objective3 : objective3}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, objective3: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`วัตถุประสงค์ ${4}`}
+                                                        value={isEditMode ? editData.objective4 : objective3}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, objective4: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`วัตถุประสงค์ ${5}`}
+                                                        value={isEditMode ? editData.objective5 : objective3}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, objective5: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                            </tbody>
 
-                                </td>
-                            </tr>
-                        </tbody>
+                                        </Table>
 
-                    </Table>
+                                    </td>
+                                </tr>
+                                {/* ลักษณะรูปแบบโครงการ */}
+                                <tr style={{ backgroundColor: "white" }}>
+                                    <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                                        <div>ลักษณะรูปแบบโครงการ</div>
+                                    </td>
+                                    <td className='back-side-td'>
+                                        <Table>
+                                            <tbody>
+                                                <tr style={{ backgroundColor: "white" }}>
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${1}`}
+                                                        value={isEditMode ? editData.project_type1 : project_type1}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, project_type1: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }} >
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${2}`}
+                                                        value={isEditMode ? editData.project_type2 : project_type2}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, project_type2: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }} >
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${3}`}
+                                                        value={isEditMode ? editData.project_type3 : project_type3}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, project_type3: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }} >
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${4}`}
+                                                        value={isEditMode ? editData.project_type4 : project_type4}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, project_type4: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                                <tr style={{ backgroundColor: "white" }} >
+                                                    <Form.Control
+                                                        className="table-margin"
+                                                        size="sm"
+                                                        type="text"
+                                                        placeholder={`ลักษณะรูปแบบโครงการ ข้อที่${5}`}
+                                                        value={isEditMode ? editData.project_type5 : project_type5}
+                                                        readOnly={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, project_type5: event.target.value });
+                                                        }}
+                                                    />
+                                                </tr>
+                                            </tbody>
+
+                                        </Table>
+
+                                    </td>
+                                </tr>
+                                {/* ลักษณะโครงการ */}
+                                <tr style={{ backgroundColor: "white" }}>
+                                    <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                                        <div>ลักษณะโครงการ</div>
+                                    </td>
+
+                                    <td className="back-side-td">
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                marginBottom: "1%",
+                                                marginTop: "1%",
+                                            }}
+                                        >
+                                            <div style={{ marginRight: "10px" }}>
+                                                <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                                                    <input
+                                                        type="radio"
+                                                        id="newProjectRadio"
+                                                        name="projectType"
+                                                        checked={isEditMode ? editData.is_newproject : is_newproject}
+                                                        readOnly={!isEditMode}
+                                                        disabled={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, is_newproject: true, is_continueproject: false, problem1: null, result1: null, problem2: null, result2: null, problem3: null, result3: null });
+                                                        }}
+                                                    />
+                                                    {`    `}โครงการใหม่
+                                                </label>
+                                            </div>
+                                            <div style={{ marginRight: "10%" }}>
+                                                <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                                                    <input
+                                                        type="radio"
+                                                        id="continueProjectRadio"
+                                                        name="projectType"
+                                                        checked={isEditMode ? editData.is_continueproject : is_continueproject}
+                                                        readOnly={!isEditMode}
+                                                        disabled={!isEditMode}
+                                                        onChange={(event) => {
+                                                            setEditData({ ...editData, is_newproject: false, is_continueproject: event.target.checked });
+                                                        }}
+                                                    />
+                                                    {`        `}โครงการต่อเนื่อง
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {editData.is_continueproject && (
+
+                                            <Table striped="columns">
+                                                <thead
+                                                    style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}
+                                                >
+                                                    <tr
+                                                        style={{
+                                                            backgroundColor: "rgba(255, 139, 19, 1)",
+                                                        }}
+                                                    >
+                                                        <th
+                                                            style={{
+                                                                color: "white",
+                                                                fontWeight: "bold",
+                                                                fontSize: "14px",
+                                                            }}
+                                                        >
+                                                            ปัญหาและอุปสรรคในปีที่ผ่านมา
+                                                        </th>
+                                                        <th
+                                                            style={{
+                                                                color: "white",
+                                                                fontWeight: "bold",
+                                                                fontSize: "14px",
+                                                            }}
+                                                        >
+                                                            แนวทางการปรับปรุงแก้ไขปัญหา และอุปสรรคในครั้งนี้
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {/* ข้อ 1 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 1  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 1"
+                                                                value={isEditMode ? editData.problem1 : problem1}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, problem1: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 1 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 1 "
+                                                                value={isEditMode ? editData.result1 : result1}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, result1: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                    {/* ข้อ 2 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 2  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 2"
+                                                                value={isEditMode ? editData.problem2 : problem2}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, problem2: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 2 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 2 "
+                                                                value={isEditMode ? editData.result2 : result2}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, result2: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                    {/* ข้อ 3 */}
+                                                    <tr style={{ backgroundColor: "white" }}>
+                                                        {/* ปัญหาข้อ 3  */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="ปัญหาข้อ 3"
+                                                                value={isEditMode ? editData.problem3 : problem3}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, problem3: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                        {/* แนวทางข้อ 3 */}
+                                                        <td style={{ verticalAlign: "middle" }}>
+                                                            <Form.Control
+                                                                size="sm"
+                                                                type="text"
+                                                                placeholder="แนวทางข้อ 3 "
+                                                                value={isEditMode ? editData.result3 : result3}
+                                                                readOnly={!isEditMode}
+                                                                onChange={(event) => {
+                                                                    setEditData({ ...editData, result3: event.target.value });
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </Table>
+
+                                        )}
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+
+                        </Table>
+                    </CardBody>
                     {isEditMode ? (
                         <>
                             <Button variant="success" onClick={handleSaveClick}>Save</Button>
