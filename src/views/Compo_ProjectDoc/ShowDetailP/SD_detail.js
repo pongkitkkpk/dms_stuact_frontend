@@ -101,6 +101,15 @@ function SD_detail({ id_project }) {
         }
     };
 
+    const handleDownloadClick = () => {
+        console.log("asdfasd")
+        // Save data here
+        Axios.get(`http://localhost:3001/student/download/${id_project}`).then((response) => {
+            console.log(response.data);
+            
+        });
+    };
+
 
 
 
@@ -132,6 +141,18 @@ function SD_detail({ id_project }) {
                     <CardBody>
                         <Table striped="columns">
                             <tbody>
+                                {/* download เอกสาร */}
+                                {!isEditMode && (
+                                    <tr style={{ backgroundColor: "white" }}>
+                                        <td className='head-side-td' style={{ verticalAlign: "top" }}>
+                                            <div>Download e-docx</div>
+                                        </td>
+                                        <td style={{ verticalAlign: "middle" }}>
+                                            <Button variant="success" onClick={handleDownloadClick}>download naja</Button>
+                                        </td>
+                                    </tr>
+                                )}
+
                                 {/* ชื่อโครงการ */}
                                 <tr style={{ backgroundColor: "white" }}>
                                     <td className='head-side-td' style={{ verticalAlign: "top" }}>
