@@ -663,6 +663,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button

@@ -387,6 +387,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button

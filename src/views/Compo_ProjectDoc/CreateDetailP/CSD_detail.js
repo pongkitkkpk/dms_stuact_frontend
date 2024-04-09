@@ -320,7 +320,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
-                    <Table striped="columns" style={{marginBottom: "0px"}}>
+                    <Table striped="columns">
                       <thead
                         style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}
                       >
@@ -524,6 +524,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button

@@ -1851,6 +1851,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button
