@@ -501,6 +501,7 @@ function CSD_indicator({ id_projects }) {
                       {is_etcfollow && (
 
                         <Form.Control
+                        style={{marginLeft:"10%",marginTop:"5%"}}
                           className="table-margin"
                           size="sm"
                           type="text"

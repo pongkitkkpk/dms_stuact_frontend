@@ -419,9 +419,8 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                                 className="table-margin"
                                 size="sm"
                                 type="text"
-                                placeholder={`ลักษณะรูปแบบโครงการที่ ${
-                                  index + 1
-                                }`}
+                                placeholder={`ลักษณะรูปแบบโครงการที่ ${index + 1
+                                  }`}
                                 onChange={(event) => {
                                   switch (index) {
                                     case 0:
@@ -500,39 +499,35 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
                         marginTop: "1%",
                       }}
                     >
-                      <div
-                        style={{
-                          flex: "1",
-                          marginRight: "15%",
-                          paddingLeft: "10%",
-                        }}
-                      >
-                        <Form.Check
-                          type="radio"
-                          id="newProjectRadio"
-                          label="โครงการใหม่"
-                          checked={is_newproject}
-                          onChange={() => {
-                            setIsNewProject(true);
-                            setIsContinueProject(false);
-                          }}
-                          style={{ marginBottom: "0" }} // Add this style
-                        />
+                      <div style={{  marginRight: "10px" }}>
+                        <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                          <input
+                            type="radio"
+                            id="newProjectRadio"
+                            checked={is_newproject}
+                            onChange={() => {
+                              setIsNewProject(true);
+                              setIsContinueProject(false);
+                            }}
+                            style={{ marginBottom: "0" }} // Add this style
+                          />
+                          {`    `}โครงการใหม่
+                        </label>
                       </div>
-                      <div style={{ flex: "1", marginRight: "5%" }}>
-                        {" "}
-                        {/* Adjusted marginRight */}
-                        <Form.Check
-                          type="radio"
-                          id="continueProjectRadio"
-                          label="โครงการต่อเนื่อง"
-                          checked={is_continueproject}
-                          onChange={() => {
-                            setIsNewProject(false);
-                            setIsContinueProject(true);
-                          }}
-                          style={{ marginBottom: "0" }} // Add this style
-                        />
+                      <div style={{  marginRight: "10%" }}>
+                        <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                          <input
+                            type="radio"
+                            id="continueProjectRadio"
+                            checked={is_continueproject}
+                            onChange={() => {
+                              setIsNewProject(false);
+                              setIsContinueProject(true);
+                            }}
+                            style={{ marginBottom: "0" }} // Add this style
+                          />
+                          {`        `}โครงการต่อเนื่อง
+                        </label>
                       </div>
                     </div>
                     {is_continueproject && (

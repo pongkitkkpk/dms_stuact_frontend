@@ -6,10 +6,10 @@ import { Card, Container, Row, Col, Button, InputGroup, Form } from "react-boots
 function AllProject() {
     const storedUserData = sessionStorage.getItem('user');
     const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
-    
+
     const studentuser = storedUser.username
-    const strcodebooksomeoutyear=storedUser.codebooksomeoutyear
-    const strcodebooksome=storedUser.codebooksome
+    const strcodebooksomeoutyear = storedUser.codebooksomeoutyear
+    const strcodebooksome = storedUser.codebooksome
 
     const [projectList, setProjectList] = useState([]);
     const [id_student, setIDStudent] = useState(studentuser);
@@ -20,6 +20,7 @@ function AllProject() {
     const getProjects = () => {
         Axios.get(`http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`).then((response) => {
             setProjectList(response.data);
+            
         });
     };
 
@@ -27,14 +28,25 @@ function AllProject() {
         getProjects();
     }, []);
 
+    useEffect(()=>{
+        console.log("projectListadf")
+        console.log(projectList)
+    },[projectList])
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
     const handleShowDetail = (id_project) => {
         history.push(`project-doc/${id_project}`);
     };
 
     return (
         <>
-        <h1>allrpo</h1>
+            <h1>allrpo</h1>
             <Container fluid>
                 <Row>
                     <Col md="12">
@@ -58,11 +70,19 @@ function AllProject() {
                                     <div className="status-tag">
                                         <span className={`badge badge-${project.project_phase === "0" ? 'secondary' : 'warning'}`}>ฉบับ ร่าง</span>
                                     </div>
-                                    <Card.Title as="h4">{project.project_name}</Card.Title>
+                                    <Card.Title as="h4">{project.project_name}id {project.id}</Card.Title>
                                     <p className="card-category">{project.project_number}</p>
                                     <div className="stats">
                                         <i className="fas fa-history"></i>
-                                        {new Date(project.created_at).toLocaleDateString('en-GB')}
+                                        <span>สร้างเมื่อ {formatDate(project.created_at)}</span>
+                                        <i className="fas fa-history"></i>
+                                        <span>
+                                            {project.updated_at === null ? (
+                                                "update เมื่อ ----"
+                                            ) : (
+                                                `update เมื่อ ${formatDate(project.updated_at)}`
+                                            )}
+                                        </span>
                                         <span>  </span>
                                         <i className="fas fa-pencil-alt"></i>
                                         {project.id_student}
