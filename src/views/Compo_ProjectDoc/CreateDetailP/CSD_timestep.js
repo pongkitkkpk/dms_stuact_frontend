@@ -1456,6 +1456,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button

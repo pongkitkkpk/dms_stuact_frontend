@@ -1191,6 +1191,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button

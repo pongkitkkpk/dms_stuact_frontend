@@ -526,6 +526,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px"
             }}
           >
             <Button
