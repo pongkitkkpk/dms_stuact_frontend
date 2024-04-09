@@ -17,10 +17,10 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {
-    Axios.get(`http://localhost:3001/student/project/getidproject/${id_project}`).then((response) => {
+    Axios.get(`http://localhost:3001/student/project/getidproject/${id_projects}`).then((response) => {
       setPPersonData(response.data);
     });
-    const idinperson = pPersonData.filter(person => person.id === id_project);
+    const idinperson = pPersonData.filter(person => person.id === id_projects);
 
     // Assuming idinperson is an array and you want to get data from the first element
     if (idinperson.length > 0) {
