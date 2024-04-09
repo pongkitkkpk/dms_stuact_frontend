@@ -120,6 +120,11 @@ const GuestRoutes =[
 
 const StudentRoutes =[
   {
+    path: "/project-doc/:id_project", // Add route parameter for id_project
+    component: ProjectDocument,
+    layout: "/students"
+  },
+  {
     path: "/c-project-doc",
     name: "สร้างโครงการใหม่",
     icon: "nc-icon nc-notes",

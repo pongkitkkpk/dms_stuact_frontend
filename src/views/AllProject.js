@@ -6,21 +6,19 @@ import { Card, Container, Row, Col, Button, InputGroup, Form } from "react-boots
 function AllProject() {
     const storedUserData = sessionStorage.getItem('user');
     const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    
     const studentuser = storedUser.username
-    console.log("storedUser")
-    console.log(storedUser.codebooksomeoutyear)
     const strcodebooksomeoutyear=storedUser.codebooksomeoutyear
-    // console.log("asdfasdf"+studentuser)
+    const strcodebooksome=storedUser.codebooksome
+
     const [projectList, setProjectList] = useState([]);
     const [id_student, setIDStudent] = useState(studentuser);
-    const [codeclub, setCodeClub] = useState('B660420200');
+    const [codeclub, setCodeClub] = useState(strcodebooksome);
     const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(strcodebooksomeoutyear);
     const history = useHistory(); // Initialize useHistory hook
 
     const getProjects = () => {
         Axios.get(`http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`).then((response) => {
-            console.log("asdfresponse.data")
-            console.log(response.data)
             setProjectList(response.data);
         });
     };
@@ -29,15 +27,8 @@ function AllProject() {
         getProjects();
     }, []);
 
-    useEffect(() => {
-        console.log(projectList)
-        console.log(id_student)
-        console.log(codeclub)
-    }, [projectList, id_student, codeclub]);
 
     const handleShowDetail = (id_project) => {
-        // Redirect to ProjectDocument component with id_project as parameter
-        
         history.push(`project-doc/${id_project}`);
     };
 
