@@ -16,7 +16,7 @@ function NewProjectDocument() {
   const [cSD_locationtime, setCSD_LocationTime] = useState(false);
   const [cSD_timestep, setCSD_timestep] = useState(false);//fix edit
   const [cSD_budget, setCSD_budget] = useState(false);
-  const [cSD_indicator, setCSD_indicator] = useState(false);
+  const [cSD_indicator, setCSD_indicator] = useState(true);
   const containerRef = useRef(null);
 
   
