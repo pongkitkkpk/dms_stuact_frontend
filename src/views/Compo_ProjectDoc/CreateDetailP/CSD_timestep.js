@@ -22,245 +22,247 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [yearly_countsketch, setYearlyCountSketch] = useState("");
 
   const [table1Id, setTable1Id] = useState("1");
-  const [table1Topic, setTable1Topic] = useState("");
-  const [startDurationTable1, setStartDurationTable1] = useState("");
-  const [endDurationTable1, setEndDurationTable1] = useState("");
-  const [responsibleTable1, setResponsibleTable1] = useState([]);
+  const [topic_table1, setTable1Topic] = useState(null);
+  const [start_duration_table1, setStartDurationTable1] = useState("");
+  const [end_duration_table1, setEndDurationTable1] = useState("");
+  const [responsible_table1, setResponsibleTable1] = useState([]);
 
   const handleresponsibleTable1Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable1.includes(name)) {
+    if (responsible_table1.includes(name)) {
       setResponsibleTable1(
-        responsibleTable1.filter((person) => person !== name)
+        responsible_table1.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable1([...responsibleTable1, name]);
+      setResponsibleTable1([...responsible_table1, name]);
     }
   };
 
   const [table2Id, setTable2Id] = useState("2");
-  const [table2Topic, setTable2Topic] = useState("");
-  const [startDurationTable2, setStartDurationTable2] = useState(null);
-  const [endDurationTable2, setEndDurationTable2] = useState(null);
-  const [responsibleTable2, setResponsibleTable2] = useState("");
+  const [topic_table2, setTable2Topic] = useState(null);
+  const [start_duration_table2, setStartDurationTable2] = useState(null);
+  const [end_duration_table2, setEndDurationTable2] = useState(null);
+  const [responsible_table2, setResponsibleTable2] = useState("");
   const handleresponsibleTable2Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable2.includes(name)) {
+    if (responsible_table2.includes(name)) {
       setResponsibleTable2(
-        responsibleTable2.filter((person) => person !== name)
+        responsible_table2.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable2([...responsibleTable2, name]);
+      setResponsibleTable2([...responsible_table2, name]);
     }
   };
 
   const [table3Id, setTable3Id] = useState("3");
-  const [table3Topic, setTable3Topic] = useState("");
-  const [startDurationTable3, setStartDurationTable3] = useState(null);
-  const [endDurationTable3, setEndDurationTable3] = useState(null);
-  const [responsibleTable3, setResponsibleTable3] = useState("");
+  const [topic_table3, setTable3Topic] = useState(null);
+  const [start_duration_table3, setStartDurationTable3] = useState(null);
+  const [end_duration_table3, setEndDurationTable3] = useState(null);
+  const [responsible_table3, setResponsibleTable3] = useState("");
   const handleresponsibleTable3Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable3.includes(name)) {
+    if (responsible_table3.includes(name)) {
       setResponsibleTable3(
-        responsibleTable3.filter((person) => person !== name)
+        responsible_table3.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable3([...responsibleTable3, name]);
+      setResponsibleTable3([...responsible_table3, name]);
     }
   };
 
   const [table4Id, setTable4Id] = useState("4");
-  const [table4Topic, setTable4Topic] = useState("");
-  const [startDurationTable4, setStartDurationTable4] = useState(null);
-  const [endDurationTable4, setEndDurationTable4] = useState(null);
-  const [responsibleTable4, setResponsibleTable4] = useState("");
+  const [topic_table4, setTable4Topic] = useState(null);
+  const [start_duration_table4, setStartDurationTable4] = useState(null);
+  const [end_duration_table4, setEndDurationTable4] = useState(null);
+  const [responsible_table4, setResponsibleTable4] = useState("");
   const handleresponsibleTable4Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable4.includes(name)) {
+    if (responsible_table4.includes(name)) {
       setResponsibleTable4(
-        responsibleTable4.filter((person) => person !== name)
+        responsible_table4.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable4([...responsibleTable4, name]);
+      setResponsibleTable4([...responsible_table4, name]);
     }
   };
 
   const [table5Id, setTable5Id] = useState("5");
-  const [table5Topic, setTable5Topic] = useState("");
-  const [startDurationTable5, setStartDurationTable5] = useState(null);
-  const [endDurationTable5, setEndDurationTable5] = useState(null);
-  const [responsibleTable5, setResponsibleTable5] = useState("");
+  const [topic_table5, setTable5Topic] = useState(null);
+  const [start_duration_table5, setStartDurationTable5] = useState(null);
+  const [end_duration_table5, setEndDurationTable5] = useState(null);
+  const [responsible_table5, setResponsibleTable5] = useState("");
   const handleresponsibleTable5Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable5.includes(name)) {
+    if (responsible_table5.includes(name)) {
       setResponsibleTable5(
-        responsibleTable5.filter((person) => person !== name)
+        responsible_table5.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable5([...responsibleTable5, name]);
+      setResponsibleTable5([...responsible_table5, name]);
     }
   };
 
   const [table6Id, setTable6Id] = useState("6");
-  const [table6Topic, setTable6Topic] = useState("");
-  const [startDurationTable6, setStartDurationTable6] = useState(null);
-  const [endDurationTable6, setEndDurationTable6] = useState(null);
-  const [responsibleTable6, setResponsibleTable6] = useState("");
+  const [topic_table6, setTable6Topic] = useState(null);
+  const [start_duration_table6, setStartDurationTable6] = useState(null);
+  const [end_duration_table6, setEndDurationTable6] = useState(null);
+  const [responsible_table6, setResponsibleTable6] = useState("");
   const handleresponsibleTable6Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable6.includes(name)) {
+    if (responsible_table6.includes(name)) {
       setResponsibleTable6(
-        responsibleTable6.filter((person) => person !== name)
+        responsible_table6.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable6([...responsibleTable6, name]);
+      setResponsibleTable6([...responsible_table6, name]);
     }
   };
 
   const [table7Id, setTable7Id] = useState("7");
-  const [table7Topic, setTable7Topic] = useState("");
-  const [startDurationTable7, setStartDurationTable7] = useState(null);
-  const [endDurationTable7, setEndDurationTable7] = useState(null);
-  const [responsibleTable7, setResponsibleTable7] = useState("");
+  const [topic_table7, setTable7Topic] = useState(null);
+  const [start_duration_table7, setStartDurationTable7] = useState(null);
+  const [end_duration_table7, setEndDurationTable7] = useState(null);
+  const [responsible_table7, setResponsibleTable7] = useState("");
   const handleresponsibleTable7Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable7.includes(name)) {
+    if (responsible_table7.includes(name)) {
       setResponsibleTable7(
-        responsibleTable7.filter((person) => person !== name)
+        responsible_table7.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable7([...responsibleTable7, name]);
+      setResponsibleTable7([...responsible_table7, name]);
     }
   };
 
   const [table8Id, setTable8Id] = useState("8");
-  const [table8Topic, setTable8Topic] = useState("");
-  const [startDurationTable8, setStartDurationTable8] = useState(null);
-  const [endDurationTable8, setEndDurationTable8] = useState(null);
-  const [responsibleTable8, setResponsibleTable8] = useState("");
+  const [topic_table8, setTable8Topic] = useState(null);
+  const [start_duration_table8, setStartDurationTable8] = useState(null);
+  const [end_duration_table8, setEndDurationTable8] = useState(null);
+  const [responsible_table8, setResponsibleTable8] = useState("");
   const handleresponsibleTable8Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable8.includes(name)) {
+    if (responsible_table8.includes(name)) {
       setResponsibleTable8(
-        responsibleTable8.filter((person) => person !== name)
+        responsible_table8.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable8([...responsibleTable8, name]);
+      setResponsibleTable8([...responsible_table8, name]);
     }
   };
 
   const [table9Id, setTable9Id] = useState("9");
-  const [table9Topic, setTable9Topic] = useState("");
-  const [startDurationTable9, setStartDurationTable9] = useState(null);
-  const [endDurationTable9, setEndDurationTable9] = useState(null);
-  const [responsibleTable9, setResponsibleTable9] = useState("");
+  const [topic_table9, setTable9Topic] = useState(null);
+  const [start_duration_table9, setStartDurationTable9] = useState(null);
+  const [end_duration_table9, setEndDurationTable9] = useState(null);
+  const [responsible_table9, setResponsibleTable9] = useState("");
   const handleresponsibleTable9Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable9.includes(name)) {
+    if (responsible_table9.includes(name)) {
       setResponsibleTable9(
-        responsibleTable9.filter((person) => person !== name)
+        responsible_table9.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable9([...responsibleTable9, name]);
+      setResponsibleTable9([...responsible_table9, name]);
     }
   };
 
   const [table10Id, setTable10Id] = useState("10");
-  const [table10Topic, setTable10Topic] = useState("");
-  const [startDurationTable10, setStartDurationTable10] = useState(null);
-  const [endDurationTable10, setEndDurationTable10] = useState(null);
-  const [responsibleTable10, setResponsibleTable10] = useState("");
+  const [topic_table10, setTable10Topic] = useState(null);
+  const [start_duration_table10, setStartDurationTable10] = useState(null);
+  const [end_duration_table10, setEndDurationTable10] = useState(null);
+  const [responsible_table10, setResponsibleTable10] = useState("");
   const handleresponsibleTable10Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable10.includes(name)) {
+    if (responsible_table10.includes(name)) {
       setResponsibleTable10(
-        responsibleTable10.filter((person) => person !== name)
+        responsible_table10.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable10([...responsibleTable10, name]);
+      setResponsibleTable10([...responsible_table10, name]);
     }
   };
 
   const [table11Id, setTable11Id] = useState("11");
-  const [table11Topic, setTable11Topic] = useState("");
-  const [startDurationTable11, setStartDurationTable11] = useState(null);
-  const [endDurationTable11, setEndDurationTable11] = useState(null);
-  const [responsibleTable11, setResponsibleTable11] = useState("");
+  const [topic_table11, setTable11Topic] = useState(null);
+  const [start_duration_table11, setStartDurationTable11] = useState(null);
+  const [end_duration_table11, setEndDurationTable11] = useState(null);
+  const [responsible_table11, setResponsibleTable11] = useState("");
   const handleresponsibleTable11Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable11.includes(name)) {
+    if (responsible_table11.includes(name)) {
       setResponsibleTable11(
-        responsibleTable11.filter((person) => person !== name)
+        responsible_table11.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable11([...responsibleTable11, name]);
+      setResponsibleTable11([...responsible_table11, name]);
     }
   };
 
   const [table12Id, setTable12Id] = useState("12");
-  const [table12Topic, setTable12Topic] = useState("");
-  const [startDurationTable12, setStartDurationTable12] = useState(null);
-  const [endDurationTable12, setEndDurationTable12] = useState(null);
-  const [responsibleTable12, setResponsibleTable12] = useState("");
+  const [topic_table12, setTable12Topic] = useState(null);
+  const [start_duration_table12, setStartDurationTable12] = useState(null);
+  const [end_duration_table12, setEndDurationTable12] = useState(null);
+  const [responsible_table12, setResponsibleTable12] = useState("");
   const handleresponsibleTable12Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable12.includes(name)) {
+    if (responsible_table12.includes(name)) {
       setResponsibleTable12(
-        responsibleTable12.filter((person) => person !== name)
+        responsible_table12.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable12([...responsibleTable12, name]);
+      setResponsibleTable12([...responsible_table12, name]);
     }
   };
 
   const [table13Id, setTable13Id] = useState("13");
-  const [table13Topic, setTable13Topic] = useState("");
-  const [startDurationTable13, setStartDurationTable13] = useState(null);
-  const [endDurationTable13, setEndDurationTable13] = useState(null);
-  const [responsibleTable13, setResponsibleTable13] = useState("");
+  const [topic_table13, setTable13Topic] = useState(null);
+  const [start_duration_table13, setStartDurationTable13] = useState(null);
+  const [end_duration_table13, setEndDurationTable13] = useState(null);
+  const [responsible_table13, setResponsibleTable13] = useState("");
   const handleresponsibleTable13Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable13.includes(name)) {
+    if (responsible_table13.includes(name)) {
       setResponsibleTable13(
-        responsibleTable13.filter((person) => person !== name)
+        responsible_table13.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable13([...responsibleTable13, name]);
+      setResponsibleTable13([...responsible_table13, name]);
     }
   };
 
   const [table14Id, setTable14Id] = useState("14");
-  const [table14Topic, setTable14Topic] = useState("");
-  const [startDurationTable14, setStartDurationTable14] = useState(null);
-  const [endDurationTable14, setEndDurationTable14] = useState(null);
-  const [responsibleTable14, setResponsibleTable14] = useState("");
+  const [topic_table14, setTable14Topic] = useState(null);
+  const [start_duration_table14, setStartDurationTable14] = useState(null);
+  const [end_duration_table14, setEndDurationTable14] = useState(null);
+  const [responsible_table14, setResponsibleTable14] = useState("");
   const handleresponsibleTable14Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable14.includes(name)) {
+    if (responsible_table14.includes(name)) {
       setResponsibleTable14(
-        responsibleTable14.filter((person) => person !== name)
+        responsible_table14.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable14([...responsibleTable14, name]);
+      setResponsibleTable14([...responsible_table14, name]);
     }
   };
 
   const [table15Id, setTable15Id] = useState("15");
-  const [table15Topic, setTable15Topic] = useState("");
-  const [startDurationTable15, setStartDurationTable15] = useState(null);
-  const [endDurationTable15, setEndDurationTable15] = useState(null);
-  const [responsibleTable15, setResponsibleTable15] = useState("");
+  const [topic_table15, setTable15Topic] = useState(null);
+  const [start_duration_table15, setStartDurationTable15] = useState(null);
+  const [end_duration_table15, setEndDurationTable15] = useState(null);
+  const [responsible_table15, setResponsibleTable15] = useState("");
   const handleresponsibleTable15Change = (event) => {
     const name = event.target.value;
-    if (responsibleTable15.includes(name)) {
+    if (responsible_table15.includes(name)) {
       setResponsibleTable15(
-        responsibleTable15.filter((person) => person !== name)
+        responsible_table15.filter((person) => person !== name)
       );
     } else {
-      setResponsibleTable15([...responsibleTable15, name]);
+      setResponsibleTable15([...responsible_table15, name]);
     }
   };
+  // const [startDurationTable15, setStartDurationTable15] = useState(null);
+  // const [endDurationTable15, setEndDurationTable15] = useState(null);
 
   const [start_prepare, setStartPrepare] = useState("");
   const [end_prepare, setEndPrepare] = useState("");
@@ -332,50 +334,56 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       setYearlyCountSketch(yearly_countsketch);
     }
   }, [id_projects, pPersonData]);
+  useEffect(()=>{
+    console.log("responsible_table1")
+    console.log(responsible_table1)
+  },[responsible_table1])
   const createProject = () => {
-    let responsibleTable1str = "";
-    if (responsibleTable1 != "") {
-      responsibleTable1str = responsibleTable1.join(",");
+    let responsibleTable1str  = "";
+    if (responsible_table1 != "") {
+      responsibleTable1str = responsible_table1.join(",");
       responsibleTable1str = responsibleTable1str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
+
     let responsibleTable2str = "";
-    if (responsibleTable2 != "") {
-      responsibleTable2str = responsibleTable2.join(",");
+    if (responsible_table2 != "") {
+      responsibleTable2str = responsible_table2.join(",");
       responsibleTable2str = responsibleTable2str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
+    setResponsibleTable2(responsibleTable2str)
     let responsibleTable3str = "";
-    if (responsibleTable3 != "") {
-      responsibleTable3str = responsibleTable3.join(",");
+    if (responsible_table3 != "") {
+      responsibleTable3str = responsible_table3.join(",");
       responsibleTable3str = responsibleTable3str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
     let responsibleTable4str = "";
-    if (responsibleTable4 != "") {
-      responsibleTable4str = responsibleTable4.join(",");
+    if (responsible_table4 != "") {
+      responsibleTable4str = responsible_table4.join(",");
       responsibleTable4str = responsibleTable4str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
     let responsibleTable5str = "";
-    if (responsibleTable5 !== "") {
-      responsibleTable5str = responsibleTable5.join(",");
+    if (responsible_table5 !== "") {
+      responsibleTable5str = responsible_table5.join(",");
       responsibleTable5str = responsibleTable5str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
     let responsibleTable6str = "";
-    if (responsibleTable6 !== "") {
-      responsibleTable6str = responsibleTable6.join(",");
+    if (responsible_table6 !== "") {
+      responsibleTable6str = responsible_table6.join(",");
       responsibleTable6str = responsibleTable6str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -383,8 +391,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable7str = "";
-    if (responsibleTable7 !== "") {
-      responsibleTable7str = responsibleTable7.join(",");
+    if (responsible_table7 !== "") {
+      responsibleTable7str = responsible_table7.join(",");
       responsibleTable7str = responsibleTable7str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -392,8 +400,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable8str = "";
-    if (responsibleTable8 !== "") {
-      responsibleTable8str = responsibleTable8.join(",");
+    if (responsible_table8 !== "") {
+      responsibleTable8str = responsible_table8.join(",");
       responsibleTable8str = responsibleTable8str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -401,8 +409,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable9str = "";
-    if (responsibleTable9 !== "") {
-      responsibleTable9str = responsibleTable9.join(",");
+    if (responsible_table9 !== "") {
+      responsibleTable9str = responsible_table9.join(",");
       responsibleTable9str = responsibleTable9str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -410,16 +418,16 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable10str = "";
-    if (responsibleTable10 !== "") {
-      responsibleTable10str = responsibleTable10.join(",");
+    if (responsible_table10 !== "") {
+      responsibleTable10str = responsible_table10.join(",");
       responsibleTable10str = responsibleTable10str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
     let responsibleTable11str = "";
-    if (responsibleTable11 !== "") {
-      responsibleTable11str = responsibleTable11.join(",");
+    if (responsible_table11 !== "") {
+      responsibleTable11str = responsible_table11.join(",");
       responsibleTable11str = responsibleTable11str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -427,8 +435,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable12str = "";
-    if (responsibleTable12 !== "") {
-      responsibleTable12str = responsibleTable12.join(",");
+    if (responsible_table12 !== "") {
+      responsibleTable12str = responsible_table12.join(",");
       responsibleTable12str = responsibleTable12str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -436,8 +444,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable13str = "";
-    if (responsibleTable13 !== "") {
-      responsibleTable13str = responsibleTable13.join(",");
+    if (responsible_table13 !== "") {
+      responsibleTable13str = responsible_table13.join(",");
       responsibleTable13str = responsibleTable13str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -445,8 +453,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable14str = "";
-    if (responsibleTable14 !== "") {
-      responsibleTable14str = responsibleTable14.join(",");
+    if (responsible_table14 !== "") {
+      responsibleTable14str = responsible_table14.join(",");
       responsibleTable14str = responsibleTable14str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -454,8 +462,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     let responsibleTable15str = "";
-    if (responsibleTable15 !== "") {
-      responsibleTable15str = responsibleTable15.join(",");
+    if (responsible_table15 !== "") {
+      responsibleTable15str = responsible_table15.join(",");
       responsibleTable15str = responsibleTable15str
         .split(",")
         .map((item) => item.trim().split(" ")[0])
@@ -465,68 +473,67 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     Axios.post(
       `http://localhost:3001/student/project/p_timestep/create/${id_projects}`,
       {
-        id_projects,
         codeclub,
         yearly_countsketch,
-        table1Topic,
-        startDurationTable1,
-        endDurationTable1,
+        topic_table1,
+        start_duration_table1,
+        end_duration_table1,
         responsibleTable1str,
-        table2Topic,
-        startDurationTable2,
-        endDurationTable2,
+        topic_table2,
+        start_duration_table2,
+        end_duration_table2,
         responsibleTable2str,
-        table3Topic,
-        startDurationTable3,
-        endDurationTable3,
+        topic_table3,
+        start_duration_table3,
+        end_duration_table3,
         responsibleTable3str,
-        table4Topic,
-        startDurationTable4,
-        endDurationTable4,
+        topic_table4,
+        start_duration_table4,
+        end_duration_table4,
         responsibleTable4str,
-        table5Topic,
-        startDurationTable5,
-        endDurationTable5,
+        topic_table5,
+        start_duration_table5,
+        end_duration_table5,
         responsibleTable5str,
-        table6Topic,
-        startDurationTable6,
-        endDurationTable6,
+        topic_table6,
+        start_duration_table6,
+        end_duration_table6,
         responsibleTable6str,
-        table7Topic,
-        startDurationTable7,
-        endDurationTable7,
+        topic_table7,
+        start_duration_table7,
+        end_duration_table7,
         responsibleTable7str,
-        table8Topic,
-        startDurationTable8,
-        endDurationTable8,
+        topic_table8,
+        start_duration_table8,
+        end_duration_table8,
         responsibleTable8str,
-        table9Topic,
-        startDurationTable9,
-        endDurationTable9,
+        topic_table9,
+        start_duration_table9,
+        end_duration_table9,
         responsibleTable9str,
-        table10Topic,
-        startDurationTable10,
-        endDurationTable10,
+        topic_table10,
+        start_duration_table10,
+        end_duration_table10,
         responsibleTable10str,
-        table11Topic,
-        startDurationTable11,
-        endDurationTable11,
+        topic_table11,
+        start_duration_table11,
+        end_duration_table11,
         responsibleTable11str,
-        table12Topic,
-        startDurationTable12,
-        endDurationTable12,
+        topic_table12,
+        start_duration_table12,
+        end_duration_table12,
         responsibleTable12str,
-        table13Topic,
-        startDurationTable13,
-        endDurationTable13,
+        topic_table13,
+        start_duration_table13,
+        end_duration_table13,
         responsibleTable13str,
-        table14Topic,
-        startDurationTable14,
-        endDurationTable14,
+        topic_table14,
+        start_duration_table14,
+        end_duration_table14,
         responsibleTable14str,
-        table15Topic,
-        startDurationTable15,
-        endDurationTable15,
+        topic_table15,
+        start_duration_table15,
+        end_duration_table15,
         responsibleTable15str,
       }
     )
@@ -669,35 +676,35 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const getStartDuration = (index) => {
     switch (index) {
       case 0:
-        return startDurationTable1;
+        return start_duration_table1;
       case 1:
-        return startDurationTable2;
+        return start_duration_table2;
       case 2:
-        return startDurationTable3;
+        return start_duration_table3;
       case 3:
-        return startDurationTable4;
+        return start_duration_table4;
       case 4:
-        return startDurationTable5;
+        return start_duration_table5;
       case 5:
-        return startDurationTable6;
+        return start_duration_table6;
       case 6:
-        return startDurationTable7;
+        return start_duration_table7;
       case 7:
-        return startDurationTable8;
+        return start_duration_table8;
       case 8:
-        return startDurationTable9;
+        return start_duration_table9;
       case 9:
-        return startDurationTable10;
+        return start_duration_table10;
       case 10:
-        return startDurationTable11;
+        return start_duration_table11;
       case 11:
-        return startDurationTable12;
+        return start_duration_table12;
       case 12:
-        return startDurationTable13;
+        return start_duration_table13;
       case 13:
-        return startDurationTable14;
+        return start_duration_table14;
       case 14:
-        return startDurationTable15;
+        return start_duration_table15;
       default:
         return null;
     }
@@ -759,35 +766,35 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const getEndDuration = (index) => {
     switch (index) {
       case 0:
-        return endDurationTable1;
+        return end_duration_table1;
       case 1:
-        return endDurationTable2;
+        return end_duration_table2;
       case 2:
-        return endDurationTable3;
+        return end_duration_table3;
       case 3:
-        return endDurationTable4;
+        return end_duration_table4;
       case 4:
-        return endDurationTable5;
+        return end_duration_table5;
       case 5:
-        return endDurationTable6;
+        return end_duration_table6;
       case 6:
-        return endDurationTable7;
+        return end_duration_table7;
       case 7:
-        return endDurationTable8;
+        return end_duration_table8;
       case 8:
-        return endDurationTable9;
+        return end_duration_table9;
       case 9:
-        return endDurationTable10;
+        return end_duration_table10;
       case 10:
-        return endDurationTable11;
+        return end_duration_table11;
       case 11:
-        return endDurationTable12;
+        return end_duration_table12;
       case 12:
-        return endDurationTable13;
+        return end_duration_table13;
       case 13:
-        return endDurationTable14;
+        return end_duration_table14;
       case 14:
-        return endDurationTable15;
+        return end_duration_table15;
       default:
         return null;
     }
@@ -937,35 +944,35 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                         value={(() => {
                           switch (index) {
                             case 0:
-                              return table1Topic;
+                              return topic_table1;
                             case 1:
-                              return table2Topic;
+                              return topic_table2;
                             case 2:
-                              return table3Topic;
+                              return topic_table3;
                             case 3:
-                              return table4Topic;
+                              return topic_table4;
                             case 4:
-                              return table5Topic;
+                              return topic_table5;
                             case 5:
-                              return table6Topic;
+                              return topic_table6;
                             case 6:
-                              return table7Topic;
+                              return topic_table7;
                             case 7:
-                              return table8Topic;
+                              return topic_table8;
                             case 8:
-                              return table9Topic;
+                              return topic_table9;
                             case 9:
-                              return table10Topic;
+                              return topic_table10;
                             case 10:
-                              return table11Topic;
+                              return topic_table11;
                             case 11:
-                              return table12Topic;
+                              return topic_table12;
                             case 12:
-                              return table13Topic;
+                              return topic_table13;
                             case 13:
-                              return table14Topic;
+                              return topic_table14;
                             case 14:
-                              return table15Topic;
+                              return topic_table15;
                             default:
                               return "";
                           }
@@ -1037,7 +1044,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable1.includes(name)}
+                                  checked={responsible_table1.includes(name)}
                                   onChange={handleresponsibleTable1Change}
                                 />
                                 {` ` + name}
@@ -1063,7 +1070,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable2.includes(name)}
+                                  checked={responsible_table2.includes(name)}
                                   onChange={handleresponsibleTable2Change}
                                 />
                                 {` ` + name}
@@ -1090,7 +1097,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable3.includes(name)}
+                                  checked={responsible_table3.includes(name)}
                                   onChange={handleresponsibleTable3Change}
                                 />
                                 {` ` + name}
@@ -1117,7 +1124,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable4.includes(name)}
+                                  checked={responsible_table4.includes(name)}
                                   onChange={handleresponsibleTable4Change}
                                 />
                                 {` ` + name}
@@ -1143,7 +1150,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable5.includes(name)}
+                                  checked={responsible_table5.includes(name)}
                                   onChange={handleresponsibleTable5Change}
                                 />
                                 {` ` + name}
@@ -1170,7 +1177,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable6.includes(name)}
+                                  checked={responsible_table6.includes(name)}
                                   onChange={handleresponsibleTable6Change}
                                 />
                                 {` ` + name}
@@ -1197,7 +1204,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable7.includes(name)}
+                                  checked={responsible_table7.includes(name)}
                                   onChange={handleresponsibleTable7Change}
                                 />
                                 {` ` + name}
@@ -1224,7 +1231,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable8.includes(name)}
+                                  checked={responsible_table8.includes(name)}
                                   onChange={handleresponsibleTable8Change}
                                 />
                                 {` ` + name}
@@ -1251,7 +1258,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable9.includes(name)}
+                                  checked={responsible_table9.includes(name)}
                                   onChange={handleresponsibleTable9Change}
                                 />
                                 {` ` + name}
@@ -1278,7 +1285,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable10.includes(name)}
+                                  checked={responsible_table10.includes(name)}
                                   onChange={handleresponsibleTable10Change}
                                 />
                                 {` ` + name}
@@ -1304,7 +1311,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable11.includes(name)}
+                                  checked={responsible_table11.includes(name)}
                                   onChange={handleresponsibleTable11Change}
                                 />
                                 {` ` + name}
@@ -1330,7 +1337,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable12.includes(name)}
+                                  checked={responsible_table12.includes(name)}
                                   onChange={handleresponsibleTable12Change}
                                 />
                                 {` ` + name}
@@ -1356,7 +1363,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable13.includes(name)}
+                                  checked={responsible_table13.includes(name)}
                                   onChange={handleresponsibleTable13Change}
                                 />
                                 {` ` + name}
@@ -1382,7 +1389,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable14.includes(name)}
+                                  checked={responsible_table14.includes(name)}
                                   onChange={handleresponsibleTable14Change}
                                 />
                                 {` ` + name}
@@ -1408,7 +1415,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
                                 <input
                                   type="checkbox"
                                   value={name}
-                                  checked={responsibleTable15.includes(name)}
+                                  checked={responsible_table15.includes(name)}
                                   onChange={handleresponsibleTable15Change}
                                 />
                                 {` ` + name}
