@@ -263,30 +263,153 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   };
 
   const formatThaiDate = (dateString) => {
-    const formattedDate = new Date(dateString);
-    const thaiMonths = [
-      "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
-      "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
-    ];
-    const day = formattedDate.getDate();
-    const month = thaiMonths[formattedDate.getMonth()];
-    const year = (formattedDate.getFullYear() + 543) % 100; // Get last 2 digits of the year
-  
-    return `${day} ${month} ${year}`;
+    if (dateString != null) {
+      const formattedDate = new Date(dateString);
+      const thaiMonths = [
+        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
+        "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+      ];
+      const day = formattedDate.getDate();
+      const month = thaiMonths[formattedDate.getMonth()];
+      const year = (formattedDate.getFullYear() + 543) % 100; // Get last 2 digits of the year
+
+      return `${day} ${month} ${year}`;
+    }
+    return null;
   };
   useEffect(() => {
     setThaiStartDurationTable1(formatThaiDate(start_duration_table1));
+    setThaiStartDurationTable2(formatThaiDate(start_duration_table2));
+    setThaiStartDurationTable3(formatThaiDate(start_duration_table3));
+    setThaiStartDurationTable4(formatThaiDate(start_duration_table4));
+    setThaiStartDurationTable5(formatThaiDate(start_duration_table5));
+    setThaiStartDurationTable6(formatThaiDate(start_duration_table6));
+    setThaiStartDurationTable7(formatThaiDate(start_duration_table7));
+    setThaiStartDurationTable8(formatThaiDate(start_duration_table8));
+    setThaiStartDurationTable9(formatThaiDate(start_duration_table9));
+    setThaiStartDurationTable10(formatThaiDate(start_duration_table10));
+    setThaiStartDurationTable11(formatThaiDate(start_duration_table11));
+    setThaiStartDurationTable12(formatThaiDate(start_duration_table12));
+    setThaiStartDurationTable13(formatThaiDate(start_duration_table13));
+    setThaiStartDurationTable14(formatThaiDate(start_duration_table14));
+    setThaiStartDurationTable15(formatThaiDate(start_duration_table15));
+
     setThaiEndDurationTable1(formatThaiDate(end_duration_table1));
-  }, [start_duration_table1,end_duration_table1]);
+    setThaiEndDurationTable2(formatThaiDate(end_duration_table2));
+    setThaiEndDurationTable3(formatThaiDate(end_duration_table3));
+    setThaiEndDurationTable4(formatThaiDate(end_duration_table4));
+    setThaiEndDurationTable5(formatThaiDate(end_duration_table5));
+    setThaiEndDurationTable6(formatThaiDate(end_duration_table6));
+    setThaiEndDurationTable7(formatThaiDate(end_duration_table7));
+    setThaiEndDurationTable8(formatThaiDate(end_duration_table8));
+    setThaiEndDurationTable9(formatThaiDate(end_duration_table9));
+    setThaiEndDurationTable10(formatThaiDate(end_duration_table10));
+    setThaiEndDurationTable11(formatThaiDate(end_duration_table11));
+    setThaiEndDurationTable12(formatThaiDate(end_duration_table12));
+    setThaiEndDurationTable13(formatThaiDate(end_duration_table13));
+    setThaiEndDurationTable14(formatThaiDate(end_duration_table14));
+    setThaiEndDurationTable15(formatThaiDate(end_duration_table15));
+
+
+  }, [start_duration_table1,
+    end_duration_table1,
+    start_duration_table2,
+    end_duration_table2,
+    start_duration_table3,
+    end_duration_table3,
+    start_duration_table4,
+    end_duration_table4,
+    start_duration_table5,
+    end_duration_table5,
+    start_duration_table6,
+    end_duration_table6,
+    start_duration_table7,
+    end_duration_table7,
+    start_duration_table8,
+    end_duration_table8,
+    start_duration_table9,
+    end_duration_table9,
+    start_duration_table10,
+    end_duration_table10,
+    start_duration_table11,
+    end_duration_table11,
+    start_duration_table12,
+    end_duration_table12,
+    start_duration_table13,
+    end_duration_table13,
+    start_duration_table14,
+    end_duration_table14,
+    start_duration_table15,
+    end_duration_table15,
+  ]);
+  const getYearFromDate = (dateString) => {
+    return dateString ? new Date(dateString).getFullYear() : null;
+  };
+
+  useEffect(() => {
+    const year1 = new Date(start_duration_table1).getFullYear();
+    const endDurationTables = [end_duration_table15, end_duration_table14, end_duration_table13, end_duration_table12, end_duration_table11, end_duration_table10, end_duration_table9, end_duration_table8, end_duration_table7, end_duration_table6, end_duration_table5, end_duration_table4, end_duration_table3, end_duration_table2, end_duration_table1];
+
+    let year = 0;
+
+    // Iterate over end_duration_tables starting from the last one
+    for (const end_duration_table of endDurationTables) {
+      if (end_duration_table !== null) {
+        year = getYearFromDate(end_duration_table);
+        break; // Exit loop if a non-null value is found
+      }
+    }
+
+    if (year !== null) {
+      const year1Thai = year1 + 543; // Convert to Thai year
+      const yearThai = year + 543; // Convert to Thai year
+      if (year1 == year) {
+        setIs_inyear(true)
+        setStart_inyear(year1Thai);
+
+      } else {
+
+        setIs_inyear(false)
+        setStart_inyear(year1Thai);
+        setEnd_inyear(yearThai);
+
+      }
+    } else {
+      console.log("All end_duration_table values are null.");
+    }
+  }, [start_duration_table1,
+    end_duration_table1,
+    end_duration_table2,
+    end_duration_table3,
+    end_duration_table4,
+    end_duration_table5,
+    end_duration_table6,
+    end_duration_table7,
+    end_duration_table8,
+    end_duration_table9,
+    end_duration_table10,
+    end_duration_table11,
+    end_duration_table12,
+    end_duration_table13,
+    end_duration_table14,
+    end_duration_table15,
+  ]);
+
+  const [is_inyear, setIs_inyear] = useState(false);
+  const [start_inyear, setStart_inyear] = useState("");
+  const [end_inyear, setEnd_inyear] = useState("");
   const [thaistart_duration_table1, setThaiStartDurationTable1] = useState(null);
-  const [thaiend_duration_table1, setThaiEndDurationTable1] = useState(null);
   const [thaistart_duration_table2, setThaiStartDurationTable2] = useState(null);
-  const [thaiend_duration_table2, setThaiEndDurationTable2] = useState(null);
   const [thaistart_duration_table3, setThaiStartDurationTable3] = useState(null);
-  const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
   const [thaistart_duration_table4, setThaiStartDurationTable4] = useState(null);
-  const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
   const [thaistart_duration_table5, setThaiStartDurationTable5] = useState(null);
+
+  const [thaiend_duration_table1, setThaiEndDurationTable1] = useState(null);
+  const [thaiend_duration_table2, setThaiEndDurationTable2] = useState(null);
+  const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
+  const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
+
+
   const [thaiend_duration_table5, setThaiEndDurationTable5] = useState(null);
   const [thaistart_duration_table6, setThaiStartDurationTable6] = useState(null);
   const [thaiend_duration_table6, setThaiEndDurationTable6] = useState(null);
@@ -320,7 +443,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [person1, setPerson1] = useState([]);
   const [person2, setPerson2] = useState([]);
   const [person3, setPerson3] = useState([]);
-  
+
   const createProject = () => {
     let responsibleTable1str = "";
     if (responsible_table1 != "") {
@@ -548,7 +671,9 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         thaiend_duration_table14,
         thaistart_duration_table15,
         thaiend_duration_table15,
-        
+        is_inyear,
+        start_inyear,
+        end_inyear
       }
     )
       .then((response) => {
@@ -621,7 +746,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   }, [id_projects, pPersonData]);
 
 
-  
+
   useEffect(() => {
     console.log("person1" + person1);
     console.log("person2" + person2);
