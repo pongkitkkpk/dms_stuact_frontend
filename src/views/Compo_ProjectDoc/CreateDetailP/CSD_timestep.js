@@ -261,8 +261,53 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       setResponsibleTable15([...responsible_table15, name]);
     }
   };
-  // const [startDurationTable15, setStartDurationTable15] = useState(null);
-  // const [endDurationTable15, setEndDurationTable15] = useState(null);
+
+  const formatThaiDate = (dateString) => {
+    const formattedDate = new Date(dateString);
+    const thaiMonths = [
+      "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
+      "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+    ];
+    const day = formattedDate.getDate();
+    const month = thaiMonths[formattedDate.getMonth()];
+    const year = (formattedDate.getFullYear() + 543) % 100; // Get last 2 digits of the year
+  
+    return `${day} ${month} ${year}`;
+  };
+  useEffect(() => {
+    setThaiStartDurationTable1(formatThaiDate(start_duration_table1));
+    setThaiEndDurationTable1(formatThaiDate(end_duration_table1));
+  }, [start_duration_table1,end_duration_table1]);
+  const [thaistart_duration_table1, setThaiStartDurationTable1] = useState(null);
+  const [thaiend_duration_table1, setThaiEndDurationTable1] = useState(null);
+  const [thaistart_duration_table2, setThaiStartDurationTable2] = useState(null);
+  const [thaiend_duration_table2, setThaiEndDurationTable2] = useState(null);
+  const [thaistart_duration_table3, setThaiStartDurationTable3] = useState(null);
+  const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
+  const [thaistart_duration_table4, setThaiStartDurationTable4] = useState(null);
+  const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
+  const [thaistart_duration_table5, setThaiStartDurationTable5] = useState(null);
+  const [thaiend_duration_table5, setThaiEndDurationTable5] = useState(null);
+  const [thaistart_duration_table6, setThaiStartDurationTable6] = useState(null);
+  const [thaiend_duration_table6, setThaiEndDurationTable6] = useState(null);
+  const [thaistart_duration_table7, setThaiStartDurationTable7] = useState(null);
+  const [thaiend_duration_table7, setThaiEndDurationTable7] = useState(null);
+  const [thaistart_duration_table8, setThaiStartDurationTable8] = useState(null);
+  const [thaiend_duration_table8, setThaiEndDurationTable8] = useState(null);
+  const [thaistart_duration_table9, setThaiStartDurationTable9] = useState(null);
+  const [thaiend_duration_table9, setThaiEndDurationTable9] = useState(null);
+  const [thaistart_duration_table10, setThaiStartDurationTable10] = useState(null);
+  const [thaiend_duration_table10, setThaiEndDurationTable10] = useState(null);
+  const [thaistart_duration_table11, setThaiStartDurationTable11] = useState(null);
+  const [thaiend_duration_table11, setThaiEndDurationTable11] = useState(null);
+  const [thaistart_duration_table12, setThaiStartDurationTable12] = useState(null);
+  const [thaiend_duration_table12, setThaiEndDurationTable12] = useState(null);
+  const [thaistart_duration_table13, setThaiStartDurationTable13] = useState(null);
+  const [thaiend_duration_table13, setThaiEndDurationTable13] = useState(null);
+  const [thaistart_duration_table14, setThaiStartDurationTable14] = useState(null);
+  const [thaiend_duration_table14, setThaiEndDurationTable14] = useState(null);
+  const [thaistart_duration_table15, setThaiStartDurationTable15] = useState(null);
+  const [thaiend_duration_table15, setThaiEndDurationTable15] = useState(null);
 
   const [start_prepare, setStartPrepare] = useState("");
   const [end_prepare, setEndPrepare] = useState("");
@@ -275,71 +320,9 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [person1, setPerson1] = useState([]);
   const [person2, setPerson2] = useState([]);
   const [person3, setPerson3] = useState([]);
-
-  const getProjectData = () => {
-    Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_projects}`
-    ).then((response) => {
-      setProjectData(response.data);
-
-      setPerson1(response.data[0].person1_name);
-      setPerson2(response.data[0].person2_name);
-      setPerson3(response.data[0].person3_name);
-
-      const startPrepare = new Date(response.data[0].start_prepare);
-      const endPrepare = new Date(response.data[0].end_prepare);
-      const startEvent = new Date(response.data[0].start_event);
-      const endEvent = new Date(response.data[0].end_event);
-      const deadline = new Date(response.data[0].deadline);
-
-      // Adding one day to each date
-      startPrepare.setDate(startPrepare.getDate());
-      endPrepare.setDate(endPrepare.getDate());
-      startEvent.setDate(startEvent.getDate());
-      endEvent.setDate(endEvent.getDate());
-      deadline.setDate(deadline.getDate());
-
-      // Logging modified dates
-      setStartPrepare(startPrepare);
-      setEndPrepare(endPrepare);
-      setStartEvent(startEvent);
-      setEndEvent(endEvent);
-      setDeadLine(deadline);
-    });
-  };
-  const [pPersonData, setPPersonData] = useState([]);
-
-  const getpPersonData = () => {
-    Axios.get("http://localhost:3001/student/project/p_person").then(
-      (response) => {
-        setPPersonData(response.data);
-      }
-    );
-  };
-
-  useEffect(() => {
-    getpPersonData();
-  }, []);
-
-  useEffect(() => {
-    const idinperson = pPersonData.filter(
-      (person) => person.id_projects === id_projects
-    );
-    console.log("id" + id_projects);
-
-    // Assuming idinperson is an array and you want to get data from the first element
-    if (idinperson.length > 0) {
-      const { codeclub, yearly_countsketch } = idinperson[0];
-      setCodeclub(codeclub);
-      setYearlyCountSketch(yearly_countsketch);
-    }
-  }, [id_projects, pPersonData]);
-  useEffect(()=>{
-    console.log("responsible_table1")
-    console.log(responsible_table1)
-  },[responsible_table1])
+  
   const createProject = () => {
-    let responsibleTable1str  = "";
+    let responsibleTable1str = "";
     if (responsible_table1 != "") {
       responsibleTable1str = responsible_table1.join(",");
       responsibleTable1str = responsibleTable1str
@@ -470,7 +453,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         .join(", ");
     }
 
-    Axios.post(
+    Axios.put(
       `http://localhost:3001/student/project/p_timestep/create/${id_projects}`,
       {
         codeclub,
@@ -535,6 +518,37 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         start_duration_table15,
         end_duration_table15,
         responsibleTable15str,
+        thaistart_duration_table1,
+        thaiend_duration_table1,
+        thaistart_duration_table2,
+        thaiend_duration_table2,
+        thaistart_duration_table3,
+        thaiend_duration_table3,
+        thaistart_duration_table4,
+        thaiend_duration_table4,
+        thaistart_duration_table5,
+        thaiend_duration_table5,
+        thaistart_duration_table6,
+        thaiend_duration_table6,
+        thaistart_duration_table7,
+        thaiend_duration_table7,
+        thaistart_duration_table8,
+        thaiend_duration_table8,
+        thaistart_duration_table9,
+        thaiend_duration_table9,
+        thaistart_duration_table10,
+        thaiend_duration_table10,
+        thaistart_duration_table11,
+        thaiend_duration_table11,
+        thaistart_duration_table12,
+        thaiend_duration_table12,
+        thaistart_duration_table13,
+        thaiend_duration_table13,
+        thaistart_duration_table14,
+        thaiend_duration_table14,
+        thaistart_duration_table15,
+        thaiend_duration_table15,
+        
       }
     )
       .then((response) => {
@@ -547,6 +561,67 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       });
     switchToCSDBudget();
   };
+  const getProjectData = () => {
+    Axios.get(
+      `http://localhost:3001/student/project/getidproject/${id_projects}`
+    ).then((response) => {
+      setProjectData(response.data);
+
+      setPerson1(response.data[0].person1_name);
+      setPerson2(response.data[0].person2_name);
+      setPerson3(response.data[0].person3_name);
+
+      const startPrepare = new Date(response.data[0].start_prepare);
+      const endPrepare = new Date(response.data[0].end_prepare);
+      const startEvent = new Date(response.data[0].start_event);
+      const endEvent = new Date(response.data[0].end_event);
+      const deadline = new Date(response.data[0].deadline);
+
+      // Adding one day to each date
+      startPrepare.setDate(startPrepare.getDate());
+      endPrepare.setDate(endPrepare.getDate());
+      startEvent.setDate(startEvent.getDate());
+      endEvent.setDate(endEvent.getDate());
+      deadline.setDate(deadline.getDate());
+
+      // Logging modified dates
+      setStartPrepare(startPrepare);
+      setEndPrepare(endPrepare);
+      setStartEvent(startEvent);
+      setEndEvent(endEvent);
+      setDeadLine(deadline);
+    });
+  };
+  const [pPersonData, setPPersonData] = useState([]);
+
+  const getpPersonData = () => {
+    Axios.get("http://localhost:3001/student/project/p_person").then(
+      (response) => {
+        setPPersonData(response.data);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getpPersonData();
+  }, []);
+
+  useEffect(() => {
+    const idinperson = pPersonData.filter(
+      (person) => person.id_projects === id_projects
+    );
+    console.log("id" + id_projects);
+
+    // Assuming idinperson is an array and you want to get data from the first element
+    if (idinperson.length > 0) {
+      const { codeclub, yearly_countsketch } = idinperson[0];
+      setCodeclub(codeclub);
+      setYearlyCountSketch(yearly_countsketch);
+    }
+  }, [id_projects, pPersonData]);
+
+
+  
   useEffect(() => {
     console.log("person1" + person1);
     console.log("person2" + person2);
@@ -672,6 +747,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       }
     }
   };
+
 
   const getStartDuration = (index) => {
     switch (index) {
