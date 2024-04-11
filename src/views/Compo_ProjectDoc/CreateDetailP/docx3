@@ -1,0 +1,213 @@
+7
+{#startM1 < endM1}
+    {#startM1 <= 7 && endM1 >= 7}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 7 || endM1 >= 7}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 7 && endM1 == 7}
+    ✔
+    {/}
+{/}
+
+
+8
+{#startM1 < endM1}
+    {#startM1 <= 8 && endM1 >= 8}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 8 || endM1 >= 8}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 8 && endM1 == 8}
+    ✔
+    {/}
+{/}
+
+
+9
+{#startM1 < endM1}
+    {#startM1 <= 9 && endM1 >= 9}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 9 || endM1 >= 9}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 9 && endM1 == 9}
+    ✔
+    {/}
+{/}
+
+
+10
+{#startM1 < endM1}
+    {#startM1 <= 10 && endM1 >= 10}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 10 || endM1 >= 10}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 10 && endM1 == 10}
+    ✔
+    {/}
+{/}
+
+
+11
+{#startM1 < endM1}
+    {#startM1 <= 11 && endM1 >= 11}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 11 || endM1 <= 11}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 11 && endM1 == 11}
+    ✔
+    {/}
+{/}
+
+
+12
+{#startM1 < endM1}
+    {#startM1 <= 12 && endM1 >= 12}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 12 || endM1 >= 12}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 12 && endM1 == 12}
+    ✔
+    {/}
+{/}
+
+1
+{#startM1 < endM1}
+    {#startM1 <= 1 && endM1 >= 1}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 1 || endM1 >= 1}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 1 && endM1 == 1}
+    ✔
+    {/}
+{/}
+
+2
+{#startM1 < endM1}
+    {#startM1 <= 2 && endM1 >= 2}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 2 || endM1 >= 2}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 2 && endM1 == 2}
+    ✔
+    {/}
+{/}
+
+
+3
+{#startM1 < endM1}
+    {#startM1 <= 3 && endM1 >= 3}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 3 || endM1 >= 3}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 3 && endM1 == 3}
+    ✔
+    {/}
+{/}
+
+
+4
+{#startM1 < endM1}
+    {#startM1 <= 4 && endM1 >= 4}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 4 || endM1 >= 4}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 4 && endM1 == 4}
+    ✔
+    {/}
+{/}
+
+
+5
+{#startM1 < endM1}
+    {#startM1 <= 5 && endM1 >= 5}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 5 || endM1 >= 5}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 5 && endM1 == 5}
+    ✔
+    {/}
+{/}
+
+6
+{#startM1 < endM1}
+    {#startM1 <= 6 && endM1 >= 6}
+    ✔
+    {/}
+{/}
+{#startM1 > endM1}
+    {#startM1 <= 6 || endM1 >= 6}
+    ✔
+    {/}
+{/}
+{#startM1 == endM1}
+    {#startM1 == 6 && endM1 == 6}
+    ✔
+    {/}
+{/}
+
+

@@ -409,7 +409,6 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
   const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
 
-
   const [thaiend_duration_table5, setThaiEndDurationTable5] = useState(null);
   const [thaistart_duration_table6, setThaiStartDurationTable6] = useState(null);
   const [thaiend_duration_table6, setThaiEndDurationTable6] = useState(null);
@@ -444,6 +443,106 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [person2, setPerson2] = useState([]);
   const [person3, setPerson3] = useState([]);
 
+  const getMFromDate = (dateString) => {
+    return dateString ? new Date(dateString).getMonth() + 1 : null; // Adding 1 because getMonth returns zero-based index
+  };
+  useEffect(() => {
+    setStartM1(getMFromDate(start_duration_table1)); 
+    setStartM2(getMFromDate(start_duration_table2)); 
+    setStartM3(getMFromDate(start_duration_table3)); 
+    setStartM4(getMFromDate(start_duration_table4)); 
+    setStartM5(getMFromDate(start_duration_table5)); 
+    setStartM6(getMFromDate(start_duration_table6)); 
+    setStartM7(getMFromDate(start_duration_table7)); 
+    setStartM8(getMFromDate(start_duration_table8)); 
+    setStartM9(getMFromDate(start_duration_table9)); 
+    setStartM10(getMFromDate(start_duration_table10)); 
+    setStartM11(getMFromDate(start_duration_table11)); 
+    setStartM12(getMFromDate(start_duration_table12)); 
+    setStartM13(getMFromDate(start_duration_table13)); 
+    setStartM14(getMFromDate(start_duration_table14)); 
+    setStartM15(getMFromDate(start_duration_table15)); 
+
+    setEndM1(getMFromDate(end_duration_table1)); 
+    setEndM2(getMFromDate(end_duration_table2)); 
+    setEndM3(getMFromDate(end_duration_table3)); 
+    setEndM4(getMFromDate(end_duration_table4)); 
+    setEndM5(getMFromDate(end_duration_table5)); 
+    setEndM6(getMFromDate(end_duration_table6)); 
+    setEndM7(getMFromDate(end_duration_table7)); 
+    setEndM8(getMFromDate(end_duration_table8)); 
+    setEndM9(getMFromDate(end_duration_table9)); 
+    setEndM10(getMFromDate(end_duration_table10)); 
+    setEndM11(getMFromDate(end_duration_table11)); 
+    setEndM12(getMFromDate(end_duration_table12)); 
+    setEndM13(getMFromDate(end_duration_table13)); 
+    setEndM14(getMFromDate(end_duration_table14)); 
+    setEndM15(getMFromDate(end_duration_table15));
+
+  }, [
+    start_duration_table1,
+    start_duration_table2,
+    start_duration_table3,
+    start_duration_table4,
+    start_duration_table5,
+    start_duration_table6,
+    start_duration_table7,
+    start_duration_table8,
+    start_duration_table9,
+    start_duration_table10,
+    start_duration_table11,
+    start_duration_table12,
+    start_duration_table13,
+    start_duration_table14,
+    start_duration_table15,
+    end_duration_table1,
+    end_duration_table2,
+    end_duration_table3,
+    end_duration_table4,
+    end_duration_table5,
+    end_duration_table6,
+    end_duration_table7,
+    end_duration_table8,
+    end_duration_table9,
+    end_duration_table10,
+    end_duration_table11,
+    end_duration_table12,
+    end_duration_table13,
+    end_duration_table14,
+    end_duration_table15,
+  ]);
+
+  const [startM1, setStartM1] = useState(null);
+  const [startM2, setStartM2] = useState(null);
+  const [startM3, setStartM3] = useState(null);
+  const [startM4, setStartM4] = useState(null);
+  const [startM5, setStartM5] = useState(null);
+  const [startM6, setStartM6] = useState(null);
+  const [startM7, setStartM7] = useState(null);
+  const [startM8, setStartM8] = useState(null);
+  const [startM9, setStartM9] = useState(null);
+  const [startM10, setStartM10] = useState(null);
+  const [startM11, setStartM11] = useState(null);
+  const [startM12, setStartM12] = useState(null);
+  const [startM13, setStartM13] = useState(null);
+  const [startM14, setStartM14] = useState(null);
+  const [startM15, setStartM15] = useState(null);
+
+  const [endM1, setEndM1] = useState(null);
+  const [endM2, setEndM2] = useState(null);
+  const [endM3, setEndM3] = useState(null);
+  const [endM4, setEndM4] = useState(null);
+  const [endM5, setEndM5] = useState(null);
+  const [endM6, setEndM6] = useState(null);
+  const [endM7, setEndM7] = useState(null);
+  const [endM8, setEndM8] = useState(null);
+  const [endM9, setEndM9] = useState(null);
+  const [endM10, setEndM10] = useState(null);
+  const [endM11, setEndM11] = useState(null);
+  const [endM12, setEndM12] = useState(null);
+  const [endM13, setEndM13] = useState(null);
+  const [endM14, setEndM14] = useState(null);
+  const [endM15, setEndM15] = useState(null);
   const createProject = () => {
     let responsibleTable1str = "";
     if (responsible_table1 != "") {
@@ -671,6 +770,36 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         thaiend_duration_table14,
         thaistart_duration_table15,
         thaiend_duration_table15,
+        startM1,
+        startM2,
+        startM3,
+        startM4,
+        startM5,
+        startM6,
+        startM7,
+        startM8,
+        startM9,
+        startM10,
+        startM11,
+        startM12,
+        startM13,
+        startM14,
+        startM15,
+        endM1,
+        endM2,
+        endM3,
+        endM4,
+        endM5,
+        endM6,
+        endM7,
+        endM8,
+        endM9,
+        endM10,
+        endM11,
+        endM12,
+        endM13,
+        endM14,
+        endM15,
         is_inyear,
         start_inyear,
         end_inyear

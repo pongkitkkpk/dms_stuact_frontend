@@ -1,0 +1,24 @@
+
+
+
+
+
+{#topic_table2 !== null}2.{/}
+
+
+รายการ
+
+{#topic_table2 !== null}{topic_table2}{/}
+
+
+
+
+วันสุดท้าย
+
+{#thaistart_duration_table2 !== null}{thaistart_duration_table2} - {thaiend_duration_table2}{/}
+
+
+รายชื่อรับผิดชอบ
+
+{#responsibleTable2str !== null}{responsibleTable2str}{/}
+
