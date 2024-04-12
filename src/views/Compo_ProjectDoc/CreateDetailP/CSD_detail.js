@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-// react-bootstrap components
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import {
@@ -13,6 +12,7 @@ import {
   Col,
   Nav,
   Table,
+  Modal,
 } from "react-bootstrap";
 import Axios from "axios";
 
@@ -23,9 +23,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
-  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear
-
-  // console.log( storedUser);
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
 
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
@@ -33,7 +31,9 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [project_phase, setProject_phase] = useState("0");
   const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
-  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(strcodebooksomeoutyear);
+  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(
+    strcodebooksomeoutyear
+  );
   const [yearly, setYearly] = useState(""); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
   const [yearly_countsketch, setYearlyCountSketch] = useState(""); // Assuming yearly_countsketch is a number
@@ -54,38 +54,179 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [is_4side, setIs_4side] = useState(false);
   const [is_5side, setIs_5side] = useState(false);
 
-  //
+  //==========================
   const minDate = new Date();
 
-  // เพิ่มสถานที่
-  const [personCount, setPersonCount] = useState(1);
+  const [newpersonicit, setNewPersonICIT] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [personCount, setPersonCount] = useState(0);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    checkuserinfoapi();
+  }, [newpersonicit]);
+
+  const checkuserinfoapi = () => {
+    if (newpersonicit) {
+      // Make API call
+      axios
+        .post(
+          "http://localhost:3001/api/userInfo",
+          {
+            username: newpersonicit,
+          },
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            maxBodyLength: Infinity,
+          }
+        )
+        .then((response) => {
+          if (response.data.status === "success") {
+            setGetuserapi(response.data);
+          }
+          if (
+            response.message.displayname === person1_name ||
+            response.message.displayname === person2_name
+          ) {
+            alert(
+              "มีข้อมูลของนักศึกษารับผิดชอบโครงการในโครงการนี้เรียบร้อยแล้ว"
+            );
+            setNewPersonICIT(null);
+            setShowModal(false);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user info:", error);
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.message === "Invalid username or password"
+          ) {
+            console.error("Invalid username naa");
+          } else {
+            console.error("An unexpected error occurred.");
+          }
+        });
+    }
+  };
+  const [getuserapi, setGetuserapi] = useState("");
+  const [username, setUsername] = useState("");
+  const [name_student, setName_student] = useState("");
+  const [firstname_en, setFirstname_en] = useState("");
+  const [lastname_en, setLastname_en] = useState("");
+  const [email, setEmail] = useState("");
+  const [account_type, setAccount_type] = useState("");
+
+  const [CAMPUS_NAME, setCAMPUS_NAME] = useState("");
+  const [STU_STATUS_DESC, setSTU_STATUS_DESC] = useState("");
+  const [LEVEL_DESC, setLEVEL_DESC] = useState("");
+  const [FAC_NAME_THAI, setFAC_NAME_THAI] = useState("");
+  useEffect(() => {
+    if (getuserapi && getuserapi.message) {
+      setUsername(getuserapi.message.username); //s63030
+      setName_student(getuserapi.message.displayname); //ชื่อไทย
+      setFirstname_en(getuserapi.message.firstname_en); //ชื่อ eng
+      setLastname_en(getuserapi.message.lastname_en); //นาม eng
+      setEmail(getuserapi.message.email); //@kmutnb.ac.th
+      setAccount_type(getuserapi.message.account_type); //
+      // - personel หมำยถึง บุคลำกร
+      // - student หมำยถึง นักศึกษำ
+      // - templecturer หมำยถึง อำจำรย์พิเศษ
+      // - retirement หมำยถึง ผู้เกษียณอำยุ
+      // - exchange_student หมำยถึง นักศึกษำแลกเปลี่ยนชำวต่ำงประเทศ
+      // - alumni หมำยถึง ศิษย์เก่ำ
+      // - guest หมำยถึง ผู้ใช้งำนชั่วครำว
+      // - kiosk หมำยถึง ผู้ใช้งำนที่ลงทะเบียนจำก KIOSK
+      // - event หมำยถึง ผู้ใช้งำนส ำหรับงำน ประชุมวิชำกำร
+    }
+    if (getuserapi && getuserapi.message2) {
+      setCAMPUS_NAME(getuserapi.message2.CAMPUS_NAME); //มจพ. กรุงเทพฯ
+      setSTU_STATUS_DESC(getuserapi.message2.STU_STATUS_DESC); //ปกติ
+      setLEVEL_DESC(getuserapi.message2.LEVEL_DESC); //ปริญญาตรี 4 ปี / 5 ปี
+      setFAC_NAME_THAI(getuserapi.message2.FAC_NAME_THAI); //วิทยาลัยเทคโนโลยีอุตสาหกรรม
+    }
+  }, [getuserapi]);
+
+  useEffect(() => {
+    if (FAC_NAME_THAI === "มจพ. กรุงเทพฯ") {
+      setCampus("Bangkok");
+    } else if (FAC_NAME_THAI === "มจพ. ปราจีน") {
+      setCampus("Prachin");
+    } else if (FAC_NAME_THAI === "มจพ. ระยอง") {
+      setCampus("Rayong");
+    }
+  }, [FAC_NAME_THAI]);
+
+  useEffect(() => {
+    setGetuserapi(null);
+  }, [showModal]);
+
+  const borrowtime = () => {
+    if (!name_student) {
+      setPersonCount(personCount - 1);
+    }
+    setShowModal(false);
+  };
+
+  const handleAddPerson = () => {
+    switch (personCount) {
+      case 1:
+        setPerson1Name(name_student);
+        break;
+      case 2:
+        setPerson2Name(name_student);
+        break;
+      case 3:
+        setPerson3Name(name_student);
+        break;
+      default:
+      // Handle other cases if needed
+    }
+    setShowModal(false); // Close the modal after adding the person's name
+  };
+
   const increasePersonCount = () => {
-    if (personCount < 3) {
+    setShowModal(true);
+    if (personCount < 4) {
       setPersonCount(personCount + 1);
     }
   };
   const decreasePersonCount = () => {
-    if (personCount > 1) {
+    if (personCount > 0) {
       setPersonCount(personCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
       switch (personCount) {
+        case 3:
+          setPerson3Name("");
+          setPerson3Contact("");
+          setName_student("")
+          break;
         case 2:
-          setPerson3Name("")
-          setPerson3Contact("")
+          setPerson2Name("");
+          setPerson2Contact("");
+          setName_student("")
           break;
         case 1:
-          setPerson2Name("")
-          setPerson2Contact("")
-          break;
-        case 0:
-          setPerson1Name("")
-          setPerson1Contact("")
+          setPerson1Name("");
+          setPerson1Contact("");
+          setName_student("")
           break;
         default:
         // Handle other cases if needed
       }
     }
   };
+
+  useEffect(() => {
+    console.log("personCount");
+    console.log(personCount);
+  }, [personCount]);
+
   // *********************************************************
   const [userList, setUserList] = useState([]);
   const getUsers = () => {
@@ -109,15 +250,15 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
 
   // หาอาจารย์ที่ปรึกษา
   useEffect(() => {
-
-    const user = userList.find((user) => user.clubName === storedUser.clubName &&
-      user.yearly == storedUser.yearly &&
-      user.position === "Ad"
+    const user = userList.find(
+      (user) =>
+        user.clubName === storedUser.clubName &&
+        user.yearly == storedUser.yearly &&
+        user.position === "Ad"
     );
 
     if (user) {
       setAdvisorName(user.name_student);
-
     } else {
       // If no matching user is found, you might want to reset the state variables
       // setYearly("");
@@ -136,9 +277,15 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
         (project) => project.codeclub === codeclub
       );
       if (existingProject) {
-        const currentYearlyCount = parseInt(existingProject.yearly_countsketch, 10);
+        const currentYearlyCount = parseInt(
+          existingProject.yearly_countsketch,
+          10
+        );
         const updatedYearlyCount = currentYearlyCount + 1;
-        const formattedYearlyCount = String(updatedYearlyCount).padStart(2, "0");
+        const formattedYearlyCount = String(updatedYearlyCount).padStart(
+          2,
+          "0"
+        );
         // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
         // setProjectNumber(codeclub+formattedYearlyCount)
 
@@ -176,7 +323,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
       is_2side: is_2side,
       is_3side: is_3side,
       is_4side: is_4side,
-      is_5side: is_5side
+      is_5side: is_5side,
     }).then(() => {
       // Assuming setProjectList is a state setter function for your projectList state
       setProjectList([
@@ -204,7 +351,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
           is_2side: is_2side,
           is_3side: is_3side,
           is_4side: is_4side,
-          is_5side: is_5side
+          is_5side: is_5side,
         },
       ]);
     });
@@ -348,61 +495,81 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {Array.from({ length: personCount }).map(
-                          (_, index) => (
-                            <tr tr key={index} style={{ backgroundColor: "white" }}>
-
-                              <td style={{ verticalAlign: "middle" }}>
-                                <Form.Control
-                                  className="font-form-control"
-                                  size="sm"
-                                  type="text"
-                                  placeholder={`ชื่อ ผู้รับผิดชอบโครงการ คนที่ ${index + 1}`}
-                                  onChange={(event) => {
-                                    switch (index) {
-                                      case 0:
-                                        setPerson1Name(event.target.value);
-                                        break;
-                                      case 1:
-                                        setPerson2Name(event.target.value);
-                                        break;
-                                      case 2:
-                                        setPerson3Name(event.target.value);
-                                        break;
-                                      default:
-                                      // Handle other cases if needed
-                                    }
-                                  }
-                                  }
-                                />
-                              </td>
-                              {/* เบอร์ คนที่ */}
-                              <td style={{ verticalAlign: "middle" }}>
-                                <Form.Control
-                                  className="font-form-control"
-                                  size="sm"
-                                  type="text"
-                                  placeholder={`เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ ${index + 1}`}
-                                  onChange={(event) => {
-                                    switch (index) {
-                                      case 0:
-                                        setPerson1Contact(event.target.value);
-                                        break;
-                                      case 1:
-                                        setPerson2Contact(event.target.value);
-                                        break;
-                                      case 2:
-                                        setPerson3Contact(event.target.value);
-                                        break;
-                                      default:
-                                      // Handle other cases if needed
-                                    }
-                                  }}
-                                />
-                              </td>
-                            </tr>
-                          ))}
-
+                        {personCount != 0 && (
+                          <tr key={0} style={{ backgroundColor: "white" }}>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                disabled
+                                value={person1_name}
+                                placeholder={`ชื่อ ผู้รับผิดชอบโครงการ คนที่ 1`}
+                              />
+                            </td>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                placeholder={`เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1`}
+                                onChange={(event) =>
+                                  setPerson1Contact(event.target.value)
+                                }
+                              />
+                            </td>
+                          </tr>
+                        )}
+                        {personCount > 1 && (
+                          <tr key={1} style={{ backgroundColor: "white" }}>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                disabled
+                                value={person2_name}
+                                placeholder={`ชื่อ ผู้รับผิดชอบโครงการ คนที่ 2`}
+                              />
+                            </td>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                placeholder={`เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 2`}
+                                onChange={(event) =>
+                                  setPerson2Contact(event.target.value)
+                                }
+                              />
+                            </td>
+                          </tr>
+                        )}
+                        {personCount > 2 && (
+                          <tr key={2} style={{ backgroundColor: "white" }}>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                disabled
+                                value={person3_name}
+                                placeholder={`ชื่อ ผู้รับผิดชอบโครงการ คนที่ 3`}
+                              />
+                            </td>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Form.Control
+                                className="font-form-control"
+                                size="sm"
+                                type="text"
+                                placeholder={`เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 3`}
+                                onChange={(event) =>
+                                  setPerson3Contact(event.target.value)
+                                }
+                              />
+                            </td>
+                          </tr>
+                        )}
                       </tbody>
                     </Table>
                     <div
@@ -421,7 +588,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                           <div style={{ fontSize: "14px" }}>เพิ่มบุคคล</div>
                         </Button>
                       )}
-                      {personCount > 1 && (
+                      {personCount != 0 && (
                         <Button
                           variant="danger"
                           className="ml-5 mb-3 btn-budget-decrease border-danger"
@@ -433,7 +600,169 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     </div>
                   </td>
                 </tr>
+                {showModal && (
+                  <Modal
+                    show={showModal}
+                    onHide={() => borrowtime()}
+                    style={{ top: "-20%", maxHeight: "100vh" }}
+                    dialogClassName="custom-modal"
+                  >
+                    <Modal.Header>
+                      <Modal.Title>เพิ่มนักศึกษารับผิดชอบโครงการ</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {/* Input fields for adding a new person */}
+                      <Form.Control
+                        className="font-form-control"
+                        size="sm"
+                        type="text"
+                        placeholder={`ICIT ของนักศึกษา`}
+                        style={{ marginBottom: "3%" }}
+                        onChange={(event) =>
+                          setNewPersonICIT(event.target.value)
+                        }
+                      />
 
+                      {getuserapi && (
+                        <div>
+                          <Table className="table">
+                            <tbody>
+                              <tr>
+                                <td
+                                  style={{
+                                    width: "25%",
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Account Type
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {account_type}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Username
+                                </td>
+                                <td style={{ border: "none" }}>{username}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Display Name
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {name_student}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  First Name (English)
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {firstname_en} {lastname_en}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Email
+                                </td>
+                                <td style={{ border: "none" }}>{email}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  คณะ
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {FAC_NAME_THAI}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  วิทยาเขต
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {CAMPUS_NAME}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  สถานะ
+                                </td>
+                                <td style={{ border: "none" }}>
+                                  {STU_STATUS_DESC}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td
+                                  style={{
+                                    backgroundColor: "#FF8B13",
+                                    border: "none",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  หลักสูตร
+                                </td>
+                                <td style={{ border: "none" }}>{LEVEL_DESC}</td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        </div>
+                      )}
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleCloseModal}>
+                        ยกเลิก
+                      </Button>
+                      <Button variant="primary" onClick={handleAddPerson}>
+                        เพิ่ม
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                )}
 
                 {/* ข้อ 5 เลือก 5 ด้าน  db */}
                 <tr style={{ backgroundColor: "white" }}>
@@ -441,24 +770,33 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                     className="head-side-td-swp"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div>
-                      แผนยุทธศาสตร์
-                    </div>
+                    <div>แผนยุทธศาสตร์</div>
                     <div>การพัฒนา</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="1"
                         checked={is_1side}
                         onChange={() => setIs_1side(!is_1side)}
-
                       />
                       {`    `}ด้านวิชาการที่ส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="2"
@@ -468,7 +806,13 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านกีฬาหรือการส่งเสริมสุขภาพ
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="3"
@@ -478,7 +822,13 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านบำเพ็ญประโยชน์หรือรักษาสิ่งแวดล้อม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="4"
@@ -488,7 +838,13 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       {`    `}ด้านเสริมสร้างคุณธรรมและจริยธรรม
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="5"
@@ -524,7 +880,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           >
             <Button
@@ -538,7 +894,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
             </Button>
           </CardFooter>
         </Card>
-      </div >
+      </div>
     </>
   );
 }

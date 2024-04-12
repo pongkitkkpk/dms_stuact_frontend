@@ -2,24 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Form, Col, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
-import Axios from 'axios';
-function CSD_budget({id_projects, switchToCSDindicator}) {
+import Axios from "axios";
+function CSD_budget({ id_projects, switchToCSDindicator }) {
   // const storedUserData = sessionStorage.getItem('user');
   // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   // const studentuser = storedUser.username
   // console.log("asdfasdf"+studentuser)
 
-
   // const [id_project, setIdProject] = useState('');
-  const [codeclub, setCodeclub] = useState('');
-  const [yearly_countsketch, setYearlyCountSketch] = useState('');
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch, setYearlyCountSketch] = useState("");
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {
-    Axios.get(`http://localhost:3001/student/project/getidproject/${id_projects}`).then((response) => {
+    Axios.get(
+      `http://localhost:3001/student/project/getidproject/${id_projects}`
+    ).then((response) => {
       setPPersonData(response.data);
     });
-    const idinperson = pPersonData.filter(person => person.id === id_projects);
+    const idinperson = pPersonData.filter(
+      (person) => person.id === id_projects
+    );
 
     // Assuming idinperson is an array and you want to get data from the first element
     if (idinperson.length > 0) {
@@ -30,14 +33,12 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   };
 
   useEffect(() => {
-
     getpPersonData();
   }, []);
 
-
-  // 
+  //
   //                          ListA
-  // 
+  //
   const [listA, setListA] = useState(Array.from({ length: 15 }, () => ""));
   const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ""));
   const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ""));
@@ -47,415 +48,417 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
 
-
   const createProject = () => {
-    Axios.put(`http://localhost:3001/student/project/p_budget/create/${id_projects}`, {
-      // A
-      listA1: listA[0],
-      listA2: listA[1],
-      listA3: listA[2],
-      listA4: listA[3],
-      listA5: listA[4],
-      listA6: listA[5],
-      listA7: listA[6],
-      listA8: listA[7],
-      listA9: listA[8],
-      listA10: listA[9],
-      listA11: listA[10],
-      listA12: listA[11],
-      listA13: listA[12],
-      listA14: listA[13],
-      listA15: listA[14],
-      // NA
-      listNA1: listNA[0],
-      listNA2: listNA[1],
-      listNA3: listNA[2],
-      listNA4: listNA[3],
-      listNA5: listNA[4],
-      listNA6: listNA[5],
-      listNA7: listNA[6],
-      listNA8: listNA[7],
-      listNA9: listNA[8],
-      listNA10: listNA[9],
-      listNA11: listNA[10],
-      listNA12: listNA[11],
-      listNA13: listNA[12],
-      listNA14: listNA[13],
-      listNA15: listNA[14],
-      // TA
-      listTA1: listTA[0],
-      listTA2: listTA[1],
-      listTA3: listTA[2],
-      listTA4: listTA[3],
-      listTA5: listTA[4],
-      listTA6: listTA[5],
-      listTA7: listTA[6],
-      listTA8: listTA[7],
-      listTA9: listTA[8],
-      listTA10: listTA[9],
-      listTA11: listTA[10],
-      listTA12: listTA[11],
-      listTA13: listTA[12],
-      listTA14: listTA[13],
-      listTA15: listTA[14],
-      // TPA
-      listTPA1: listTPA[0],
-      listTPA2: listTPA[1],
-      listTPA3: listTPA[2],
-      listTPA4: listTPA[3],
-      listTPA5: listTPA[4],
-      listTPA6: listTPA[5],
-      listTPA7: listTPA[6],
-      listTPA8: listTPA[7],
-      listTPA9: listTPA[8],
-      listTPA10: listTPA[9],
-      listTPA11: listTPA[10],
-      listTPA12: listTPA[11],
-      listTPA13: listTPA[12],
-      listTPA14: listTPA[13],
-      listTPA15: listTPA[14],
-      // SA
-      listSA1: listSA[0],
-      listSA2: listSA[1],
-      listSA3: listSA[2],
-      listSA4: listSA[3],
-      listSA5: listSA[4],
-      listSA6: listSA[5],
-      listSA7: listSA[6],
-      listSA8: listSA[7],
-      listSA9: listSA[8],
-      listSA10: listSA[9],
-      listSA11: listSA[10],
-      listSA12: listSA[11],
-      listSA13: listSA[12],
-      listSA14: listSA[13],
-      listSA15: listSA[14],
-      listSSA: listSSA,
-      // BT
-      listBT1: listBT[0],
-      listBT2: listBT[1],
-      listBT3: listBT[2],
-      listBT4: listBT[3],
-      listBT5: listBT[4],
-      listBT6: listBT[5],
-      listBT7: listBT[6],
-      listBT8: listBT[7],
-      listBT9: listBT[8],
-      listBT10: listBT[9],
-      listBT11: listBT[10],
-      listBT12: listBT[11],
-      listBT13: listBT[12],
-      listBT14: listBT[13],
-      listBT15: listBT[14],
-      listBT16: listBT[15],
-      listBT17: listBT[16],
-      listBT18: listBT[17],
-      listBT19: listBT[18],
-      listBT20: listBT[19],
-      // NBT
-      listNBT1: listNBT[0],
-      listNBT2: listNBT[1],
-      listNBT3: listNBT[2],
-      listNBT4: listNBT[3],
-      listNBT5: listNBT[4],
-      listNBT6: listNBT[5],
-      listNBT7: listNBT[6],
-      listNBT8: listNBT[7],
-      listNBT9: listNBT[8],
-      listNBT10: listNBT[9],
-      listNBT11: listNBT[10],
-      listNBT12: listNBT[11],
-      listNBT13: listNBT[12],
-      listNBT14: listNBT[13],
-      listNBT15: listNBT[14],
-      listNBT16: listNBT[15],
-      listNBT17: listNBT[16],
-      listNBT18: listNBT[17],
-      listNBT19: listNBT[18],
-      listNBT20: listNBT[19],
-      // NNBT
-      listNNBT1: listNNBT[0],
-      listNNBT2: listNNBT[1],
-      listNNBT3: listNNBT[2],
-      listNNBT4: listNNBT[3],
-      listNNBT5: listNNBT[4],
-      listNNBT6: listNNBT[5],
-      listNNBT7: listNNBT[6],
-      listNNBT8: listNNBT[7],
-      listNNBT9: listNNBT[8],
-      listNNBT10: listNNBT[9],
-      listNNBT11: listNNBT[10],
-      listNNBT12: listNNBT[11],
-      listNNBT13: listNNBT[12],
-      listNNBT14: listNNBT[13],
-      listNNBT15: listNNBT[14],
-      listNNBT16: listNNBT[15],
-      listNNBT17: listNNBT[16],
-      listNNBT18: listNNBT[17],
-      listNNBT19: listNNBT[18],
-      listNNBT20: listNNBT[19],
-      // TBT
-      listTBT1: listTBT[0],
-      listTBT2: listTBT[1],
-      listTBT3: listTBT[2],
-      listTBT4: listTBT[3],
-      listTBT5: listTBT[4],
-      listTBT6: listTBT[5],
-      listTBT7: listTBT[6],
-      listTBT8: listTBT[7],
-      listTBT9: listTBT[8],
-      listTBT10: listTBT[9],
-      listTBT11: listTBT[10],
-      listTBT12: listTBT[11],
-      listTBT13: listTBT[12],
-      listTBT14: listTBT[13],
-      listTBT15: listTBT[14],
-      listTBT16: listTBT[15],
-      listTBT17: listTBT[16],
-      listTBT18: listTBT[17],
-      listTBT19: listTBT[18],
-      listTBT20: listTBT[19],
-      // TNBT
-      listTNBT1: listTNBT[0],
-      listTNBT2: listTNBT[1],
-      listTNBT3: listTNBT[2],
-      listTNBT4: listTNBT[3],
-      listTNBT5: listTNBT[4],
-      listTNBT6: listTNBT[5],
-      listTNBT7: listTNBT[6],
-      listTNBT8: listTNBT[7],
-      listTNBT9: listTNBT[8],
-      listTNBT10: listTNBT[9],
-      listTNBT11: listTNBT[10],
-      listTNBT12: listTNBT[11],
-      listTNBT13: listTNBT[12],
-      listTNBT14: listTNBT[13],
-      listTNBT15: listTNBT[14],
-      listTNBT16: listTNBT[15],
-      listTNBT17: listTNBT[16],
-      listTNBT18: listTNBT[17],
-      listTNBT19: listTNBT[18],
-      listTNBT20: listTNBT[19],
-      // TPBT
-      listTPBT1: listTPBT[0],
-      listTPBT2: listTPBT[1],
-      listTPBT3: listTPBT[2],
-      listTPBT4: listTPBT[3],
-      listTPBT5: listTPBT[4],
-      listTPBT6: listTPBT[5],
-      listTPBT7: listTPBT[6],
-      listTPBT8: listTPBT[7],
-      listTPBT9: listTPBT[8],
-      listTPBT10: listTPBT[9],
-      listTPBT11: listTPBT[10],
-      listTPBT12: listTPBT[11],
-      listTPBT13: listTPBT[12],
-      listTPBT14: listTPBT[13],
-      listTPBT15: listTPBT[14],
-      listTPBT16: listTPBT[15],
-      listTPBT17: listTPBT[16],
-      listTPBT18: listTPBT[17],
-      listTPBT19: listTPBT[18],
-      listTPBT20: listTPBT[19],
-      // SBT
-      listSBT1: listSBT[0],
-      listSBT2: listSBT[1],
-      listSBT3: listSBT[2],
-      listSBT4: listSBT[3],
-      listSBT5: listSBT[4],
-      listSBT6: listSBT[5],
-      listSBT7: listSBT[6],
-      listSBT8: listSBT[7],
-      listSBT9: listSBT[8],
-      listSBT10: listSBT[9],
-      listSBT11: listSBT[10],
-      listSBT12: listSBT[11],
-      listSBT13: listSBT[12],
-      listSBT14: listSBT[13],
-      listSBT15: listSBT[14],
-      listSBT16: listSBT[15],
-      listSBT17: listSBT[16],
-      listSBT18: listSBT[17],
-      listSBT19: listSBT[18],
-      listSBT20: listSBT[19],
+    Axios.put(
+      `http://localhost:3001/student/project/p_budget/create/${id_projects}`,
+      {
+        // A
+        listA1: listA[0],
+        listA2: listA[1],
+        listA3: listA[2],
+        listA4: listA[3],
+        listA5: listA[4],
+        listA6: listA[5],
+        listA7: listA[6],
+        listA8: listA[7],
+        listA9: listA[8],
+        listA10: listA[9],
+        listA11: listA[10],
+        listA12: listA[11],
+        listA13: listA[12],
+        listA14: listA[13],
+        listA15: listA[14],
+        // NA
+        listNA1: listNA[0],
+        listNA2: listNA[1],
+        listNA3: listNA[2],
+        listNA4: listNA[3],
+        listNA5: listNA[4],
+        listNA6: listNA[5],
+        listNA7: listNA[6],
+        listNA8: listNA[7],
+        listNA9: listNA[8],
+        listNA10: listNA[9],
+        listNA11: listNA[10],
+        listNA12: listNA[11],
+        listNA13: listNA[12],
+        listNA14: listNA[13],
+        listNA15: listNA[14],
+        // TA
+        listTA1: listTA[0],
+        listTA2: listTA[1],
+        listTA3: listTA[2],
+        listTA4: listTA[3],
+        listTA5: listTA[4],
+        listTA6: listTA[5],
+        listTA7: listTA[6],
+        listTA8: listTA[7],
+        listTA9: listTA[8],
+        listTA10: listTA[9],
+        listTA11: listTA[10],
+        listTA12: listTA[11],
+        listTA13: listTA[12],
+        listTA14: listTA[13],
+        listTA15: listTA[14],
+        // TPA
+        listTPA1: listTPA[0],
+        listTPA2: listTPA[1],
+        listTPA3: listTPA[2],
+        listTPA4: listTPA[3],
+        listTPA5: listTPA[4],
+        listTPA6: listTPA[5],
+        listTPA7: listTPA[6],
+        listTPA8: listTPA[7],
+        listTPA9: listTPA[8],
+        listTPA10: listTPA[9],
+        listTPA11: listTPA[10],
+        listTPA12: listTPA[11],
+        listTPA13: listTPA[12],
+        listTPA14: listTPA[13],
+        listTPA15: listTPA[14],
+        // SA
+        listSA1: listSA[0],
+        listSA2: listSA[1],
+        listSA3: listSA[2],
+        listSA4: listSA[3],
+        listSA5: listSA[4],
+        listSA6: listSA[5],
+        listSA7: listSA[6],
+        listSA8: listSA[7],
+        listSA9: listSA[8],
+        listSA10: listSA[9],
+        listSA11: listSA[10],
+        listSA12: listSA[11],
+        listSA13: listSA[12],
+        listSA14: listSA[13],
+        listSA15: listSA[14],
+        listSSA: listSSA,
+        // BT
+        listBT1: listBT[0],
+        listBT2: listBT[1],
+        listBT3: listBT[2],
+        listBT4: listBT[3],
+        listBT5: listBT[4],
+        listBT6: listBT[5],
+        listBT7: listBT[6],
+        listBT8: listBT[7],
+        listBT9: listBT[8],
+        listBT10: listBT[9],
+        listBT11: listBT[10],
+        listBT12: listBT[11],
+        listBT13: listBT[12],
+        listBT14: listBT[13],
+        listBT15: listBT[14],
+        listBT16: listBT[15],
+        listBT17: listBT[16],
+        listBT18: listBT[17],
+        listBT19: listBT[18],
+        listBT20: listBT[19],
+        // NBT
+        listNBT1: listNBT[0],
+        listNBT2: listNBT[1],
+        listNBT3: listNBT[2],
+        listNBT4: listNBT[3],
+        listNBT5: listNBT[4],
+        listNBT6: listNBT[5],
+        listNBT7: listNBT[6],
+        listNBT8: listNBT[7],
+        listNBT9: listNBT[8],
+        listNBT10: listNBT[9],
+        listNBT11: listNBT[10],
+        listNBT12: listNBT[11],
+        listNBT13: listNBT[12],
+        listNBT14: listNBT[13],
+        listNBT15: listNBT[14],
+        listNBT16: listNBT[15],
+        listNBT17: listNBT[16],
+        listNBT18: listNBT[17],
+        listNBT19: listNBT[18],
+        listNBT20: listNBT[19],
+        // NNBT
+        listNNBT1: listNNBT[0],
+        listNNBT2: listNNBT[1],
+        listNNBT3: listNNBT[2],
+        listNNBT4: listNNBT[3],
+        listNNBT5: listNNBT[4],
+        listNNBT6: listNNBT[5],
+        listNNBT7: listNNBT[6],
+        listNNBT8: listNNBT[7],
+        listNNBT9: listNNBT[8],
+        listNNBT10: listNNBT[9],
+        listNNBT11: listNNBT[10],
+        listNNBT12: listNNBT[11],
+        listNNBT13: listNNBT[12],
+        listNNBT14: listNNBT[13],
+        listNNBT15: listNNBT[14],
+        listNNBT16: listNNBT[15],
+        listNNBT17: listNNBT[16],
+        listNNBT18: listNNBT[17],
+        listNNBT19: listNNBT[18],
+        listNNBT20: listNNBT[19],
+        // TBT
+        listTBT1: listTBT[0],
+        listTBT2: listTBT[1],
+        listTBT3: listTBT[2],
+        listTBT4: listTBT[3],
+        listTBT5: listTBT[4],
+        listTBT6: listTBT[5],
+        listTBT7: listTBT[6],
+        listTBT8: listTBT[7],
+        listTBT9: listTBT[8],
+        listTBT10: listTBT[9],
+        listTBT11: listTBT[10],
+        listTBT12: listTBT[11],
+        listTBT13: listTBT[12],
+        listTBT14: listTBT[13],
+        listTBT15: listTBT[14],
+        listTBT16: listTBT[15],
+        listTBT17: listTBT[16],
+        listTBT18: listTBT[17],
+        listTBT19: listTBT[18],
+        listTBT20: listTBT[19],
+        // TNBT
+        listTNBT1: listTNBT[0],
+        listTNBT2: listTNBT[1],
+        listTNBT3: listTNBT[2],
+        listTNBT4: listTNBT[3],
+        listTNBT5: listTNBT[4],
+        listTNBT6: listTNBT[5],
+        listTNBT7: listTNBT[6],
+        listTNBT8: listTNBT[7],
+        listTNBT9: listTNBT[8],
+        listTNBT10: listTNBT[9],
+        listTNBT11: listTNBT[10],
+        listTNBT12: listTNBT[11],
+        listTNBT13: listTNBT[12],
+        listTNBT14: listTNBT[13],
+        listTNBT15: listTNBT[14],
+        listTNBT16: listTNBT[15],
+        listTNBT17: listTNBT[16],
+        listTNBT18: listTNBT[17],
+        listTNBT19: listTNBT[18],
+        listTNBT20: listTNBT[19],
+        // TPBT
+        listTPBT1: listTPBT[0],
+        listTPBT2: listTPBT[1],
+        listTPBT3: listTPBT[2],
+        listTPBT4: listTPBT[3],
+        listTPBT5: listTPBT[4],
+        listTPBT6: listTPBT[5],
+        listTPBT7: listTPBT[6],
+        listTPBT8: listTPBT[7],
+        listTPBT9: listTPBT[8],
+        listTPBT10: listTPBT[9],
+        listTPBT11: listTPBT[10],
+        listTPBT12: listTPBT[11],
+        listTPBT13: listTPBT[12],
+        listTPBT14: listTPBT[13],
+        listTPBT15: listTPBT[14],
+        listTPBT16: listTPBT[15],
+        listTPBT17: listTPBT[16],
+        listTPBT18: listTPBT[17],
+        listTPBT19: listTPBT[18],
+        listTPBT20: listTPBT[19],
+        // SBT
+        listSBT1: listSBT[0],
+        listSBT2: listSBT[1],
+        listSBT3: listSBT[2],
+        listSBT4: listSBT[3],
+        listSBT5: listSBT[4],
+        listSBT6: listSBT[5],
+        listSBT7: listSBT[6],
+        listSBT8: listSBT[7],
+        listSBT9: listSBT[8],
+        listSBT10: listSBT[9],
+        listSBT11: listSBT[10],
+        listSBT12: listSBT[11],
+        listSBT13: listSBT[12],
+        listSBT14: listSBT[13],
+        listSBT15: listSBT[14],
+        listSBT16: listSBT[15],
+        listSBT17: listSBT[16],
+        listSBT18: listSBT[17],
+        listSBT19: listSBT[18],
+        listSBT20: listSBT[19],
 
-      listSSBT: listSSBT,
-      // BNT
-      listBNT1: listBNT[0],
-      listBNT2: listBNT[1],
-      listBNT3: listBNT[2],
-      listBNT4: listBNT[3],
-      listBNT5: listBNT[4],
-      listBNT6: listBNT[5],
-      listBNT7: listBNT[6],
-      listBNT8: listBNT[7],
-      listBNT9: listBNT[8],
-      listBNT10: listBNT[9],
-      // NBNT
-      listNBNT1: listNBNT[0],
-      listNBNT2: listNBNT[1],
-      listNBNT3: listNBNT[2],
-      listNBNT4: listNBNT[3],
-      listNBNT5: listNBNT[4],
-      listNBNT6: listNBNT[5],
-      listNBNT7: listNBNT[6],
-      listNBNT8: listNBNT[7],
-      listNBNT9: listNBNT[8],
-      listNBNT10: listNBNT[9],
-      // NNBNT
-      listNNBNT1: listNNBNT[0],
-      listNNBNT2: listNNBNT[1],
-      listNNBNT3: listNNBNT[2],
-      listNNBNT4: listNNBNT[3],
-      listNNBNT5: listNNBNT[4],
-      listNNBNT6: listNNBNT[5],
-      listNNBNT7: listNNBNT[6],
-      listNNBNT8: listNNBNT[7],
-      listNNBNT9: listNNBNT[8],
-      listNNBNT10: listNNBNT[9],
-      // TPBNT
-      listTPBNT1: listTPBNT[0],
-      listTPBNT2: listTPBNT[1],
-      listTPBNT3: listTPBNT[2],
-      listTPBNT4: listTPBNT[3],
-      listTPBNT5: listTPBNT[4],
-      listTPBNT6: listTPBNT[5],
-      listTPBNT7: listTPBNT[6],
-      listTPBNT8: listTPBNT[7],
-      listTPBNT9: listTPBNT[8],
-      listTPBNT10: listTPBNT[9],
-      // SBNT
-      listSBNT1: listSBNT[0],
-      listSBNT2: listSBNT[1],
-      listSBNT3: listSBNT[2],
-      listSBNT4: listSBNT[3],
-      listSBNT5: listSBNT[4],
-      listSBNT6: listSBNT[5],
-      listSBNT7: listSBNT[6],
-      listSBNT8: listSBNT[7],
-      listSBNT9: listSBNT[8],
-      listSBNT10: listSBNT[9],
+        listSSBT: listSSBT,
+        // BNT
+        listBNT1: listBNT[0],
+        listBNT2: listBNT[1],
+        listBNT3: listBNT[2],
+        listBNT4: listBNT[3],
+        listBNT5: listBNT[4],
+        listBNT6: listBNT[5],
+        listBNT7: listBNT[6],
+        listBNT8: listBNT[7],
+        listBNT9: listBNT[8],
+        listBNT10: listBNT[9],
+        // NBNT
+        listNBNT1: listNBNT[0],
+        listNBNT2: listNBNT[1],
+        listNBNT3: listNBNT[2],
+        listNBNT4: listNBNT[3],
+        listNBNT5: listNBNT[4],
+        listNBNT6: listNBNT[5],
+        listNBNT7: listNBNT[6],
+        listNBNT8: listNBNT[7],
+        listNBNT9: listNBNT[8],
+        listNBNT10: listNBNT[9],
+        // NNBNT
+        listNNBNT1: listNNBNT[0],
+        listNNBNT2: listNNBNT[1],
+        listNNBNT3: listNNBNT[2],
+        listNNBNT4: listNNBNT[3],
+        listNNBNT5: listNNBNT[4],
+        listNNBNT6: listNNBNT[5],
+        listNNBNT7: listNNBNT[6],
+        listNNBNT8: listNNBNT[7],
+        listNNBNT9: listNNBNT[8],
+        listNNBNT10: listNNBNT[9],
+        // TPBNT
+        listTPBNT1: listTPBNT[0],
+        listTPBNT2: listTPBNT[1],
+        listTPBNT3: listTPBNT[2],
+        listTPBNT4: listTPBNT[3],
+        listTPBNT5: listTPBNT[4],
+        listTPBNT6: listTPBNT[5],
+        listTPBNT7: listTPBNT[6],
+        listTPBNT8: listTPBNT[7],
+        listTPBNT9: listTPBNT[8],
+        listTPBNT10: listTPBNT[9],
+        // SBNT
+        listSBNT1: listSBNT[0],
+        listSBNT2: listSBNT[1],
+        listSBNT3: listSBNT[2],
+        listSBNT4: listSBNT[3],
+        listSBNT5: listSBNT[4],
+        listSBNT6: listSBNT[5],
+        listSBNT7: listSBNT[6],
+        listSBNT8: listSBNT[7],
+        listSBNT9: listSBNT[8],
+        listSBNT10: listSBNT[9],
 
-      listSSBNT: listSSBNT,
-      // C
-      listC1: listC[0],
-      listC2: listC[1],
-      listC3: listC[2],
-      listC4: listC[3],
-      listC5: listC[4],
-      listC6: listC[5],
-      listC7: listC[6],
-      listC8: listC[7],
-      listC9: listC[8],
-      listC10: listC[9],
-      listC11: listC[10],
-      listC12: listC[11],
-      listC13: listC[12],
-      listC14: listC[13],
-      listC15: listC[14],
-      listC16: listC[15],
-      listC17: listC[16],
-      listC18: listC[17],
-      listC19: listC[18],
-      listC20: listC[19],
-      // NC
-      listNC1: listNC[0],
-      listNC2: listNC[1],
-      listNC3: listNC[2],
-      listNC4: listNC[3],
-      listNC5: listNC[4],
-      listNC6: listNC[5],
-      listNC7: listNC[6],
-      listNC8: listNC[7],
-      listNC9: listNC[8],
-      listNC10: listNC[9],
-      listNC11: listNC[10],
-      listNC12: listNC[11],
-      listNC13: listNC[12],
-      listNC14: listNC[13],
-      listNC15: listNC[14],
-      listNC16: listNC[15],
-      listNC17: listNC[16],
-      listNC18: listNC[17],
-      listNC19: listNC[18],
-      listNC20: listNC[19],
-      //NNC
-      listNNC1: listNNC[0],
-      listNNC2: listNNC[1],
-      listNNC3: listNNC[2],
-      listNNC4: listNNC[3],
-      listNNC5: listNNC[4],
-      listNNC6: listNNC[5],
-      listNNC7: listNNC[6],
-      listNNC8: listNNC[7],
-      listNNC9: listNNC[8],
-      listNNC10: listNNC[9],
-      listNNC11: listNNC[10],
-      listNNC12: listNNC[11],
-      listNNC13: listNNC[12],
-      listNNC14: listNNC[13],
-      listNNC15: listNNC[14],
-      listNNC16: listNNC[15],
-      listNNC17: listNNC[16],
-      listNNC18: listNNC[17],
-      listNNC19: listNNC[18],
-      listNNC20: listNNC[19],
-      //TPC
-      listTPC1: listTPC[0],
-      listTPC2: listTPC[1],
-      listTPC3: listTPC[2],
-      listTPC4: listTPC[3],
-      listTPC5: listTPC[4],
-      listTPC6: listTPC[5],
-      listTPC7: listTPC[6],
-      listTPC8: listTPC[7],
-      listTPC9: listTPC[8],
-      listTPC10: listTPC[9],
-      listTPC11: listTPC[10],
-      listTPC12: listTPC[11],
-      listTPC13: listTPC[12],
-      listTPC14: listTPC[13],
-      listTPC15: listTPC[14],
-      listTPC16: listTPC[15],
-      listTPC17: listTPC[16],
-      listTPC18: listTPC[17],
-      listTPC19: listTPC[18],
-      listTPC20: listTPC[19],
-      //SC
-      listSC1: listSC[0],
-      listSC2: listSC[1],
-      listSC3: listSC[2],
-      listSC4: listSC[3],
-      listSC5: listSC[4],
-      listSC6: listSC[5],
-      listSC7: listSC[6],
-      listSC8: listSC[7],
-      listSC9: listSC[8],
-      listSC10: listSC[9],
-      listSC11: listSC[10],
-      listSC12: listSC[11],
-      listSC13: listSC[12],
-      listSC14: listSC[13],
-      listSC15: listSC[14],
-      listSC16: listSC[15],
-      listSC17: listSC[16],
-      listSC18: listSC[17],
-      listSC19: listSC[18],
-      listSC20: listSC[19],
+        listSSBNT: listSSBNT,
+        // C
+        listC1: listC[0],
+        listC2: listC[1],
+        listC3: listC[2],
+        listC4: listC[3],
+        listC5: listC[4],
+        listC6: listC[5],
+        listC7: listC[6],
+        listC8: listC[7],
+        listC9: listC[8],
+        listC10: listC[9],
+        listC11: listC[10],
+        listC12: listC[11],
+        listC13: listC[12],
+        listC14: listC[13],
+        listC15: listC[14],
+        listC16: listC[15],
+        listC17: listC[16],
+        listC18: listC[17],
+        listC19: listC[18],
+        listC20: listC[19],
+        // NC
+        listNC1: listNC[0],
+        listNC2: listNC[1],
+        listNC3: listNC[2],
+        listNC4: listNC[3],
+        listNC5: listNC[4],
+        listNC6: listNC[5],
+        listNC7: listNC[6],
+        listNC8: listNC[7],
+        listNC9: listNC[8],
+        listNC10: listNC[9],
+        listNC11: listNC[10],
+        listNC12: listNC[11],
+        listNC13: listNC[12],
+        listNC14: listNC[13],
+        listNC15: listNC[14],
+        listNC16: listNC[15],
+        listNC17: listNC[16],
+        listNC18: listNC[17],
+        listNC19: listNC[18],
+        listNC20: listNC[19],
+        //NNC
+        listNNC1: listNNC[0],
+        listNNC2: listNNC[1],
+        listNNC3: listNNC[2],
+        listNNC4: listNNC[3],
+        listNNC5: listNNC[4],
+        listNNC6: listNNC[5],
+        listNNC7: listNNC[6],
+        listNNC8: listNNC[7],
+        listNNC9: listNNC[8],
+        listNNC10: listNNC[9],
+        listNNC11: listNNC[10],
+        listNNC12: listNNC[11],
+        listNNC13: listNNC[12],
+        listNNC14: listNNC[13],
+        listNNC15: listNNC[14],
+        listNNC16: listNNC[15],
+        listNNC17: listNNC[16],
+        listNNC18: listNNC[17],
+        listNNC19: listNNC[18],
+        listNNC20: listNNC[19],
+        //TPC
+        listTPC1: listTPC[0],
+        listTPC2: listTPC[1],
+        listTPC3: listTPC[2],
+        listTPC4: listTPC[3],
+        listTPC5: listTPC[4],
+        listTPC6: listTPC[5],
+        listTPC7: listTPC[6],
+        listTPC8: listTPC[7],
+        listTPC9: listTPC[8],
+        listTPC10: listTPC[9],
+        listTPC11: listTPC[10],
+        listTPC12: listTPC[11],
+        listTPC13: listTPC[12],
+        listTPC14: listTPC[13],
+        listTPC15: listTPC[14],
+        listTPC16: listTPC[15],
+        listTPC17: listTPC[16],
+        listTPC18: listTPC[17],
+        listTPC19: listTPC[18],
+        listTPC20: listTPC[19],
+        //SC
+        listSC1: listSC[0],
+        listSC2: listSC[1],
+        listSC3: listSC[2],
+        listSC4: listSC[3],
+        listSC5: listSC[4],
+        listSC6: listSC[5],
+        listSC7: listSC[6],
+        listSC8: listSC[7],
+        listSC9: listSC[8],
+        listSC10: listSC[9],
+        listSC11: listSC[10],
+        listSC12: listSC[11],
+        listSC13: listSC[12],
+        listSC14: listSC[13],
+        listSC15: listSC[14],
+        listSC16: listSC[15],
+        listSC17: listSC[16],
+        listSC18: listSC[17],
+        listSC19: listSC[18],
+        listSC20: listSC[19],
 
-      listSSC: listSSC,
-      listETC: listETC,
-      listSETC: listSETC,
-      listSAll: listSAll
-
-
-    }).then(response => {
-      console.log(response.data);
-      switchToCSDindicator();
-
-    }).catch((error) => {
-      console.error('Error creating project:', error);
-    });
+        listSSC: listSSC,
+        listETC: listETC,
+        listSETC: listSETC,
+        listSAll: listSAll,
+        thailistSAll: thailistSAll,
+      }
+    )
+      .then((response) => {
+        console.log(response.data);
+        switchToCSDindicator();
+      })
+      .catch((error) => {
+        console.error("Error creating project:", error);
+      });
   };
   // useEffect(()=>{
   //   console.log(listA)
@@ -517,45 +520,54 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
       return newListTPA;
     });
   };
-
   const updateListSA = (index, numPeople, numHours, pricePerHour) => {
     const totalPrice =
       parseInt(numPeople) * parseInt(numHours) * parseInt(pricePerHour);
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
     setListSA((prevListSA) => {
       const newListSA = [...prevListSA];
-      newListSA[index] = isNaN(totalPrice) ? "" : totalPrice;
+      newListSA[index] = isNaN(totalPrice)
+        ? ""
+        : formattedTotalPrice.toString();
       return newListSA;
     });
   };
 
   useEffect(() => {
-    // Convert string values to numbers and filter out non-numeric values
     const numericValues = listSA
-      .map((value) => parseFloat(value))
+      .map((value) => {
+        return parseFloat(value.replace(/,/g, ""));
+      })
       .filter((value) => !isNaN(value));
-    // Calculate sum using reduce method
     const sumA = numericValues.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    // console.log(sumA);
-    setListSSA(sumA);
+    const formattedSumA = sumA.toLocaleString("en-US");
+    setListSSA(formattedSumA);
   }, [listSA]);
 
-  // 
+  useEffect(() => {});
+
+  //
   //                      ListBT
-  // 
+  //
   const [listBT, setListBT] = useState(Array.from({ length: 20 }, () => ""));
   const [listNBT, setListNBT] = useState(Array.from({ length: 20 }, () => ""));
-  const [listNNBT, setListNNBT] = useState(Array.from({ length: 20 }, () => ""));
+  const [listNNBT, setListNNBT] = useState(
+    Array.from({ length: 20 }, () => "")
+  );
   const [listTBT, setListTBT] = useState(Array.from({ length: 20 }, () => ""));
-  const [listTNBT, setListTNBT] = useState(Array.from({ length: 20 }, () => ""));
-  const [listTPBT, setListTPBT] = useState(Array.from({ length: 20 }, () => ""));
+  const [listTNBT, setListTNBT] = useState(
+    Array.from({ length: 20 }, () => "")
+  );
+  const [listTPBT, setListTPBT] = useState(
+    Array.from({ length: 20 }, () => "")
+  );
   const [listSBT, setListSBT] = useState(Array.from({ length: 20 }, () => ""));
 
   const [listSSBT, setListSSBT] = useState(1);
   const [TypeBTCount, setTypeBTCount] = useState(1);
-
 
   // useEffect(()=>{
   //   console.log(listBT)
@@ -641,45 +653,58 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
   const updateListSBT = (index, numPeople, numHours, pricePerHour) => {
     const totalPrice =
       parseInt(numPeople) * parseInt(numHours) * parseInt(pricePerHour);
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
     setListSBT((prevListSBT) => {
       const newListSBT = [...prevListSBT];
-      newListSBT[index] = isNaN(totalPrice) ? "" : totalPrice;
+      newListSBT[index] = isNaN(totalPrice)
+        ? ""
+        : formattedTotalPrice.toString();
       return newListSBT;
     });
   };
 
   useEffect(() => {
-    // Convert string values to numbers and filter out non-numeric values
     const numericValues = listSBT
-      .map((value) => parseFloat(value))
+      .map((value) => {
+        return parseFloat(value.replace(/,/g, ""));
+      })
       .filter((value) => !isNaN(value));
-    // Calculate sum using reduce method
     const sumBT = numericValues.reduce(
-      (accumulator, currentValue) => accumulator + currentValue, 0);
-    // console.log(sumBT);
-    setListSSBT(sumBT);
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const formattedSumBT = sumBT.toLocaleString("en-US");
+    setListSSBT(formattedSumBT);
   }, [listSBT]);
 
-  // 
+  //
   //                        ListBNT
-  // 
+  //
   const [listBNT, setListBNT] = useState(Array.from({ length: 10 }, () => ""));
-  const [listNBNT, setListNBNT] = useState(Array.from({ length: 10 }, () => ""));
-  const [listNNBNT, setListNNBNT] = useState(Array.from({ length: 10 }, () => ""));
-  const [listTPBNT, setListTPBNT] = useState(Array.from({ length: 10 }, () => ""));
-  const [listSBNT, setListSBNT] = useState(Array.from({ length: 10 }, () => ""));
+  const [listNBNT, setListNBNT] = useState(
+    Array.from({ length: 10 }, () => "")
+  );
+  const [listNNBNT, setListNNBNT] = useState(
+    Array.from({ length: 10 }, () => "")
+  );
+  const [listTPBNT, setListTPBNT] = useState(
+    Array.from({ length: 10 }, () => "")
+  );
+  const [listSBNT, setListSBNT] = useState(
+    Array.from({ length: 10 }, () => "")
+  );
 
   const [listSSBNT, setListSSBNT] = useState(1);
   const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
   useEffect(() => {
-    console.log(listBNT)
-    console.log(listNBNT)
-    console.log(listNNBNT)
-    console.log(listTPBNT)
-    console.log(listSBNT)
-    console.log(listSSBNT)
-  }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT])
+    console.log(listBNT);
+    console.log(listNBNT);
+    console.log(listNNBNT);
+    console.log(listTPBNT);
+    console.log(listSBNT);
+    console.log(listSSBNT);
+  }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT]);
   const increaseTypeBNTCount = () => {
     if (TypeBNTCount < 10) {
       setTypeBNTCount(TypeBNTCount + 1);
@@ -733,30 +758,33 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
 
   const updateListSBNT = (index, numPeople, pricePerHour) => {
     const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
     setListSBNT((prevListSBNT) => {
       const newListSBNT = [...prevListSBNT];
-      newListSBNT[index] = isNaN(totalPrice) ? "" : totalPrice;
+      newListSBNT[index] = isNaN(totalPrice)
+        ? ""
+        : formattedTotalPrice.toString();
       return newListSBNT;
     });
   };
 
   useEffect(() => {
-    // Convert string values to numbers and filter out non-numeric values
     const numericValues = listSBNT
-      .map((value) => parseFloat(value))
+      .map((value) => {
+        return parseFloat(value.replace(/,/g, ""));
+      })
       .filter((value) => !isNaN(value));
-    // Calculate sum using reduce method
     const sumBNT = numericValues.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    // console.log(sumBNT);
-    setListSSBNT(sumBNT);
+    const formattedSumBNT = sumBNT.toLocaleString("en-US");
+    setListSSBNT(formattedSumBNT);
   }, [listSBNT]);
 
-  // 
+  //
   //                    ListC
-  // 
+  //
   const [listC, setListC] = useState(Array.from({ length: 20 }, () => ""));
   const [listNC, setListNC] = useState(Array.from({ length: 20 }, () => ""));
   const [listNNC, setListNNC] = useState(Array.from({ length: 20 }, () => ""));
@@ -827,63 +855,195 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
 
   const updateListSC = (index, numPeople, pricePerHour) => {
     const totalPrice = parseInt(numPeople) * parseInt(pricePerHour);
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
     setListSC((prevListSC) => {
       const newListSC = [...prevListSC];
-      newListSC[index] = isNaN(totalPrice) ? "" : totalPrice;
+      newListSC[index] = isNaN(totalPrice)
+        ? ""
+        : formattedTotalPrice.toString();
       return newListSC;
     });
   };
 
   useEffect(() => {
-    // Convert string values to numbers and filter out non-numeric values
     const numericValues = listSC
-      .map((value) => parseFloat(value))
+      .map((value) => {
+        return parseFloat(value.replace(/,/g, ""));
+      })
       .filter((value) => !isNaN(value));
-    // Calculate sum using reduce method
     const sumC = numericValues.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
-    // console.log(sumC);
-    setListSSC(sumC);
+    const formattedSumC = sumC.toLocaleString("en-US");
+    setListSSC(formattedSumC);
   }, [listSC]);
 
   const [listETC, setListETC] = useState(0);
   const [listSETC, setListSETC] = useState(0);
 
-  useEffect(() => {
-    console.log("ETC" + listETC);
-    console.log("SETC" + listSETC);
-    // console.log("SBT"+listSA)
-  }, [listETC, listSETC]);
 
   const [listSAll, setListSAll] = useState(0);
+  const [thailistSAll, setThaiListSAll] = useState(0);
 
-  useEffect(() => {
-    // Convert string values to integers and filter out non-numeric values for each list
+useEffect(() => {
+    // Convert string values back to integers and filter out non-numeric values for each list
     const numericValuesSA = listSA
-      .map((value) => parseInt(value))
+      .map((value) => parseInt(value.replace(/,/g, '')))
       .filter((value) => !isNaN(value));
     const numericValuesSBT = listSBT
-      .map((value) => parseInt(value))
+      .map((value) => parseInt(value.replace(/,/g, '')))
       .filter((value) => !isNaN(value));
     const numericValuesSBNT = listSBNT
-      .map((value) => parseInt(value))
+      .map((value) => parseInt(value.replace(/,/g, '')))
       .filter((value) => !isNaN(value));
     const numericValuesSC = listSC
-      .map((value) => parseInt(value))
+      .map((value) => parseInt(value.replace(/,/g, '')))
       .filter((value) => !isNaN(value));
 
     // Calculate sum for each list
-    const sumSA = numericValuesSA.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    const sumSBT = numericValuesSBT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    const sumSBNT = numericValuesSBNT.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    const sumSC = numericValuesSC.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const sumSA = numericValuesSA.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const sumSBT = numericValuesSBT.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const sumSBNT = numericValuesSBNT.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const sumSC = numericValuesSC.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
 
+
+    
     // Calculate total sum
-    const totalSum = sumSA + sumSBT + sumSBNT + sumSC + parseInt(listSETC);
-    setListSAll(totalSum);
-  }, [listSA, listSBT, listSBNT, listSC, listSETC]);
+    const totalSum = sumSA + sumSBT + sumSBNT + sumSC + Number(listSETC);
+
+    // Format the total sum with commas
+    const formattedTotalSum = totalSum.toLocaleString('en-US');
+
+    // Set listSAll to the formatted total sum
+    setListSAll(formattedTotalSum);
+}, [listSA, listSBT, listSBNT, listSC, listSETC]);
+
+
+  function ThaiNumberToText(num) {
+    num = String(num);
+    num = num.replace(/๐/gi, "0");
+    num = num.replace(/๑/gi, "1");
+    num = num.replace(/๒/gi, "2");
+    num = num.replace(/๓/gi, "3");
+    num = num.replace(/๔/gi, "4");
+    num = num.replace(/๕/gi, "5");
+    num = num.replace(/๖/gi, "6");
+    num = num.replace(/๗/gi, "7");
+    num = num.replace(/๘/gi, "8");
+    num = num.replace(/๙/gi, "9");
+    return ArabicNumberToText(num);
+  }
+
+  function ArabicNumberToText(Number) {
+    var Number = CheckNumber(Number);
+    var NumberArray = new Array(
+      "ศูนย์",
+      "หนึ่ง",
+      "สอง",
+      "สาม",
+      "สี่",
+      "ห้า",
+      "หก",
+      "เจ็ด",
+      "แปด",
+      "เก้า",
+      "สิบ"
+    );
+    var DigitArray = new Array(
+      "",
+      "สิบ",
+      "ร้อย",
+      "พัน",
+      "หมื่น",
+      "แสน",
+      "ล้าน"
+    );
+    var BahtText = "";
+    if (isNaN(Number)) {
+      return "ข้อมูลนำเข้าไม่ถูกต้อง";
+    } else {
+      if (Number - 0 > 9999999.9999) {
+        return "ข้อมูลนำเข้าเกินขอบเขตที่ตั้งไว้";
+      } else {
+        Number = Number.split(".");
+        if (Number[1].length > 0) {
+          Number[1] = Number[1].substring(0, 2);
+        }
+        var NumberLen = Number[0].length - 0;
+        for (var i = 0; i < NumberLen; i++) {
+          var tmp = Number[0].substring(i, i + 1) - 0;
+          if (tmp != 0) {
+            if (i == NumberLen - 1 && tmp == 1) {
+              BahtText += "เอ็ด";
+            } else if (i == NumberLen - 2 && tmp == 2) {
+              BahtText += "ยี่";
+            } else if (i == NumberLen - 2 && tmp == 1) {
+              BahtText += "";
+            } else {
+              BahtText += NumberArray[tmp];
+            }
+            BahtText += DigitArray[NumberLen - i - 1];
+          }
+        }
+        BahtText += "บาท";
+        if (Number[1] == "0" || Number[1] == "00") {
+          BahtText += "ถ้วน";
+        } else {
+          DecimalLen = Number[1].length - 0;
+          for (var i = 0; i < DecimalLen; i++) {
+            var tmp = Number[1].substring(i, i + 1) - 0;
+            if (tmp != 0) {
+              if (i == DecimalLen - 1 && tmp == 1) {
+                BahtText += "เอ็ด";
+              } else if (i == DecimalLen - 2 && tmp == 2) {
+                BahtText += "ยี่";
+              } else if (i == DecimalLen - 2 && tmp == 1) {
+                BahtText += "";
+              } else {
+                BahtText += NumberArray[tmp];
+              }
+              BahtText += DigitArray[DecimalLen - i - 1];
+            }
+          }
+          BahtText += "สตางค์";
+        }
+        return BahtText;
+      }
+    }
+  }
+
+  function CheckNumber(Number) {
+    var decimal = false;
+    Number = Number.toString();
+    Number = Number.replace(/ |,|บาท|฿/gi, "");
+    for (var i = 0; i < Number.length; i++) {
+      if (Number[i] == ".") {
+        decimal = true;
+      }
+    }
+    if (decimal == false) {
+      Number = Number + ".00";
+    }
+    return Number;
+  }
+  useEffect(() => {
+    setThaiListSAll(ThaiNumberToText(listSAll));
+  }, [listSAll]);
+
+  useEffect(() => {}, [listSSA]);
 
   return (
     <>
@@ -913,9 +1073,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
               <tbody>
                 {/* ค่าตอบแทน */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td
-                    className="head-side-td" style={{ verticalAlign: "top" }}
-                  >
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>หมวดค่าตอบแทน</div>
                   </td>
                   <td className="back-side-td">
@@ -1103,7 +1261,8 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
                 {/* ค่าใช้สอย(มีจำนวนเวลา) */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าใช้สอย</div>
                     <div>(มีจำนวนเวลา)</div>
@@ -1324,9 +1483,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
 
                 {/* ค่าใช้สอย(ไม่มีจำนวนเวลา) */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td
-                    className="head-side-td" style={{ verticalAlign: "top" }}
-                  >
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>หมวดค่าใช้สอย</div>
                     <div>(ไม่มีจำนวนเวลา)</div>
                   </td>
@@ -1516,7 +1673,8 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
                 {/* ค่าวัสดุ  */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
                   >
                     <div>หมวดค่าวัสดุ</div>
                   </td>
@@ -1700,9 +1858,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
 
                 {/* ค่าอื่นๆ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td
-                    className="head-side-td" style={{ verticalAlign: "top" }}
-                  >
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
                     <div>หมวดอื่นๆ</div>
                   </td>
 
@@ -1802,7 +1958,8 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
                 {/* ยอดงบประมาณรวม */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp" style={{ verticalAlign: "top" }}
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
                   >
                     <div>งบประมาณสุทธิ</div>
                   </td>
@@ -1851,7 +2008,7 @@ function CSD_budget({id_projects, switchToCSDindicator}) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           >
             <Button

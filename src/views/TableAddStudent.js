@@ -239,7 +239,7 @@ function TableAddStudent() {
                 <Modal.Header>
                   <Modal.Title>
                     ข้อมูลลายละเอียดของ icit account
-                    (ตารางเอาแบบมีเส้นหรือไม่มีเส้น)
+                    
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
