@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Card, Container, Row, Col } from "react-bootstrap";
 import SD_detail from './Compo_ProjectDoc/ShowDetailP/SD_detail';
 import SD_detail2 from './Compo_ProjectDoc/ShowDetailP/SD_detail2';
+import SD_person from './Compo_ProjectDoc/ShowDetailP/SD_person';
 
 import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
 import SD_locationtime from './Compo_ProjectDoc/ShowDetailP/SD_locationtime';
@@ -62,6 +63,7 @@ function ProjectDocument() {
           {/* Conditionally render components based on currentStep */}
           {currentStep === 'SD_Detail' && <SD_detail id_project={id_project} />}
           {currentStep === 'SD_Detail2' && <SD_detail2 id_project={id_project} />}
+          {currentStep === 'SD_person' && <SD_person id_project={id_project} />}
           {currentStep === 'SD_locationtime' && <SD_locationtime id_project={id_project} />}
           {currentStep === 'SD_Plan' && <SD_plan />}
           {currentStep === 'SD_Budget' && <SD_budget />}
