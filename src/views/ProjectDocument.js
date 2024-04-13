@@ -4,9 +4,10 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import SD_detail from './Compo_ProjectDoc/ShowDetailP/SD_detail';
 import SD_detail2 from './Compo_ProjectDoc/ShowDetailP/SD_detail2';
 import SD_person from './Compo_ProjectDoc/ShowDetailP/SD_person';
-
-import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
 import SD_locationtime from './Compo_ProjectDoc/ShowDetailP/SD_locationtime';
+import SD_timestep from './Compo_ProjectDoc/ShowDetailP/SD_timestep';
+import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
+
 
 function ProjectDocument() {
   const { id_project } = useParams();
@@ -65,6 +66,7 @@ function ProjectDocument() {
           {currentStep === 'SD_Detail2' && <SD_detail2 id_project={id_project} />}
           {currentStep === 'SD_person' && <SD_person id_project={id_project} />}
           {currentStep === 'SD_locationtime' && <SD_locationtime id_project={id_project} />}
+          {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
           {currentStep === 'SD_Plan' && <SD_plan />}
           {currentStep === 'SD_Budget' && <SD_budget />}
         </Row>

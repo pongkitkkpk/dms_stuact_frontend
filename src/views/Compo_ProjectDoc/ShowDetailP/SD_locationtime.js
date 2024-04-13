@@ -16,8 +16,7 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 
-function SD_locationtime({ id_projects }) {
-
+function SD_locationtime({ id_project }) {
   const [projectList, setProjectList] = useState([]);
 
   const [location1, setLocation1] = useState("");
@@ -37,13 +36,6 @@ function SD_locationtime({ id_projects }) {
   const [thaiend_event, setThaiEndEvent] = useState("");
   const [thaideadline, setThaiDeadLine] = useState("");
 
-  const [problem1, setProblem1] = useState("");
-  const [result1, setResult1] = useState("");
-  const [problem2, setProblem2] = useState("");
-  const [result2, setResult2] = useState("");
-  const [problem3, setProblem3] = useState("");
-  const [result3, setResult3] = useState("");
-
   const [created_at, setCreated_At] = useState(new Date());
   const [updated_at, setUpdated_at] = useState("");
   const [onlymonthstart, setOnlyMonthStart] = useState("");
@@ -51,8 +43,6 @@ function SD_locationtime({ id_projects }) {
 
   //
   const minDate = new Date();
-
-
 
   const [originalData, setOriginalData] = useState({});
   const [editData, setEditData] = useState({});
@@ -63,29 +53,23 @@ function SD_locationtime({ id_projects }) {
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
-      setPrinciplesAndReasons1(response.data[0].principles_and_reasons1);
-      setPrinciplesAndReasons2(response.data[0].principles_and_reasons2);
-      setPrinciplesAndReasons3(response.data[0].principles_and_reasons3);
-      setPrinciplesAndReasons4(response.data[0].principles_and_reasons4);
-      setPrinciplesAndReasons5(response.data[0].principles_and_reasons5);
-      setObjective1(response.data[0].objective1);
-      setObjective2(response.data[0].objective2);
-      setObjective3(response.data[0].objective3);
-      setObjective4(response.data[0].objective4);
-      setObjective5(response.data[0].objective5);
-      setProjectType1(response.data[0].project_type1);
-      setProjectType2(response.data[0].project_type2);
-      setProjectType3(response.data[0].project_type3);
-      setProjectType4(response.data[0].project_type4);
-      setProjectType5(response.data[0].project_type5);
-      setIsNewProject(response.data[0].is_newproject);
-      setIsContinueProject(response.data[0].is_continueproject);
-      setProblem1(response.data[0].problem1);
-      setResult1(response.data[0].result1);
-      setProblem2(response.data[0].problem2);
-      setResult2(response.data[0].result2);
-      setProblem3(response.data[0].problem3);
-      setResult3(response.data[0].result3);
+      setLocation1(response.data[0].location1);
+      setLocation2(response.data[0].location2);
+      setLocation3(response.data[0].location3);
+      setLocation4(response.data[0].location4);
+      setLocation5(response.data[0].location5);
+
+      setStartPrepare(response.data[0].start_prepare);
+      setEndPrepare(response.data[0].end_prepare);
+      setStartEvent(response.data[0].start_event);
+      setEndEvent(response.data[0].end_event);
+      setDeadLine(response.data[0].deadline);
+
+      setThaiStartPrepare(response.data[0].thaistart_prepare);
+      setThaiEndPrepare(response.data[0].thaiend_prepare);
+      setThaiStartEvent(response.data[0].thaistart_event);
+      setThaiEndEvent(response.data[0].thaiend_event);
+      setThaiDeadLine(response.data[0].thaideadline);
     });
   };
 
@@ -93,9 +77,6 @@ function SD_locationtime({ id_projects }) {
     getProjectData();
   }, [id_project]);
 
-  useEffect(() => {
-    console.log(editData.is_continueproject);
-  }, [editData]);
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -104,7 +85,10 @@ function SD_locationtime({ id_projects }) {
   const handleSaveClick = () => {
     // Save data here
     setIsEditMode(false);
-
+    setEditData((prevEditData) => ({
+        ...prevEditData,
+        deadline: deadline,
+      }));
     if (window.confirm("Do you want to save changes?")) {
       Axios.put(
         `http://localhost:3001/student/project/edit/${id_project}`,
@@ -132,7 +116,6 @@ function SD_locationtime({ id_projects }) {
       setEditData(originalData);
     }
   };
- 
 
   // Split month start_prepare
   useEffect(() => {
@@ -145,74 +128,133 @@ function SD_locationtime({ id_projects }) {
   // Calculate end date for วันส่งรายงาน
   useEffect(() => {
     if (end_event) {
-      const endReportDate = new Date(end_event);
+      const endReportDate = new Date(editData.end_event);
       endReportDate.setDate(endReportDate.getDate() + 30);
-
+  
       const day = endReportDate.getDate().toString().padStart(2, "0");
       const month = (endReportDate.getMonth() + 1).toString().padStart(2, "0");
       const year = endReportDate.getFullYear();
-
-      setDeadLine(`${year}-${month}-${day}`);
+  
+      const a = `${year}-${month}-${day}`;
+      console.log("New deadline:", a);
+  
+      // Update editData using the functional form of setEditData
+      setEditData((prevEditData) => ({
+        ...prevEditData,
+        deadline: a,
+      }));
+      console.log("Updated editData:", editData);
+  
+      setDeadLine(a);
+      console.log("Updated editData:", deadline);
       setShowDeadLine(`${day}/${month}/${year}`);
     }
-  }, [end_event]);
+  }, [editData.end_event]); 
+  useEffect(() => {
+    console.log("Updated editData2:", deadline);
+    setEditData((prevEditData) => ({
+        ...prevEditData,
+        deadline: deadline,
+      }));
+  }, [deadline]);
 
 
-  useEffect(()=>{
-    const formattedDate = new Date(start_prepare).toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-  });
-  setThaiStartPrepare(formattedDate)
-  },[start_prepare])
-  useEffect(()=>{
-    const formattedDate = new Date(end_prepare).toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-  });
-  setThaiEndPrepare(formattedDate)
-  },[end_prepare])
-  useEffect(()=>{
-    const formattedDate = new Date(start_event).toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-  });
-  setThaiStartEvent(formattedDate)
-  },[start_event])
-  useEffect(()=>{
-    const formattedDate = new Date(end_event).toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-  });
-  setThaiEndEvent(formattedDate)
-  },[end_event])
-  useEffect(()=>{
-    const formattedDate = new Date(deadline).toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-  });
-  setThaiDeadLine(formattedDate)
-  },[deadline])
+  useEffect(() => {
+    const formattedDate = new Date(editData.start_prepare).toLocaleDateString("th-TH", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    setEditData({
+        ...editData,
+        thaistart_prepare: formattedDate,
+      });
+    setThaiStartPrepare(formattedDate);
+  }, [editData.start_prepare]);
 
+  useEffect(() => {
+    const formattedDate = new Date(editData.end_prepare).toLocaleDateString("th-TH", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    setEditData({
+        ...editData,
+        thaiend_prepare: formattedDate,
+      });
+    setThaiEndPrepare(formattedDate);
+  }, [editData.end_prepare]);
 
-  useEffect(()=>{
-    
-    console.log(thaistart_prepare)
-    console.log(thaiend_prepare)
-    console.log(thaistart_event)
-    console.log(thaiend_event)
-    console.log(thaideadline)
-  },[thaiend_event,thaiend_prepare,thaistart_event,thaistart_prepare,thaideadline])
+  useEffect(() => {
+    const formattedDate = new Date(editData.start_event).toLocaleDateString("th-TH", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    setEditData({
+        ...editData,
+        thaistart_event: formattedDate,
+      });
+    setThaiStartEvent(formattedDate);
+  }, [editData.start_event]);
+
+  useEffect(() => {
+    const formattedDate = new Date(editData.end_event).toLocaleDateString("th-TH", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    setEditData({
+        ...editData,
+        thaiend_event: formattedDate,
+      });
+    setThaiEndEvent(formattedDate);
+  }, [editData.end_event]);
+
+  useEffect(() => {
+    const formattedDate = new Date(editData.deadline).toLocaleDateString("th-TH", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    setEditData({
+        ...editData,
+        thaideadline: formattedDate,
+      });
+    setThaiDeadLine(formattedDate);
+    console.log("BBBBBBBBBBBBBBB")
+    console.log(formattedDate)
+  }, [editData.deadline]);
+
+  useEffect(() => {
+    console.log(thaistart_prepare);
+    console.log(thaiend_prepare);
+    console.log(thaistart_event);
+    console.log(thaiend_event);
+    console.log(thaideadline);
+  }, [
+    thaiend_event,
+    thaiend_prepare,
+    thaistart_event,
+    thaistart_prepare,
+    thaideadline,
+  ]);
   return (
     <>
       {/* วนค่าจากdatabase  */}
       <Col md="9">
         <Card>
+          {!isEditMode && (
+            <Button
+              type="submit"
+              className="btn-dataupdate"
+              style={{ fontSize: "14px", margin: "1%" }}
+              variant="primary"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
+          )}
           <CardHeader
             style={{
               backgroundColor: "#535353",
@@ -246,72 +288,89 @@ function SD_locationtime({ id_projects }) {
                         <tr></tr>
                       </thead>
                       <tbody>
-                        {Array.from({ length: locationCount }).map(
-                          (_, index) => (
-                            <tr
-                              key={index}
-                              style={{ backgroundColor: "white" }}
-                            >
-                              <Form.Control
-                                className="table-margin"
-                                size="sm"
-                                type="text"
-                                placeholder={`สถานที่จัดโครงการที่ ${
-                                  index + 1
-                                }`}
-                                onChange={(event) => {
-                                  switch (index) {
-                                    case 0:
-                                      setLocation1(event.target.value);
-                                      break;
-                                    case 1:
-                                      setLocation2(event.target.value);
-                                      break;
-                                    case 2:
-                                      setLocation3(event.target.value);
-                                      break;
-                                    case 3:
-                                      setLocation4(event.target.value);
-                                      break;
-                                    case 4:
-                                      setLocation5(event.target.value);
-                                      break;
-                                    default:
-                                    // Handle other cases if needed
-                                  }
-                                }}
-                              />
-                            </tr>
-                          )
-                        )}
+                        <tr style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการที่ ${1}`}
+                            value={isEditMode ? editData.location1 : location1}
+                            readOnly={!isEditMode}
+                            onChange={(event) => {
+                              setEditData({
+                                ...editData,
+                                location1: event.target.value,
+                              });
+                            }}
+                          />
+                        </tr>
+
+                        <tr style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการที่ ${2}`}
+                            value={isEditMode ? editData.location2 : location2}
+                            readOnly={!isEditMode}
+                            onChange={(event) => {
+                              setEditData({
+                                ...editData,
+                                location2: event.target.value,
+                              });
+                            }}
+                          />
+                        </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการที่ ${3}`}
+                            value={isEditMode ? editData.location3 : location3}
+                            readOnly={!isEditMode}
+                            onChange={(event) => {
+                              setEditData({
+                                ...editData,
+                                location3: event.target.value,
+                              });
+                            }}
+                          />
+                        </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการที่ ${4}`}
+                            value={isEditMode ? editData.location4 : location4}
+                            readOnly={!isEditMode}
+                            onChange={(event) => {
+                              setEditData({
+                                ...editData,
+                                location4: event.target.value,
+                              });
+                            }}
+                          />
+                        </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`สถานที่จัดโครงการที่ ${5}`}
+                            value={isEditMode ? editData.location5 : location5}
+                            readOnly={!isEditMode}
+                            onChange={(event) => {
+                              setEditData({
+                                ...editData,
+                                location5: event.target.value,
+                              });
+                            }}
+                          />
+                        </tr>
                       </tbody>
                     </Table>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {locationCount < 5 && (
-                        <Button
-                          variant="success"
-                          className="ml-5 mb-3 btn-budget-increase border-success"
-                          onClick={increaseLocationCount}
-                        >
-                          <div style={{ fontSize: "14px" }}>เพิ่มสถานที่</div>
-                        </Button>
-                      )}
-                      {locationCount > 1 && (
-                        <Button
-                          variant="danger"
-                          className="ml-5 mb-3 btn-budget-decrease border-danger"
-                          onClick={decreaseLocationCount}
-                        >
-                          <div style={{ fontSize: "14px" }}>ลดสถานที่</div>
-                        </Button>
-                      )}
-                    </div>
                   </td>
                 </tr>
 
@@ -329,9 +388,13 @@ function SD_locationtime({ id_projects }) {
                       <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันเริ่มต้น (จัดเตรียม) :</Form.Label>
                         <DatePicker
-                          selected={start_prepare}
-                          onChange={(date) => 
-                            setStartPrepare(date)}
+                          selected={
+                            isEditMode ? editData.start_prepare : start_prepare
+                          }
+                          onChange={(date) => setEditData({
+                            ...editData,
+                            start_prepare: date, // Ensure date is a valid date object
+                          })}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันเริ่มต้น"
                           className="form-control margin-form-control"
@@ -339,24 +402,33 @@ function SD_locationtime({ id_projects }) {
                           popperPlacement="top-start"
                           isClearable
                           selectsStart
-                          startDate={start_prepare}
-                          endDate={end_prepare}
+                          startDate={
+                            isEditMode ? editData.start_prepare : start_prepare
+                          }
+                          endDate={
+                            isEditMode ? editData.end_prepare : end_prepare
+                          }
+                          readOnly={!isEditMode}
                         />
                       </td>
                       <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันสิ้นสุด (จัดเตรียม) :</Form.Label>
                         <DatePicker
-                          selected={end_prepare}
-                          onChange={(date) => setEndPrepare(date)}
+                          selected={ isEditMode ? editData.end_prepare:end_prepare}
+                          onChange={(date) => setEditData({
+                            ...editData,
+                            end_prepare: date, // Ensure date is a valid date object
+                          })}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันสิ้นสุด"
                           className="form-control margin-form-control"
-                          minDate={start_prepare}
+                          minDate={ isEditMode ? editData.start_prepare : start_prepare}
                           popperPlacement="top-start"
                           isClearable
                           selectsEnd
-                          startDate={start_prepare}
-                          endDate={end_prepare}
+                          startDate={ isEditMode ? editData.start_prepare : start_prepare}
+                          endDate={isEditMode ? editData.end_prepare : end_prepare}
+                          readOnly={!isEditMode}
                         />
                       </td>
                     </div>
@@ -376,33 +448,41 @@ function SD_locationtime({ id_projects }) {
                       <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันเริ่มต้น (ดำเนินงาน) : </Form.Label>
                         <DatePicker
-                          selected={start_event}
-                          onChange={(date) => setStartEvent(date)}
+                          selected={isEditMode ? editData.start_event:start_event}
+                          onChange={(date) => setEditData({
+                            ...editData,
+                            start_event: date, // Ensure date is a valid date object
+                          })}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันเริ่มต้น"
                           className="form-control margin-form-control"
-                          minDate={end_prepare}
+                          minDate={isEditMode ? editData.end_prepare:end_prepare}
                           popperPlacement="top-start"
                           isClearable
                           selectsStart
-                          startDate={start_event}
-                          endDate={end_event}
+                          startDate={isEditMode ? editData.start_event:start_event}
+                          endDate={isEditMode ? editData.end_event:end_event}
+                          readOnly={!isEditMode}
                         />
                       </td>
                       <td style={{ borderColor: "white", width: "50%" }}>
                         <Form.Label>วันสิ้นสุด (ดำเนินงาน) : </Form.Label>
                         <DatePicker
-                          selected={end_event}
-                          onChange={(date) => setEndEvent(date)}
+                          selected={isEditMode ? editData.end_event:end_event}
+                          onChange={(date) => setEditData({
+                            ...editData,
+                            end_event: date, // Ensure date is a valid date object
+                          })}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันสิ้นสุด"
                           className="form-control margin-form-control"
-                          minDate={start_event}
+                          minDate={isEditMode ? editData.start_event:start_event}
                           popperPlacement="top-start"
                           isClearable
                           selectsEnd
-                          startDate={start_event}
-                          endDate={end_event}
+                          startDate={isEditMode ? editData.start_event:start_event}
+                          endDate={isEditMode ? editData.end_event:end_event}
+                          readOnly={!isEditMode}
                         />
                       </td>
                     </div>
@@ -411,7 +491,10 @@ function SD_locationtime({ id_projects }) {
 
                 {/* วันกำหนดส่งโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>วันกำหนดส่งโครงการ</div>
                     {/* <p className="detail-prodoc">
                       กำหนด 30 วัน หลังจากวันดำเนินงาน
@@ -422,7 +505,7 @@ function SD_locationtime({ id_projects }) {
                       {/* <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label> */}
                       <input
                         type="text"
-                        value={showdeadline}
+                        value={isEditMode ? editData.deadline:showdeadline}
                         className="form-control"
                         readOnly
                       />
@@ -438,18 +521,31 @@ function SD_locationtime({ id_projects }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           >
-            <Button
-              onClick={createProject}
-              type="submit"
-              variant="warning"
-              className="btn-dataupdate"
-              style={{ fontSize: "14px" }}
-            >
-              บันทึกข้อมูล
-            </Button>
+            {isEditMode ? (
+              <>
+                <Button
+                  variant="success"
+                  type="submit"
+                  className="ml-5 mb-3 btn-budget-increase"
+                  style={{ fontSize: "14px" }}
+                  onClick={handleSaveClick}
+                >
+                  Save
+                </Button>
+                <Button
+                  type="submit"
+                  className="ml-5 mb-3 btn-budget-decrease"
+                  style={{ fontSize: "14px" }}
+                  variant="danger"
+                  onClick={handleBackClick}
+                >
+                  Back
+                </Button>
+              </>
+            ) : null}
           </CardFooter>
         </Card>
       </Col>
