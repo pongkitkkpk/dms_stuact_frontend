@@ -7,6 +7,7 @@ import SD_person from './Compo_ProjectDoc/ShowDetailP/SD_person';
 import SD_locationtime from './Compo_ProjectDoc/ShowDetailP/SD_locationtime';
 import SD_timestep from './Compo_ProjectDoc/ShowDetailP/SD_timestep';
 import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
+import SD_indicator from './Compo_ProjectDoc/ShowDetailP/SD_indicator';
 
 
 function ProjectDocument() {
@@ -67,7 +68,8 @@ function ProjectDocument() {
           {currentStep === 'SD_person' && <SD_person id_project={id_project} />}
           {currentStep === 'SD_locationtime' && <SD_locationtime id_project={id_project} />}
           {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
-          {currentStep === 'SD_Budget' && <SD_budget />}
+          {currentStep === 'SD_budget' && <SD_budget id_project={id_project}/>}
+          {currentStep === 'SD_indicator' && <SD_indicator id_project={id_project}/>}
         </Row>
       </Container>
     </>

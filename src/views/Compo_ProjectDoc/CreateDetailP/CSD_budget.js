@@ -1047,7 +1047,8 @@ useEffect(() => {
 
   return (
     <>
-      <div style={{ width: "79%", marginLeft: "1%" }}>
+    <Col md="9">
+      {/* <div style={{ width: "79%", marginLeft: "1%" }}> */}
         <Card>
           <CardHeader
             style={{
@@ -2022,7 +2023,8 @@ useEffect(() => {
             </Button>
           </CardFooter>
         </Card>
-      </div>
+      {/* </div> */}
+      </Col>
     </>
   );
 }
