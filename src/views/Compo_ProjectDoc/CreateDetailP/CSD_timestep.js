@@ -802,7 +802,8 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         endM15,
         is_inyear,
         start_inyear,
-        end_inyear
+        end_inyear,
+        TopictableCount
       }
     )
       .then((response) => {

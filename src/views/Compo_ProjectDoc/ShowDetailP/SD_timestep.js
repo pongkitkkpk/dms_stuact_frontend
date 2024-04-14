@@ -318,6 +318,7 @@ function SD_timestep({ id_project }) {
       setEndDurationTable13(response.data[0].end_duration_table13);
       setEndDurationTable14(response.data[0].end_duration_table14);
       setEndDurationTable15(response.data[0].end_duration_table15);
+      setTopictableCount(response.data[0].TopictableCount);
 
       const namesArray1 = response.data[0].responsibleTable1str
         .split(",")
@@ -382,6 +383,9 @@ function SD_timestep({ id_project }) {
     });
   };
 
+  useEffect(() => {
+    // console.log(responsible_table1.includes(name));
+  }, [responsible_table1]);
   useEffect(() => {
     getProjectData();
   }, [id_project]);
@@ -1225,98 +1229,114 @@ function SD_timestep({ id_project }) {
                     <td className="back-side-td">
                       <Form.Label>รายละเอียดการดำเนินงาน : </Form.Label>
                       <Form.Control
+                        size="sm"
+                        type="text"
+                        placeholder={`รายละเอียดขั้นตอนที่ ${index + 1}`}
                         className="font-form-control"
+                        value={
+                          isEditMode
+                            ? editData[`topic_table${index + 1}`]
+                            : originalData[`topic_table${index + 1}`]
+                        }
                         onChange={(event) => {
+                          const newValue = event.target.value;
                           switch (index) {
                             case 0:
-                              setTable1Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table1: newValue,
+                              });
                               break;
                             case 1:
-                              setTable2Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table2: newValue,
+                              });
                               break;
                             case 2:
-                              setTable3Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table3: newValue,
+                              });
                               break;
                             case 3:
-                              setTable4Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table4: newValue,
+                              });
                               break;
                             case 4:
-                              setTable5Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table5: newValue,
+                              });
                               break;
                             case 5:
-                              setTable6Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table6: newValue,
+                              });
                               break;
                             case 6:
-                              setTable7Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table7: newValue,
+                              });
                               break;
                             case 7:
-                              setTable8Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table8: newValue,
+                              });
                               break;
                             case 8:
-                              setTable9Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table9: newValue,
+                              });
                               break;
                             case 9:
-                              setTable10Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table10: newValue,
+                              });
                               break;
                             case 10:
-                              setTable11Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table11: newValue,
+                              });
                               break;
                             case 11:
-                              setTable12Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table12: newValue,
+                              });
                               break;
                             case 12:
-                              setTable13Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table13: newValue,
+                              });
                               break;
                             case 13:
-                              setTable14Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table14: newValue,
+                              });
                               break;
                             case 14:
-                              setTable15Topic(event.target.value);
+                              setEditData({
+                                ...editData,
+                                topic_table15: newValue,
+                              });
                               break;
                             default:
                               // Handle default case if necessary
                               break;
                           }
                         }}
-                        value={(() => {
-                          switch (index) {
-                            case 0:
-                              return topic_table1;
-                            case 1:
-                              return topic_table2;
-                            case 2:
-                              return topic_table3;
-                            case 3:
-                              return topic_table4;
-                            case 4:
-                              return topic_table5;
-                            case 5:
-                              return topic_table6;
-                            case 6:
-                              return topic_table7;
-                            case 7:
-                              return topic_table8;
-                            case 8:
-                              return topic_table9;
-                            case 9:
-                              return topic_table10;
-                            case 10:
-                              return topic_table11;
-                            case 11:
-                              return topic_table12;
-                            case 12:
-                              return topic_table13;
-                            case 13:
-                              return topic_table14;
-                            case 14:
-                              return topic_table15;
-                            default:
-                              return "";
-                          }
-                        })()}
-                        size="sm"
-                        type="text"
-                        placeholder={`รายละเอียดขั้นตอนที่ ${index + 1}`}
+                        readOnly={!isEditMode}
                       />
                       <div
                         style={{
@@ -1328,18 +1348,34 @@ function SD_timestep({ id_project }) {
                         <Form.Label>ระยะเวลา : </Form.Label>
                         <div>
                           <DatePicker
-                            selected={getStartDuration(index)}
-                            onChange={(date) => setStartDuration(index, date)}
+                            selected={
+                              isEditMode
+                                ? editData[`start_duration_table${index + 1}`]
+                                : getStartDuration(index)
+                            }
+                            onChange={(date) =>
+                              setEditData({
+                                ...editData,
+                                [`start_duration_table${index + 1}`]: date, // Ensure date is a valid date object
+                              })
+                            }
                             dateFormat="dd/MM/yyyy"
                             placeholderText="เลือกวันเริ่มต้น"
                             className="form-control margin-form-control"
-                            minDate={start_prepare}
-                            maxDate={end_event}
                             popperPlacement="top-start"
                             isClearable
                             selectsStart
-                            startDate={getStartDuration(index)}
-                            endDate={getEndDuration(index)}
+                            startDate={
+                              isEditMode
+                                ? editData[`start_duration_table${index + 1}`]
+                                : getStartDuration(index)
+                            }
+                            endDate={
+                              isEditMode
+                                ? editData[`start_duration_table${index + 1}`]
+                                : getEndDuration(index)
+                            }
+                            readOnly={!isEditMode}
                           />
                         </div>
                         <span style={{ marginLeft: "1%", marginRight: "1%" }}>
@@ -1347,31 +1383,47 @@ function SD_timestep({ id_project }) {
                         </span>
                         <div>
                           <DatePicker
-                            selected={getEndDuration(index)}
-                            onChange={(date) => setEndDuration(index, date)}
+                            selected={
+                              isEditMode
+                                ? editData[`end_duration_table${index + 1}`]
+                                : getEndDuration(index)
+                            }
+                            onChange={(date) =>
+                              setEditData({
+                                ...editData,
+                                [`end_duration_table${index + 1}`]: date, // Ensure date is a valid date object
+                              })
+                            }
                             dateFormat="dd/MM/yyyy"
                             placeholderText="เลือกวันสิ้นสุด"
                             className="form-control"
-                            minDate={getStartDuration(index)}
-                            maxDate={end_event}
                             popperPlacement="top-start"
                             isClearable
                             selectsEnd
-                            startDate={getStartDuration(index)}
-                            endDate={getEndDuration(index)}
+                            startDate={
+                              isEditMode
+                                ? editData[`start_duration_table${index + 1}`]
+                                : getStartDuration(index)
+                            }
+                            endDate={
+                              isEditMode
+                                ? editData[`start_duration_table${index + 1}`]
+                                : getEndDuration(index)
+                            }
+                            readOnly={!isEditMode}
                           />
                         </div>
                       </div>
 
                       <br></br>
-                      {index == 0 && (
+                      {index === 0 && (
                         <div style={{ display: "inline-block" }}>
                           <Form.Label style={{ marginRight: "10px" }}>
                             ผู้รับผิดชอบ :{" "}
                           </Form.Label>
-                          {personNames.map((name, index) => (
+                          {personNames.map((name, idx) => (
                             <div
-                              key={index}
+                              key={idx}
                               style={{
                                 display: "inline-block",
                                 marginRight: "10px",
@@ -1390,6 +1442,7 @@ function SD_timestep({ id_project }) {
                           ))}
                         </div>
                       )}
+
                       {index == 1 && (
                         <div style={{ display: "inline-block" }}>
                           <Form.Label style={{ marginRight: "10px" }}>
