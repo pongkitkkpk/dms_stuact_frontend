@@ -262,288 +262,136 @@ function SD_timestep({ id_project }) {
     }
   };
 
-  const formatThaiDate = (dateString) => {
-    if (dateString != null) {
-      const formattedDate = new Date(dateString);
-      const thaiMonths = [
-        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
-        "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
-      ];
-      const day = formattedDate.getDate();
-      const month = thaiMonths[formattedDate.getMonth()];
-      const year = (formattedDate.getFullYear() + 543) % 100; // Get last 2 digits of the year
+  const [originalData, setOriginalData] = useState({});
+  const [editData, setEditData] = useState({});
+  const [isEditMode, setIsEditMode] = useState(false);
+  const getProjectData = () => {
+    Axios.get(
+      `http://localhost:3001/student/project/timestep/getidproject/${id_project}`
+    ).then((response) => {
+      setOriginalData(response.data[0]);
+      setEditData(response.data[0]);
+      setTable1Topic(response.data[0].topic_table1);
+      setTable2Topic(response.data[0].topic_table2);
+      setTable3Topic(response.data[0].topic_table3);
+      setTable4Topic(response.data[0].topic_table4);
+      setTable5Topic(response.data[0].topic_table5);
+      setTable6Topic(response.data[0].topic_table6);
+      setTable7Topic(response.data[0].topic_table7);
+      setTable8Topic(response.data[0].topic_table8);
+      setTable9Topic(response.data[0].topic_table9);
+      setTable10Topic(response.data[0].topic_table10);
+      setTable11Topic(response.data[0].topic_table11);
+      setTable12Topic(response.data[0].topic_table12);
+      setTable13Topic(response.data[0].topic_table13);
+      setTable14Topic(response.data[0].topic_table14);
+      setTable15Topic(response.data[0].topic_table15);
 
-      return `${day} ${month} ${year}`;
-    }
-    return null;
+      setStartDurationTable1(response.data[0].start_duration_table1);
+      setStartDurationTable2(response.data[0].start_duration_table2);
+      setStartDurationTable3(response.data[0].start_duration_table3);
+      setStartDurationTable4(response.data[0].start_duration_table4);
+      setStartDurationTable5(response.data[0].start_duration_table5);
+      setStartDurationTable6(response.data[0].start_duration_table6);
+      setStartDurationTable7(response.data[0].start_duration_table7);
+      setStartDurationTable8(response.data[0].start_duration_table8);
+      setStartDurationTable9(response.data[0].start_duration_table9);
+      setStartDurationTable10(response.data[0].start_duration_table10);
+      setStartDurationTable11(response.data[0].start_duration_table11);
+      setStartDurationTable12(response.data[0].start_duration_table12);
+      setStartDurationTable13(response.data[0].start_duration_table13);
+      setStartDurationTable14(response.data[0].start_duration_table14);
+      setStartDurationTable15(response.data[0].start_duration_table15);
+
+      setEndDurationTable1(response.data[0].end_duration_table1);
+      setEndDurationTable2(response.data[0].end_duration_table2);
+      setEndDurationTable3(response.data[0].end_duration_table3);
+      setEndDurationTable4(response.data[0].end_duration_table4);
+      setEndDurationTable5(response.data[0].end_duration_table5);
+      setEndDurationTable6(response.data[0].end_duration_table6);
+      setEndDurationTable7(response.data[0].end_duration_table7);
+      setEndDurationTable8(response.data[0].end_duration_table8);
+      setEndDurationTable9(response.data[0].end_duration_table9);
+      setEndDurationTable10(response.data[0].end_duration_table10);
+      setEndDurationTable11(response.data[0].end_duration_table11);
+      setEndDurationTable12(response.data[0].end_duration_table12);
+      setEndDurationTable13(response.data[0].end_duration_table13);
+      setEndDurationTable14(response.data[0].end_duration_table14);
+      setEndDurationTable15(response.data[0].end_duration_table15);
+
+      const namesArray1 = response.data[0].responsibleTable1str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable1(namesArray1);
+      const namesArray2 = response.data[0].responsibleTable2str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable2(namesArray2);
+      const namesArray3 = response.data[0].responsibleTable3str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable3(namesArray3);
+      const namesArray4 = response.data[0].responsibleTable4str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable4(namesArray4);
+      const namesArray5 = response.data[0].responsibleTable5str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable5(namesArray5);
+      const namesArray6 = response.data[0].responsibleTable6str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable6(namesArray6);
+      const namesArray7 = response.data[0].responsibleTable7str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable7(namesArray7);
+      const namesArray8 = response.data[0].responsibleTable8str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable8(namesArray8);
+      const namesArray9 = response.data[0].responsibleTable9str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable9(namesArray9);
+      const namesArray10 = response.data[0].responsibleTable10str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable10(namesArray10);
+      const namesArray11 = response.data[0].responsibleTable11str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable11(namesArray11);
+      const namesArray12 = response.data[0].responsibleTable12str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable12(namesArray12);
+      const namesArray13 = response.data[0].responsibleTable13str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable13(namesArray13);
+      const namesArray14 = response.data[0].responsibleTable14str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable14(namesArray14);
+      const namesArray15 = response.data[0].responsibleTable15str
+        .split(",")
+        .map((name) => name.trim());
+      setResponsibleTable15(namesArray15);
+    });
   };
+
   useEffect(() => {
-    setThaiStartDurationTable1(formatThaiDate(start_duration_table1));
-    setThaiStartDurationTable2(formatThaiDate(start_duration_table2));
-    setThaiStartDurationTable3(formatThaiDate(start_duration_table3));
-    setThaiStartDurationTable4(formatThaiDate(start_duration_table4));
-    setThaiStartDurationTable5(formatThaiDate(start_duration_table5));
-    setThaiStartDurationTable6(formatThaiDate(start_duration_table6));
-    setThaiStartDurationTable7(formatThaiDate(start_duration_table7));
-    setThaiStartDurationTable8(formatThaiDate(start_duration_table8));
-    setThaiStartDurationTable9(formatThaiDate(start_duration_table9));
-    setThaiStartDurationTable10(formatThaiDate(start_duration_table10));
-    setThaiStartDurationTable11(formatThaiDate(start_duration_table11));
-    setThaiStartDurationTable12(formatThaiDate(start_duration_table12));
-    setThaiStartDurationTable13(formatThaiDate(start_duration_table13));
-    setThaiStartDurationTable14(formatThaiDate(start_duration_table14));
-    setThaiStartDurationTable15(formatThaiDate(start_duration_table15));
+    getProjectData();
+  }, [id_project]);
 
-    setThaiEndDurationTable1(formatThaiDate(end_duration_table1));
-    setThaiEndDurationTable2(formatThaiDate(end_duration_table2));
-    setThaiEndDurationTable3(formatThaiDate(end_duration_table3));
-    setThaiEndDurationTable4(formatThaiDate(end_duration_table4));
-    setThaiEndDurationTable5(formatThaiDate(end_duration_table5));
-    setThaiEndDurationTable6(formatThaiDate(end_duration_table6));
-    setThaiEndDurationTable7(formatThaiDate(end_duration_table7));
-    setThaiEndDurationTable8(formatThaiDate(end_duration_table8));
-    setThaiEndDurationTable9(formatThaiDate(end_duration_table9));
-    setThaiEndDurationTable10(formatThaiDate(end_duration_table10));
-    setThaiEndDurationTable11(formatThaiDate(end_duration_table11));
-    setThaiEndDurationTable12(formatThaiDate(end_duration_table12));
-    setThaiEndDurationTable13(formatThaiDate(end_duration_table13));
-    setThaiEndDurationTable14(formatThaiDate(end_duration_table14));
-    setThaiEndDurationTable15(formatThaiDate(end_duration_table15));
-
-
-  }, [start_duration_table1,
-    end_duration_table1,
-    start_duration_table2,
-    end_duration_table2,
-    start_duration_table3,
-    end_duration_table3,
-    start_duration_table4,
-    end_duration_table4,
-    start_duration_table5,
-    end_duration_table5,
-    start_duration_table6,
-    end_duration_table6,
-    start_duration_table7,
-    end_duration_table7,
-    start_duration_table8,
-    end_duration_table8,
-    start_duration_table9,
-    end_duration_table9,
-    start_duration_table10,
-    end_duration_table10,
-    start_duration_table11,
-    end_duration_table11,
-    start_duration_table12,
-    end_duration_table12,
-    start_duration_table13,
-    end_duration_table13,
-    start_duration_table14,
-    end_duration_table14,
-    start_duration_table15,
-    end_duration_table15,
-  ]);
-  const getYearFromDate = (dateString) => {
-    return dateString ? new Date(dateString).getFullYear() : null;
+  const handleEditClick = () => {
+    setIsEditMode(true);
   };
 
-  useEffect(() => {
-    const year1 = new Date(start_duration_table1).getFullYear();
-    const endDurationTables = [end_duration_table15, end_duration_table14, end_duration_table13, end_duration_table12, end_duration_table11, end_duration_table10, end_duration_table9, end_duration_table8, end_duration_table7, end_duration_table6, end_duration_table5, end_duration_table4, end_duration_table3, end_duration_table2, end_duration_table1];
-
-    let year = 0;
-
-    // Iterate over end_duration_tables starting from the last one
-    for (const end_duration_table of endDurationTables) {
-      if (end_duration_table !== null) {
-        year = getYearFromDate(end_duration_table);
-        break; // Exit loop if a non-null value is found
-      }
-    }
-
-    if (year !== null) {
-      const year1Thai = year1 + 543; // Convert to Thai year
-      const yearThai = year + 543; // Convert to Thai year
-      if (year1 == year) {
-        setIs_inyear(true)
-        setStart_inyear(year1Thai);
-
-      } else {
-
-        setIs_inyear(false)
-        setStart_inyear(year1Thai);
-        setEnd_inyear(yearThai);
-
-      }
-    } else {
-      console.log("All end_duration_table values are null.");
-    }
-  }, [start_duration_table1,
-    end_duration_table1,
-    end_duration_table2,
-    end_duration_table3,
-    end_duration_table4,
-    end_duration_table5,
-    end_duration_table6,
-    end_duration_table7,
-    end_duration_table8,
-    end_duration_table9,
-    end_duration_table10,
-    end_duration_table11,
-    end_duration_table12,
-    end_duration_table13,
-    end_duration_table14,
-    end_duration_table15,
-  ]);
-
-  const [is_inyear, setIs_inyear] = useState(false);
-  const [start_inyear, setStart_inyear] = useState("");
-  const [end_inyear, setEnd_inyear] = useState("");
-  const [thaistart_duration_table1, setThaiStartDurationTable1] = useState(null);
-  const [thaistart_duration_table2, setThaiStartDurationTable2] = useState(null);
-  const [thaistart_duration_table3, setThaiStartDurationTable3] = useState(null);
-  const [thaistart_duration_table4, setThaiStartDurationTable4] = useState(null);
-  const [thaistart_duration_table5, setThaiStartDurationTable5] = useState(null);
-
-  const [thaiend_duration_table1, setThaiEndDurationTable1] = useState(null);
-  const [thaiend_duration_table2, setThaiEndDurationTable2] = useState(null);
-  const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
-  const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
-
-  const [thaiend_duration_table5, setThaiEndDurationTable5] = useState(null);
-  const [thaistart_duration_table6, setThaiStartDurationTable6] = useState(null);
-  const [thaiend_duration_table6, setThaiEndDurationTable6] = useState(null);
-  const [thaistart_duration_table7, setThaiStartDurationTable7] = useState(null);
-  const [thaiend_duration_table7, setThaiEndDurationTable7] = useState(null);
-  const [thaistart_duration_table8, setThaiStartDurationTable8] = useState(null);
-  const [thaiend_duration_table8, setThaiEndDurationTable8] = useState(null);
-  const [thaistart_duration_table9, setThaiStartDurationTable9] = useState(null);
-  const [thaiend_duration_table9, setThaiEndDurationTable9] = useState(null);
-  const [thaistart_duration_table10, setThaiStartDurationTable10] = useState(null);
-  const [thaiend_duration_table10, setThaiEndDurationTable10] = useState(null);
-  const [thaistart_duration_table11, setThaiStartDurationTable11] = useState(null);
-  const [thaiend_duration_table11, setThaiEndDurationTable11] = useState(null);
-  const [thaistart_duration_table12, setThaiStartDurationTable12] = useState(null);
-  const [thaiend_duration_table12, setThaiEndDurationTable12] = useState(null);
-  const [thaistart_duration_table13, setThaiStartDurationTable13] = useState(null);
-  const [thaiend_duration_table13, setThaiEndDurationTable13] = useState(null);
-  const [thaistart_duration_table14, setThaiStartDurationTable14] = useState(null);
-  const [thaiend_duration_table14, setThaiEndDurationTable14] = useState(null);
-  const [thaistart_duration_table15, setThaiStartDurationTable15] = useState(null);
-  const [thaiend_duration_table15, setThaiEndDurationTable15] = useState(null);
-
-  const [start_prepare, setStartPrepare] = useState("");
-  const [end_prepare, setEndPrepare] = useState("");
-  const [start_event, setStartEvent] = useState("");
-  const [end_event, setEndEvent] = useState("");
-  const [deadline, setDeadLine] = useState("");
-  const [projectData, setProjectData] = useState("");
-
-  const [personNames, setPersonNames] = useState([]);
-  const [person1, setPerson1] = useState([]);
-  const [person2, setPerson2] = useState([]);
-  const [person3, setPerson3] = useState([]);
-
-  const getMFromDate = (dateString) => {
-    return dateString ? new Date(dateString).getMonth() + 1 : null; // Adding 1 because getMonth returns zero-based index
-  };
-  useEffect(() => {
-    setStartM1(getMFromDate(start_duration_table1)); 
-    setStartM2(getMFromDate(start_duration_table2)); 
-    setStartM3(getMFromDate(start_duration_table3)); 
-    setStartM4(getMFromDate(start_duration_table4)); 
-    setStartM5(getMFromDate(start_duration_table5)); 
-    setStartM6(getMFromDate(start_duration_table6)); 
-    setStartM7(getMFromDate(start_duration_table7)); 
-    setStartM8(getMFromDate(start_duration_table8)); 
-    setStartM9(getMFromDate(start_duration_table9)); 
-    setStartM10(getMFromDate(start_duration_table10)); 
-    setStartM11(getMFromDate(start_duration_table11)); 
-    setStartM12(getMFromDate(start_duration_table12)); 
-    setStartM13(getMFromDate(start_duration_table13)); 
-    setStartM14(getMFromDate(start_duration_table14)); 
-    setStartM15(getMFromDate(start_duration_table15)); 
-
-    setEndM1(getMFromDate(end_duration_table1)); 
-    setEndM2(getMFromDate(end_duration_table2)); 
-    setEndM3(getMFromDate(end_duration_table3)); 
-    setEndM4(getMFromDate(end_duration_table4)); 
-    setEndM5(getMFromDate(end_duration_table5)); 
-    setEndM6(getMFromDate(end_duration_table6)); 
-    setEndM7(getMFromDate(end_duration_table7)); 
-    setEndM8(getMFromDate(end_duration_table8)); 
-    setEndM9(getMFromDate(end_duration_table9)); 
-    setEndM10(getMFromDate(end_duration_table10)); 
-    setEndM11(getMFromDate(end_duration_table11)); 
-    setEndM12(getMFromDate(end_duration_table12)); 
-    setEndM13(getMFromDate(end_duration_table13)); 
-    setEndM14(getMFromDate(end_duration_table14)); 
-    setEndM15(getMFromDate(end_duration_table15));
-
-  }, [
-    start_duration_table1,
-    start_duration_table2,
-    start_duration_table3,
-    start_duration_table4,
-    start_duration_table5,
-    start_duration_table6,
-    start_duration_table7,
-    start_duration_table8,
-    start_duration_table9,
-    start_duration_table10,
-    start_duration_table11,
-    start_duration_table12,
-    start_duration_table13,
-    start_duration_table14,
-    start_duration_table15,
-    end_duration_table1,
-    end_duration_table2,
-    end_duration_table3,
-    end_duration_table4,
-    end_duration_table5,
-    end_duration_table6,
-    end_duration_table7,
-    end_duration_table8,
-    end_duration_table9,
-    end_duration_table10,
-    end_duration_table11,
-    end_duration_table12,
-    end_duration_table13,
-    end_duration_table14,
-    end_duration_table15,
-  ]);
-
-  const [startM1, setStartM1] = useState(null);
-  const [startM2, setStartM2] = useState(null);
-  const [startM3, setStartM3] = useState(null);
-  const [startM4, setStartM4] = useState(null);
-  const [startM5, setStartM5] = useState(null);
-  const [startM6, setStartM6] = useState(null);
-  const [startM7, setStartM7] = useState(null);
-  const [startM8, setStartM8] = useState(null);
-  const [startM9, setStartM9] = useState(null);
-  const [startM10, setStartM10] = useState(null);
-  const [startM11, setStartM11] = useState(null);
-  const [startM12, setStartM12] = useState(null);
-  const [startM13, setStartM13] = useState(null);
-  const [startM14, setStartM14] = useState(null);
-  const [startM15, setStartM15] = useState(null);
-
-  const [endM1, setEndM1] = useState(null);
-  const [endM2, setEndM2] = useState(null);
-  const [endM3, setEndM3] = useState(null);
-  const [endM4, setEndM4] = useState(null);
-  const [endM5, setEndM5] = useState(null);
-  const [endM6, setEndM6] = useState(null);
-  const [endM7, setEndM7] = useState(null);
-  const [endM8, setEndM8] = useState(null);
-  const [endM9, setEndM9] = useState(null);
-  const [endM10, setEndM10] = useState(null);
-  const [endM11, setEndM11] = useState(null);
-  const [endM12, setEndM12] = useState(null);
-  const [endM13, setEndM13] = useState(null);
-  const [endM14, setEndM14] = useState(null);
-  const [endM15, setEndM15] = useState(null);
-  const createProject = () => {
+  const handleSaveClick = () => {
+    setIsEditMode(false);
     let responsibleTable1str = "";
     if (responsible_table1 != "") {
       responsibleTable1str = responsible_table1.join(",");
@@ -561,7 +409,7 @@ function SD_timestep({ id_project }) {
         .map((item) => item.trim().split(" ")[0])
         .join(", ");
     }
-    setResponsibleTable2(responsibleTable2str)
+    setResponsibleTable2(responsibleTable2str);
     let responsibleTable3str = "";
     if (responsible_table3 != "") {
       responsibleTable3str = responsible_table3.join(",");
@@ -675,180 +523,354 @@ function SD_timestep({ id_project }) {
         .join(", ");
     }
 
-    Axios.put(
-      `http://localhost:3001/student/project/p_timestep/create/${id_project}`,
-      {
-        codeclub,
-        yearly_countsketch,
-        topic_table1,
-        start_duration_table1,
-        end_duration_table1,
-        responsibleTable1str,
-        topic_table2,
-        start_duration_table2,
-        end_duration_table2,
-        responsibleTable2str,
-        topic_table3,
-        start_duration_table3,
-        end_duration_table3,
-        responsibleTable3str,
-        topic_table4,
-        start_duration_table4,
-        end_duration_table4,
-        responsibleTable4str,
-        topic_table5,
-        start_duration_table5,
-        end_duration_table5,
-        responsibleTable5str,
-        topic_table6,
-        start_duration_table6,
-        end_duration_table6,
-        responsibleTable6str,
-        topic_table7,
-        start_duration_table7,
-        end_duration_table7,
-        responsibleTable7str,
-        topic_table8,
-        start_duration_table8,
-        end_duration_table8,
-        responsibleTable8str,
-        topic_table9,
-        start_duration_table9,
-        end_duration_table9,
-        responsibleTable9str,
-        topic_table10,
-        start_duration_table10,
-        end_duration_table10,
-        responsibleTable10str,
-        topic_table11,
-        start_duration_table11,
-        end_duration_table11,
-        responsibleTable11str,
-        topic_table12,
-        start_duration_table12,
-        end_duration_table12,
-        responsibleTable12str,
-        topic_table13,
-        start_duration_table13,
-        end_duration_table13,
-        responsibleTable13str,
-        topic_table14,
-        start_duration_table14,
-        end_duration_table14,
-        responsibleTable14str,
-        topic_table15,
-        start_duration_table15,
-        end_duration_table15,
-        responsibleTable15str,
-        thaistart_duration_table1,
-        thaiend_duration_table1,
-        thaistart_duration_table2,
-        thaiend_duration_table2,
-        thaistart_duration_table3,
-        thaiend_duration_table3,
-        thaistart_duration_table4,
-        thaiend_duration_table4,
-        thaistart_duration_table5,
-        thaiend_duration_table5,
-        thaistart_duration_table6,
-        thaiend_duration_table6,
-        thaistart_duration_table7,
-        thaiend_duration_table7,
-        thaistart_duration_table8,
-        thaiend_duration_table8,
-        thaistart_duration_table9,
-        thaiend_duration_table9,
-        thaistart_duration_table10,
-        thaiend_duration_table10,
-        thaistart_duration_table11,
-        thaiend_duration_table11,
-        thaistart_duration_table12,
-        thaiend_duration_table12,
-        thaistart_duration_table13,
-        thaiend_duration_table13,
-        thaistart_duration_table14,
-        thaiend_duration_table14,
-        thaistart_duration_table15,
-        thaiend_duration_table15,
-        startM1,
-        startM2,
-        startM3,
-        startM4,
-        startM5,
-        startM6,
-        startM7,
-        startM8,
-        startM9,
-        startM10,
-        startM11,
-        startM12,
-        startM13,
-        startM14,
-        startM15,
-        endM1,
-        endM2,
-        endM3,
-        endM4,
-        endM5,
-        endM6,
-        endM7,
-        endM8,
-        endM9,
-        endM10,
-        endM11,
-        endM12,
-        endM13,
-        endM14,
-        endM15,
-        is_inyear,
-        start_inyear,
-        end_inyear
+    // Update the grand total state for executive
+
+    if (window.confirm("Do you want to save changes?")) {
+      Axios.put(
+        `http://localhost:3001/student/project/timestep/edit/${id_project}`,
+        editData
+      )
+        .then((response) => {
+          // Handle success
+          console.log("Data saved successfully:", response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error saving data:", error);
+        });
+    }
+  };
+
+  const handleBackClick = () => {
+    const confirmBack = window.confirm(
+      "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ"
+    );
+
+    if (confirmBack) {
+      setIsEditMode(false);
+      setEditData(originalData);
+    }
+  };
+
+  const formatThaiDate = (dateString) => {
+    if (dateString != null) {
+      const formattedDate = new Date(dateString);
+      const thaiMonths = [
+        "ม.ค.",
+        "ก.พ.",
+        "มี.ค.",
+        "เม.ย.",
+        "พ.ค.",
+        "มิ.ย.",
+        "ก.ค.",
+        "ส.ค.",
+        "ก.ย.",
+        "ต.ค.",
+        "พ.ย.",
+        "ธ.ค.",
+      ];
+      const day = formattedDate.getDate();
+      const month = thaiMonths[formattedDate.getMonth()];
+      const year = (formattedDate.getFullYear() + 543) % 100; // Get last 2 digits of the year
+
+      return `${day} ${month} ${year}`;
+    }
+    return null;
+  };
+  useEffect(() => {
+    setThaiStartDurationTable1(formatThaiDate(start_duration_table1));
+    setThaiStartDurationTable2(formatThaiDate(start_duration_table2));
+    setThaiStartDurationTable3(formatThaiDate(start_duration_table3));
+    setThaiStartDurationTable4(formatThaiDate(start_duration_table4));
+    setThaiStartDurationTable5(formatThaiDate(start_duration_table5));
+    setThaiStartDurationTable6(formatThaiDate(start_duration_table6));
+    setThaiStartDurationTable7(formatThaiDate(start_duration_table7));
+    setThaiStartDurationTable8(formatThaiDate(start_duration_table8));
+    setThaiStartDurationTable9(formatThaiDate(start_duration_table9));
+    setThaiStartDurationTable10(formatThaiDate(start_duration_table10));
+    setThaiStartDurationTable11(formatThaiDate(start_duration_table11));
+    setThaiStartDurationTable12(formatThaiDate(start_duration_table12));
+    setThaiStartDurationTable13(formatThaiDate(start_duration_table13));
+    setThaiStartDurationTable14(formatThaiDate(start_duration_table14));
+    setThaiStartDurationTable15(formatThaiDate(start_duration_table15));
+
+    setThaiEndDurationTable1(formatThaiDate(end_duration_table1));
+    setThaiEndDurationTable2(formatThaiDate(end_duration_table2));
+    setThaiEndDurationTable3(formatThaiDate(end_duration_table3));
+    setThaiEndDurationTable4(formatThaiDate(end_duration_table4));
+    setThaiEndDurationTable5(formatThaiDate(end_duration_table5));
+    setThaiEndDurationTable6(formatThaiDate(end_duration_table6));
+    setThaiEndDurationTable7(formatThaiDate(end_duration_table7));
+    setThaiEndDurationTable8(formatThaiDate(end_duration_table8));
+    setThaiEndDurationTable9(formatThaiDate(end_duration_table9));
+    setThaiEndDurationTable10(formatThaiDate(end_duration_table10));
+    setThaiEndDurationTable11(formatThaiDate(end_duration_table11));
+    setThaiEndDurationTable12(formatThaiDate(end_duration_table12));
+    setThaiEndDurationTable13(formatThaiDate(end_duration_table13));
+    setThaiEndDurationTable14(formatThaiDate(end_duration_table14));
+    setThaiEndDurationTable15(formatThaiDate(end_duration_table15));
+  }, [
+    start_duration_table1,
+    end_duration_table1,
+    start_duration_table2,
+    end_duration_table2,
+    start_duration_table3,
+    end_duration_table3,
+    start_duration_table4,
+    end_duration_table4,
+    start_duration_table5,
+    end_duration_table5,
+    start_duration_table6,
+    end_duration_table6,
+    start_duration_table7,
+    end_duration_table7,
+    start_duration_table8,
+    end_duration_table8,
+    start_duration_table9,
+    end_duration_table9,
+    start_duration_table10,
+    end_duration_table10,
+    start_duration_table11,
+    end_duration_table11,
+    start_duration_table12,
+    end_duration_table12,
+    start_duration_table13,
+    end_duration_table13,
+    start_duration_table14,
+    end_duration_table14,
+    start_duration_table15,
+    end_duration_table15,
+  ]);
+  const getYearFromDate = (dateString) => {
+    return dateString ? new Date(dateString).getFullYear() : null;
+  };
+
+  useEffect(() => {
+    const year1 = new Date(start_duration_table1).getFullYear();
+    const endDurationTables = [
+      end_duration_table15,
+      end_duration_table14,
+      end_duration_table13,
+      end_duration_table12,
+      end_duration_table11,
+      end_duration_table10,
+      end_duration_table9,
+      end_duration_table8,
+      end_duration_table7,
+      end_duration_table6,
+      end_duration_table5,
+      end_duration_table4,
+      end_duration_table3,
+      end_duration_table2,
+      end_duration_table1,
+    ];
+
+    let year = 0;
+
+    // Iterate over end_duration_tables starting from the last one
+    for (const end_duration_table of endDurationTables) {
+      if (end_duration_table !== null) {
+        year = getYearFromDate(end_duration_table);
+        break; // Exit loop if a non-null value is found
       }
-    )
-      .then((response) => {
-        console.log(response.data);
-        // Handle success, if needed
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-        // Handle error, if needed
-      });
-    switchToCSDBudget();
+    }
+
+    if (year !== null) {
+      const year1Thai = year1 + 543; // Convert to Thai year
+      const yearThai = year + 543; // Convert to Thai year
+      if (year1 == year) {
+        setIs_inyear(true);
+        setStart_inyear(year1Thai);
+      } else {
+        setIs_inyear(false);
+        setStart_inyear(year1Thai);
+        setEnd_inyear(yearThai);
+      }
+    } else {
+      console.log("All end_duration_table values are null.");
+    }
+  }, [
+    start_duration_table1,
+    end_duration_table1,
+    end_duration_table2,
+    end_duration_table3,
+    end_duration_table4,
+    end_duration_table5,
+    end_duration_table6,
+    end_duration_table7,
+    end_duration_table8,
+    end_duration_table9,
+    end_duration_table10,
+    end_duration_table11,
+    end_duration_table12,
+    end_duration_table13,
+    end_duration_table14,
+    end_duration_table15,
+  ]);
+
+  const [is_inyear, setIs_inyear] = useState(false);
+  const [start_inyear, setStart_inyear] = useState("");
+  const [end_inyear, setEnd_inyear] = useState("");
+  const [thaistart_duration_table1, setThaiStartDurationTable1] =
+    useState(null);
+  const [thaistart_duration_table2, setThaiStartDurationTable2] =
+    useState(null);
+  const [thaistart_duration_table3, setThaiStartDurationTable3] =
+    useState(null);
+  const [thaistart_duration_table4, setThaiStartDurationTable4] =
+    useState(null);
+  const [thaistart_duration_table5, setThaiStartDurationTable5] =
+    useState(null);
+
+  const [thaiend_duration_table1, setThaiEndDurationTable1] = useState(null);
+  const [thaiend_duration_table2, setThaiEndDurationTable2] = useState(null);
+  const [thaiend_duration_table3, setThaiEndDurationTable3] = useState(null);
+  const [thaiend_duration_table4, setThaiEndDurationTable4] = useState(null);
+
+  const [thaiend_duration_table5, setThaiEndDurationTable5] = useState(null);
+  const [thaistart_duration_table6, setThaiStartDurationTable6] =
+    useState(null);
+  const [thaiend_duration_table6, setThaiEndDurationTable6] = useState(null);
+  const [thaistart_duration_table7, setThaiStartDurationTable7] =
+    useState(null);
+  const [thaiend_duration_table7, setThaiEndDurationTable7] = useState(null);
+  const [thaistart_duration_table8, setThaiStartDurationTable8] =
+    useState(null);
+  const [thaiend_duration_table8, setThaiEndDurationTable8] = useState(null);
+  const [thaistart_duration_table9, setThaiStartDurationTable9] =
+    useState(null);
+  const [thaiend_duration_table9, setThaiEndDurationTable9] = useState(null);
+  const [thaistart_duration_table10, setThaiStartDurationTable10] =
+    useState(null);
+  const [thaiend_duration_table10, setThaiEndDurationTable10] = useState(null);
+  const [thaistart_duration_table11, setThaiStartDurationTable11] =
+    useState(null);
+  const [thaiend_duration_table11, setThaiEndDurationTable11] = useState(null);
+  const [thaistart_duration_table12, setThaiStartDurationTable12] =
+    useState(null);
+  const [thaiend_duration_table12, setThaiEndDurationTable12] = useState(null);
+  const [thaistart_duration_table13, setThaiStartDurationTable13] =
+    useState(null);
+  const [thaiend_duration_table13, setThaiEndDurationTable13] = useState(null);
+  const [thaistart_duration_table14, setThaiStartDurationTable14] =
+    useState(null);
+  const [thaiend_duration_table14, setThaiEndDurationTable14] = useState(null);
+  const [thaistart_duration_table15, setThaiStartDurationTable15] =
+    useState(null);
+  const [thaiend_duration_table15, setThaiEndDurationTable15] = useState(null);
+
+  const [start_prepare, setStartPrepare] = useState("");
+  const [end_prepare, setEndPrepare] = useState("");
+  const [start_event, setStartEvent] = useState("");
+  const [end_event, setEndEvent] = useState("");
+  const [deadline, setDeadLine] = useState("");
+  const [projectData, setProjectData] = useState("");
+
+  const [personNames, setPersonNames] = useState([]);
+  const [person1, setPerson1] = useState([]);
+  const [person2, setPerson2] = useState([]);
+  const [person3, setPerson3] = useState([]);
+
+  const getMFromDate = (dateString) => {
+    return dateString ? new Date(dateString).getMonth() + 1 : null; // Adding 1 because getMonth returns zero-based index
   };
-  const getProjectData = () => {
-    Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
-    ).then((response) => {
-      setProjectData(response.data);
+  useEffect(() => {
+    setStartM1(getMFromDate(start_duration_table1));
+    setStartM2(getMFromDate(start_duration_table2));
+    setStartM3(getMFromDate(start_duration_table3));
+    setStartM4(getMFromDate(start_duration_table4));
+    setStartM5(getMFromDate(start_duration_table5));
+    setStartM6(getMFromDate(start_duration_table6));
+    setStartM7(getMFromDate(start_duration_table7));
+    setStartM8(getMFromDate(start_duration_table8));
+    setStartM9(getMFromDate(start_duration_table9));
+    setStartM10(getMFromDate(start_duration_table10));
+    setStartM11(getMFromDate(start_duration_table11));
+    setStartM12(getMFromDate(start_duration_table12));
+    setStartM13(getMFromDate(start_duration_table13));
+    setStartM14(getMFromDate(start_duration_table14));
+    setStartM15(getMFromDate(start_duration_table15));
 
-      setPerson1(response.data[0].person1_name);
-      setPerson2(response.data[0].person2_name);
-      setPerson3(response.data[0].person3_name);
+    setEndM1(getMFromDate(end_duration_table1));
+    setEndM2(getMFromDate(end_duration_table2));
+    setEndM3(getMFromDate(end_duration_table3));
+    setEndM4(getMFromDate(end_duration_table4));
+    setEndM5(getMFromDate(end_duration_table5));
+    setEndM6(getMFromDate(end_duration_table6));
+    setEndM7(getMFromDate(end_duration_table7));
+    setEndM8(getMFromDate(end_duration_table8));
+    setEndM9(getMFromDate(end_duration_table9));
+    setEndM10(getMFromDate(end_duration_table10));
+    setEndM11(getMFromDate(end_duration_table11));
+    setEndM12(getMFromDate(end_duration_table12));
+    setEndM13(getMFromDate(end_duration_table13));
+    setEndM14(getMFromDate(end_duration_table14));
+    setEndM15(getMFromDate(end_duration_table15));
+  }, [
+    start_duration_table1,
+    start_duration_table2,
+    start_duration_table3,
+    start_duration_table4,
+    start_duration_table5,
+    start_duration_table6,
+    start_duration_table7,
+    start_duration_table8,
+    start_duration_table9,
+    start_duration_table10,
+    start_duration_table11,
+    start_duration_table12,
+    start_duration_table13,
+    start_duration_table14,
+    start_duration_table15,
+    end_duration_table1,
+    end_duration_table2,
+    end_duration_table3,
+    end_duration_table4,
+    end_duration_table5,
+    end_duration_table6,
+    end_duration_table7,
+    end_duration_table8,
+    end_duration_table9,
+    end_duration_table10,
+    end_duration_table11,
+    end_duration_table12,
+    end_duration_table13,
+    end_duration_table14,
+    end_duration_table15,
+  ]);
 
-      const startPrepare = new Date(response.data[0].start_prepare);
-      const endPrepare = new Date(response.data[0].end_prepare);
-      const startEvent = new Date(response.data[0].start_event);
-      const endEvent = new Date(response.data[0].end_event);
-      const deadline = new Date(response.data[0].deadline);
+  const [startM1, setStartM1] = useState(null);
+  const [startM2, setStartM2] = useState(null);
+  const [startM3, setStartM3] = useState(null);
+  const [startM4, setStartM4] = useState(null);
+  const [startM5, setStartM5] = useState(null);
+  const [startM6, setStartM6] = useState(null);
+  const [startM7, setStartM7] = useState(null);
+  const [startM8, setStartM8] = useState(null);
+  const [startM9, setStartM9] = useState(null);
+  const [startM10, setStartM10] = useState(null);
+  const [startM11, setStartM11] = useState(null);
+  const [startM12, setStartM12] = useState(null);
+  const [startM13, setStartM13] = useState(null);
+  const [startM14, setStartM14] = useState(null);
+  const [startM15, setStartM15] = useState(null);
 
-      // Adding one day to each date
-      startPrepare.setDate(startPrepare.getDate());
-      endPrepare.setDate(endPrepare.getDate());
-      startEvent.setDate(startEvent.getDate());
-      endEvent.setDate(endEvent.getDate());
-      deadline.setDate(deadline.getDate());
-
-      // Logging modified dates
-      setStartPrepare(startPrepare);
-      setEndPrepare(endPrepare);
-      setStartEvent(startEvent);
-      setEndEvent(endEvent);
-      setDeadLine(deadline);
-    });
-  };
-
-
-
+  const [endM1, setEndM1] = useState(null);
+  const [endM2, setEndM2] = useState(null);
+  const [endM3, setEndM3] = useState(null);
+  const [endM4, setEndM4] = useState(null);
+  const [endM5, setEndM5] = useState(null);
+  const [endM6, setEndM6] = useState(null);
+  const [endM7, setEndM7] = useState(null);
+  const [endM8, setEndM8] = useState(null);
+  const [endM9, setEndM9] = useState(null);
+  const [endM10, setEndM10] = useState(null);
+  const [endM11, setEndM11] = useState(null);
+  const [endM12, setEndM12] = useState(null);
+  const [endM13, setEndM13] = useState(null);
+  const [endM14, setEndM14] = useState(null);
+  const [endM15, setEndM15] = useState(null);
 
   useEffect(() => {
     console.log("person1" + person1);
@@ -863,10 +885,6 @@ function SD_timestep({ id_project }) {
 
     setPersonNames(names);
   }, [person1, person2, person3]);
-
-  useEffect(() => {
-    getProjectData();
-  }, []);
 
   const [TopictableCount, setTopictableCount] = useState(1);
   const increasePrinciplesAndReasons = () => {
@@ -975,7 +993,6 @@ function SD_timestep({ id_project }) {
       }
     }
   };
-
 
   const getStartDuration = (index) => {
     switch (index) {
@@ -1161,6 +1178,17 @@ function SD_timestep({ id_project }) {
     <>
       <Col md="9">
         <Card>
+          {!isEditMode && (
+            <Button
+              type="submit"
+              className="btn-dataupdate"
+              style={{ fontSize: "14px", margin: "1%" }}
+              variant="primary"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
+          )}
           <CardHeader
             style={{
               backgroundColor: "#535353",
@@ -1186,7 +1214,12 @@ function SD_timestep({ id_project }) {
                 {/* หัวข้อ index */}
                 {Array.from({ length: TopictableCount }).map((_, index) => (
                   <tr style={{ backgroundColor: "white" }}>
-                    <td className={`head-side-td ${index % 2 === 1 ? 'even' : ''}`} style={{ verticalAlign: "top" }}>
+                    <td
+                      className={`head-side-td ${
+                        index % 2 === 1 ? "even" : ""
+                      }`}
+                      style={{ verticalAlign: "top" }}
+                    >
                       <div>{`ขั้นตอนที่ ${index + 1}`}</div>
                     </td>
                     <td className="back-side-td">
@@ -1741,23 +1774,27 @@ function SD_timestep({ id_project }) {
                 alignItems: "center",
               }}
             >
-              {TopictableCount < 15 && (
-                <Button
-                  variant="success"
-                  className="ml-5 mb-3 btn-budget-increase border-success"
-                  onClick={increasePrinciplesAndReasons}
-                >
-                  <div style={{ fontSize: "14px" }}>เพิ่มขั้นตอน</div>
-                </Button>
-              )}
-              {TopictableCount > 1 && (
-                <Button
-                  variant="danger"
-                  className="ml-5 mb-3 btn-budget-decrease border-danger"
-                  onClick={decreasePrinciplesAndReasons}
-                >
-                  <div style={{ fontSize: "14px" }}>ลดขั้นตอน</div>
-                </Button>
+              {isEditMode && (
+                <>
+                  {TopictableCount < 15 && (
+                    <Button
+                      variant="success"
+                      className="ml-5 mb-3 btn-budget-increase border-success"
+                      onClick={increasePrinciplesAndReasons}
+                    >
+                      <div style={{ fontSize: "14px" }}>เพิ่มขั้นตอน</div>
+                    </Button>
+                  )}
+                  {TopictableCount > 1 && (
+                    <Button
+                      variant="danger"
+                      className="ml-5 mb-3 btn-budget-decrease border-danger"
+                      onClick={decreasePrinciplesAndReasons}
+                    >
+                      <div style={{ fontSize: "14px" }}>ลดขั้นตอน</div>
+                    </Button>
+                  )}
+                </>
               )}
             </div>
           </CardBody>
@@ -1767,18 +1804,31 @@ function SD_timestep({ id_project }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginBottom: "10px"
+              marginBottom: "10px",
             }}
           >
-            <Button
-              type="submit"
-              variant="warning"
-              className="btn-dataupdate"
-              style={{ fontSize: "14px" }}
-              onClick={createProject}
-            >
-              บันทึกข้อมูล
-            </Button>
+            {isEditMode ? (
+              <>
+                <Button
+                  variant="success"
+                  type="submit"
+                  className="ml-5 mb-3 btn-budget-increase"
+                  style={{ fontSize: "14px" }}
+                  onClick={handleSaveClick}
+                >
+                  Save
+                </Button>
+                <Button
+                  type="submit"
+                  className="ml-5 mb-3 btn-budget-decrease"
+                  style={{ fontSize: "14px" }}
+                  variant="danger"
+                  onClick={handleBackClick}
+                >
+                  Back
+                </Button>
+              </>
+            ) : null}
           </CardFooter>
         </Card>
       </Col>
