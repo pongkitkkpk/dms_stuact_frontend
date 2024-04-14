@@ -238,7 +238,7 @@ function TableAddStudent() {
               >
                 <Modal.Header>
                   <Modal.Title>
-                    ข้อมูลลายละเอียดของ icit account
+                    ข้อมูลรายละเอียดของ icit account
                     
                   </Modal.Title>
                 </Modal.Header>

@@ -17,6 +17,129 @@ import {
 import Axios from "axios";
 
 function SD_indicator({ id_project }) {
+  
+  const [volume1, setVolume1] = useState("");
+  const [volume2, setVolume2] = useState("");
+  const [volume3, setVolume3] = useState("");
+  const [volume4, setVolume4] = useState("");
+  const [volume5, setVolume5] = useState("");
+  // ผลที่คาดว่าจะได้รับ
+  const [VolumeCount, setVolumecount] = useState(1);
+  const increaseVolumeCount = () => {
+    if (VolumeCount < 5) {
+      setVolumecount(VolumeCount + 1);
+    }
+  };
+  const decreaseVolumeCount = () => {
+    if (VolumeCount > 1) {
+      setVolumecount(VolumeCount - 1);
+      // Reset corresponding studentTypeNumber state variables to 0
+      switch (VolumeCount) {
+        case 4:
+          setVolume5("");
+          break;
+        case 3:
+          setVolume4("");
+          break;
+        case 2:
+          setVolume3("");
+          break;
+        case 1:
+          setVolume2("");
+          break;
+        case 0:
+          setVolume1("");
+          break;
+        default:
+        // Handle other cases if needed
+      }
+    }
+  };
+
+  const [quality1, setQuality1] = useState("");
+  const [quality2, setQuality2] = useState("");
+  const [quality3, setQuality3] = useState("");
+  const [quality4, setQuality4] = useState("");
+  const [quality5, setQuality5] = useState("");
+  // ผลที่คาดว่าจะได้รับ
+  const [QualityCount, setQualitycount] = useState(1);
+  const increaseQualityCount = () => {
+    if (QualityCount < 5) {
+      setQualitycount(QualityCount + 1);
+    }
+  };
+  const decreaseQualityCount = () => {
+    if (QualityCount > 1) {
+      setQualitycount(QualityCount - 1);
+      // Reset corresponding studentTypeNumber state variables to 0
+      switch (QualityCount) {
+        case 4:
+          setQuality5("");
+          break;
+        case 3:
+          setQuality4("");
+          break;
+        case 2:
+          setQuality3("");
+          break;
+        case 1:
+          setQuality2("");
+          break;
+        case 0:
+          setQuality1("");
+          break;
+        default:
+        // Handle other cases if needed
+      }
+    }
+  };
+
+
+  const [expresult1, setExpresult1] = useState("");
+  const [expresult2, setExpresult2] = useState("");
+  const [expresult3, setExpresult3] = useState("");
+  const [expresult4, setExpresult4] = useState("");
+  const [expresult5, setExpresult5] = useState("");
+  // ผลที่คาดว่าจะได้รับ
+  const [ExpresultCount, setExpresultcount] = useState(1);
+  const increaseExpresultCount = () => {
+    if (ExpresultCount < 5) {
+      setExpresultcount(ExpresultCount + 1);
+    }
+  };
+  const decreaseExpresultCount = () => {
+    if (ExpresultCount > 1) {
+      setExpresultcount(ExpresultCount - 1);
+      // Reset corresponding studentTypeNumber state variables to 0
+      switch (ExpresultCount) {
+        case 4:
+          setExpresult5("");
+          break;
+        case 3:
+          setExpresult4("");
+          break;
+        case 2:
+          setExpresult3("");
+          break;
+        case 1:
+          setExpresult2("");
+          break;
+        case 0:
+          setExpresult1("");
+          break;
+        default:
+        // Handle other cases if needed
+      }
+    }
+  };
+
+  const [is_1follow, setIs_1follow] = useState(false);
+  const [is_2follow, setIs_2follow] = useState(false);
+  const [is_3follow, setIs_3follow] = useState(false);
+  const [is_4follow, setIs_4follow] = useState(false);
+  const [is_etcfollow, setIs_etcfollow] = useState(false);
+  const [etcfollow, setEtcfollow] = useState("");
+
   const [originalData, setOriginalData] = useState({});
   const [editData, setEditData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -108,128 +231,6 @@ function SD_indicator({ id_project }) {
       setEditData(originalData);
     }
   };
-  const [volume1, setVolume1] = useState("");
-  const [volume2, setVolume2] = useState("");
-  const [volume3, setVolume3] = useState("");
-  const [volume4, setVolume4] = useState("");
-  const [volume5, setVolume5] = useState("");
-  // ผลที่คาดว่าจะได้รับ
-  const [VolumeCount, setVolumecount] = useState(1);
-  const increaseVolumeCount = () => {
-    if (VolumeCount < 5) {
-      setVolumecount(VolumeCount + 1);
-    }
-  };
-  const decreaseVolumeCount = () => {
-    if (VolumeCount > 1) {
-      setVolumecount(VolumeCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (VolumeCount) {
-        case 4:
-          setVolume5("");
-          break;
-        case 3:
-          setVolume4("");
-          break;
-        case 2:
-          setVolume3("");
-          break;
-        case 1:
-          setVolume2("");
-          break;
-        case 0:
-          setVolume1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
-
-  const [quality1, setQuality1] = useState("");
-  const [quality2, setQuality2] = useState("");
-  const [quality3, setQuality3] = useState("");
-  const [quality4, setQuality4] = useState("");
-  const [quality5, setQuality5] = useState("");
-  // ผลที่คาดว่าจะได้รับ
-  const [QualityCount, setQualitycount] = useState(1);
-  const increaseQualityCount = () => {
-    if (QualityCount < 5) {
-      setQualitycount(QualityCount + 1);
-    }
-  };
-  const decreaseQualityCount = () => {
-    if (QualityCount > 1) {
-      setQualitycount(QualityCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (QualityCount) {
-        case 4:
-          setQuality5("");
-          break;
-        case 3:
-          setQuality4("");
-          break;
-        case 2:
-          setQuality3("");
-          break;
-        case 1:
-          setQuality2("");
-          break;
-        case 0:
-          setQuality1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
-  QualityCount;
-
-  const [expresult1, setExpresult1] = useState("");
-  const [expresult2, setExpresult2] = useState("");
-  const [expresult3, setExpresult3] = useState("");
-  const [expresult4, setExpresult4] = useState("");
-  const [expresult5, setExpresult5] = useState("");
-  // ผลที่คาดว่าจะได้รับ
-  const [ExpresultCount, setExpresultcount] = useState(1);
-  const increaseExpresultCount = () => {
-    if (ExpresultCount < 5) {
-      setExpresultcount(ExpresultCount + 1);
-    }
-  };
-  const decreaseExpresultCount = () => {
-    if (ExpresultCount > 1) {
-      setExpresultcount(ExpresultCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (ExpresultCount) {
-        case 4:
-          setExpresult5("");
-          break;
-        case 3:
-          setExpresult4("");
-          break;
-        case 2:
-          setExpresult3("");
-          break;
-        case 1:
-          setExpresult2("");
-          break;
-        case 0:
-          setExpresult1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
-
-  const [is_1follow, setIs_1follow] = useState(false);
-  const [is_2follow, setIs_2follow] = useState(false);
-  const [is_3follow, setIs_3follow] = useState(false);
-  const [is_4follow, setIs_4follow] = useState(false);
-  const [is_etcfollow, setIs_etcfollow] = useState(false);
-  const [etcfollow, setEtcfollow] = useState("");
-
   return (
     <>
       <Col md="9">
@@ -284,7 +285,7 @@ function SD_indicator({ id_project }) {
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={volume1}
+                            value={volume1 }
                             placeholder={`ด้านปริมาณข้อที่ ${1}`}
                             onChange={(event) => {
                               setVolume1(event.target.value);

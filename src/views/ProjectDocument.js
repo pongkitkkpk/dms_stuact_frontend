@@ -8,6 +8,7 @@ import SD_locationtime from './Compo_ProjectDoc/ShowDetailP/SD_locationtime';
 import SD_timestep from './Compo_ProjectDoc/ShowDetailP/SD_timestep';
 import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
 import SD_indicator from './Compo_ProjectDoc/ShowDetailP/SD_indicator';
+import SD_addfile from './Compo_ProjectDoc/ShowDetailP/SD_addfile';
 
 
 function ProjectDocument() {
@@ -54,8 +55,14 @@ function ProjectDocument() {
                   <tr className={currentStep === 'SD_indicator' ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={() => toggleStep('SD_indicator')}style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
                   </tr>
-                  <tr>
-                    <td className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>
+                  <tr className={currentStep === 'SD_addfile' ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={() => toggleStep('SD_addfile')}style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>
+                  </tr>
+                  <tr className="list-group-item" style={{ backgroundColor: "#535353" }}>
+                    <th><a href="#section1"><div style={{ fontFamily: 'Bai Jamjuree', color: "white" }}>แบบขออนุมัติโครงการ</div></a></th>
+                  </tr>
+                  <tr className="list-group-item" style={{ backgroundColor: "#535353" }}>
+                    <th><a href="#section1"><div style={{ fontFamily: 'Bai Jamjuree', color: "white" }}>2.1 ประวัติการแก้ไขโครงการ</div></a></th>
                   </tr>
                 </table>
               </Card.Body>
@@ -70,6 +77,7 @@ function ProjectDocument() {
           {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
           {currentStep === 'SD_budget' && <SD_budget id_project={id_project}/>}
           {currentStep === 'SD_indicator' && <SD_indicator id_project={id_project}/>}
+          {currentStep === 'SD_addfile' && <SD_addfile id_project={id_project}/>}
         </Row>
       </Container>
     </>

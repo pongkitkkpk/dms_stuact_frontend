@@ -254,7 +254,7 @@ function TableAddPersonel() {
                 >
                   <Modal.Header>
                     <Modal.Title>
-                      ข้อมูลลายละเอียดของ icit account รอแก้ลายละเอียดงับบบ
+                      ข้อมูลรายละเอียดของ icit account 
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
