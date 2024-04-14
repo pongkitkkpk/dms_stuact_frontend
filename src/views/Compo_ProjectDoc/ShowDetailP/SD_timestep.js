@@ -20,13 +20,35 @@ function SD_timestep({ id_project }) {
   const [projectList, setProjectList] = useState([]);
   const [codeclub, setCodeclub] = useState("");
   const [yearly_countsketch, setYearlyCountSketch] = useState("");
+  const [personNames, setPersonNames] = useState([]);
+  const getProjectdeatailData = () => {
+    Axios.get(
+      `http://localhost:3001/student/project/getidproject/${id_project}`
+    ).then((response) => {
+      setProjectData(response.data);
 
+      setPersonNames([
+        response.data[0].person1_name,
+        response.data[0].person2_name,
+        response.data[0].person3_name,
+      ]);
+
+      const startPrepare = new Date(response.data[0].start_prepare);
+      const endPrepare = new Date(response.data[0].end_prepare);
+      const startEvent = new Date(response.data[0].start_event);
+      const endEvent = new Date(response.data[0].end_event);
+      const deadline = new Date(response.data[0].deadline);
+    });
+  };
+
+  useEffect(() => {
+    getProjectdeatailData();
+  }, []);
   const [table1Id, setTable1Id] = useState("1");
   const [topic_table1, setTable1Topic] = useState(null);
   const [start_duration_table1, setStartDurationTable1] = useState("");
   const [end_duration_table1, setEndDurationTable1] = useState("");
   const [responsible_table1, setResponsibleTable1] = useState([]);
-
   const handleresponsibleTable1Change = (event) => {
     const name = event.target.value;
     if (responsible_table1.includes(name)) {
@@ -384,166 +406,10 @@ function SD_timestep({ id_project }) {
   };
 
   useEffect(() => {
-    // console.log(responsible_table1.includes(name));
-  }, [responsible_table1]);
-  useEffect(() => {
     getProjectData();
   }, [id_project]);
-
   const handleEditClick = () => {
     setIsEditMode(true);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditMode(false);
-    let responsibleTable1str = "";
-    if (responsible_table1 != "") {
-      responsibleTable1str = responsible_table1.join(",");
-      responsibleTable1str = responsibleTable1str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable2str = "";
-    if (responsible_table2 != "") {
-      responsibleTable2str = responsible_table2.join(",");
-      responsibleTable2str = responsibleTable2str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-    setResponsibleTable2(responsibleTable2str);
-    let responsibleTable3str = "";
-    if (responsible_table3 != "") {
-      responsibleTable3str = responsible_table3.join(",");
-      responsibleTable3str = responsibleTable3str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-    let responsibleTable4str = "";
-    if (responsible_table4 != "") {
-      responsibleTable4str = responsible_table4.join(",");
-      responsibleTable4str = responsibleTable4str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-    let responsibleTable5str = "";
-    if (responsible_table5 !== "") {
-      responsibleTable5str = responsible_table5.join(",");
-      responsibleTable5str = responsibleTable5str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-    let responsibleTable6str = "";
-    if (responsible_table6 !== "") {
-      responsibleTable6str = responsible_table6.join(",");
-      responsibleTable6str = responsibleTable6str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable7str = "";
-    if (responsible_table7 !== "") {
-      responsibleTable7str = responsible_table7.join(",");
-      responsibleTable7str = responsibleTable7str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable8str = "";
-    if (responsible_table8 !== "") {
-      responsibleTable8str = responsible_table8.join(",");
-      responsibleTable8str = responsibleTable8str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable9str = "";
-    if (responsible_table9 !== "") {
-      responsibleTable9str = responsible_table9.join(",");
-      responsibleTable9str = responsibleTable9str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable10str = "";
-    if (responsible_table10 !== "") {
-      responsibleTable10str = responsible_table10.join(",");
-      responsibleTable10str = responsibleTable10str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-    let responsibleTable11str = "";
-    if (responsible_table11 !== "") {
-      responsibleTable11str = responsible_table11.join(",");
-      responsibleTable11str = responsibleTable11str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable12str = "";
-    if (responsible_table12 !== "") {
-      responsibleTable12str = responsible_table12.join(",");
-      responsibleTable12str = responsibleTable12str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable13str = "";
-    if (responsible_table13 !== "") {
-      responsibleTable13str = responsible_table13.join(",");
-      responsibleTable13str = responsibleTable13str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable14str = "";
-    if (responsible_table14 !== "") {
-      responsibleTable14str = responsible_table14.join(",");
-      responsibleTable14str = responsibleTable14str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    let responsibleTable15str = "";
-    if (responsible_table15 !== "") {
-      responsibleTable15str = responsible_table15.join(",");
-      responsibleTable15str = responsibleTable15str
-        .split(",")
-        .map((item) => item.trim().split(" ")[0])
-        .join(", ");
-    }
-
-    // Update the grand total state for executive
-
-    if (window.confirm("Do you want to save changes?")) {
-      Axios.put(
-        `http://localhost:3001/student/project/timestep/edit/${id_project}`,
-        editData
-      )
-        .then((response) => {
-          // Handle success
-          console.log("Data saved successfully:", response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error saving data:", error);
-        });
-    }
   };
 
   const handleBackClick = () => {
@@ -771,11 +637,6 @@ function SD_timestep({ id_project }) {
   const [deadline, setDeadLine] = useState("");
   const [projectData, setProjectData] = useState("");
 
-  const [personNames, setPersonNames] = useState([]);
-  const [person1, setPerson1] = useState([]);
-  const [person2, setPerson2] = useState([]);
-  const [person3, setPerson3] = useState([]);
-
   const getMFromDate = (dateString) => {
     return dateString ? new Date(dateString).getMonth() + 1 : null; // Adding 1 because getMonth returns zero-based index
   };
@@ -875,20 +736,6 @@ function SD_timestep({ id_project }) {
   const [endM13, setEndM13] = useState(null);
   const [endM14, setEndM14] = useState(null);
   const [endM15, setEndM15] = useState(null);
-
-  useEffect(() => {
-    console.log("person1" + person1);
-    console.log("person2" + person2);
-    console.log("person3" + person3);
-    // 'person1', 'person2', 'person3' will have the updated values here
-    const names = [
-      person1 !== "" ? person1 : null,
-      person2 !== "" ? person2 : null,
-      person3 !== "" ? person3 : null,
-    ].filter((name) => name !== null);
-
-    setPersonNames(names);
-  }, [person1, person2, person3]);
 
   const [TopictableCount, setTopictableCount] = useState(1);
   const increasePrinciplesAndReasons = () => {
@@ -1178,6 +1025,264 @@ function SD_timestep({ id_project }) {
     }
   };
 
+  useEffect(() => {
+    console.log(end_duration_table1);
+    console.log(editData.end_duration_table1);
+  }, [editData]);
+
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      thaiend_duration_table1: thaiend_duration_table1,
+      thaiend_duration_table2: thaiend_duration_table2,
+      thaiend_duration_table3: thaiend_duration_table3,
+      thaiend_duration_table4: thaiend_duration_table4,
+      thaiend_duration_table5: thaiend_duration_table5,
+      thaiend_duration_table6: thaiend_duration_table6,
+      thaiend_duration_table7: thaiend_duration_table7,
+      thaiend_duration_table8: thaiend_duration_table8,
+      thaiend_duration_table9: thaiend_duration_table9,
+      thaiend_duration_table10: thaiend_duration_table10,
+      thaiend_duration_table11: thaiend_duration_table11,
+      thaiend_duration_table12: thaiend_duration_table12,
+      thaiend_duration_table13: thaiend_duration_table13,
+      thaiend_duration_table14: thaiend_duration_table14,
+      thaiend_duration_table15: thaiend_duration_table15,
+    });
+  }, [
+    thaiend_duration_table1,
+    thaiend_duration_table2,
+    thaiend_duration_table3,
+    thaiend_duration_table4,
+    thaiend_duration_table5,
+    thaiend_duration_table6,
+    thaiend_duration_table7,
+    thaiend_duration_table8,
+    thaiend_duration_table9,
+    thaiend_duration_table10,
+    thaiend_duration_table11,
+    thaiend_duration_table12,
+    thaiend_duration_table13,
+    thaiend_duration_table14,
+    thaiend_duration_table15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      thaistart_duration_table1: thaistart_duration_table1,
+      thaistart_duration_table2: thaistart_duration_table2,
+      thaistart_duration_table3: thaistart_duration_table3,
+      thaistart_duration_table4: thaistart_duration_table4,
+      thaistart_duration_table5: thaistart_duration_table5,
+      thaistart_duration_table6: thaistart_duration_table6,
+      thaistart_duration_table7: thaistart_duration_table7,
+      thaistart_duration_table8: thaistart_duration_table8,
+      thaistart_duration_table9: thaistart_duration_table9,
+      thaistart_duration_table10: thaistart_duration_table10,
+      thaistart_duration_table11: thaistart_duration_table11,
+      thaistart_duration_table12: thaistart_duration_table12,
+      thaistart_duration_table13: thaistart_duration_table13,
+      thaistart_duration_table14: thaistart_duration_table14,
+      thaistart_duration_table15: thaistart_duration_table15,
+    });
+  }, [
+    thaistart_duration_table1,
+    thaistart_duration_table2,
+    thaistart_duration_table3,
+    thaistart_duration_table4,
+    thaistart_duration_table5,
+    thaistart_duration_table6,
+    thaistart_duration_table7,
+    thaistart_duration_table8,
+    thaistart_duration_table9,
+    thaistart_duration_table10,
+    thaistart_duration_table11,
+    thaistart_duration_table12,
+    thaistart_duration_table13,
+    thaistart_duration_table14,
+    thaistart_duration_table15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      start_duration_table1: start_duration_table1,
+      start_duration_table2: start_duration_table2,
+      start_duration_table3: start_duration_table3,
+      start_duration_table4: start_duration_table4,
+      start_duration_table5: start_duration_table5,
+      start_duration_table6: start_duration_table6,
+      start_duration_table7: start_duration_table7,
+      start_duration_table8: start_duration_table8,
+      start_duration_table9: start_duration_table9,
+      start_duration_table10: start_duration_table10,
+      start_duration_table11: start_duration_table11,
+      start_duration_table12: start_duration_table12,
+      start_duration_table13: start_duration_table13,
+      start_duration_table14: start_duration_table14,
+      start_duration_table15: start_duration_table15,
+    });
+  }, [
+    start_duration_table1,
+    start_duration_table2,
+    start_duration_table3,
+    start_duration_table4,
+    start_duration_table5,
+    start_duration_table6,
+    start_duration_table7,
+    start_duration_table8,
+    start_duration_table9,
+    start_duration_table10,
+    start_duration_table11,
+    start_duration_table12,
+    start_duration_table13,
+    start_duration_table14,
+    start_duration_table15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      end_duration_table1: end_duration_table1,
+      end_duration_table2: end_duration_table2,
+      end_duration_table3: end_duration_table3,
+      end_duration_table4: end_duration_table4,
+      end_duration_table5: end_duration_table5,
+      end_duration_table6: end_duration_table6,
+      end_duration_table7: end_duration_table7,
+      end_duration_table8: end_duration_table8,
+      end_duration_table9: end_duration_table9,
+      end_duration_table10: end_duration_table10,
+      end_duration_table11: end_duration_table11,
+      end_duration_table12: end_duration_table12,
+      end_duration_table13: end_duration_table13,
+      end_duration_table14: end_duration_table14,
+      end_duration_table15: end_duration_table15,
+    });
+  }, [
+    end_duration_table1,
+    end_duration_table2,
+    end_duration_table3,
+    end_duration_table4,
+    end_duration_table5,
+    end_duration_table6,
+    end_duration_table7,
+    end_duration_table8,
+    end_duration_table9,
+    end_duration_table10,
+    end_duration_table11,
+    end_duration_table12,
+    end_duration_table13,
+    end_duration_table14,
+    end_duration_table15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      startM1: startM1,
+      startM2: startM2,
+      startM3: startM3,
+      startM4: startM4,
+      startM5: startM5,
+      startM6: startM6,
+      startM7: startM7,
+      startM8: startM8,
+      startM9: startM9,
+      startM10: startM10,
+      startM11: startM11,
+      startM12: startM12,
+      startM13: startM13,
+      startM14: startM14,
+      startM15: startM15,
+    });
+  }, [
+    startM1,
+    startM2,
+    startM3,
+    startM4,
+    startM5,
+    startM6,
+    startM7,
+    startM8,
+    startM9,
+    startM10,
+    startM11,
+    startM12,
+    startM13,
+    startM14,
+    startM15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      endM1: endM1,
+      endM2: endM2,
+      endM3: endM3,
+      endM4: endM4,
+      endM5: endM5,
+      endM6: endM6,
+      endM7: endM7,
+      endM8: endM8,
+      endM9: endM9,
+      endM10: endM10,
+      endM11: endM11,
+      endM12: endM12,
+      endM13: endM13,
+      endM14: endM14,
+      endM15: endM15,
+    });
+  }, [
+    endM1,
+    endM2,
+    endM3,
+    endM4,
+    endM5,
+    endM6,
+    endM7,
+    endM8,
+    endM9,
+    endM10,
+    endM11,
+    endM12,
+    endM13,
+    endM14,
+    endM15,
+  ]);
+  useEffect(() => {
+    setEditData({
+      ...editData,
+      is_inyear: is_inyear,
+      start_inyear: start_inyear,
+      end_inyear: end_inyear,
+      TopictableCount: TopictableCount,
+    });
+  }, [
+    is_inyear,
+    start_inyear,
+    end_inyear,
+    TopictableCount
+  ]);
+
+  const handleSaveClick = () => {
+    setIsEditMode(false);
+    
+
+    // Update the grand total state for executive
+
+    if (window.confirm("Do you want to save changes?")) {
+      Axios.put(
+        `http://localhost:3001/student/project/timestep/edit/${id_project}`,
+        editData
+      )
+        .then((response) => {
+          // Handle success
+          console.log("Data saved successfully:", response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error saving data:", error);
+        });
+    }
+  };
   return (
     <>
       <Col md="9">
@@ -1226,6 +1331,7 @@ function SD_timestep({ id_project }) {
                     >
                       <div>{`ขั้นตอนที่ ${index + 1}`}</div>
                     </td>
+
                     <td className="back-side-td">
                       <Form.Label>รายละเอียดการดำเนินงาน : </Form.Label>
                       <Form.Control
@@ -1353,12 +1459,14 @@ function SD_timestep({ id_project }) {
                                 ? editData[`start_duration_table${index + 1}`]
                                 : getStartDuration(index)
                             }
-                            onChange={(date) =>
+                            onChange={(date) => {
+                              setStartDuration(index, date); // Update the start duration state
+                              // Update the editData state after setting start duration
                               setEditData({
                                 ...editData,
                                 [`start_duration_table${index + 1}`]: date, // Ensure date is a valid date object
-                              })
-                            }
+                              });
+                            }}
                             dateFormat="dd/MM/yyyy"
                             placeholderText="เลือกวันเริ่มต้น"
                             className="form-control margin-form-control"
@@ -1388,12 +1496,14 @@ function SD_timestep({ id_project }) {
                                 ? editData[`end_duration_table${index + 1}`]
                                 : getEndDuration(index)
                             }
-                            onChange={(date) =>
+                            onChange={(date) => {
+                              setEndDuration(index, date); // Update the start duration state
+                              // Update the editData state after setting start duration
                               setEditData({
                                 ...editData,
                                 [`end_duration_table${index + 1}`]: date, // Ensure date is a valid date object
-                              })
-                            }
+                              });
+                            }}
                             dateFormat="dd/MM/yyyy"
                             placeholderText="เลือกวันสิ้นสุด"
                             className="form-control"
@@ -1416,404 +1526,6 @@ function SD_timestep({ id_project }) {
                       </div>
 
                       <br></br>
-                      {index === 0 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, idx) => (
-                            <div
-                              key={idx}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table1.includes(name)}
-                                  onChange={handleresponsibleTable1Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 1 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table2.includes(name)}
-                                  onChange={handleresponsibleTable2Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 2 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table3.includes(name)}
-                                  onChange={handleresponsibleTable3Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 3 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table4.includes(name)}
-                                  onChange={handleresponsibleTable4Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 4 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table5.includes(name)}
-                                  onChange={handleresponsibleTable5Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 5 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table6.includes(name)}
-                                  onChange={handleresponsibleTable6Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 6 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table7.includes(name)}
-                                  onChange={handleresponsibleTable7Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 7 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table8.includes(name)}
-                                  onChange={handleresponsibleTable8Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 8 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table9.includes(name)}
-                                  onChange={handleresponsibleTable9Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {index == 9 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table10.includes(name)}
-                                  onChange={handleresponsibleTable10Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 10 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table11.includes(name)}
-                                  onChange={handleresponsibleTable11Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 11 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table12.includes(name)}
-                                  onChange={handleresponsibleTable12Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 12 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table13.includes(name)}
-                                  onChange={handleresponsibleTable13Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 13 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table14.includes(name)}
-                                  onChange={handleresponsibleTable14Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {index == 14 && (
-                        <div style={{ display: "inline-block" }}>
-                          <Form.Label style={{ marginRight: "10px" }}>
-                            ผู้รับผิดชอบ :{" "}
-                          </Form.Label>
-                          {personNames.map((name, index) => (
-                            <div
-                              key={index}
-                              style={{
-                                display: "inline-block",
-                                marginRight: "10px",
-                              }}
-                            >
-                              <label>
-                                <input
-                                  type="checkbox"
-                                  value={name}
-                                  checked={responsible_table15.includes(name)}
-                                  onChange={handleresponsibleTable15Change}
-                                />
-                                {` ` + name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      )}
                     </td>
                   </tr>
                 ))}

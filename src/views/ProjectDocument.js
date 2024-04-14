@@ -67,7 +67,6 @@ function ProjectDocument() {
           {currentStep === 'SD_person' && <SD_person id_project={id_project} />}
           {currentStep === 'SD_locationtime' && <SD_locationtime id_project={id_project} />}
           {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
-          {currentStep === 'SD_Plan' && <SD_plan />}
           {currentStep === 'SD_Budget' && <SD_budget />}
         </Row>
       </Container>
