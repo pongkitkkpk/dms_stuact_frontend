@@ -15,7 +15,12 @@ import {
 } from "react-bootstrap";
 
 function SD_person({ id_project }) {
-  const [codeclub, setCodeClub] = useState("");
+
+  const storedUserData = sessionStorage.getItem("user");
+  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+  const id_student = storedUser.username;
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+  const [codeclub, setCodeclub] = useState("");
   const [yearly_countsketch, setYearlyCountSketch] = useState("");
 
   const [originalData, setOriginalData] = useState({});
@@ -27,6 +32,8 @@ function SD_person({ id_project }) {
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setYearlyCountSketch(response.data[0].responsible_agency);
       setExecutiveType1Name(response.data[0].executiveType1Name);
       setExecutiveType2Name(response.data[0].executiveType2Name);
       setExecutiveType3Name(response.data[0].executiveType3Name);
@@ -92,6 +99,7 @@ function SD_person({ id_project }) {
   };
 
   const handleSaveClick = () => {
+    const editpage = "กลุ่มเป้าหมายโครงการ"
     setIsEditMode(false);
 
     // Update the grand total state for executive
@@ -110,6 +118,18 @@ function SD_person({ id_project }) {
           // Handle error
           console.error("Error saving data:", error);
         });
+
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          {codeclub,editpage,id_student}
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
     }
   };
 

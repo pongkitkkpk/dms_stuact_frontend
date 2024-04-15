@@ -17,6 +17,10 @@ import {
 import Axios from "axios";
 
 function SD_locationtime({ id_project }) {
+  const storedUserData = sessionStorage.getItem("user");
+  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+  const id_student = storedUser.username;
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
   const [projectList, setProjectList] = useState([]);
 
   const [location1, setLocation1] = useState("");
@@ -43,7 +47,8 @@ function SD_locationtime({ id_project }) {
 
   //
   const minDate = new Date();
-
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch,setYearlyCountSketch]=useState("");
   const [originalData, setOriginalData] = useState({});
   const [editData, setEditData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -53,6 +58,8 @@ function SD_locationtime({ id_project }) {
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setYearlyCountSketch(response.data[0].responsible_agency);
       setLocation1(response.data[0].location1);
       setLocation2(response.data[0].location2);
       setLocation3(response.data[0].location3);
@@ -83,6 +90,7 @@ function SD_locationtime({ id_project }) {
   };
 
   const handleSaveClick = () => {
+    const editpage = "สถานที่และเวลาดำเนินการ"
     // Save data here
     setIsEditMode(false);
     setEditData((prevEditData) => ({
@@ -103,6 +111,17 @@ function SD_locationtime({ id_project }) {
           // Handle error
           console.error("Error saving data:", error);
         });
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          {codeclub,editpage,id_student}
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
     }
   };
 

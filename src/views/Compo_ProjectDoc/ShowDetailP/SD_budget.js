@@ -4,6 +4,14 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import Axios from "axios";
 function SD_budget({ id_project }) {
+
+  const storedUserData = sessionStorage.getItem("user");
+  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+  const id_student = storedUser.username;
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch, setYearlyCountSketch] = useState("");
+
   const [originalData, setOriginalData] = useState({});
   const [editData, setEditData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -15,6 +23,8 @@ function SD_budget({ id_project }) {
       const responseData = response.data[0];
       setOriginalData(responseData);
       setEditData(responseData);
+      setCodeclub(response.data[0].codeclub);
+      setYearlyCountSketch(response.data[0].responsible_agency);
 
       const newListA = Array.from(
         { length: 15 },
@@ -183,6 +193,7 @@ function SD_budget({ id_project }) {
     console.log(listA);
   }, [listA]);
   const handleSaveClick = () => {
+    const editpage = "งบประมาณโครงการ"
     Axios.put(
       `http://localhost:3001/student/project/p_budget/create/${id_project}`,
       {
@@ -597,6 +608,17 @@ function SD_budget({ id_project }) {
       .catch((error) => {
         console.error("Error creating project:", error);
       });
+      Axios.post(
+        `http://localhost:3001/student/project/edit/history/${id_project}`,
+        {codeclub,editpage,id_student}
+      )
+        .then((response) => {
+          console.log("Data saved successfully:", response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
   };
 
   const increaseTypeACount = () => {

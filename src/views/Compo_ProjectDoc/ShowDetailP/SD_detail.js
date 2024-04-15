@@ -16,9 +16,10 @@ import {
 } from "react-bootstrap";
 
 function SD_detail({ id_project }) {
+
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
-  const studentuser = storedUser.username;
+  const id_student = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
 
   const [project_name, setProjectName] = useState("");
@@ -42,12 +43,16 @@ function SD_detail({ id_project }) {
   const [editData, setEditData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [showdeadline, setShowDeadLine] = useState("");
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch,setYearly_countsketch]=useState("");
   const getProjectData = () => {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setYearly_countsketch(response.data[0].responsible_agency);
       setProjectName(response.data[0].project_name);
       setResponsibleAgency(response.data[0].responsible_agency);
       setAcademicYear(response.data[0].academic_year);
@@ -75,12 +80,25 @@ function SD_detail({ id_project }) {
   };
 
   const handleSaveClick = () => {
-    // Save data here
+    const editpage = "ข้อมูลพื้นฐานโครงการ"
+    
     setIsEditMode(false);
     if (window.confirm("Do you want to save changes?")) {
       Axios.put(
         `http://localhost:3001/student/project/edit/${id_project}`,
         editData
+      )
+        .then((response) => {
+          console.log("Data saved successfully:", response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+
+      Axios.post(
+        `http://localhost:3001/student/project/edit/history/${id_project}`,
+        {codeclub,editpage,id_student}
       )
         .then((response) => {
           console.log("Data saved successfully:", response.data);

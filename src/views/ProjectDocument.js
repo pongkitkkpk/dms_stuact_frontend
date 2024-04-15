@@ -10,6 +10,8 @@ import SD_budget from './Compo_ProjectDoc/ShowDetailP/SD_budget';
 import SD_indicator from './Compo_ProjectDoc/ShowDetailP/SD_indicator';
 import SD_addfile from './Compo_ProjectDoc/ShowDetailP/SD_addfile';
 
+import SD_showedit from './Compo_ProjectDoc/ShowDetailP/SD_showedit';
+
 
 function ProjectDocument() {
   const { id_project } = useParams();
@@ -55,14 +57,14 @@ function ProjectDocument() {
                   <tr className={currentStep === 'SD_indicator' ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={() => toggleStep('SD_indicator')}style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
                   </tr>
-                  <tr className={currentStep === 'SD_addfile' ? "list-group-item active" : "list-group-item"}>
+                  {/* <tr className={currentStep === 'SD_addfile' ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={() => toggleStep('SD_addfile')}style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>
-                  </tr>
+                  </tr> */}
                   <tr className="list-group-item" style={{ backgroundColor: "#535353" }}>
                     <th><a href="#section1"><div style={{ fontFamily: 'Bai Jamjuree', color: "white" }}>แบบขออนุมัติโครงการ</div></a></th>
                   </tr>
-                  <tr className="list-group-item" style={{ backgroundColor: "#535353" }}>
-                    <th><a href="#section1"><div style={{ fontFamily: 'Bai Jamjuree', color: "white" }}>2.1 ประวัติการแก้ไขโครงการ</div></a></th>
+                  <tr className={currentStep === 'SD_showedit' ? "list-group-item active" : "list-group-item"}>
+                    <td><a href="#" onClick={() => toggleStep('SD_showedit')}style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>2.1 รายการแก้ไข</div></a></td>
                   </tr>
                 </table>
               </Card.Body>
@@ -77,7 +79,8 @@ function ProjectDocument() {
           {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
           {currentStep === 'SD_budget' && <SD_budget id_project={id_project}/>}
           {currentStep === 'SD_indicator' && <SD_indicator id_project={id_project}/>}
-          {currentStep === 'SD_addfile' && <SD_addfile id_project={id_project}/>}
+          {/* {currentStep === 'SD_addfile' && <SD_addfile id_project={id_project}/>} */}
+          {currentStep === 'SD_showedit' && <SD_showedit id_project={id_project}/>}
         </Row>
       </Container>
     </>

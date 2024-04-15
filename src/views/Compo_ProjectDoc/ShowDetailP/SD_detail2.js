@@ -18,7 +18,7 @@ import {
 function SD_detail({ id_project }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
-  const studentuser = storedUser.username;
+  const id_student = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
 
   const [principles_and_reasons1, setPrinciplesAndReasons1] = useState("");
@@ -48,12 +48,16 @@ function SD_detail({ id_project }) {
   const [originalData, setOriginalData] = useState({});
   const [editData, setEditData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch,setYearly_countsketch]=useState("");
   const getProjectData = () => {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setYearly_countsketch(response.data[0].responsible_agency);
       setPrinciplesAndReasons1(response.data[0].principles_and_reasons1);
       setPrinciplesAndReasons2(response.data[0].principles_and_reasons2);
       setPrinciplesAndReasons3(response.data[0].principles_and_reasons3);
@@ -80,6 +84,7 @@ function SD_detail({ id_project }) {
     });
   };
 
+
   useEffect(() => {
     getProjectData();
   }, [id_project]);
@@ -94,6 +99,7 @@ function SD_detail({ id_project }) {
 
   const handleSaveClick = () => {
     // Save data here
+    const editpage = "ลักษณะโครงการ"
     setIsEditMode(false);
 
     if (window.confirm("Do you want to save changes?")) {
@@ -110,6 +116,18 @@ function SD_detail({ id_project }) {
           // Handle error
           console.error("Error saving data:", error);
         });
+
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          {codeclub,editpage,id_student}
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
     }
   };
 

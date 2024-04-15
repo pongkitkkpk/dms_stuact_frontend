@@ -17,7 +17,13 @@ import {
 import Axios from "axios";
 
 function SD_indicator({ id_project }) {
-  
+  const storedUserData = sessionStorage.getItem("user");
+  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+  const id_student = storedUser.username;
+  const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+  const [codeclub, setCodeclub] = useState("");
+  const [yearly_countsketch, setYearlyCountSketch] = useState("");
+
   const [volume1, setVolume1] = useState("");
   const [volume2, setVolume2] = useState("");
   const [volume3, setVolume3] = useState("");
@@ -150,6 +156,8 @@ function SD_indicator({ id_project }) {
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setYearlyCountSketch(response.data[0].responsible_agency);
       setVolume1(response.data[0].volume1);
       setVolume2(response.data[0].volume2);
       setVolume3(response.data[0].volume3);
@@ -182,7 +190,7 @@ function SD_indicator({ id_project }) {
   };
 
   const handleSaveClick = () => {
-    // Save data here
+    const editpage = "ความคาดหวังของโครงการ"
     setIsEditMode(false);
 
     if (window.confirm("Do you want to save changes?")) {
@@ -218,6 +226,17 @@ function SD_indicator({ id_project }) {
           // Handle error
           console.error("Error saving data:", error);
         });
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          {codeclub,editpage,id_student}
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
     }
   };
 
