@@ -55,6 +55,33 @@ function AllProject() {
     history.push(`project-doc/${id_project}`);
   };
 
+  const handleDeleteProject = (id_project, project_name) => {
+    const confirmDelete = window.confirm(`คุณต้องการลบ ${project_name}`);
+
+    if (confirmDelete) {
+      Axios.delete(`http://localhost:3001/student/deleteProject/${id_project}`)
+        .then((response) => {
+          if (response.status === 200) {
+            // Filter out the deleted project from the project list
+            const updatedProjectList = projectList.filter(
+              (project) => project.id !== id_project
+            );
+            setProjectList(updatedProjectList);
+
+            // Show alert after successful deletion
+            alert("Project deleted successfully!");
+          } else {
+            console.error("Failed to delete project");
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting project:", error);
+        });
+    } else {
+      // User canceled deletion, do nothing
+    }
+  };
+
   return (
     <>
       <h1>allrpo</h1>
@@ -109,19 +136,19 @@ function AllProject() {
                     {project.id_student}
                   </div>
                 </Card.Body>
-                <Card.Footer className="d-flex justify-content-end">
-                  <div>
+                <Card.Footer className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center",backgroundColor: "#f0f0f0"  }}>
+                  <div >
                     <Button
-                   
-                      onClick={() => handleShowDetail(project.id)}
+                      onClick={() =>
+                        handleDeleteProject(project.id, project.project_name)
+                      }
                     >
-                      Show Detail
+                      ลบ
                     </Button>
-                    <div><hi>{}</hi></div>
-                    <Button
-                    
-                      onClick={() => handleShowDetail(project.id)}
-                    >
+                    <div>
+                      <hi>{}</hi>
+                    </div>
+                    <Button onClick={() => handleShowDetail(project.id)}>
                       Show Detail
                     </Button>
                   </div>
