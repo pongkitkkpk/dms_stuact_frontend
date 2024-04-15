@@ -861,9 +861,7 @@
 }
 
 .show-detail-button-warning {
-  position: absolute;
-  top: 50%;
-  right: 5%;
+
   transform: translate(-50%, -50%);
   z-index: 1;
   background-color: #ffc404;
@@ -876,9 +874,7 @@
 }
 
 .show-detail-button-success {
-  position: absolute;
-  top: 50%;
-  right: 5%;
+
   transform: translate(-50%, -50%);
   z-index: 1;
   background-color: #28a745;

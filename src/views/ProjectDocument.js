@@ -79,7 +79,6 @@ function ProjectDocument() {
           {currentStep === 'SD_timestep' && <SD_timestep id_project={id_project} />}
           {currentStep === 'SD_budget' && <SD_budget id_project={id_project}/>}
           {currentStep === 'SD_indicator' && <SD_indicator id_project={id_project}/>}
-          {/* {currentStep === 'SD_addfile' && <SD_addfile id_project={id_project}/>} */}
           {currentStep === 'SD_showedit' && <SD_showedit id_project={id_project}/>}
         </Row>
       </Container>
