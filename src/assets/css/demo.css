@@ -859,19 +859,85 @@
   border-left: 4px solid #ffc404;
   position: relative;
 }
+/* CSS */
+.card-with-border-draft {
+  border-left: 4px solid #7AC6FF; /* Light blue */
+  position: relative;
+}
+
+.card-with-border-progress {
+  border-left: 4px solid #8E4E41; /* Dark brown */
+  position: relative;
+}
+
+.card-with-border-approved {
+  border-left: 4px solid #44C827; /* Green */
+  position: relative;
+}
+
+.card-with-border-approved-budget {
+  border-left: 4px solid #39934F; /* Dark green */
+  position: relative;
+}
+
+.card-with-border-summary-draft {
+  border-left: 4px solid #0E9E93; /* Turquoise */
+  position: relative;
+}
+
+.card-with-border-summary-progress {
+  border-left: 4px solid #0E4D9E; /* Dark turquoise */
+  position: relative;
+}
+
+.card-with-border-closed {
+  border-left: 4px solid #5C7AD6; /* Blue */
+  position: relative;
+}
+/* 8888888888888888888888 */
+.badge-draft {
+  background-color: #7AC6FF; /* Light blue */
+}
+
+.badge-progress {
+  background-color: #8E4E41; /* Dark brown */
+}
+
+
+.badge-approved {
+  background-color: #44C827; /* Green */
+}
+
+
+.badge-approved-budget {
+  background-color: #39934F; /* Dark green */
+}
+
+
+.badge-summary-draft {
+  background-color: #0E9E93; /* Turquoise */
+}
+
+.badge-summary-progress {
+  background-color: #0E4D9E; /* Dark turquoise */
+}
+
+.badge-closed {
+  background-color: #5C7AD6; /* Blue */
+}
+
+
 
 .show-detail-button-warning {
-
   transform: translate(-50%, -50%);
   z-index: 1;
   background-color: #ffc404;
   color: white;
 }
 
-.card-with-border-success {
-  border-left: 4px solid #28a745;
-  position: relative;
-}
+
+/* 00000000000000000000000000000000000 */
+
 
 .show-detail-button-success {
 

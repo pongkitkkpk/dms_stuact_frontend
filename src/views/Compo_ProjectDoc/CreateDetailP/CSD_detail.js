@@ -28,7 +28,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
-  const [project_phase, setProject_phase] = useState("0");
+  const [project_phase, setProject_phase] = useState("ร่างคำขออนุมัติ");
   const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
   const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(

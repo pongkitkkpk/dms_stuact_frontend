@@ -30,7 +30,7 @@ function TableAddStudent() {
   const [fusername, setFusername] = useState("");
   const [department, setDepartment] = useState("BBB");
   const [position, setPosition] = useState("");
-  const [clubName, setClubname] = useState("");
+  const [clubName, setClubname] = useState("องค์การนักศึกษา มจพ.กรุงเทพฯ");
 
   const [campus, setCampus] = useState("Bangkok"); //รอเชื่อม api
   const [yearly, setYearly] = useState(66); // เวลา
@@ -77,7 +77,7 @@ function TableAddStudent() {
       setLEVEL_DESC(getuserapi.message2.LEVEL_DESC); //ปริญญาตรี 4 ปี / 5 ปี
       setFAC_NAME_THAI(getuserapi.message2.FAC_NAME_THAI); //วิทยาลัยเทคโนโลยีอุตสาหกรรม
     }
-    console.log(username);
+ 
   }, [getuserapi]);
 
   useEffect(() => {
@@ -155,6 +155,25 @@ function TableAddStudent() {
     const newCodebooksomeoutyear = `${campusAbbreviation}${"yy"}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
     setCodebooksome(newCodebooksome);
     setCodebooksomeoutyear(newCodebooksomeoutyear);
+
+    if (clubName === 'องค์การนักศึกษา มจพ.กรุงเทพฯ' || clubName === 'สภานักศึกษา มจพ.กรุงเทพฯ') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'องค์การนักศึกษา มจพ.ปราจีนบุรี' || clubName === 'สภานักศึกษา มจพ.ปราจีนบุรี') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'องค์การนักศึกษา มจพ.ระยอง' || clubName === 'สภานักศึกษา มจพ.ระยอง') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'ชมรมวิทยุสมัครเล่น' || clubName === 'ชมรมถ่ายภาพ' || clubName === 'ชมรมคอมพิวเตอร์' || clubName === 'ชมรมภาษาต่างประเทศ' || clubName === 'ชมรมสื่อสิ่งพิมพ์') {
+      setAgencyGroupName("ชมรมฝ่ายวิชาการ");
+    } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
+      setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
+    }  else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+      setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
+    } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
+      setAgencyGroupName("ชมรมฝ่ายกีฬา");
+    } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
+      setAgencyGroupName("ชมรมฝ่ายกีฬา");
+    }
+
     Axios.post("http://localhost:3001/admin/user/createUser", {
       id_student: username,
       name_student: name_student,
@@ -171,7 +190,8 @@ function TableAddStudent() {
       codeagency: codeagency,
       codeworkgroup: codeworkgroup,
       codebooksome: newCodebooksome,
-      codebooksomeoutyear:newCodebooksomeoutyear
+      codebooksomeoutyear:newCodebooksomeoutyear,
+      agencyGroupName:agencyGroupName
     })
       .then(() => {
         setUserList([
@@ -192,7 +212,8 @@ function TableAddStudent() {
             codeagency: codeagency,
             codeworkgroup: codeworkgroup,
             codebooksome: newCodebooksome,
-            codebooksomeoutyear:newCodebooksomeoutyear
+            codebooksomeoutyear:newCodebooksomeoutyear,
+            agencyGroupName:agencyGroupName
           },
         ]);
         // Reload the page after adding a user
@@ -202,6 +223,30 @@ function TableAddStudent() {
         console.error("Error adding user:", error);
       });
   };
+  const [agencyGroupName, setAgencyGroupName] = useState("");
+
+  useEffect(() => {
+    if (clubName === 'องค์การนักศึกษา มจพ.กรุงเทพฯ' || clubName === 'สภานักศึกษา มจพ.กรุงเทพฯ') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'องค์การนักศึกษา มจพ.ปราจีนบุรี' || clubName === 'สภานักศึกษา มจพ.ปราจีนบุรี') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'องค์การนักศึกษา มจพ.ระยอง' || clubName === 'สภานักศึกษา มจพ.ระยอง') {
+      setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
+    } else if (clubName === 'ชมรมวิทยุสมัครเล่น' || clubName === 'ชมรมถ่ายภาพ' || clubName === 'ชมรมคอมพิวเตอร์' || clubName === 'ชมรมภาษาต่างประเทศ' || clubName === 'ชมรมสื่อสิ่งพิมพ์') {
+      setAgencyGroupName("ชมรมฝ่ายวิชาการ");
+    } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
+      setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
+    }  else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+      setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
+    } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
+      setAgencyGroupName("ชมรมฝ่ายกีฬา");
+    } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
+      setAgencyGroupName("ชมรมฝ่ายกีฬา");
+    }
+    console.log("ASDASDFAS")
+    console.log(clubName)
+    console.log(agencyGroupName)
+  }, [clubName]);
   return (
     <>
       <Container fluid>

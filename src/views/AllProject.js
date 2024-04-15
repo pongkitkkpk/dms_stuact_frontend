@@ -10,6 +10,7 @@ import {
   InputGroup,
   Form,
 } from "react-bootstrap";
+import Admin from "layouts/Admin";
 
 function AllProject() {
   const storedUserData = sessionStorage.getItem("user");
@@ -18,6 +19,9 @@ function AllProject() {
   const studentuser = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
   const strcodebooksome = storedUser.codebooksome;
+  useEffect(()=>{
+    console.log(storedUser.account_type)
+  },[storedUser])
 
   const [projectList, setProjectList] = useState([]);
   const [id_student, setIDStudent] = useState(studentuser);
@@ -26,23 +30,55 @@ function AllProject() {
     strcodebooksomeoutyear
   );
   const history = useHistory(); // Initialize useHistory hook
+  const [searchQuery, setSearchQuery] = useState("");
 
+  const filterProjectList = projectList.filter((project) => {
+    const yearlyString = project.yearly ? project.yearly.toString() : ""; // Convert yearly to string, handle null case
+    return (
+      (project.id_student &&
+        project.id_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.project_name &&
+        project.project_name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (project.campus &&
+        project.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.clubName &&
+        project.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.codeclub &&
+        project.codeclub.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.responsible_agency &&
+        project.responsible_agency
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
+    );
+  });
   const getProjects = () => {
-    Axios.get(
-      `http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`
-    ).then((response) => {
-      setProjectList(response.data);
-    });
+    console.log("asdsa")
+    if (storedUser.account_type == 'admin') {
+
+      console.log("asdsa")
+      console.log("asdsa"+storedUser.account_type)
+      Axios.get(
+        `http://localhost:3001/admin/allprojects`
+      ).then((response) => {
+        setProjectList(response.data);
+      });
+    } else {
+      Axios.get(
+        `http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`
+      ).then((response) => {
+        setProjectList(response.data);
+      });
+    }
   };
+  
 
   useEffect(() => {
     getProjects();
   }, []);
 
-  useEffect(() => {
-    console.log("projectListadf");
-    console.log(projectList);
-  }, [projectList]);
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -82,17 +118,37 @@ function AllProject() {
     }
   };
 
+  const stepTitles = [
+    " ร่างคำขออนุมัติ",
+    " ดำเนินการขออนุมัติ",
+    " โครงการอนุมัติ",
+    " เงินโครงการอนุมัติ",
+    " ร่างสรุปผลโครงการ",
+    " ดำเนินการสรุปผล",
+    " ปิดโครงการ"
+  ];
+  const stepColors = {
+    " ร่างคำขออนุมัติ": "#7AC6FF",
+    " ดำเนินการขออนุมัติ": "#8E4E41",
+    " โครงการอนุมัติ": "#44C827",
+    " เงินโครงการอนุมัติ": "#39934F",
+    " ร่างสรุปผลโครงการ": "#0E9E93",
+    " ดำเนินการสรุปผล": "#0E4D9E",
+    " ปิดโครงการ": "#5C7AD6"
+  };
   return (
     <>
-      <h1>allrpo</h1>
+
       <Container fluid>
         <Row>
           <Col md="12">
-            <InputGroup className="mb-3" style={{ width: "20%" }}>
+            <InputGroup className="mb-3" style={{ width: "100%" }}>
               <Form.Control
                 placeholder="ค้นหา"
+                type="text"
                 aria-describedby="basic-addon2"
-                onChange={(event) => console.log(event.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <InputGroup.Text>
                 <i className="fa fa-search" aria-hidden="true"></i>
@@ -100,84 +156,87 @@ function AllProject() {
             </InputGroup>
 
             <br />
-            {projectList.map((project, index) => (
-              <Card
+            {filterProjectList.map((val, index) => {
+              return (
+                <Card
                 key={index}
                 className={`card-with-border-${
-                  project.project_phase === "0" ? "secondary" : "warning"
+                  val.project_phase === "ร่างคำขออนุมัติ" ? "draft" :
+                  val.project_phase === "ดำเนินการขออนุมัติ" ? "progress" :
+                  val.project_phase === "โครงการอนุมัติ" ? "approved" :
+                  val.project_phase === "เงินโครงการอนุมัติ" ? "approved-budget" :
+                  val.project_phase === "ร่างสรุปผลโครงการ" ? "summary-draft" :
+                  val.project_phase === "ดำเนินการสรุปผล" ? "summary-progress" :
+                  val.project_phase === "ปิดโครงการ" ? "closed" : ""
                 }`}
                 style={{ margin: "0% 0" }}
               >
-                <Card.Body>
-                  <div className="status-tag">
-                    <span
-                      className={`badge badge-${
-                        project.project_phase === "0" ? "secondary" : "warning"
-                      }`}
-                    >
-                      ฉบับ ร่าง
-                    </span>
-                  </div>
-                  <Card.Title as="h4">
-                    {project.project_name}id {project.id}
-                  </Card.Title>
-                  <p className="card-category">{project.project_number}</p>
-                  <div className="stats">
-                    <i className="fas fa-history"></i>
-                    <span>สร้างเมื่อ {formatDate(project.created_at)}</span>
-                    <i className="fas fa-history"></i>
-                    <span>
-                      {project.updated_at === null
-                        ? "update เมื่อ ----"
-                        : `update เมื่อ ${formatDate(project.updated_at)}`}
-                    </span>
-                    <span> </span>
-                    <i className="fas fa-pencil-alt"></i>
-                    {project.id_student}
-                  </div>
-                </Card.Body>
-                <Card.Footer className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center",backgroundColor: "#f0f0f0"  }}>
-                  <div >
-                    <Button
-                      onClick={() =>
-                        handleDeleteProject(project.id, project.project_name)
-                      }
-                    >
-                      ลบ
-                    </Button>
-                    <div>
-                      <hi>{}</hi>
+                  <Card.Body>
+                    <div className="status-tag">
+                      <span
+                          className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ" ? "draft" :
+                            val.project_phase === "ดำเนินการขออนุมัติ" ? "progress" :
+                            val.project_phase === "โครงการอนุมัติ" ? "approved" :
+                            val.project_phase === "เงินโครงการอนุมัติ" ? "approved-budget" :
+                            val.project_phase === "ร่างสรุปผลโครงการ" ? "summary-draft" :
+                            val.project_phase === "ดำเนินการสรุปผล" ? "summary-progress" :
+                            val.project_phase === "ปิดโครงการ" ? "closed" : ""
+                          }`}
+                          style={{ marginRight: "1%", backgroundColor: stepColors[val.project_phase] }}
+                        >
+                          {val.project_phase}
+                        </span>
+                      <span
+                        className={`badge badge-"warning"`}
+                        // className={`badge badge-"warning"`} ดำขาว
+                      >
+                        {val.responsible_agency}
+                      </span>
                     </div>
-                    <Button onClick={() => handleShowDetail(project.id)}>
-                      Show Detail
-                    </Button>
-                  </div>
-                </Card.Footer>
-              </Card>
-            ))}
-          </Col>
+                    <Card.Title as="h4">
+                      {val.project_name}id {val.id} 
+                    </Card.Title>
+                    <p className="card-category">{val.project_number}</p>
+                    <div
+                      className="d-flex justify-content-between align-items-center"
+                      style={{ backgroundColor: "#f0f0f0" }}
+                    >
+                      <div>
+                        <Button onClick={() => handleShowDetail(val.id)}>
+                          Show Detail
+                        </Button>
+                        {/* You can place additional elements here */}
+                      </div>
+                      <div>
+                        <Button
+                          onClick={() =>
+                            handleDeleteProject(val.id, val.project_name)
+                          }
+                        >
+                          ลบ
+                        </Button>
+                        {/* This is the button you want on the right side */}
+                      </div>
+                    </div>
+                    <div className="stats">
+                      <i className="fas fa-history"></i>
+                      <span>สร้างเมื่อ {formatDate(val.created_at)}</span>
+                      <i className="fas fa-history"></i>
 
-          {/* <Col md="12">
-                        <Card className='card-with-border-success ' style={{ "margin": "0% 0" }}>
-                            <Card.Body>
-                                <div className="status-tag">
-                                    <span className="badge badge-success">In Progress</span>
-                                </div>
-                                <Card.Title as="h4">Project Title</Card.Title>
-                                <p className="card-category">Project subtitle or category</p>
-                                <div className="stats">
-                                    <i className="fas fa-history"></i>
-                                    Updated 3 minutes ago
-                                </div>
-                                <Button
-                                    variant="success"
-                                    className='show-detail-button-success'
-                                >
-                                    Show Detail
-                                </Button>
-                            </Card.Body>
-                        </Card>
-                    </Col> */}
+                      <span>
+                        {val.updated_at === null
+                          ? "update เมื่อ ----"
+                          : `update เมื่อ ${formatDate(val.updated_at)}`}
+                      </span>
+                      <span> </span>
+                      <i className="fas fa-pencil-alt"></i>
+                      {val.id_student}
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </Col>
         </Row>
       </Container>
     </>
