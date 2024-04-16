@@ -51,16 +51,16 @@ function ProjectDocument() {
   }, [id_project]);
 
   const getStateData = () => {
-    Axios.get(
-      `http://localhost:3001/getState/${id_project}`
-    ).then((response) => {
-      setDBProject_phase(response.data[0].project_phase);
-    });
+    Axios.get(`http://localhost:3001/getState/${id_project}`).then(
+      (response) => {
+        setDBProject_phase(response.data[0].project_phase);
+      }
+    );
   };
 
   useEffect(() => {
-    console.log("OOOOOO")
-    console.log(project_phase)
+    console.log("OOOOOO");
+    console.log(project_phase);
   }, [project_phase]);
 
   const toggleStep = (step) => {
@@ -69,7 +69,6 @@ function ProjectDocument() {
 
   const totalSteps = 7;
   const [currentStepProject, setCurrentStepProject] = useState(1);
- 
 
   const handleNextStepPleaseAllow = () => {
     Swal.fire({
@@ -95,17 +94,6 @@ function ProjectDocument() {
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-
-        Axios.post("/sendEmail", {
-          email: storedUser.email,
-          message: "Your project has proceeded to the next step.",
-        })
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error("Error sending email:", error);
-          });
         Swal.fire(
           "Success!",
           "You have proceeded to the next step.",
@@ -125,11 +113,10 @@ function ProjectDocument() {
       "ดำเนินการสรุปผล",
       "ปิดโครงการ",
     ];
-  
+
     const index = stepNames.indexOf(DBproject_phase);
     setCurrentStepProject(index + 1); // Adding 1 to match the step number
   }, [DBproject_phase]);
-  
 
   useEffect(() => {
     const stepNames = [
@@ -155,7 +142,6 @@ function ProjectDocument() {
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-
         Axios.put(`http://localhost:3001/updateState/${id_project}`, {
           project_phase,
           editor_name,
@@ -168,9 +154,9 @@ function ProjectDocument() {
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-
-        Axios.post("/sendEmail", {
+        Axios.post("http://localhost:3001/sendEmail", {
           email: storedUser.email,
+          subject: `อัพเดท สถานะโครงการ ${project_name} เป็น ${DBproject_phase}`,
           message: "Your project has proceeded to the next step.",
         })
           .then((response) => {
