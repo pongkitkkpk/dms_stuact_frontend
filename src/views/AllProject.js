@@ -35,20 +35,15 @@ function AllProject() {
   const filterProjectList = projectList.filter((project) => {
     const yearlyString = project.yearly ? project.yearly.toString() : ""; // Convert yearly to string, handle null case
     return (
-      (project.id_student &&
-        project.id_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.project_name &&
-        project.project_name
+      (project.id_student &&project.id_student.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.project_name &&project.project_name
           .toLowerCase()
           .includes(searchQuery.toLowerCase())) ||
-      (project.campus &&
-        project.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.clubName &&
-        project.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.codeclub &&
-        project.codeclub.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.responsible_agency &&
-        project.responsible_agency
+      (project.campus &&project.campus.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.clubName &&project.clubName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.codeclub &&project.codeclub.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.project_phase &&project.project_phase.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.responsible_agency &&project.responsible_agency
           .toLowerCase()
           .includes(searchQuery.toLowerCase())) ||
       (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search

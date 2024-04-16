@@ -13,6 +13,7 @@ import SD_addfile from "./Compo_ProjectDoc/ShowDetailP/SD_addfile";
 import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
+import Swal from 'sweetalert2';
 
 function ProjectDocument() {
   const storedUserData = sessionStorage.getItem("user");
@@ -36,12 +37,27 @@ function ProjectDocument() {
   const [currentStepProject, setCurrentStepProject] = useState(1);
 
   const handleNextStep = () => {
-    setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to proceed to the next step?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, proceed',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
+        Swal.fire('Success!', 'You have proceeded to the next step.', 'success');
+      }
+    });
   };
-
   const handlePrevStep = () => {
     setCurrentStepProject((prevStep) => Math.max(prevStep - 1, 1));
   };
+
+  useEffect(()=>{
+    console.log(currentStepProject)
+  },[currentStepProject])
 
   return (
     <>
@@ -68,6 +84,20 @@ function ProjectDocument() {
           </button>
         </div>
       )}
+
+{storedUser.account_type === "students" && currentStepProject <= 1 &&(
+  <div className="d-flex justify-content-end">
+    <button
+      onClick={handleNextStep}
+      type="submit"
+      className="btn-dataupdate"
+      // style={{ fontSize: "14px", margin: "1%" }}
+      // variant="primary"
+    >
+      ร่างคำขออนุมัติ
+    </button>
+  </div>
+)}
 
       <Container fluid>
         <Row>

@@ -14,9 +14,9 @@ import {
   Nav,
   Table,
 } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 function SD_detail({ id_project }) {
-
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -44,7 +44,8 @@ function SD_detail({ id_project }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [showdeadline, setShowDeadLine] = useState("");
   const [codeclub, setCodeclub] = useState("");
-  const [yearly_countsketch,setYearly_countsketch]=useState("");
+  const [yearly_countsketch, setYearly_countsketch] = useState("");
+  
   const getProjectData = () => {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
@@ -79,46 +80,109 @@ function SD_detail({ id_project }) {
     setIsEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    const editpage = "ข้อมูลพื้นฐานโครงการ"
-    
-    setIsEditMode(false);
-    if (window.confirm("Do you want to save changes?")) {
-      Axios.put(
-        `http://localhost:3001/student/project/edit/${id_project}`,
-        editData
-      )
-        .then((response) => {
-          console.log("Data saved successfully:", response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
+  // const handleSaveClick = () => {
+  //   const editpage = "ข้อมูลพื้นฐานโครงการ";
 
-      Axios.post(
-        `http://localhost:3001/student/project/edit/history/${id_project}`,
-        {codeclub,editpage,id_student}
-      )
-        .then((response) => {
-          console.log("Data saved successfully:", response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
-    }
+  //   setIsEditMode(false);
+  //   if (window.confirm("Do you want to save changes?")) {
+  //     Axios.put(
+  //       `http://localhost:3001/student/project/edit/${id_project}`,
+  //       editData
+  //     )
+  //       .then((response) => {
+  //         console.log("Data saved successfully:", response.data);
+  //         window.location.reload();
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error saving data:", error);
+  //       });
+
+  //     Axios.post(
+  //       `http://localhost:3001/student/project/edit/history/${id_project}`,
+  //       { codeclub, editpage, id_student }
+  //     )
+  //       .then((response) => {
+  //         console.log("Data saved successfully:", response.data);
+  //         window.location.reload();
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error saving data:", error);
+  //       });
+  //   }
+  // };
+
+  const handleSaveClick = () => {
+    const editpage = "ข้อมูลพื้นฐานโครงการ";
+    Swal.fire({
+      title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
+      text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "บันทึก",
+      cancelButtonText: "ยกเลิก",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Your Axios PUT request code goes here
+        Axios.put(
+          `http://localhost:3001/student/project/edit/${id_project}`,
+          editData
+        )
+          .then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error creating project:", error);
+          });
+
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          { codeclub, editpage, id_student }
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
+          Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+      }
+    });
   };
 
-  const handleBackClick = () => {
-    const confirmBack = window.confirm(
-      "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ"
-    );
+  // const handleBackClick = () => {
+  //   const confirmBack = window.confirm(
+  //     "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ"
+  //   );
 
-    if (confirmBack) {
-      setIsEditMode(false);
-      setEditData(originalData);
-    }
+  //   if (confirmBack) {
+  //     setIsEditMode(false);
+  //     setEditData(originalData);
+  //   }
+  // };
+
+  const handleBackClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, proceed",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsEditMode(false);
+        setEditData(originalData);
+        window.location.reload();
+
+        Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+      }
+    });
   };
 
   const handleDownloadClick = () => {
