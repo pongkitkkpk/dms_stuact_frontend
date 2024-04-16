@@ -14,19 +14,54 @@ import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
 import Swal from "sweetalert2";
+import Axios from "axios";
 
 function ProjectDocument() {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+
   useEffect(() => {
-    console.log("storedUser");
-    console.log(storedUser);
-    console.log(storedUser.email);
-  }, [storedUser]);
+    setEditor_name(id_student);
+  }, [id_student]);
+
   const { id_project } = useParams();
   const [currentStepSideBar, setCurrentStepSideBar] = useState("SD_Detail"); // Default step is SD_Detail
+  const [project_name, setProjectName] = useState("");
+  const [codeclub, setCodeclub] = useState("");
+  const [editor_name, setEditor_name] = useState("");
+  const [originalData, setOriginalData] = useState([]);
+  const [project_phase, setProject_phase] = useState("");
+  const [DBproject_phase, setDBProject_phase] = useState("");
+
+  const getProjectData = () => {
+    Axios.get(
+      `http://localhost:3001/student/project/getidproject/${id_project}`
+    ).then((response) => {
+      setOriginalData(response.data[0]);
+      setCodeclub(response.data[0].codeclub);
+      setProjectName(response.data[0].project_name);
+    });
+  };
+
+  useEffect(() => {
+    getProjectData();
+    getStateData();
+  }, [id_project]);
+
+  const getStateData = () => {
+    Axios.get(
+      `http://localhost:3001/getState/${id_project}`
+    ).then((response) => {
+      setDBProject_phase(response.data[0].project_phase);
+    });
+  };
+
+  useEffect(() => {
+    console.log("OOOOOO")
+    console.log(project_phase)
+  }, [project_phase]);
 
   const toggleStep = (step) => {
     setCurrentStepSideBar(step);
@@ -34,7 +69,7 @@ function ProjectDocument() {
 
   const totalSteps = 7;
   const [currentStepProject, setCurrentStepProject] = useState(1);
-  const [currentStepNameProject, setCurrentStepNameProject] = useState("");
+ 
 
   const handleNextStepPleaseAllow = () => {
     Swal.fire({
@@ -48,19 +83,29 @@ function ProjectDocument() {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
 
-        Axios.put(
-          `http://localhost:3001/updateState/${id_project}`,
-          editData
-        )
+        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
+          project_phase,
+          editor_name,
+        })
           .then((response) => {
+            console.log("response.data");
             console.log(response.data);
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((error) => {
             console.error("Error creating project:", error);
           });
 
-
+        Axios.post("/sendEmail", {
+          email: storedUser.email,
+          message: "Your project has proceeded to the next step.",
+        })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+          });
         Swal.fire(
           "Success!",
           "You have proceeded to the next step.",
@@ -69,8 +114,8 @@ function ProjectDocument() {
       }
     });
   };
+
   useEffect(() => {
-    // Define step names array
     const stepNames = [
       "ร่างคำขออนุมัติ",
       "ดำเนินการขออนุมัติ",
@@ -78,11 +123,25 @@ function ProjectDocument() {
       "เงินโครงการอนุมัติ",
       "ร่างสรุปผลโครงการ",
       "ดำเนินการสรุปผล",
-      "ปิดโครงการ"
+      "ปิดโครงการ",
     ];
+  
+    const index = stepNames.indexOf(DBproject_phase);
+    setCurrentStepProject(index + 1); // Adding 1 to match the step number
+  }, [DBproject_phase]);
+  
 
-    setCurrentStepNameProject(stepNames[currentStepProject - 1] || "");
-    console.log(currentStepNameProject)
+  useEffect(() => {
+    const stepNames = [
+      "ดำเนินการขออนุมัติ",
+      "โครงการอนุมัติ",
+      "เงินโครงการอนุมัติ",
+      "ร่างสรุปผลโครงการ",
+      "ดำเนินการสรุปผล",
+      "ปิดโครงการ",
+    ];
+    console.log(currentStepProject);
+    setProject_phase(stepNames[currentStepProject - 1] || "");
   }, [currentStepProject]);
 
   const handleNextStep = () => {
@@ -97,18 +156,18 @@ function ProjectDocument() {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
 
-        Axios.put(
-          `http://localhost:3001/student/project/edit/${id_project}`,
-          editData
-        )
+        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
+          project_phase,
+          editor_name,
+        })
           .then((response) => {
+            console.log("response.data");
             console.log(response.data);
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-
 
         Axios.post("/sendEmail", {
           email: storedUser.email,
@@ -133,10 +192,6 @@ function ProjectDocument() {
     setCurrentStepProject((prevStep) => Math.max(prevStep - 1, 1));
   };
 
-  useEffect(() => {
-    console.log(currentStepProject);
-  }, [currentStepProject]);
-
   return (
     <>
       <ArrowProgressBar
@@ -145,7 +200,7 @@ function ProjectDocument() {
       />
 
       {/* Render buttons to handle next and previous steps */}
-      {storedUser.account_type === "admin" && (
+      {storedUser.account_type === "admin" && currentStepProject != 1 && (
         <div className="d-flex justify-content-end">
           <button onClick={handlePrevStep} disabled={currentStepProject === 1}>
             Previous Step
@@ -155,8 +210,6 @@ function ProjectDocument() {
             disabled={currentStepProject === totalSteps}
             type="submit"
             className="btn-dataupdate"
-            // style={{ fontSize: "14px", margin: "1%" }}
-            // variant="primary"
           >
             Next Step
           </button>
