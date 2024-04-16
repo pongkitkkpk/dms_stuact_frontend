@@ -149,7 +149,7 @@ function SD_detail({ id_project }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-          Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+          Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
       }
     });
   };
