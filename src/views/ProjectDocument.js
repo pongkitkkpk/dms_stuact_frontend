@@ -13,7 +13,7 @@ import SD_addfile from "./Compo_ProjectDoc/ShowDetailP/SD_addfile";
 import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function ProjectDocument() {
   const storedUserData = sessionStorage.getItem("user");
@@ -23,41 +23,119 @@ function ProjectDocument() {
   useEffect(() => {
     console.log("storedUser");
     console.log(storedUser);
-    console.log(storedUser.account_type);
+    console.log(storedUser.email);
   }, [storedUser]);
   const { id_project } = useParams();
   const [currentStepSideBar, setCurrentStepSideBar] = useState("SD_Detail"); // Default step is SD_Detail
 
-  // // Function to toggle between steps
   const toggleStep = (step) => {
     setCurrentStepSideBar(step);
   };
 
   const totalSteps = 7;
   const [currentStepProject, setCurrentStepProject] = useState(1);
+  const [currentStepNameProject, setCurrentStepNameProject] = useState("");
 
-  const handleNextStep = () => {
+  const handleNextStepPleaseAllow = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to proceed to the next step?',
-      icon: 'question',
+      title: "Are you sure?",
+      text: "Do you want to proceed to the next step?",
+      icon: "question",
       showCancelButton: true,
-      confirmButtonText: 'Yes, proceed',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: "Yes, proceed",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-        Swal.fire('Success!', 'You have proceeded to the next step.', 'success');
+
+        Axios.put(
+          `http://localhost:3001/updateState/${id_project}`,
+          editData
+        )
+          .then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error creating project:", error);
+          });
+
+
+        Swal.fire(
+          "Success!",
+          "You have proceeded to the next step.",
+          "success"
+        );
       }
     });
   };
+  useEffect(() => {
+    // Define step names array
+    const stepNames = [
+      "ร่างคำขออนุมัติ",
+      "ดำเนินการขออนุมัติ",
+      "โครงการอนุมัติ",
+      "เงินโครงการอนุมัติ",
+      "ร่างสรุปผลโครงการ",
+      "ดำเนินการสรุปผล",
+      "ปิดโครงการ"
+    ];
+
+    setCurrentStepNameProject(stepNames[currentStepProject - 1] || "");
+    console.log(currentStepNameProject)
+  }, [currentStepProject]);
+
+  const handleNextStep = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to proceed to the next step?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, proceed",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
+
+        Axios.put(
+          `http://localhost:3001/student/project/edit/${id_project}`,
+          editData
+        )
+          .then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error creating project:", error);
+          });
+
+
+        Axios.post("/sendEmail", {
+          email: storedUser.email,
+          message: "Your project has proceeded to the next step.",
+        })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+          });
+        Swal.fire(
+          "Success!",
+          "You have proceeded to the next step.",
+          "success"
+        );
+      }
+    });
+  };
+
   const handlePrevStep = () => {
     setCurrentStepProject((prevStep) => Math.max(prevStep - 1, 1));
   };
 
-  useEffect(()=>{
-    console.log(currentStepProject)
-  },[currentStepProject])
+  useEffect(() => {
+    console.log(currentStepProject);
+  }, [currentStepProject]);
 
   return (
     <>
@@ -85,19 +163,19 @@ function ProjectDocument() {
         </div>
       )}
 
-{storedUser.account_type === "students" && currentStepProject <= 1 &&(
-  <div className="d-flex justify-content-end">
-    <button
-      onClick={handleNextStep}
-      type="submit"
-      className="btn-dataupdate"
-      // style={{ fontSize: "14px", margin: "1%" }}
-      // variant="primary"
-    >
-      ร่างคำขออนุมัติ
-    </button>
-  </div>
-)}
+      {storedUser.account_type === "students" && currentStepProject == 1 && (
+        <div className="d-flex justify-content-end">
+          <button
+            onClick={handleNextStepPleaseAllow}
+            type="submit"
+            className="btn-dataupdate"
+            // style={{ fontSize: "14px", margin: "1%" }}
+            // variant="primary"
+          >
+            ร่างคำขออนุมัติ
+          </button>
+        </div>
+      )}
 
       <Container fluid>
         <Row>
