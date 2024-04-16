@@ -5,10 +5,10 @@ import { CardBody, CardFooter } from "reactstrap";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import setCode from "./setCode.json";
-function DASplitBudget() {
+function DAddSplitBudget() {
   const [project_name, setProjectName] = useState("");
   const [responsible_agency, setResponsibleAgency] = useState("");
-  const [yearly, setYearly] = useState("");
+  const [yearly, setYearly] = useState("2566");
 
   const [campus, setCampus] = useState("Bangkok");
   const [codedivision, setCodedivision] = useState("");
@@ -28,7 +28,7 @@ function DASplitBudget() {
       .then((response) => {
         // Handle success response
         console.log("Net project created successfully:", response.data);
-        // You can perform additional actions here if needed
+        window.location.reload();
       })
       .catch((error) => {
         // Handle error response
@@ -217,6 +217,7 @@ function DASplitBudget() {
                             size="sm"
                             type="text"
                             placeholder={`พ.ศ.`}
+                            value={yearly}
                             onChange={(event) => {
                               setYearly(event.target.value);
                             }}
@@ -278,4 +279,4 @@ function DASplitBudget() {
   );
 }
 
-export default DASplitBudget;
+export default DAddSplitBudget;

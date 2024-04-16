@@ -50,11 +50,7 @@ function AllProject() {
     );
   });
   const getProjects = () => {
-    console.log("asdsa")
     if (storedUser.account_type == 'admin') {
-
-      console.log("asdsa")
-      console.log("asdsa"+storedUser.account_type)
       Axios.get(
         `http://localhost:3001/admin/allprojects`
       ).then((response) => {

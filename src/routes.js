@@ -170,6 +170,7 @@ const StudentRoutes =[
     component: DetailBudget,
     layout: "/students"
   },
+
 ];
 export { StudentRoutes,GuestRoutes};
 export default dashboardRoutes;
