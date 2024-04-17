@@ -90,7 +90,6 @@ function NewProjectDocument() {
   };
 
   const switchToCSDTimestep = () => {
-    console.log("switchtime")
     setCSD_timestep(true);
     setCSD_LocationTime(false);
     // Scroll to the top of the Container
@@ -98,14 +97,12 @@ function NewProjectDocument() {
   };
 
   const switchToCSDBudget = () => {
-    console.log("switchBud")
     setCSD_budget(true);
     setCSD_timestep(false);
     // Scroll to the top of the Container
     containerRef.current.scrollIntoView({ behavior: "smooth" });
   };
   const switchToCSDindicator = () => {
-    console.log("switchtoindi")
     setCSD_indicator(true);
     setCSD_budget(false);
     // Scroll to the top of the Container
@@ -113,8 +110,10 @@ function NewProjectDocument() {
   };
 
   return (
+    <>
+    <h1>{id_projects}</h1>
     <Container fluid ref={containerRef}>
-      <h1>{id_projects}</h1>
+      
       <Row>
         <div style={{width: "20%"}}>
           <div className="sticky-sidebar">
@@ -165,6 +164,7 @@ function NewProjectDocument() {
         {cSD_indicator && <CSD_indicator id_projects={id_projects} />}
       </Row>
     </Container>
+    </>
   );
 }
 

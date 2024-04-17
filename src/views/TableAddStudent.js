@@ -151,7 +151,14 @@ function TableAddStudent() {
     const numericCodeagency = codeagency.replace(/\D/g, "");
     const numericCodeworkgroup = codeworkgroup.replace(/\D/g, "");
 
-    const newCodebooksome = `${campusAbbreviation}${yearly}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
+    const yearlyString = typeof yearly === 'string' ? yearly : yearly.toString();
+
+// Extract the last two characters of the string
+const lastTwoCharacters = yearlyString.slice(-2);
+
+// Construct newCodebooksome using the extracted characters
+const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
+
     const newCodebooksomeoutyear = `${campusAbbreviation}${"yy"}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
     setCodebooksome(newCodebooksome);
     setCodebooksomeoutyear(newCodebooksomeoutyear);

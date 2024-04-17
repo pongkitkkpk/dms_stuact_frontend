@@ -145,64 +145,57 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
     }
   };
 
-  const createProject = (yearlyCountsketch) => {
-    Axios.put(`http://localhost:3001/student/project/create2/${id_projects}`, {
-      principles_and_reasons1: principles_and_reasons1,
-      principles_and_reasons2: principles_and_reasons2,
-      principles_and_reasons3: principles_and_reasons3,
-      principles_and_reasons4: principles_and_reasons4,
-      principles_and_reasons5: principles_and_reasons5,
-      objective1: objective1,
-      objective2: objective2,
-      objective3: objective3,
-      objective4: objective4,
-      objective5: objective5,
-      project_type1: project_type1,
-      project_type2: project_type2,
-      project_type3: project_type3,
-      project_type4: project_type4,
-      project_type5: project_type5,
-      is_newproject: is_newproject,
-      is_continueproject: is_continueproject,
-      problem1: problem1,
-      result1: result1,
-      problem2: problem2,
-      result2: result2,
-      problem3: problem3,
-      result3: result3,
-    }).then(() => {
-      // Assuming setProjectList is a state setter function for your projectList state
-      setProjectList([
-        ...projectList,
-        {
-          principles_and_reasons1: principles_and_reasons1,
-          principles_and_reasons2: principles_and_reasons2,
-          principles_and_reasons3: principles_and_reasons3,
-          principles_and_reasons4: principles_and_reasons4,
-          principles_and_reasons5: principles_and_reasons5,
-          objective1: objective1,
-          objective2: objective2,
-          objective3: objective3,
-          objective4: objective4,
-          objective5: objective5,
-          project_type1: project_type1,
-          project_type2: project_type2,
-          project_type3: project_type3,
-          project_type4: project_type4,
-          project_type5: project_type5,
-          is_newproject: is_newproject,
-          is_continueproject: is_continueproject,
-          problem1: problem1,
-          result1: result1,
-          problem2: problem2,
-          result2: result2,
-          problem3: problem3,
-          result3: result3,
-        },
-      ]);
-    });
+  useEffect(()=>{
+    console.log("AAAAAAAAAAAA")
+    console.log(id_projects)
+  },[id_projects])
+
+  const createProject = () => {
+    console.log("Creating project...");
+  
+    // Create project data object
+    const projectData = {
+      principles_and_reasons1,
+      principles_and_reasons2,
+      principles_and_reasons3,
+      principles_and_reasons4,
+      principles_and_reasons5,
+      objective1,
+      objective2,
+      objective3,
+      objective4,
+      objective5,
+      project_type1,
+      project_type2,
+      project_type3,
+      project_type4,
+      project_type5,
+      is_newproject,
+      is_continueproject,
+      problem1,
+      result1,
+      problem2,
+      result2,
+      problem3,
+      result3,
+    };
+  
+    // Send project data to the server
+    Axios.put(`http://localhost:3001/student/project/create2/${id_projects}`, projectData)
+      .then(() => {
+        console.log("Project created successfully");
+        // Update local state with the new project
+        setProjectList([...projectList, projectData]);
+      })
+      .catch(error => {
+        console.error("Error creating project:", error);
+        // Handle the error, e.g., show a notification to the user
+      });
+  
+    // Switch to CSD person view
     switchToCSDPerson();
   };
+  
 
   return (
     <>

@@ -30,7 +30,10 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const clubName = storedUser.clubName;
   const yearsession = storedUser.yearly;
 
-
+useEffect(()=>{
+  console.log(clubName)
+  console.log(storedUser)
+},[clubName])
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
@@ -38,9 +41,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [project_phase, setProject_phase] = useState("ร่างคำขออนุมัติ");
   const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
-  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(
-    strcodebooksomeoutyear
-  );
+  const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(strcodebooksomeoutyear);
   const [yearly, setYearly] = useState(yearsession); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
   const [yearly_countsketch, setYearlyCountSketch] = useState(""); // Assuming yearly_countsketch is a number
@@ -246,10 +247,6 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
     }
   };
 
-  useEffect(() => {
-    console.log("personCount");
-    console.log(personCount);
-  }, [personCount]);
 
   // *********************************************************
   const [userList, setUserList] = useState([]);
@@ -268,6 +265,8 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
     if (user) {
       setYearly(user.yearly);
       setResponsibleAgency(user.clubName);
+      console.log("user.codebooksome")
+      console.log(user.codebooksome)
       setCodeClub(user.codebooksome);
     }
   }, [userList, id_student]);
@@ -294,9 +293,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   // *********************************************************
 
   const addBasicProject = () => {
+    console.log("before button")
     Axios.get(
       `http://localhost:3001/student/project/getcodeclub/${codeclub}`
     ).then((response) => {
+      console.log("respong")
+      console.log(response.data)
       const existingProject = response.data.find(
         (project) => project.codeclub === codeclub
       );
@@ -312,10 +314,12 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
         );
         // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
         // setProjectNumber(codeclub+formattedYearlyCount)
-
-        createProject(formattedYearlyCount);
         const newProjectId = response.data[0].id; // Assuming the id is the correct property
+        console.log("newProject")
+        console.log(newProjectId + 1)
         setIdProjects(newProjectId + 1);
+        createProject(formattedYearlyCount);
+        
       } else {
         // If project_number doesn't exist, create a new project with yearly_count set to 1
         createProject("01");
