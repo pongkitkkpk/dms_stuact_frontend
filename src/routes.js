@@ -14,7 +14,7 @@ import AllProject from "views/AllProject";
 import NewProjectDocument from "views/NewProjectDocument";
 import test from "views/test";
 import DetailBudget from "views/DetailBudget";
-import DASplitBudgetAdmin from "views/DASplitBudgetAdmin";
+import DListSplitBudget from "views/DListSplitBudget";
 
 const dashboardRoutes = [
   {
@@ -61,7 +61,7 @@ const dashboardRoutes = [
     path: "/splitbudget",
     name: "การจัดสรรค์งบประมาณ",
     icon: "nc-icon nc-notes",
-    component: DASplitBudgetAdmin,
+    component: DListSplitBudget,
     layout: "/admin"
   },
   {
