@@ -431,12 +431,6 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [thaistart_duration_table15, setThaiStartDurationTable15] = useState(null);
   const [thaiend_duration_table15, setThaiEndDurationTable15] = useState(null);
 
-  const [start_prepare, setStartPrepare] = useState("");
-  const [end_prepare, setEndPrepare] = useState("");
-  const [start_event, setStartEvent] = useState("");
-  const [end_event, setEndEvent] = useState("");
-  const [deadline, setDeadLine] = useState("");
-  const [projectData, setProjectData] = useState("");
 
   const [personNames, setPersonNames] = useState([]);
   const [person1, setPerson1] = useState([]);
@@ -847,6 +841,13 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       setDeadLine(deadline);
     });
   };
+  
+  const [start_prepare, setStartPrepare] = useState("");
+  const [end_prepare, setEndPrepare] = useState("");
+  const [start_event, setStartEvent] = useState("");
+  const [end_event, setEndEvent] = useState("");
+  const [deadline, setDeadLine] = useState("");
+  const [projectData, setProjectData] = useState("");
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {

@@ -33,7 +33,7 @@ function TableAddStudent() {
   const [clubName, setClubname] = useState("องค์การนักศึกษา มจพ.กรุงเทพฯ");
 
   const [campus, setCampus] = useState("Bangkok"); //รอเชื่อม api
-  const [yearly, setYearly] = useState(66); // เวลา
+  const [yearly, setYearly] = useState(2567); // เวลา
   const [codedivision, setCodedivision] = useState("");
   const [codeagency, setCodeagency] = useState("");
   const [codeworkgroup, setCodeworkgroup] = useState("00");
@@ -77,7 +77,7 @@ function TableAddStudent() {
       setLEVEL_DESC(getuserapi.message2.LEVEL_DESC); //ปริญญาตรี 4 ปี / 5 ปี
       setFAC_NAME_THAI(getuserapi.message2.FAC_NAME_THAI); //วิทยาลัยเทคโนโลยีอุตสาหกรรม
     }
- 
+
   }, [getuserapi]);
 
   useEffect(() => {
@@ -166,7 +166,7 @@ function TableAddStudent() {
       setAgencyGroupName("ชมรมฝ่ายวิชาการ");
     } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
       setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
-    }  else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+    } else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
       setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
     } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
@@ -190,8 +190,8 @@ function TableAddStudent() {
       codeagency: codeagency,
       codeworkgroup: codeworkgroup,
       codebooksome: newCodebooksome,
-      codebooksomeoutyear:newCodebooksomeoutyear,
-      agencyGroupName:agencyGroupName
+      codebooksomeoutyear: newCodebooksomeoutyear,
+      agencyGroupName: agencyGroupName
     })
       .then(() => {
         setUserList([
@@ -212,8 +212,8 @@ function TableAddStudent() {
             codeagency: codeagency,
             codeworkgroup: codeworkgroup,
             codebooksome: newCodebooksome,
-            codebooksomeoutyear:newCodebooksomeoutyear,
-            agencyGroupName:agencyGroupName
+            codebooksomeoutyear: newCodebooksomeoutyear,
+            agencyGroupName: agencyGroupName
           },
         ]);
         // Reload the page after adding a user
@@ -236,7 +236,7 @@ function TableAddStudent() {
       setAgencyGroupName("ชมรมฝ่ายวิชาการ");
     } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
       setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
-    }  else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+    } else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
       setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
     } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
@@ -283,8 +283,8 @@ function TableAddStudent() {
               >
                 <Modal.Header>
                   <Modal.Title>
-                    ข้อมูลรายละเอียดของ icit account
-                    
+                    <div>ข้อมูลรายละเอียดของ icit account</div>
+
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -300,9 +300,9 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            Account Type
+                           <div> Account Type</div>
                           </td>
-                          <td style={{ border: "none" }}>{account_type}</td>
+                          <td style={{ border: "none" }}><div>{account_type}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -312,9 +312,9 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            Username
+                            <div>Username</div>
                           </td>
-                          <td style={{ border: "none" }}>{username}</td>
+                          <td style={{ border: "none" }}><div>{username}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -324,9 +324,9 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            Display Name
+                            <div>Display Name</div>
                           </td>
-                          <td style={{ border: "none" }}>{name_student}</td>
+                          <td style={{ border: "none" }}><div>{name_student}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -336,10 +336,13 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            First Name (English)
+                           <div> First Name (English)</div>
                           </td>
                           <td style={{ border: "none" }}>
-                            {firstname_en} {lastname_en}
+                            <div>
+                              {firstname_en} {lastname_en}
+                            </div>
+
                           </td>
                         </tr>
                         <tr>
@@ -350,9 +353,18 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            Email
+                            <div>Email</div>
                           </td>
-                          <td style={{ border: "none" }}>{email}</td>
+                          <td style={{ border: "none" }}><Form.Control
+                            className="font-form-control"
+                            size="sm"
+                            type="text"
+                            placeholder="email"
+                            value={email}
+                            onChange={(event) => {
+                              setEmail(event.target.value);
+                            }}
+                          /></td>
                         </tr>
                         <tr>
                           <td
@@ -362,9 +374,11 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            คณะ
+                            <div>คณะ</div>
+
                           </td>
-                          <td style={{ border: "none" }}>{FAC_NAME_THAI}</td>
+                          <td style={{ border: "none" }}>
+                            <div>{FAC_NAME_THAI}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -374,9 +388,10 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            วิทยาเขต
+
+                            <div>วิทยาเขต</div>
                           </td>
-                          <td style={{ border: "none" }}>{CAMPUS_NAME}</td>
+                          <td style={{ border: "none" }}><div>{CAMPUS_NAME}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -385,10 +400,10 @@ function TableAddStudent() {
                               border: "none",
                               color: "#fff",
                             }}
-                          >
-                            สถานะ
+                          ><div>สถานะ</div>
+
                           </td>
-                          <td style={{ border: "none" }}>{STU_STATUS_DESC}</td>
+                          <td style={{ border: "none" }}><div>{STU_STATUS_DESC}</div></td>
                         </tr>
                         <tr>
                           <td
@@ -397,10 +412,10 @@ function TableAddStudent() {
                               border: "none",
                               color: "#fff",
                             }}
-                          >
-                            หลักสูตร
+                          ><div>หลักสูตร</div>
+
                           </td>
-                          <td style={{ border: "none" }}>{LEVEL_DESC}</td>
+                          <td style={{ border: "none" }}><div>{LEVEL_DESC}</div></td>
                         </tr>
                       </tbody>
                     </Table>

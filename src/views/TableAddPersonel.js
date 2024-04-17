@@ -33,7 +33,7 @@ function TableAddPersonel() {
   const [clubName, setClubname] = useState("");
 
   const [campus, setCampus] = useState("Bangkok"); //รอเชื่อม api
-  const [yearly, setYearly] = useState(66); // เวลา
+  const [yearly, setYearly] = useState(2667); // เวลา
   const [codedivision, setCodedivision] = useState("");
   const [codeagency, setCodeagency] = useState("");
   const [codeworkgroup, setCodeworkgroup] = useState("00");

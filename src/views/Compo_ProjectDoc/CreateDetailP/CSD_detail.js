@@ -17,6 +17,9 @@ import {
 import Axios from "axios";
 
 function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
+
+
+
   const [projectList, setProjectList] = useState([]);
 
   //ตัวแปรรับค่าจาก database
@@ -24,20 +27,24 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const studentuser = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+  const clubName = storedUser.clubName;
+  const yearsession = storedUser.yearly;
+
 
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
+  const [customProjectName, setCustomProjectName] = useState("");
   const [project_phase, setProject_phase] = useState("ร่างคำขออนุมัติ");
   const [project_number, setProject_number] = useState("");
   const [codeclub, setCodeClub] = useState(""); //code_some
   const [codebooksomeoutyear, setCodebooksomeoutyear] = useState(
     strcodebooksomeoutyear
   );
-  const [yearly, setYearly] = useState(""); // Assuming yearly is a number
+  const [yearly, setYearly] = useState(yearsession); // Assuming yearly is a number
   const [yearly_count, setYearlyCount] = useState(""); // Assuming yearly_countsketch is a number
   const [yearly_countsketch, setYearlyCountSketch] = useState(""); // Assuming yearly_countsketch is a number
-  const [responsible_agency, setResponsibleAgency] = useState("");
+  const [responsible_agency, setResponsibleAgency] = useState(clubName);
   const [academic_year, setAcademicYear] = useState("");
   const [advisor_name, setAdvisorName] = useState("");
   const [person1_name, setPerson1Name] = useState("");
@@ -55,6 +62,21 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [is_5side, setIs_5side] = useState(false);
 
   //==========================
+  const [NetList, setNetList] = useState([])
+  const getNetProject = () => {
+    Axios.get(`http://localhost:3001/student/project/getBudgetclubName/${responsible_agency}/${yearly}`).then((response) => {
+      setNetList(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getNetProject();
+  }, [])
+
+  useEffect(() => {
+    console.log(studentuser)
+  }, [studentuser])
+
   const minDate = new Date();
 
   const [newpersonicit, setNewPersonICIT] = useState(false);
@@ -115,6 +137,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
         });
     }
   };
+
   const [getuserapi, setGetuserapi] = useState("");
   const [username, setUsername] = useState("");
   const [name_student, setName_student] = useState("");
@@ -127,6 +150,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const [STU_STATUS_DESC, setSTU_STATUS_DESC] = useState("");
   const [LEVEL_DESC, setLEVEL_DESC] = useState("");
   const [FAC_NAME_THAI, setFAC_NAME_THAI] = useState("");
+
   useEffect(() => {
     if (getuserapi && getuserapi.message) {
       setUsername(getuserapi.message.username); //s63030
@@ -300,9 +324,10 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   };
 
   const createProject = (yearlyCountsketch) => {
+    const projectNameToUse = project_name === "etc" ? customProjectName : project_name;
     Axios.post("http://localhost:3001/student/project/create/", {
       id_student: id_student,
-      project_name: project_name,
+      project_name: projectNameToUse,
       project_number: project_number,
       codeclub: codeclub,
       codebooksomeoutyear: codebooksomeoutyear,
@@ -330,7 +355,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
         ...projectList,
         {
           id_student: id_student,
-          project_name: project_name,
+          project_name: projectNameToUse,
           project_number: project_number,
           codeclub: codeclub,
           codebooksomeoutyear: codebooksomeoutyear,
@@ -394,16 +419,41 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Form.Control
+                      as="select"
                       className="font-form-control"
                       size="sm"
-                      type="text"
-                      placeholder="ชื่อโครงการ"
                       onChange={(event) => {
-                        setProjectName(event.target.value);
+                        const selectedValue = event.target.value;
+
+                          setProjectName(selectedValue);
+      
                       }}
-                    />
+                    >
+                      <option value="">เลือกโครงการ</option>
+                      {NetList.map((project, index) => (
+                        <option key={index} value={project.project_name}>
+                          {project.project_name}
+                        </option>
+                      ))}
+                      <option value="etc">อื่นๆ</option>
+                    </Form.Control>
+                    {/* Conditionally render the input field for custom project name */}
+                    {project_name === "etc" && (
+                      <Form.Control
+                        className="font-form-control"
+                        size="sm"
+                        type="text"
+                        placeholder="ชื่อโครงการ"
+                        value={customProjectName}
+                        onChange={(event) => {
+                          setCustomProjectName(event.target.value);
+                        }}
+                      />
+                    )}
                   </td>
                 </tr>
+
+
                 {/* หน่วยงานที่รับผิดชอบ db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
@@ -434,7 +484,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
                       size="sm"
                       type="text"
                       placeholder="Enter ID Code"
-                      value={"ปีการศึกษา 25" + yearly}
+                      value={"ปีการศึกษา" + yearly}
                       disabled
                     />
                   </td>

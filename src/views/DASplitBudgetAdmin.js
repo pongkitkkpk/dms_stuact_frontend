@@ -46,7 +46,7 @@ function DASplitBudgetAdmin() {
   //   setAgencyGroupName("ชมรมฝ่ายกีฬา");
 
   const getNetProject = () => {
-    Axios.get('http://localhost:3001/student/getallNetProject').then((response) => {
+    Axios.get('http://localhost:3001/admin/getallNetProject').then((response) => {
       setNetList(response.data);
     });
   };
@@ -54,9 +54,7 @@ function DASplitBudgetAdmin() {
   useEffect(() => {
     getNetProject();
   }, []);
-  useEffect(() => {
-    console.log(clubName)
-  }, [clubName])
+
 
 
   const handleDelete = (id) => {
