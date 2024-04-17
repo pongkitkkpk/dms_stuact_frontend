@@ -250,6 +250,7 @@ useEffect(()=>{
 
   // *********************************************************
   const [userList, setUserList] = useState([]);
+  const [PhoneAdvisor, setPhoneAdvisor] = useState("");
   const getUsers = () => {
     Axios.get("http://localhost:3001/student/users").then((response) => {
       setUserList(response.data);
@@ -277,11 +278,12 @@ useEffect(()=>{
       (user) =>
         user.clubName === storedUser.clubName &&
         user.yearly == storedUser.yearly &&
-        user.position === "Ad"
+        user.position === "AD"
     );
 
     if (user) {
       setAdvisorName(user.name_student);
+      setPhoneAdvisor(user.Phone)
     } else {
       // If no matching user is found, you might want to reset the state variables
       // setYearly("");
@@ -342,6 +344,7 @@ useEffect(()=>{
       responsible_agency: responsible_agency,
       academic_year: academic_year,
       advisor_name: advisor_name,
+      PhoneAdvisor:PhoneAdvisor,
       person1_name: person1_name,
       person1_contact: person1_contact,
       person2_name: person2_name,
@@ -500,9 +503,6 @@ useEffect(()=>{
                     style={{ verticalAlign: "top" }}
                   >
                     <div>อาจารย์ปรึกษา</div>
-                    {/* <p className="detail-prodoc">
-                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
-                    </p> */}
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Form.Control
@@ -511,6 +511,25 @@ useEffect(()=>{
                       type="text"
                       placeholder="Enter ID Code"
                       value={advisor_name}
+                      disabled
+                    />
+                  </td>
+                </tr>
+                {/* เบอร์ติดต่ออ.  db */}
+                <tr style={{ backgroundColor: "white" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
+                    <div>เบอร์ติดต่อของอาจารย์ที่ปรึกษา</div>
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    <Form.Control
+                      className="font-form-control"
+                      size="sm"
+                      type="text"
+                      placeholder="Enter ID Code"
+                      value={PhoneAdvisor}
                       disabled
                     />
                   </td>

@@ -142,7 +142,9 @@ function ProjectDocument() {
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
+        Axios.post(`http://localhost:3001/updateState/${id_project}`, {
+          project_name,
+          codeclub,
           project_phase,
           editor_name,
         })

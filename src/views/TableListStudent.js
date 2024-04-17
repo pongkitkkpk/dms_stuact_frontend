@@ -109,7 +109,7 @@ function TableListStudent() {
                                 val.clubName.includes("องค์การ") ? <div>นายกองค์การ</div>:
                                 <div>ประธานชมรม</div>
                             ) : null}
-                            {val.position === "Ad" ? <div>อาจารย์ที่ปรึกษา</div> : null}
+                            {val.position === "AD" ? <div>อาจารย์ที่ปรึกษา</div> : null}
                           </td>
                           {/* หน่วยงาน/คณะ */}
                           <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.clubName}</div></td>

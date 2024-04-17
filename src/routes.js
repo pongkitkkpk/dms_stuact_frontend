@@ -13,7 +13,8 @@ import ProjectDocument from "views/ProjectDocument";
 import AllProject from "views/AllProject";
 import NewProjectDocument from "views/NewProjectDocument";
 import test from "views/test";
-
+import DTableAddBudget from "views/DTableAddBudget";
+import DListSplitBudget from "views/DListSplitBudget";
 
 const dashboardRoutes = [
   {
@@ -49,7 +50,20 @@ const dashboardRoutes = [
     component: AllProject,
     layout: "/admin"
   },
-
+  {
+    path: "/addbudgetproject",
+    name: "เพิ่มงบประมาณ",
+    icon: "nc-icon nc-notes",
+    component: DTableAddBudget,
+    layout: "/admin"
+  },
+  {
+    path: "/Listbudgetproject",
+    name: "ดูงบประมาณทั้งหมด",
+    icon: "nc-icon nc-circle-09",
+    component: DListSplitBudget,
+    layout: "/admin"
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -57,6 +71,7 @@ const dashboardRoutes = [
     component: Dashboard,
     layout: "/admin"
   },
+ 
   {
     path: "/user",
     name: "User Profile",
@@ -148,6 +163,13 @@ const StudentRoutes =[
     component: Dashboard,
     layout: "/students",
     color:"#32fefe"
+  },
+  {
+    path: "/Listbudgetproject",
+    name: "User Profile",
+    icon: "nc-icon nc-circle-09",
+    component: DListSplitBudget,
+    layout: "/students"
   },
 
 ];

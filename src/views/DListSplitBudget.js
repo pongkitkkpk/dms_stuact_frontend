@@ -15,7 +15,7 @@ import {
   Col,
 } from "react-bootstrap";
 
-import DASplitBudget from "./DASplitBudget";
+
 function DListSplitBudget() {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
@@ -30,7 +30,7 @@ function DListSplitBudget() {
     [net_budget];
   return (
     <>
-    <DASplitBudget/>
+
       
     </>
   );

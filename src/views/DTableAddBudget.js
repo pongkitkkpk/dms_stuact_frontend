@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import DAddSplitBudget from "./DAddSplitBudget";
 import setCode from "./setCode.json";
 
-function DASplitBudgetAdmin() {
+function DTableAddBudget() {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -256,5 +256,5 @@ function DASplitBudgetAdmin() {
   );
 }
 
-export default DASplitBudgetAdmin;
+export default DTableAddBudget;
 

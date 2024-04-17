@@ -52,6 +52,7 @@ function TableAddStudent() {
   const [STU_STATUS_DESC, setSTU_STATUS_DESC] = useState("");
   const [LEVEL_DESC, setLEVEL_DESC] = useState("");
   const [FAC_NAME_THAI, setFAC_NAME_THAI] = useState("");
+  const [Phone, setPhone] = useState("");
 
   useEffect(() => {
     if (getuserapi && getuserapi.message) {
@@ -153,11 +154,11 @@ function TableAddStudent() {
 
     const yearlyString = typeof yearly === 'string' ? yearly : yearly.toString();
 
-// Extract the last two characters of the string
-const lastTwoCharacters = yearlyString.slice(-2);
+    // Extract the last two characters of the string
+    const lastTwoCharacters = yearlyString.slice(-2);
 
-// Construct newCodebooksome using the extracted characters
-const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
+    // Construct newCodebooksome using the extracted characters
+    const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
 
     const newCodebooksomeoutyear = `${campusAbbreviation}${"yy"}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
     setCodebooksome(newCodebooksome);
@@ -184,6 +185,7 @@ const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCoded
     Axios.post("http://localhost:3001/admin/user/createUser", {
       id_student: username,
       name_student: name_student,
+      Phone:Phone,
       department: FAC_NAME_THAI,
       position: position,
       clubName: clubName, // Change to match the column name in the table
@@ -307,7 +309,7 @@ const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCoded
                               color: "#fff",
                             }}
                           >
-                           <div> Account Type</div>
+                            <div> Account Type</div>
                           </td>
                           <td style={{ border: "none" }}><div>{account_type}</div></td>
                         </tr>
@@ -343,7 +345,7 @@ const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCoded
                               color: "#fff",
                             }}
                           >
-                           <div> First Name (English)</div>
+                            <div> First Name (English)</div>
                           </td>
                           <td style={{ border: "none" }}>
                             <div>
@@ -362,68 +364,104 @@ const newCodebooksome = `${campusAbbreviation}${lastTwoCharacters}${numericCoded
                           >
                             <div>Email</div>
                           </td>
-                          <td style={{ border: "none" }}><Form.Control
-                            className="font-form-control"
-                            size="sm"
-                            type="text"
-                            placeholder="email"
-                            value={email}
-                            onChange={(event) => {
-                              setEmail(event.target.value);
-                            }}
-                          /></td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{
-                              backgroundColor: "#FF8B13",
-                              border: "none",
-                              color: "#fff",
-                            }}
-                          >
-                            <div>คณะ</div>
-
-                          </td>
                           <td style={{ border: "none" }}>
-                            <div>{FAC_NAME_THAI}</div></td>
+                            <Form.Control
+                              className="font-form-control"
+                              size="sm"
+                              type="text"
+                              placeholder="email"
+                              value={email}
+                              onChange={(event) => {
+                                setEmail(event.target.value);
+                              }}
+                            /></td>
                         </tr>
-                        <tr>
-                          <td
-                            style={{
-                              backgroundColor: "#FF8B13",
-                              border: "none",
-                              color: "#fff",
-                            }}
-                          >
+                        {account_type === "personel" && (
+                          <>
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>เบอร์โทรติดต่อ</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <Form.Control
+                                  className="font-form-control"
+                                  size="sm"
+                                  type="text"
+                                  placeholder="0XXXXXXXXX"
+                                  onChange={(event) => {
+                                    setPhone(event.target.value);
+                                  }}
+                                /></td>
 
-                            <div>วิทยาเขต</div>
-                          </td>
-                          <td style={{ border: "none" }}><div>{CAMPUS_NAME}</div></td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{
-                              backgroundColor: "#FF8B13",
-                              border: "none",
-                              color: "#fff",
-                            }}
-                          ><div>สถานะ</div>
-
-                          </td>
-                          <td style={{ border: "none" }}><div>{STU_STATUS_DESC}</div></td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{
-                              backgroundColor: "#FF8B13",
-                              border: "none",
-                              color: "#fff",
-                            }}
-                          ><div>หลักสูตร</div>
-
-                          </td>
-                          <td style={{ border: "none" }}><div>{LEVEL_DESC}</div></td>
-                        </tr>
+                            </tr>
+                          </>
+                        )}
+                        {account_type === "students" && (
+                          <>
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>คณะ</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <div>{FAC_NAME_THAI}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>วิทยาเขต</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <div>{CAMPUS_NAME}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>สถานะ</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <div>{STU_STATUS_DESC}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>หลักสูตร</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <div>{LEVEL_DESC}</div>
+                              </td>
+                            </tr>
+                          </>
+                        )}
                       </tbody>
                     </Table>
                   </div>
