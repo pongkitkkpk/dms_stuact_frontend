@@ -652,6 +652,7 @@ function SD_budget({ id_project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         // Your Axios PUT request code goes here
+        const listSSB = listSSBT + listSSBNT;
         Axios.put(
           `http://localhost:3001/student/project/p_budget/create/${id_project}`,
           {
@@ -942,6 +943,7 @@ function SD_budget({ id_project }) {
             listSBNT10: listSBNT[9],
     
             listSSBNT: listSSBNT,
+            listSSB:listSSB,
             // C
             listC1: listC[0],
             listC2: listC[1],

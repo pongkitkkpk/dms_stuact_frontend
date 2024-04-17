@@ -49,6 +49,8 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
   const [TypeACount, setTypeACount] = useState(1);
 
   const createProject = () => {
+    const listSSB = +listSSBT + +listSSBNT;
+    
     Axios.put(
       `http://localhost:3001/student/project/p_budget/create/${id_projects}`,
       {
@@ -339,6 +341,8 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
         listSBNT10: listSBNT[9],
 
         listSSBNT: listSSBNT,
+
+        listSSB:listSSB,
         // C
         listC1: listC[0],
         listC2: listC[1],
