@@ -53,6 +53,7 @@ function TableAddStudent() {
   const [LEVEL_DESC, setLEVEL_DESC] = useState("");
   const [FAC_NAME_THAI, setFAC_NAME_THAI] = useState("");
   const [Phone, setPhone] = useState("");
+  const [AgencyAdvisor, setAgencyAdvisor] = useState("");
 
   useEffect(() => {
     if (getuserapi && getuserapi.message) {
@@ -186,6 +187,7 @@ function TableAddStudent() {
       id_student: username,
       name_student: name_student,
       Phone:Phone,
+      AgencyAdvisor:AgencyAdvisor,
       department: FAC_NAME_THAI,
       position: position,
       clubName: clubName, // Change to match the column name in the table
@@ -396,6 +398,29 @@ function TableAddStudent() {
                                   placeholder="0XXXXXXXXX"
                                   onChange={(event) => {
                                     setPhone(event.target.value);
+                                  }}
+                                /></td>
+
+                            </tr>
+
+                            <tr>
+                              <td
+                                style={{
+                                  backgroundColor: "#FF8B13",
+                                  border: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                <div>สังกัดหน่วยงาน</div>
+                              </td>
+                              <td style={{ border: "none" }}>
+                                <Form.Control
+                                  className="font-form-control"
+                                  size="sm"
+                                  type="text"
+                                  placeholder="สังกัดหน่วยงาน"
+                                  onChange={(event) => {
+                                    setAgencyAdvisor(event.target.value);
                                   }}
                                 /></td>
 

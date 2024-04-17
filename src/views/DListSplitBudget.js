@@ -32,6 +32,7 @@ function DListSplitBudget() {
 
   useEffect(() => {
     console.log(NetList)
+    console.log(ProjectList)
   }, [NetList]);
   return (
     <>

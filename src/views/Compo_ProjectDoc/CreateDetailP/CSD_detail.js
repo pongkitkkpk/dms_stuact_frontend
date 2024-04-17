@@ -251,6 +251,7 @@ useEffect(()=>{
   // *********************************************************
   const [userList, setUserList] = useState([]);
   const [PhoneAdvisor, setPhoneAdvisor] = useState("");
+  const [AgencyAdvisor, setAgencyAdvisor] = useState("");
   const getUsers = () => {
     Axios.get("http://localhost:3001/student/users").then((response) => {
       setUserList(response.data);
@@ -284,6 +285,7 @@ useEffect(()=>{
     if (user) {
       setAdvisorName(user.name_student);
       setPhoneAdvisor(user.Phone)
+      setAgencyAdvisor(user.AgencyAdvisor)
     } else {
       // If no matching user is found, you might want to reset the state variables
       // setYearly("");
@@ -295,11 +297,10 @@ useEffect(()=>{
   // *********************************************************
 
   const addBasicProject = () => {
-    console.log("before button")
+    
     Axios.get(
       `http://localhost:3001/student/project/getcodeclub/${codeclub}`
     ).then((response) => {
-      console.log("respong")
       console.log(response.data)
       const existingProject = response.data.find(
         (project) => project.codeclub === codeclub
@@ -345,6 +346,7 @@ useEffect(()=>{
       academic_year: academic_year,
       advisor_name: advisor_name,
       PhoneAdvisor:PhoneAdvisor,
+      AgencyAdvisor:AgencyAdvisor,
       person1_name: person1_name,
       person1_contact: person1_contact,
       person2_name: person2_name,

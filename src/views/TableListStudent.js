@@ -81,7 +81,7 @@ function TableListStudent() {
                       <th style={{ width: "13%", color: "white", fontWeight: "bold" }}>ชื่อ-นามสกุล</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>email</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>วิทยาเขต</th>
-                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>คณะ/มหาวิทยาลัย</th>
+                      <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>สังกัด</th>
                       <th style={{ width: "8%", color: "white", fontWeight: "bold" }}>ตำแหน่ง</th>
                       <th style={{ width: "15%", color: "white", fontWeight: "bold" }}>หน่วยงาน/คณะสโมสร</th>
                       <th style={{ width: "5%", color: "white", fontWeight: "bold" }}>ปีการศึกษาที่ดูแล</th>
@@ -91,16 +91,23 @@ function TableListStudent() {
                   <tbody>
                     {filteredUserList.map((val, key) => {
                       return (
+                        
                         <tr key={key}>
                           <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}> <div>{val.id_student}</div></td>
                           {/* ชื่อ */}
-                          <td><div>{val.name_student}</div></td>
+                          <td><div>{val.name_student}{console.log(val)}</div></td>
                           {/* email */}
                           <td style={{ maxWidth: "100px", overflow: "hidden", textOverflow: "ellipsis" }}><div>{val.email}</div></td>
                           {/* วิทยาเขต */}
                           <td><div>{val.campus}</div></td>
                           {/* คณะ/มหาวิทยาลัย */}
-                          <td><div>{val.department}</div></td>
+                          
+                          <td>
+                          {val.account_type === "personel" ? <div>{val.AgencyAdvisor}</div> : null}
+                          {val.account_type === "students" ? <div> {val.department}</div> : null}
+
+                            
+                          </td>
                           {/* ตำแหน่ง */}
                           <td>
                             {val.position === "S" ? <div>นักศึกษาประสานงาน</div> : null}

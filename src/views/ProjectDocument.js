@@ -30,6 +30,7 @@ function ProjectDocument() {
   const [currentStepSideBar, setCurrentStepSideBar] = useState("SD_Detail"); // Default step is SD_Detail
   const [project_name, setProjectName] = useState("");
   const [codeclub, setCodeclub] = useState("");
+  const [yearly, setYearly] = useState("");
   const [editor_name, setEditor_name] = useState("");
   const [originalData, setOriginalData] = useState([]);
   const [project_phase, setProject_phase] = useState("");
@@ -41,6 +42,7 @@ function ProjectDocument() {
     ).then((response) => {
       setOriginalData(response.data[0]);
       setCodeclub(response.data[0].codeclub);
+      setYearly(response.data[0].yearly)
       setProjectName(response.data[0].project_name);
     });
   };
@@ -70,7 +72,23 @@ function ProjectDocument() {
   const totalSteps = 7;
   const [currentStepProject, setCurrentStepProject] = useState(1);
 
+
+  const [CountYear, setCountYear] = useState("");
+
+
+  const handlecountyear=()=>{
+    console.log(codeclub);
+    Axios.get(
+      `http://localhost:3001/student/project/getProjectYearly/${codeclub}`
+    ).then((response) => {
+     // i need search more yearly_count
+    });
+  }
   const handleNextStepPleaseAllow = () => {
+
+    handlecountyear()
+
+    console.log(CountYear)
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to proceed to the next step?",
@@ -82,9 +100,11 @@ function ProjectDocument() {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
 
-        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
+        Axios.put(`http://localhost:3001/firstupdateState/${id_project}`, {
+          project_name,
+          codeclub,
           project_phase,
-          editor_name,
+          CountYear:ACountYear
         })
           .then((response) => {
             console.log("response.data");
@@ -142,7 +162,7 @@ function ProjectDocument() {
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-        Axios.post(`http://localhost:3001/updateState/${id_project}`, {
+        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
           project_name,
           codeclub,
           project_phase,
@@ -210,8 +230,8 @@ function ProjectDocument() {
             onClick={handleNextStepPleaseAllow}
             type="submit"
             className="btn-dataupdate"
-            // style={{ fontSize: "14px", margin: "1%" }}
-            // variant="primary"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
           >
             ร่างคำขออนุมัติ
           </button>
