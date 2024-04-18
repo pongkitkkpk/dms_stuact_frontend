@@ -81,9 +81,9 @@ function AllProject() {
   };
 
 
-useEffect(() => {
-  getProjects();
-}, []);
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -177,64 +177,62 @@ useEffect(() => {
 
             <br />
             <div>
-              
+
             </div>
             {filterProjectList.map((val, index) => {
               return (
                 <Card
-                  style={{marginBottom:"5px"}}
+                  style={{ marginBottom: "5px" }}
                   key={index}
-                  className={`card-with-border-${
-                    val.project_phase === "ร่างคำขออนุมัติ"
-                      ? "draft"
-                      : val.project_phase === "ดำเนินการขออนุมัติ"
+                  className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
+                    ? "draft"
+                    : val.project_phase === "ดำเนินการขออนุมัติ"
                       ? "progress"
                       : val.project_phase === "รออนุมัติโครงการ"
-                      ? "wait-progress"
-                      : val.project_phase === "โครงการอนุมัติ"
-                      ? "approved"
-                      : val.project_phase === "รอเงินโครงการอนุมัติ"
-                      ? "wait-approved-budget"
-                      : val.project_phase === "เงินโครงการอนุมัติ"
-                      ? "approved-budget"
-                      : val.project_phase === "รอสรุปผลโครงการ"
-                      ? "wait-summary-draft"
-                      : val.project_phase === "ร่างสรุปผลโครงการ"
-                      ? "summary-draft"
-                      : val.project_phase === "ดำเนินการสรุปผล"
-                      ? "summary-progress"
-                      : val.project_phase === "ปิดโครงการ"
-                      ? "closed"
-                      : ""
-                  }`}
-                  
+                        ? "wait-progress"
+                        : val.project_phase === "โครงการอนุมัติ"
+                          ? "approved"
+                          : val.project_phase === "รอเงินโครงการอนุมัติ"
+                            ? "wait-approved-budget"
+                            : val.project_phase === "เงินโครงการอนุมัติ"
+                              ? "approved-budget"
+                              : val.project_phase === "รอสรุปผลโครงการ"
+                                ? "wait-summary-draft"
+                                : val.project_phase === "ร่างสรุปผลโครงการ"
+                                  ? "summary-draft"
+                                  : val.project_phase === "ดำเนินการสรุปผล"
+                                    ? "summary-progress"
+                                    : val.project_phase === "ปิดโครงการ"
+                                      ? "closed"
+                                      : ""
+                    }`}
+
                 >
                   <Card.Body>
                     <div className="status-tag">
                       <span
-                        className={`badge badge-${
-                          val.project_phase === "ร่างคำขออนุมัติ"
-                            ? "draft"
-                            : val.project_phase === "ดำเนินการขออนุมัติ"
+                        className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
+                          ? "draft"
+                          : val.project_phase === "ดำเนินการขออนุมัติ"
                             ? "progress"
                             : val.project_phase === "รออนุมัติ"
-                            ? "wait-progress"
-                            : val.project_phase === "โครงการอนุมัติ"
-                            ? "approved"
-                            : val.project_phase === "รอเงินโครงการอนุมัติ"
-                            ? "wait-approved-budget"
-                            : val.project_phase === "เงินโครงการอนุมัติ"
-                            ? "approved-budget"
-                            : val.project_phase === "รอสรุปผลโครงการ"
-                            ? "wait-summary-draft"
-                            : val.project_phase === "ร่างสรุปผลโครงการ"
-                            ? "summary-draft"
-                            : val.project_phase === "ดำเนินการสรุปผล"
-                            ? "summary-progress"
-                            : val.project_phase === "ปิดโครงการ"
-                            ? "closed"
-                            : ""
-                        }`}
+                              ? "wait-progress"
+                              : val.project_phase === "โครงการอนุมัติ"
+                                ? "approved"
+                                : val.project_phase === "รอเงินโครงการอนุมัติ"
+                                  ? "wait-approved-budget"
+                                  : val.project_phase === "เงินโครงการอนุมัติ"
+                                    ? "approved-budget"
+                                    : val.project_phase === "รอสรุปผลโครงการ"
+                                      ? "wait-summary-draft"
+                                      : val.project_phase === "ร่างสรุปผลโครงการ"
+                                        ? "summary-draft"
+                                        : val.project_phase === "ดำเนินการสรุปผล"
+                                          ? "summary-progress"
+                                          : val.project_phase === "ปิดโครงการ"
+                                            ? "closed"
+                                            : ""
+                          }`}
                         style={{
                           marginRight: "1%",
                           backgroundColor: stepColors[val.project_phase],
@@ -244,7 +242,7 @@ useEffect(() => {
                       </span>
                       <span
                         className={`badge badge-"warning"`}
-                        // className={`badge badge-"warning"`} ดำขาว
+                      // className={`badge badge-"warning"`} ดำขาว
                       >
                         {val.responsible_agency}
                       </span>
@@ -269,18 +267,19 @@ useEffect(() => {
                             >
                               แสดงรายละเอียด
                             </Button>
-                            <Button
-                              style={{ marginLeft: "5px" }}
-                              className="btn-decrease"
-                              variant="danger"
-                              onClick={() =>
-                                handleDeleteProject(val.id, val.project_name)
-                              }
-                            >
-                              ลบ
-                            </Button>
+                            {val.project_phase === "ร่างคำขออนุมัติ" && (
+                              <Button
+                                style={{ marginLeft: "5px" }}
+                                className="btn-decrease"
+                                variant="danger"
+                                onClick={() => handleDeleteProject(val.id, val.project_name)}
+                              >
+                                ลบ
+                              </Button>
+                            )}
                           </div>
                         </div>
+
                       </div>
                     </div>
 
