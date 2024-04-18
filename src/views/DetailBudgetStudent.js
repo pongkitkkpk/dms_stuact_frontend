@@ -1,34 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Axios from "axios";
-import DetailBudgetStudent from "./DetailBudgetStudent";
 
-function DetailBudget() {
-  const storedUserData = sessionStorage.getItem("user");
-  const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
-  const straccount_type =storedUser.account_type;
+function DetailBudgetStudent() {
+    const storedUserData = sessionStorage.getItem("user");
+    const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
+    const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
+
+    const [ProjectList, setProjectList] = useState([]);
+    const [yearly, setYearly] = useState("");
+    const [filteredProjects, setFilteredProjects] = useState([]);
+
+    useEffect(() => {
+        const getDetailProject = () => {
+            Axios.get(
+                `http://localhost:3001/student/project/getcodebooksomeoutyear/${strcodebooksomeoutyear}`
+            ).then((response) => {
+                setProjectList(response.data);
+            });
+
+        };
+        getDetailProject();
+    }, []);
 
 
-  const [account_type, setAccount_type] = useState(straccount_type)
-  const [position, setPosition] = useState(storedUser.position)
 
-  useEffect(()=>{
-    console.log(position)
-  },[position])
-  // useEffect(()=>{
-  //   console.log(position)
-  // },[position])
-  return (
-    <>
-    
-    {account_type == "students" && <DetailBudgetStudent />}
-  </>
-  );
-  
-  
+
+    useEffect(() => {
+        console.log("AAAAAAAAAAAAAAAAAAA")
+        console.log(ProjectList)
+    }, [ProjectList])
+
+    return (
+        <>
+        <h1>ASdfasdfasdfasddddddddddd</h1>
+            <div>
+                <Table striped="columns">
+                    <tbody>
+                        {filteredProjects.map((project, index) => (
+                            <tr key={index} style={{ backgroundColor: "white" }}>
+                                <td>{project.project_number}</td>
+                                <td>{project.project_name}</td>
+                                <td>{project.responsible_agency}</td>
+                                <td>{project.yearly}</td>
+                                <td>{project.net_budget ? formatNumber(project.net_budget) : ''}</td>
+                                <td>{project.allow_budget ? formatNumber(project.allow_budget) : ''}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
+        </>
+    );
+
+
 }
 
-export default DetailBudget;
+export default DetailBudgetStudent;
 
 
 

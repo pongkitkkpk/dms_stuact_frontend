@@ -267,7 +267,7 @@ function AllProject() {
                             >
                               แสดงรายละเอียด
                             </Button>
-                            {val.project_phase === "ร่างคำขออนุมัติ" && (
+                            {/* {val.project_phase === "ร่างคำขออนุมัติ" && ( */}
                               <Button
                                 style={{ marginLeft: "5px" }}
                                 className="btn-decrease"
@@ -276,7 +276,7 @@ function AllProject() {
                               >
                                 ลบ
                               </Button>
-                            )}
+                            {/* )} */}
                           </div>
                         </div>
 
