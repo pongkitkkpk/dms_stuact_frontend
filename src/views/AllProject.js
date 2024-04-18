@@ -176,9 +176,13 @@ useEffect(() => {
             </InputGroup>
 
             <br />
+            <div>
+              
+            </div>
             {filterProjectList.map((val, index) => {
               return (
                 <Card
+                  style={{marginBottom:"5px"}}
                   key={index}
                   className={`card-with-border-${
                     val.project_phase === "ร่างคำขออนุมัติ"
@@ -203,7 +207,7 @@ useEffect(() => {
                       ? "closed"
                       : ""
                   }`}
-                  style={{ margin: "0% 0" }}
+                  
                 >
                   <Card.Body>
                     <div className="status-tag">
