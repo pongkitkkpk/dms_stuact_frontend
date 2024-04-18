@@ -92,8 +92,8 @@ function Login() {
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "15px"}}>
-                  <Button variant="primary" type="submit" className="btn-login">
-                    เข้าสู่ระบบ
+                  <Button variant="warning" type="submit" className="btn-login">
+                    <div style={{fontSize:"14px"}}>เข้าสู่ระบบ</div>
                   </Button>
                 </div>
               </Form>

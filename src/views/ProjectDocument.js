@@ -243,11 +243,11 @@ function ProjectDocument() {
           <button
             onClick={handleNextStep}
             type="submit"
-            className="btn-dataupdate"
-          // style={{ fontSize: "14px", margin: "1%" }}
-          // variant="primary"
+            className="btn-dataupdate px-4 py-2"
+            style={{margin: "1%"}}
+            variant="warning"
           >
-            <div>ส่งร่างคำขออนุมัติ</div>
+            <div style={{fontSize: "14px"}}>เสนอพิจารณา</div>
           </button>
         </div>
       )}
@@ -258,11 +258,11 @@ function ProjectDocument() {
           <button
             onClick={handleNextStep}
             type="submit"
-            className="btn-dataupdate"
-          // style={{ fontSize: "14px", margin: "1%" }}
-          // variant="primary"
+            className="btn-dataupdate px-4 py-2"
+            style={{margin: "1%"}}
+            variant="warning"
           >
-            <div>ยืนยัน</div>
+            <div style={{fontSize: "14px"}}>ยืนยัน</div>
           </button>
           
           
@@ -275,11 +275,11 @@ function ProjectDocument() {
           <button
             onClick={handleNextStepPleaseAllow}
             type="submit"
-            className="btn-dataupdate"
-          // style={{ fontSize: "14px", margin: "1%" }}
-          // variant="primary"
+            className="btn-dataupdate px-4 py-2"
+            style={{margin: "1%"}}
+            variant="warning"
           >
-            <div>โครงการอนุมัติ</div>
+            <div style={{fontSize: "14px"}}>โครงการอนุมัติ</div>
           </button>
           
           

@@ -69,7 +69,7 @@ function Header() {
               onClick={(e) => e.preventDefault()}
               className="mr-2"
             >
-              <div>ระบบขออนุมัติและจัดการกิจกรรม</div>
+              <div>ระบบจัดการโครงการ</div>
             </Navbar.Brand>
           </div>
 
@@ -119,7 +119,7 @@ function Header() {
                         variant="default"
                         className="m-0 no-iconx"
                       >
-                        <span className="">menu</span>
+                        <span className="">เมนู</span>
                       </Dropdown.Toggle>
                     ) : (
                       <Dropdown.Toggle
@@ -131,7 +131,7 @@ function Header() {
                         variant="default"
                         className="m-0"
                       >
-                        <span className="no-icon">menu</span>
+                        <span className="no-icon">เมนู</span>
                       </Dropdown.Toggle>
                     )}
 
@@ -166,7 +166,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-5%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.account_type}
                         </Dropdown.Item>
@@ -175,7 +175,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-2%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.username}
                         </Dropdown.Item>
@@ -184,7 +184,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-2%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.firstname_en} {storedUser.lastname_en}
                         </Dropdown.Item>
@@ -195,7 +195,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "0%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.CAMPUS_NAME}
                         </Dropdown.Item>
@@ -204,7 +204,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-2%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.clubName}
                         </Dropdown.Item>
@@ -214,7 +214,7 @@ function Header() {
                         <Dropdown.Item
                           href="#pablo"
                           onClick={logout}
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           ออกจากระบบ
                         </Dropdown.Item>
@@ -228,6 +228,7 @@ function Header() {
                           left: "-30%",
                           transform: "translateX(-50%)",
                         }}
+                        
                       >
                         {/* icon sex */}
                         <Dropdown.Item
@@ -258,7 +259,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-5%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.account_type}
                         </Dropdown.Item>
@@ -267,7 +268,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-5%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.username}
                         </Dropdown.Item>
@@ -276,7 +277,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "-5%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.firstname_en} {storedUser.lastname_en}
                         </Dropdown.Item>
@@ -287,7 +288,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "0%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.CAMPUS_NAME}
                         </Dropdown.Item>
@@ -296,7 +297,7 @@ function Header() {
                           href="#pablo"
                           style={{ marginTop: "0%" }}
                           disabled // Disable this item
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           {storedUser.clubName}
                         </Dropdown.Item>
@@ -306,37 +307,20 @@ function Header() {
                         <Dropdown.Item
                           href="#pablo"
                           onClick={logout}
-                          className="text-center" // Add this class to center the text
+                          className="text-center title" // Add this class to center the text
                         >
                           ออกจากระบบ
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     )}
                   </Dropdown>
-                ) : (
-                  <Button variant="primary" href="/guest/login">
-                    เข้าสู่ระบบ
-                  </Button>
-                )}
+                ) : (<></>)}
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div>
-        <Navbar.Brand
-          href="#home"
-          onClick={(e) => e.preventDefault()}
-          className="p-4"
-        >
-          Home{" "}
-          <i
-            className="nc-icon nc-stre-right"
-            style={{ transform: "scale(0.)" }}
-          ></i>{" "}
-          {getBrandText()}
-        </Navbar.Brand>
-      </div>
+      
     </>
   );
 }
