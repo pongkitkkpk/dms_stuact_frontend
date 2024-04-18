@@ -14,7 +14,7 @@ import AllProject from "views/AllProject";
 import NewProjectDocument from "views/NewProjectDocument";
 import test from "views/test";
 import DTableAddBudget from "views/DTableAddBudget";
-import DListSplitBudget from "views/DListSplitBudget";
+import DetailBudget from "views/DetailBudget";
 
 const dashboardRoutes = [
   {
@@ -54,7 +54,7 @@ const dashboardRoutes = [
     path: "/Listbudgetproject",
     name: "ดูงบประมาณทั้งหมด",
     icon: "nc-icon nc-circle-09",
-    component: DListSplitBudget,
+    component: DetailBudget,
     layout: "/admin"
   },
   {
@@ -161,7 +161,7 @@ const StudentRoutes =[
     path: "/Listbudgetproject",
     name: "User Profile",
     icon: "nc-icon nc-circle-09",
-    component: DListSplitBudget,
+    component: DetailBudget,
     layout: "/students"
   },
 

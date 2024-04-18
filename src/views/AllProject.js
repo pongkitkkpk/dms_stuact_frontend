@@ -177,61 +177,61 @@ function AllProject() {
 
             <br />
             <div>
-              
+
             </div>
             {filterProjectList.map((val, index) => {
               return (
                 <Card
-                  style={{marginBottom:"5px"}}
+                  style={{ marginBottom: "5px" }}
                   key={index}
                   className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
-                      ? "draft"
-                      : val.project_phase === "ดำเนินการขออนุมัติ"
+                    ? "draft"
+                    : val.project_phase === "ดำเนินการขออนุมัติ"
                       ? "progress"
                       : val.project_phase === "รออนุมัติโครงการ"
-                      ? "wait-progress"
-                      : val.project_phase === "โครงการอนุมัติ"
-                      ? "approved"
-                      : val.project_phase === "รอเงินโครงการอนุมัติ"
-                      ? "wait-approved-budget"
-                      : val.project_phase === "เงินโครงการอนุมัติ"
-                      ? "approved-budget"
-                      : val.project_phase === "รอสรุปผลโครงการ"
-                      ? "wait-summary-draft"
-                      : val.project_phase === "ร่างสรุปผลโครงการ"
-                      ? "summary-draft"
-                      : val.project_phase === "ดำเนินการสรุปผล"
-                      ? "summary-progress"
-                      : val.project_phase === "ปิดโครงการ"
-                      ? "closed"
-                      : ""
-                  }`}
-                  
+                        ? "wait-progress"
+                        : val.project_phase === "โครงการอนุมัติ"
+                          ? "approved"
+                          : val.project_phase === "รอเงินโครงการอนุมัติ"
+                            ? "wait-approved-budget"
+                            : val.project_phase === "เงินโครงการอนุมัติ"
+                              ? "approved-budget"
+                              : val.project_phase === "รอสรุปผลโครงการ"
+                                ? "wait-summary-draft"
+                                : val.project_phase === "ร่างสรุปผลโครงการ"
+                                  ? "summary-draft"
+                                  : val.project_phase === "ดำเนินการสรุปผล"
+                                    ? "summary-progress"
+                                    : val.project_phase === "ปิดโครงการ"
+                                      ? "closed"
+                                      : ""
+                    }`}
+
                 >
                   <Card.Body>
                     <div className="status-tag">
                       <span
                         className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
-                            ? "draft"
-                            : val.project_phase === "ดำเนินการขออนุมัติ"
-                              ? "progress"
-                              : val.project_phase === "รออนุมัติ"
-                                ? "wait-progress"
-                                : val.project_phase === "โครงการอนุมัติ"
-                                  ? "approved"
-                                  : val.project_phase === "รอเงินโครงการอนุมัติ"
-                                    ? "wait-approved-budget"
-                                    : val.project_phase === "เงินโครงการอนุมัติ"
-                                      ? "approved-budget"
-                                      : val.project_phase === "รอสรุปผลโครงการ"
-                                        ? "wait-summary-draft"
-                                        : val.project_phase === "ร่างสรุปผลโครงการ"
-                                          ? "summary-draft"
-                                          : val.project_phase === "ดำเนินการสรุปผล"
-                                            ? "summary-progress"
-                                            : val.project_phase === "ปิดโครงการ"
-                                              ? "closed"
-                                              : ""
+                          ? "draft"
+                          : val.project_phase === "ดำเนินการขออนุมัติ"
+                            ? "progress"
+                            : val.project_phase === "รออนุมัติ"
+                              ? "wait-progress"
+                              : val.project_phase === "โครงการอนุมัติ"
+                                ? "approved"
+                                : val.project_phase === "รอเงินโครงการอนุมัติ"
+                                  ? "wait-approved-budget"
+                                  : val.project_phase === "เงินโครงการอนุมัติ"
+                                    ? "approved-budget"
+                                    : val.project_phase === "รอสรุปผลโครงการ"
+                                      ? "wait-summary-draft"
+                                      : val.project_phase === "ร่างสรุปผลโครงการ"
+                                        ? "summary-draft"
+                                        : val.project_phase === "ดำเนินการสรุปผล"
+                                          ? "summary-progress"
+                                          : val.project_phase === "ปิดโครงการ"
+                                            ? "closed"
+                                            : ""
                           }`}
                         style={{
                           marginRight: "1%",

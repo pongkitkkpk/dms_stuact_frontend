@@ -83,14 +83,14 @@ function TableAddStudent() {
   }, [getuserapi]);
 
   useEffect(() => {
-    if (FAC_NAME_THAI === "มจพ. กรุงเทพฯ") {
+    if (CAMPUS_NAME === "มจพ. กรุงเทพฯ") {
       setCampus("Bangkok");
-    } else if (FAC_NAME_THAI === "มจพ. ปราจีน") {
+    } else if (CAMPUS_NAME === "มจพ. ปราจีน") {
       setCampus("Prachin");
-    } else if (FAC_NAME_THAI === "มจพ. ระยอง") {
+    } else if (CAMPUS_NAME === "มจพ. ระยอง") {
       setCampus("Rayong");
     }
-  }, [FAC_NAME_THAI]);
+  }, [CAMPUS_NAME]);
 
   const handleDivisionChange = (division) => {
     setCodedivision(division);

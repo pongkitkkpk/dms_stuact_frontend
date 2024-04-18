@@ -45,6 +45,7 @@ function SD_detail({ id_project, currentStepProject }) {
   const [showdeadline, setShowDeadLine] = useState("");
   const [codeclub, setCodeclub] = useState("");
   const [yearly_countsketch, setYearly_countsketch] = useState("");
+  const [yearly, setYearly] = useState("");
 
   const getProjectData = () => {
     Axios.get(
@@ -53,6 +54,7 @@ function SD_detail({ id_project, currentStepProject }) {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
       setCodeclub(response.data[0].codeclub);
+      setYearly(response.data[0].yearly);
       setYearly_countsketch(response.data[0].responsible_agency);
       setProjectName(response.data[0].project_name);
       setResponsibleAgency(response.data[0].responsible_agency);
@@ -313,13 +315,13 @@ function SD_detail({ id_project, currentStepProject }) {
                       type="text"
                       placeholder="Enter ID Code"
                       value={
-                        isEditMode ? editData.academic_year : academic_year
+                        isEditMode ? editData.yearly : `ปีการศึกษา ${yearly}`
                       }
                       readOnly
                       onChange={(event) => {
                         setEditData({
                           ...editData,
-                          academic_year: event.target.value,
+                          yearly: event.target.value,
                         });
                       }}
                     />
