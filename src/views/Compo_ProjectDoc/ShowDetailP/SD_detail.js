@@ -245,8 +245,8 @@ function SD_detail({ id_project, currentStepProject }) {
                       <div>Download e-docx</div>
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
-                      <Button variant="success" onClick={handleDownloadClick}>
-                        download naja
+                      <Button variant="success" className="btn-budget-increase" onClick={handleDownloadClick}>
+                        <div style={{fontSize:"14px"}}>ดาวน์โหลด (.docx)</div>
                       </Button>
                     </td>
                   </tr>
