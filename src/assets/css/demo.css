@@ -861,69 +861,93 @@
 }
 /* CSS */
 .card-with-border-draft {
-  border-left: 4px solid #7AC6FF; /* Light blue */
+  border-left: 4px solid #ff0000; 
   position: relative;
 }
 
 .card-with-border-progress {
-  border-left: 4px solid #8E4E41; /* Dark brown */
+  border-left: 4px solid #ff8000;
+  position: relative;
+}
+
+.card-with-border-wait-progress {
+  border-left: 4px solid #ff8000; 
   position: relative;
 }
 
 .card-with-border-approved {
-  border-left: 4px solid #44C827; /* Green */
+  border-left: 4px solid #fff000;
+  position: relative;
+}
+
+.card-with-border-wait-approved-budget {
+  border-left: 4px solid #00ff00; 
   position: relative;
 }
 
 .card-with-border-approved-budget {
-  border-left: 4px solid #39934F; /* Dark green */
+  border-left: 4px solid #00ff00; 
+  position: relative;
+}
+
+.card-with-border-wait-summary-draft {
+  border-left: 4px solid #00ffff; 
   position: relative;
 }
 
 .card-with-border-summary-draft {
-  border-left: 4px solid #0E9E93; /* Turquoise */
+  border-left: 4px solid #0000ff; 
   position: relative;
 }
 
 .card-with-border-summary-progress {
-  border-left: 4px solid #0E4D9E; /* Dark turquoise */
+  border-left: 4px solid #0000ff; 
   position: relative;
 }
 
 .card-with-border-closed {
-  border-left: 4px solid #5C7AD6; /* Blue */
+  border-left: 4px solid #8000ff;
   position: relative;
 }
 /* 8888888888888888888888 */
 .badge-draft {
-  background-color: #7AC6FF; /* Light blue */
+  background-color: #ff0000; 
 }
 
 .badge-progress {
-  background-color: #8E4E41; /* Dark brown */
+  background-color: #ff8000; 
 }
 
+.badge-wait-progress {
+  background-color: #ff8000; 
+}
 
 .badge-approved {
-  background-color: #44C827; /* Green */
+  background-color: #fff000; 
 }
 
+.badge-wait-approved-budget {
+  background-color: #00ff00; 
+}
 
 .badge-approved-budget {
-  background-color: #39934F; /* Dark green */
+  background-color: #00ff00; 
 }
 
+.badge-wait-summary-draft {
+  background-color: #00ffff; 
+}
 
 .badge-summary-draft {
-  background-color: #0E9E93; /* Turquoise */
+  background-color: #0000ff; 
 }
 
 .badge-summary-progress {
-  background-color: #0E4D9E; /* Dark turquoise */
+  background-color: #0000ff; 
 }
 
 .badge-closed {
-  background-color: #5C7AD6; /* Blue */
+  background-color: #8000ff; 
 }
 
 
@@ -1008,6 +1032,18 @@
   color: #ffffff;
 }
 
+.btn-decrease {
+  transition: background-color 0.3s ease;
+  color: #F33E3E;
+  border-radius: 20px;
+}
+
+.btn-decrease:hover {
+  border-color: #F33E3E;
+  background-color: #F33E3E;
+  color: #ffffff;
+}
+
 .btn-dataupdate {
   transition: background-color 0.3s ease;
   border-color: #FF8B13;
@@ -1021,9 +1057,34 @@
   color: #ffffff;
 }
 
+.btn-details {
+  transition: background-color 0.3s ease;
+  border-color: #FF8B13;
+  color: #FF8B13;
+  border-radius: 20px;
+}
+
+.btn-details:hover {
+  border-color: #FF8B13;
+  background-color: #FF8B13;
+  color: #ffffff;
+}
+
 .font-form-control {
   font-family: 'Bai Jamjuree';
   font-size: 14px;
+  font-weight: normal;
+}
+
+.font-alert {
+  font-family: 'Bai Jamjuree';
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.title {
+  font-family: 'Bai Jamjuree';
+  font-size: 16px;
   font-weight: normal;
 }
 
