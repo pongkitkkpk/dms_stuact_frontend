@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import Swal from 'sweetalert2';
 
-function SD_detail({ id_project }) {
+function SD_detail({ id_project, currentStepProject }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -45,7 +45,7 @@ function SD_detail({ id_project }) {
   const [showdeadline, setShowDeadLine] = useState("");
   const [codeclub, setCodeclub] = useState("");
   const [yearly_countsketch, setYearly_countsketch] = useState("");
-  
+
   const getProjectData = () => {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
@@ -149,7 +149,7 @@ function SD_detail({ id_project }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-          Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+        Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
       }
     });
   };
@@ -199,7 +199,8 @@ function SD_detail({ id_project }) {
     <>
       <Col md="9">
         <Card>
-          {!isEditMode && (
+
+          {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"
@@ -210,6 +211,7 @@ function SD_detail({ id_project }) {
               Edit
             </Button>
           )}
+
           <CardHeader
             style={{
               backgroundColor: "#535353",

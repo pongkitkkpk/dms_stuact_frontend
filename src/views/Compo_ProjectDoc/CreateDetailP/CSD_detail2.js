@@ -15,6 +15,7 @@ import {
   Table,
 } from "react-bootstrap";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 
 function CSD_detail2({ id_projects, switchToCSDPerson }) {
   const [projectList, setProjectList] = useState([]);
@@ -191,7 +192,11 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
         console.error("Error creating project:", error);
         // Handle the error, e.g., show a notification to the user
       });
-  
+      Swal.fire({
+        title: "บันทึกโครงการหน้า  ลักษณะโครงการ",
+        text: "ใส่ข้อมูล หมวดถัดไป",
+        icon: "success",
+      })
     // Switch to CSD person view
     switchToCSDPerson();
   };

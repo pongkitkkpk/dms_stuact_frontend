@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // react-bootstrap components
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
+import Swal from 'sweetalert2';
 import {
   Button,
   Card,
@@ -141,7 +142,6 @@ function CSD_indicator({ id_projects }) {
 
   const createIndicator = () => {
     Axios.put(`http://localhost:3001/student/project/p_indicator/create/${id_projects}`, {
-
       volume1,
       volume2,
       volume3,
@@ -166,11 +166,21 @@ function CSD_indicator({ id_projects }) {
     })
       .then((response) => {
         console.log(response.data);
+        
         // Handle success, if needed
       })
       .catch((error) => {
         console.error("There was an error!", error);
         // Handle error, if needed
+      });
+      Swal.fire({
+        title: "เสร็จโครงการเสร็จสิ้น?",
+        text: "ทำการเพิ่มโครงการแล้ว",
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/students/allproject';
+        }
       });
   };
   return (

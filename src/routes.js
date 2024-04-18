@@ -23,13 +23,6 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/c-project-doc",
-    name: "สร้างโครงการใหม่",
-    icon: "nc-icon nc-notes",
-    component: NewProjectDocument,
-    layout: "/admin"
-  },
-  {
     path: "/tablestudent",
     name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
     icon: "nc-icon nc-notes",

@@ -3,6 +3,7 @@ import { Button, Card, Form, Col, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 function CSD_budget({ id_projects, switchToCSDindicator }) {
   // const storedUserData = sessionStorage.getItem('user');
   // const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
@@ -458,6 +459,11 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
     )
       .then((response) => {
         console.log(response.data);
+        Swal.fire({
+          title: "บันทึกโครงการหน้า  งบประมาณโครงการ",
+          text: "ใส่ข้อมูล หมวดถัดไป",
+          icon: "success",
+        })
         switchToCSDindicator();
       })
       .catch((error) => {

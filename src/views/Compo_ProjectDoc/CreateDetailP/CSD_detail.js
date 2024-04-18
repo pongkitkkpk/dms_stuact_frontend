@@ -15,7 +15,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import Axios from "axios";
-
+import Swal from 'sweetalert2';
 function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
 
 
@@ -61,12 +61,15 @@ useEffect(()=>{
   const [is_3side, setIs_3side] = useState(false);
   const [is_4side, setIs_4side] = useState(false);
   const [is_5side, setIs_5side] = useState(false);
+  
 
   //==========================
   const [NetList, setNetList] = useState([])
+  const [net_budget, setNet_budget] = useState("");
   const getNetProject = () => {
     Axios.get(`http://localhost:3001/student/project/getBudgetclubName/${responsible_agency}/${yearly}`).then((response) => {
       setNetList(response.data);
+      setNet_budget(response.data[0].net_budget)
     });
   };
 
@@ -252,24 +255,23 @@ useEffect(()=>{
   const [userList, setUserList] = useState([]);
   const [PhoneAdvisor, setPhoneAdvisor] = useState("");
   const [AgencyAdvisor, setAgencyAdvisor] = useState("");
+  const [AgnecyGroupName, setAgnecyGroupName] = useState("");
+
   const getUsers = () => {
     Axios.get("http://localhost:3001/student/users").then((response) => {
       setUserList(response.data);
     });
   };
-
   useEffect(() => {
     getUsers();
   }, []);
-
   useEffect(() => {
     const user = userList.find((user) => user.id_student === id_student);
     if (user) {
       setYearly(user.yearly);
       setResponsibleAgency(user.clubName);
-      console.log("user.codebooksome")
-      console.log(user.codebooksome)
       setCodeClub(user.codebooksome);
+      setAgnecyGroupName(user.agencyGroupName)
     }
   }, [userList, id_student]);
 
@@ -342,7 +344,9 @@ useEffect(()=>{
       yearly: yearly,
       yearly_count: yearly_count,
       yearly_countsketch: yearlyCountsketch,
+      AgnecyGroupName:AgnecyGroupName,
       responsible_agency: responsible_agency,
+      net_budget:net_budget,
       academic_year: academic_year,
       advisor_name: advisor_name,
       PhoneAdvisor:PhoneAdvisor,
@@ -373,6 +377,7 @@ useEffect(()=>{
           yearly_count: yearly_count,
           yearly_countsketch: yearly_countsketch,
           responsible_agency: responsible_agency,
+          net_budget:net_budget,
           academic_year: academic_year,
           advisor_name: advisor_name,
           person1_name: person1_name,
@@ -389,7 +394,11 @@ useEffect(()=>{
         },
       ]);
     });
-
+    Swal.fire({
+      title: "บันทึกโครงการหน้า ข้อมูลพื้นฐานโครงการเสร็จเรียบร้อยแล้ว",
+      text: "ใส่ข้อมูล หมวดถัดไป",
+      icon: "success",
+    })
     // window.scrollTo({ top: 0, behavior: 'smooth' });
     switchToCSDDetail2();
   };

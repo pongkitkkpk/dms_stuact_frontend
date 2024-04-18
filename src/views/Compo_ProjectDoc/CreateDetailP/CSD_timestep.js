@@ -15,6 +15,7 @@ import {
   Table,
 } from "react-bootstrap";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 
 function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [projectList, setProjectList] = useState([]);
@@ -808,6 +809,11 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         console.error("There was an error!", error);
         // Handle error, if needed
       });
+      Swal.fire({
+        title: "บันทึกโครงการหน้า  ขั้นตอนและแผนดำเนินงาน",
+        text: "ใส่ข้อมูล หมวดถัดไป",
+        icon: "success",
+      })
     switchToCSDBudget();
   };
   const getProjectData = () => {

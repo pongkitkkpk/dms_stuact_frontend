@@ -32,10 +32,10 @@ function ProjectDocument() {
   const [codeclub, setCodeclub] = useState("");
   const [yearly, setYearly] = useState("");
   const [editor_name, setEditor_name] = useState("");
-  const [originalData, setOriginalData] = useState([]);
   const [project_phase, setProject_phase] = useState("");
+  const [AgnecyGroupName, setAgnecyGroupName] = useState("");
   const [DBproject_phase, setDBProject_phase] = useState("");
-
+  const [originalData, setOriginalData] = useState({});
   const getProjectData = () => {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
@@ -44,6 +44,7 @@ function ProjectDocument() {
       setCodeclub(response.data[0].codeclub);
       setYearly(response.data[0].yearly)
       setProjectName(response.data[0].project_name);
+      setAgnecyGroupName(response.data[0].AgnecyGroupName)
     });
   };
 
@@ -60,10 +61,7 @@ function ProjectDocument() {
     );
   };
 
-  useEffect(() => {
-    console.log("OOOOOO");
-    console.log(project_phase);
-  }, [project_phase]);
+
 
   const toggleStep = (step) => {
     setCurrentStepSideBar(step);
@@ -76,52 +74,68 @@ function ProjectDocument() {
   const [CountYear, setCountYear] = useState("");
 
 
-  const handlecountyear=()=>{
-    console.log(codeclub);
-    Axios.get(
-      `http://localhost:3001/student/project/getProjectYearly/${codeclub}`
-    ).then((response) => {
-     // i need search more yearly_count
-    });
-  }
+
+
+  //ถ้าใช้function นี้จะเพิ่มproject number ของจริง ใช้ตอนโครงการอนุมัติ
   const handleNextStepPleaseAllow = () => {
+    console.log("setname")
+    Axios.get(
+      `http://localhost:3001/student/project/getProjectYearly/${codeclub}/${yearly}`
+    ).then((response) => {
+      console.log(codeclub)
+      let maxYearlyCount = 0;
+      response.data.forEach((project) => {
+        const yearlyCount = parseInt(project.yearly_count);
+        if (yearlyCount > maxYearlyCount) {
+          maxYearlyCount = yearlyCount;
+        }
+      });
 
-    handlecountyear()
+      const newYearlyCount = maxYearlyCount === 0 ? "01" : (maxYearlyCount + 1).toString().padStart(2, "0");
 
-    console.log(CountYear)
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to proceed to the next step?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, proceed",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
+      const newProject_number = codeclub+newYearlyCount
+      console.log(newProject_number)
+      setCountYear(newYearlyCount);
+      
 
-        Axios.put(`http://localhost:3001/firstupdateState/${id_project}`, {
-          project_name,
-          codeclub,
-          project_phase,
-          CountYear:ACountYear
-        })
-          .then((response) => {
-            console.log("response.data");
-            console.log(response.data);
-            // window.location.reload();
+
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to proceed to the next step?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, proceed",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
+
+          Axios.put(`http://localhost:3001/student/firstupdateState/${id_project}`, {
+            project_name,
+            codeclub,
+            project_phase,
+            CountYear:newYearlyCount,
+            project_number:newProject_number
           })
-          .catch((error) => {
-            console.error("Error creating project:", error);
-          });
-        Swal.fire(
-          "Success!",
-          "You have proceeded to the next step.",
-          "success"
-        );
-      }
+            .then((response) => {
+              console.log("response.data");
+              console.log(response.data);
+              // window.location.reload();
+            })
+            .catch((error) => {
+              console.error("Error creating project:", error);
+            });
+          Swal.fire(
+            "Success!",
+            "You have proceeded to the next step.",
+            "success"
+          );
+        }
+      });
     });
   };
+
 
   useEffect(() => {
     const stepNames = [
@@ -133,7 +147,6 @@ function ProjectDocument() {
       "ดำเนินการสรุปผล",
       "ปิดโครงการ",
     ];
-
     const index = stepNames.indexOf(DBproject_phase);
     setCurrentStepProject(index + 1); // Adding 1 to match the step number
   }, [DBproject_phase]);
@@ -154,7 +167,7 @@ function ProjectDocument() {
   const handleNextStep = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Do you want to proceed to the next step?",
+      text: `คุณต้องการปลาๆใช่หรือไม่? ${project_phase}`,
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, proceed",
@@ -202,6 +215,7 @@ function ProjectDocument() {
 
   return (
     <>
+      <h1>{id_project}</h1>
       <ArrowProgressBar
         steps={totalSteps}
         currentStepProject={currentStepProject}
@@ -223,9 +237,41 @@ function ProjectDocument() {
           </button>
         </div>
       )}
-
+      {/* ร่างคำขออนุมัติ */}
       {storedUser.account_type === "students" && currentStepProject == 1 && (
         <div className="d-flex justify-content-end">
+          <button
+            onClick={handleNextStep}
+            type="submit"
+            className="btn-dataupdate"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
+          >
+            <div>ส่งร่างคำขออนุมัติ</div>
+          </button>
+        </div>
+      )}
+      {/* ยืนยัน  */}
+      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
+        <div className="d-flex justify-content-end">
+
+          <button
+            onClick={handleNextStep}
+            type="submit"
+            className="btn-dataupdate"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
+          >
+            <div>ยืนยัน</div>
+          </button>
+          
+          
+        </div>
+      )}
+      {/* โครงการอนุมัติ */}
+      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 3 && (
+        <div className="d-flex justify-content-end">
+
           <button
             onClick={handleNextStepPleaseAllow}
             type="submit"
@@ -233,8 +279,56 @@ function ProjectDocument() {
           // style={{ fontSize: "14px", margin: "1%" }}
           // variant="primary"
           >
-            ร่างคำขออนุมัติ
+            <div>โครงการอนุมัติ</div>
           </button>
+          
+          
+        </div>
+      )}
+      {/* ส่งร่างสรุปผลโครงการ */}
+      {storedUser.account_type === "students" && currentStepProject == 4 && (
+        <div className="d-flex justify-content-end">
+          <button
+            onClick={handleNextStep}
+            type="submit"
+            className="btn-dataupdate"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
+          >
+            <div>ส่งร่างสรุปผลโครงการ</div>
+          </button>
+        </div>
+      )}
+      {/* ดำเนินการสรุปผล */}
+      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 5 && (
+        <div className="d-flex justify-content-end">
+          <button
+            onClick={handleNextStep}
+            type="submit"
+            className="btn-dataupdate"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
+          >
+            <div>ดำเนินการสรุปผล</div>
+          </button>
+          
+          
+        </div>
+      )}
+      {/* ปิดโครงการ */}
+      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 6 && (
+        <div className="d-flex justify-content-end">
+          <button
+            onClick={handleNextStep}
+            type="submit"
+            className="btn-dataupdate"
+          // style={{ fontSize: "14px", margin: "1%" }}
+          // variant="primary"
+          >
+            <div>ปิดโครงการ</div>
+          </button>
+          
+          
         </div>
       )}
 
@@ -458,28 +552,28 @@ function ProjectDocument() {
 
           {/* Conditionally render components based on currentStep */}
           {currentStepSideBar === "SD_Detail" && (
-            <SD_detail id_project={id_project} />
+            <SD_detail id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_Detail2" && (
-            <SD_detail2 id_project={id_project} />
+            <SD_detail2 id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_person" && (
-            <SD_person id_project={id_project} />
+            <SD_person id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_locationtime" && (
-            <SD_locationtime id_project={id_project} />
+            <SD_locationtime id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_timestep" && (
-            <SD_timestep id_project={id_project} />
+            <SD_timestep id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_budget" && (
-            <SD_budget id_project={id_project} />
+            <SD_budget id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_indicator" && (
-            <SD_indicator id_project={id_project} />
+            <SD_indicator id_project={id_project} currentStepProject={currentStepProject}/>
           )}
           {currentStepSideBar === "SD_showedit" && (
-            <SD_showedit id_project={id_project} />
+            <SD_showedit id_project={id_project} currentStepProject={currentStepProject}/>
           )}
         </Row>
       </Container>

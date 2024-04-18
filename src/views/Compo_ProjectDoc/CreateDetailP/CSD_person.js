@@ -13,6 +13,7 @@ import {
   Nav,
   Table,
 } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 function CSD_person({ id_projects, switchToCSDLocationTime }) {
   const [codeclub, setCodeClub] = useState("");
@@ -389,6 +390,11 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
         console.error("There was an error!", error);
         // Handle error, if needed
       });
+      Swal.fire({
+        title: "บันทึกโครงการหน้า  กลุ่มเป้าหมายโครงการ",
+        text: "ใส่ข้อมูล หมวดถัดไป",
+        icon: "success",
+      })
     switchToCSDLocationTime();
   };
 
