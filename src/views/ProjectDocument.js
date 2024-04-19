@@ -76,13 +76,15 @@ function ProjectDocument() {
 
 
 
+
   //ถ้าใช้function นี้จะเพิ่มproject number ของจริง ใช้ตอนโครงการอนุมัติ
   const handleNextStepPleaseAllow = () => {
-    console.log("setname")
+    console.log("ADSFASDFAsd")
     Axios.get(
-      `http://localhost:3001/student/project/getProjectYearly/${codeclub}/${yearly}`
+      `http://localhost:3001/student/project/getNameProjectYearly/${project_name}/${codeclub}/${yearly}`
     ).then((response) => {
-      console.log(codeclub)
+      const allow_budget = response.data[0].allow_budget
+      console.log(allow_budget)
       let maxYearlyCount = 0;
       response.data.forEach((project) => {
         const yearlyCount = parseInt(project.yearly_count);
@@ -93,12 +95,8 @@ function ProjectDocument() {
 
       const newYearlyCount = maxYearlyCount === 0 ? "01" : (maxYearlyCount + 1).toString().padStart(2, "0");
 
-      const newProject_number = codeclub+newYearlyCount
-      console.log(newProject_number)
+      const newProject_number = codeclub + newYearlyCount
       setCountYear(newYearlyCount);
-      
-
-
 
       Swal.fire({
         title: "Are you sure?",
@@ -110,13 +108,23 @@ function ProjectDocument() {
       }).then((result) => {
         if (result.isConfirmed) {
           setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-
           Axios.put(`http://localhost:3001/student/firstupdateState/${id_project}`, {
             project_name,
             codeclub,
             project_phase,
-            CountYear:newYearlyCount,
-            project_number:newProject_number
+            CountYear: newYearlyCount,
+            project_number: newProject_number
+          }).then((response) => {
+            console.log("response.data");
+            console.log(response.data);
+            // window.location.reload();
+          }).catch((error) => {
+            console.error("Error creating project:", error);
+          });
+
+
+          Axios.put(`http://localhost:3001/admin/updateusebudget/${project_name}`, {
+            allow_budget:allow_budget
           })
             .then((response) => {
               console.log("response.data");
@@ -126,6 +134,10 @@ function ProjectDocument() {
             .catch((error) => {
               console.error("Error creating project:", error);
             });
+
+
+
+
           Swal.fire(
             "Success!",
             "You have proceeded to the next step.",
@@ -244,28 +256,27 @@ function ProjectDocument() {
             onClick={handleNextStep}
             type="submit"
             className="btn-dataupdate px-4 py-2"
-            style={{margin: "1%"}}
+            style={{ margin: "1%" }}
             variant="warning"
           >
-            <div style={{fontSize: "14px"}}>เสนอพิจารณา</div>
+            <div style={{ fontSize: "14px" }}>เสนอพิจารณา</div>
           </button>
         </div>
       )}
       {/* ยืนยัน  */}
       {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
         <div className="d-flex justify-content-end">
-
           <button
-            onClick={handleNextStep}
+            onClick={handleNextStepPleaseAllow}
             type="submit"
             className="btn-dataupdate px-4 py-2"
-            style={{margin: "1%"}}
+            style={{ margin: "1%" }}
             variant="warning"
           >
-            <div style={{fontSize: "14px"}}>ยืนยัน</div>
+            <div style={{ fontSize: "14px" }}>ยืนยัน</div>
           </button>
-          
-          
+
+
         </div>
       )}
       {/* โครงการอนุมัติ */}
@@ -273,16 +284,16 @@ function ProjectDocument() {
         <div className="d-flex justify-content-end">
 
           <button
-            onClick={handleNextStepPleaseAllow}
+            onClick={handleNextStep}
             type="submit"
             className="btn-dataupdate px-4 py-2"
-            style={{margin: "1%"}}
+            style={{ margin: "1%" }}
             variant="warning"
           >
-            <div style={{fontSize: "14px"}}>โครงการอนุมัติ</div>
+            <div style={{ fontSize: "14px" }}>โครงการอนุมัติ</div>
           </button>
-          
-          
+
+
         </div>
       )}
       {/* ส่งร่างสรุปผลโครงการ */}
@@ -311,8 +322,8 @@ function ProjectDocument() {
           >
             <div>ดำเนินการสรุปผล</div>
           </button>
-          
-          
+
+
         </div>
       )}
       {/* ปิดโครงการ */}
@@ -327,8 +338,8 @@ function ProjectDocument() {
           >
             <div>ปิดโครงการ</div>
           </button>
-          
-          
+
+
         </div>
       )}
 
@@ -552,28 +563,28 @@ function ProjectDocument() {
 
           {/* Conditionally render components based on currentStep */}
           {currentStepSideBar === "SD_Detail" && (
-            <SD_detail id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_detail id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_Detail2" && (
-            <SD_detail2 id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_detail2 id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_person" && (
-            <SD_person id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_person id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_locationtime" && (
-            <SD_locationtime id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_locationtime id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_timestep" && (
-            <SD_timestep id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_timestep id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_budget" && (
-            <SD_budget id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_budget id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_indicator" && (
-            <SD_indicator id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_indicator id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_showedit" && (
-            <SD_showedit id_project={id_project} currentStepProject={currentStepProject}/>
+            <SD_showedit id_project={id_project} currentStepProject={currentStepProject} />
           )}
         </Row>
       </Container>

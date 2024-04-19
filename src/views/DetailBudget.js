@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Axios from "axios";
-import DetailBudgetStudent from "./DetailBudgetStudent";
+import DetailBudgetStudent from "./DetailBudget3Role/DetailBudgetStudent";
+import DetailBudgetAdmin from "./DetailBudget3Role/DetailBudgetAdmin";
 
 function DetailBudget() {
   const storedUserData = sessionStorage.getItem("user");
@@ -22,6 +23,8 @@ function DetailBudget() {
     <>
     
     {account_type == "students" && <DetailBudgetStudent />}
+
+    {account_type == "admin" && <DetailBudgetAdmin />}
   </>
   );
   
