@@ -28,7 +28,7 @@ const ArrowProgressBar = ({ steps, currentStepProject }) => {
 
   return (
     // padding ปรับความหนา
-      <div className="multi-step-progress-bar" style={{right:"2%",padding:"0.5%" }}>
+      <div className="multi-step-progress-bar" style={{alignItems: "center",padding:"0.5%" }}>
         <div
           className="progress"
           style={{ width: `100-${calculateStepWidth()}%`}}
