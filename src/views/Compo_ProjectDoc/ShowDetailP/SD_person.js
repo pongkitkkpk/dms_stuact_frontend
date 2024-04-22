@@ -604,7 +604,7 @@ function SD_person({ id_project }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
           <CardHeader

@@ -156,7 +156,7 @@ function SD_detail({ id_project }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
           <CardHeader
@@ -303,7 +303,8 @@ function SD_detail({ id_project }) {
                     className="head-side-td-swp"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div>วัตถุประสงค์ของโครงการ</div>
+                    <div><p className="title" style={{marginBottom:"0"}}>วัตถุประสงค์</p><p className="title" style={{marginBottom:"0"}}>ของโครงการ</p></div>
+                    
                   </td>
                   <td className="back-side-td">
                     <Table>
@@ -408,7 +409,7 @@ function SD_detail({ id_project }) {
                 {/* ลักษณะรูปแบบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td"
                     style={{ verticalAlign: "top" }}
                   >
                     <div>ลักษณะรูปแบบโครงการ</div>
@@ -524,7 +525,7 @@ function SD_detail({ id_project }) {
                 <tr style={{ backgroundColor: "white" }}>
                   <td
                     className="head-side-td-swp"
-                    style={{ verticalAlign: "top" }}
+                    style={{ verticalAlign: "center" }}
                   >
                     <div>ลักษณะโครงการ</div>
                   </td>

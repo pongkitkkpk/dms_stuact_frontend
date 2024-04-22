@@ -210,7 +210,7 @@ function SD_detail({ id_project, currentStepProject }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
 
@@ -240,12 +240,12 @@ function SD_detail({ id_project, currentStepProject }) {
                   <tr style={{ backgroundColor: "white" }}>
                     <td
                       className="head-side-td"
-                      style={{ verticalAlign: "top" }}
+                      style={{ verticalAlign: "center" }}
                     >
                       <div>Download e-docx</div>
                     </td>
                     <td style={{ verticalAlign: "middle" }}>
-                      <Button variant="success" className="btn-budget-increase" onClick={handleDownloadClick}>
+                      <Button variant="primary" className="btn-download-file" onClick={handleDownloadClick}>
                         <div style={{fontSize:"14px"}}>ดาวน์โหลด (.docx)</div>
                       </Button>
                     </td>
@@ -254,7 +254,7 @@ function SD_detail({ id_project, currentStepProject }) {
 
                 {/* ชื่อโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "center" }}>
                     <div>ชื่อโครงการ</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -277,10 +277,11 @@ function SD_detail({ id_project, currentStepProject }) {
                 {/* หน่วยงานที่รับผิดชอบ db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div>หน่วยงานที่รับผิดชอบ</div>
+                    <div><p className="title" style={{marginBottom:"0"}}>หน่วยงาน</p><p className="title" style={{marginBottom:"0"}}>ที่รับผิดชอบ</p></div>
+                    
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Form.Control
@@ -305,7 +306,7 @@ function SD_detail({ id_project, currentStepProject }) {
                 </tr>
                 {/* ปีการศึกษา db */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "center" }}>
                     <div>ปีการศึกษา</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
@@ -330,15 +331,41 @@ function SD_detail({ id_project, currentStepProject }) {
                 {/* ที่อาจารย์ปรึกษา  db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td">
-                    อาจารย์ปรึกษา
-                    <p className="detail-prodoc">
+                    <div>อาจารย์ปรึกษา</div>
+                    {/* <p className="detail-prodoc">
                       ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
-                    </p>
+                    </p> */}
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Form.Control
                       size="sm"
                       type="text"
+                      className="font-form-control"
+                      placeholder="Enter ID Code"
+                      value={isEditMode ? editData.advisor_name : advisor_name}
+                      readOnly={!isEditMode}
+                      onChange={(event) => {
+                        setEditData({
+                          ...editData,
+                          advisor_name: event.target.value,
+                        });
+                      }}
+                    />
+                  </td>
+                </tr>
+                {/* เบอร์อาจารย์ที่ปรึกษา  db */}
+                <tr style={{ backgroundColor: "white" }}>
+                  <td className="head-side-td-swp">
+                    <div><p className="title" style={{marginBottom:"0"}}>เบอร์ติดต่อ</p><p className="title" style={{marginBottom:"0"}}>อาจารย์ปรึกษา</p></div>
+                    {/* <p className="detail-prodoc">
+                      ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
+                    </p> */}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
+                    <Form.Control
+                      size="sm"
+                      type="text"
+                      className="font-form-control"
                       placeholder="Enter ID Code"
                       value={isEditMode ? editData.advisor_name : advisor_name}
                       readOnly={!isEditMode}
@@ -353,13 +380,15 @@ function SD_detail({ id_project, currentStepProject }) {
                 </tr>
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td">ผู้รับผิดชอบโครงการ</td>
+                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <div><p className="title" style={{marginBottom:"0"}}>ผู้รับผิดชอบ</p><p className="title" style={{marginBottom:"0"}}>โครงการ</p></div>
+                  </td>
                   <td className="back-side-td">
                     <Table striped="columns">
-                      <thead>
-                        <tr>
-                          <th>ชื่อ-สกุล</th>
-                          <th>โทรศัพท์</th>
+                      <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
+                        <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
+                          <th style={{color: "white", fontSize:"14px", fontWeight:"bold"}}>ชื่อ-สกุล</th>
+                          <th style={{color: "white", fontSize:"14px", fontWeight:"bold"}}>โทรศัพท์</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -370,6 +399,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 1"
                               value={
                                 isEditMode
@@ -390,6 +420,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
                               value={
                                 isEditMode
@@ -413,6 +444,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 2"
                               value={
                                 isEditMode
@@ -433,6 +465,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 2"
                               value={
                                 isEditMode
@@ -456,6 +489,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="ชื่อ ผู้รับผิดชอบโครงการ คนที่ 3"
                               value={
                                 isEditMode
@@ -476,6 +510,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <Form.Control
                               size="sm"
                               type="text"
+                              className="font-form-control"
                               placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 3"
                               value={
                                 isEditMode

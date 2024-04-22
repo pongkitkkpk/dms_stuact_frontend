@@ -1722,7 +1722,7 @@ function SD_budget({ id_project }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
           <CardHeader

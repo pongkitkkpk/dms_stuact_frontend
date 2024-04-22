@@ -28,7 +28,7 @@ const ArrowProgressBar = ({ steps, currentStepProject }) => {
 
   return (
     // padding ปรับความหนา
-      <div className="multi-step-progress-bar" style={{alignItems: "center",padding:"0.5%" }}>
+      <div className="multi-step-progress-bar" style={{justifyItems: "start",marginBottom:"5px", width: "100%",marginLeft:"17px"}}>
         <div
           className="progress"
           style={{ width: `100-${calculateStepWidth()}%`}}
@@ -40,15 +40,15 @@ const ArrowProgressBar = ({ steps, currentStepProject }) => {
             } ${stepStates[index] ? "active" : ""} ${
               index === currentStepProject - 1 ? "current" : ""
             }`}
-            style={{ width: `${117 / steps}%` }}
+            style={{ width: `${117 / steps}%` , height:"40px", paddingRight:"20px", fontSize:"15px", color: "white"}}
             // style={{ width: `${100 / steps}%` }}
             onClick={() => handleStepClick(index)}
           >
             {index < currentStepProject - 1 ? (
               // Display an icon for completed steps✅
-              <i className="nc-icon nc-check-2" style={{ width: "20px", height: "20px" }}></i>
+              <i className="nc-icon nc-check-2" style={{ width: "20px", height: "12px", color: "white", fontWeight:"bold" }}></i>
             ) : (
-              <i className="nc-icon nc-settings-gear-64" style={{ width: "20px", height: "100px" }}></i>
+              <i className="nc-icon nc-settings-gear-64" style={{ width: "20px", height: "12px", color: "white", fontWeight:"bold"}}></i>
             )}
             {stepTitles[index]}
           </div>

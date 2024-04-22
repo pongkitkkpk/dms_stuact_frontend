@@ -195,27 +195,27 @@ function SD_indicator({ id_project }) {
 
     if (window.confirm("Do you want to save changes?")) {
       Axios.put(`http://localhost:3001/student/project/indicator/edit/${id_project}`, {
-        volume1 : volume1,
-        volume2 : volume2,
-        volume3 : volume3,
-        volume4 : volume4,
-        volume5 : volume5,
-        quality1 : quality1,
-        quality2 : quality2,
-        quality3 : quality3,
-        quality4 : quality4,
-        quality5 : quality5,
-        expresult1 : expresult1,
-        expresult2 : expresult2,
-        expresult3 : expresult3,
-        expresult4 : expresult4,
-        expresult5 : expresult5,
-        is_1follow :is_1follow,
-        is_2follow :is_2follow,
-        is_3follow :is_3follow,
-        is_4follow :is_4follow,
-        is_etcfollow :is_etcfollow,
-        etcfollow :etcfollow,
+        volume1: volume1,
+        volume2: volume2,
+        volume3: volume3,
+        volume4: volume4,
+        volume5: volume5,
+        quality1: quality1,
+        quality2: quality2,
+        quality3: quality3,
+        quality4: quality4,
+        quality5: quality5,
+        expresult1: expresult1,
+        expresult2: expresult2,
+        expresult3: expresult3,
+        expresult4: expresult4,
+        expresult5: expresult5,
+        is_1follow: is_1follow,
+        is_2follow: is_2follow,
+        is_3follow: is_3follow,
+        is_4follow: is_4follow,
+        is_etcfollow: is_etcfollow,
+        etcfollow: etcfollow,
       })
         .then((response) => {
           // Handle success
@@ -226,17 +226,17 @@ function SD_indicator({ id_project }) {
           // Handle error
           console.error("Error saving data:", error);
         });
-        Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
-          {codeclub,editpage,id_student}
-        )
-          .then((response) => {
-            console.log("Data saved successfully:", response.data);
-            window.location.reload();
-          })
-          .catch((error) => {
-            console.error("Error saving data:", error);
-          });
+      Axios.post(
+        `http://localhost:3001/student/project/edit/history/${id_project}`,
+        { codeclub, editpage, id_student }
+      )
+        .then((response) => {
+          console.log("Data saved successfully:", response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
     }
   };
 
@@ -262,7 +262,7 @@ function SD_indicator({ id_project }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
           <CardHeader
@@ -290,8 +290,7 @@ function SD_indicator({ id_project }) {
                 {/* ตัวชี้วัด(ด้านปริมาณ) */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    <div>ตัวชี้วัด </div>
-                    <p>(ด้านปริมาณ)</p>
+                    <div><p className="title" style={{marginBottom:"0"}}>ตัวชี้วัด</p><p className="title" style={{marginBottom:"0"}}>(ด้านปริมาณ)</p></div>
                   </td>
                   <td className="back-side-td">
                     <Table>
@@ -304,7 +303,7 @@ function SD_indicator({ id_project }) {
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={volume1 }
+                            value={volume1}
                             placeholder={`ด้านปริมาณข้อที่ ${1}`}
                             onChange={(event) => {
                               setVolume1(event.target.value);
@@ -375,8 +374,7 @@ function SD_indicator({ id_project }) {
                     className="head-side-td-swp"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div>ตัวชี้วัด </div>
-                    <p>(ด้านคุณภาพ)</p>
+                    <div><p className="title" style={{marginBottom:"0"}}>ตัวชี้วัด</p><p className="title" style={{marginBottom:"0"}}>(ด้านคุณภาพ)</p></div>
                   </td>
                   <td className="back-side-td">
                     <Table>
@@ -536,8 +534,10 @@ function SD_indicator({ id_project }) {
                 </tr>
                 {/* วิธีติดตามผล */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    <div>วิธีติดตามผลประเมินผลโครงการ/กิจกรรม</div>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                    <div><p className="title" style={{ marginBottom: "0" }}>วิธีติดตามผล</p>
+                      <p className="title" style={{ marginBottom: "0" }}>การประเมินผล</p>
+                      <p className="title" style={{ marginBottom: "0" }}>โครงการ/กิจกรรม</p></div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <label

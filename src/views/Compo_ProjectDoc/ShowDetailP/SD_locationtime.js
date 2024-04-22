@@ -271,7 +271,7 @@ function SD_locationtime({ id_project }) {
               variant="primary"
               onClick={handleEditClick}
             >
-              Edit
+              แก้ไข
             </Button>
           )}
           <CardHeader

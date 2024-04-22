@@ -1,6 +1,6 @@
 .multi-step-progress-bar {
     position: relative;
-    width: 97%;  /* เอาไว้แก้ความยาว*/
+    /* width: 97%;  เอาไว้แก้ความยาว */
     height: 50px;
     background-color: #f7f7f9;
     overflow: hidden;
@@ -19,7 +19,7 @@
 
 .step {
     height: 100%;
-    background-color: #ddd;
+    background-color: #a0a0a0;
     float: left;
     display: flex;
     align-items: center;
@@ -29,12 +29,12 @@
 }
 
 .step.completed {
-    background-color: #4caf50;
+    background-color: #28a745;
     clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
     margin-left: -2.5%;
 }
 
 .step.current {
-    background-color: #d39b34;
+    background-color: #ff8813;
     clip-path: polygon(75% 0%, 85% 51%, 75% 100%, 0% 100%, 10% 50%, 0% 0%);
 }
