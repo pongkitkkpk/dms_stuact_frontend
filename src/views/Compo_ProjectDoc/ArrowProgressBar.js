@@ -46,9 +46,9 @@ const ArrowProgressBar = ({ steps, currentStepProject }) => {
           >
             {index < currentStepProject - 1 ? (
               // Display an icon for completed steps✅
-              <i className="nc-icon nc-check-2"></i>
+              <i className="nc-icon nc-check-2" style={{ width: "20px", height: "20px" }}></i>
             ) : (
-              <i className="nc-icon nc-settings-gear-64"></i>
+              <i className="nc-icon nc-settings-gear-64" style={{ width: "20px", height: "100px" }}></i>
             )}
             {stepTitles[index]}
           </div>
