@@ -399,8 +399,13 @@ useEffect(()=>{
       text: "ใส่ข้อมูล หมวดถัดไป",
       icon: "success",
     })
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
-    switchToCSDDetail2();
+    
+
+    // Wait for the scroll animation to finish before navigating
+    setTimeout(() => {
+      switchToCSDDetail2();
+    }, 500); // Adjust the delay if needed
+
   };
 
   return (
@@ -529,7 +534,7 @@ useEffect(()=>{
                 {/* เบอร์ติดต่ออ.  db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td"
                     style={{ verticalAlign: "top" }}
                   >
                     <div>เบอร์ติดต่อของอาจารย์ที่ปรึกษา</div>
@@ -547,7 +552,7 @@ useEffect(()=>{
                 </tr>
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td" style={{ verticalAlign: "top" }}>
+                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
                     <div>ผู้รับผิดชอบโครงการ</div>
                   </td>
                   <td className="back-side-td">
@@ -851,7 +856,7 @@ useEffect(()=>{
                 {/* ข้อ 5 เลือก 5 ด้าน  db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td
-                    className="head-side-td-swp"
+                    className="head-side-td"
                     style={{ verticalAlign: "top" }}
                   >
                     <div>แผนยุทธศาสตร์</div>

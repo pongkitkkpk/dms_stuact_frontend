@@ -390,12 +390,15 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
         console.error("There was an error!", error);
         // Handle error, if needed
       });
-      Swal.fire({
-        title: "บันทึกโครงการหน้า  กลุ่มเป้าหมายโครงการ",
-        text: "ใส่ข้อมูล หมวดถัดไป",
-        icon: "success",
-      })
-    switchToCSDLocationTime();
+    Swal.fire({
+      title: "บันทึกโครงการหน้า  กลุ่มเป้าหมายโครงการ",
+      text: "ใส่ข้อมูล หมวดถัดไป",
+      icon: "success",
+    })
+    setTimeout(() => {
+      switchToCSDLocationTime();
+    }, 500); // Adjust the delay if needed
+
   };
 
   return (
@@ -476,9 +479,8 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
                                   className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder={`ผู้บริหารประเภทที่ ${
-                                    index + 1
-                                  }`}
+                                  placeholder={`ผู้บริหารประเภทที่ ${index + 1
+                                    }`}
                                   onChange={(event) => {
                                     switch (index) {
                                       case 0:
@@ -665,9 +667,8 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
                                   className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder={`คณาจารย์ / บุคลากรประเภทที่ ${
-                                    index + 1
-                                  }`}
+                                  placeholder={`คณาจารย์ / บุคลากรประเภทที่ ${index + 1
+                                    }`}
                                   onChange={(event) => {
                                     switch (index) {
                                       case 0:
@@ -847,9 +848,8 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
                                   className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder={`นักศึกษาประเภทที่  ${
-                                    index + 1
-                                  }`}
+                                  placeholder={`นักศึกษาประเภทที่  ${index + 1
+                                    }`}
                                   onChange={(event) => {
                                     switch (index) {
                                       case 0:

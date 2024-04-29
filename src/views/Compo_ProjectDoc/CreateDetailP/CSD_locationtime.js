@@ -147,7 +147,10 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
       text: "ใส่ข้อมูล หมวดถัดไป",
       icon: "success",
     })
-    switchToCSDTimestep();
+    setTimeout(() => {
+      switchToCSDTimestep();
+    }, 500); // Adjust the delay if needed
+
   };
 
   // Split month start_prepare
@@ -174,56 +177,56 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
   }, [end_event]);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     const formattedDate = new Date(start_prepare).toLocaleDateString('th-TH', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-  });
-  setThaiStartPrepare(formattedDate)
-  },[start_prepare])
-  useEffect(()=>{
+    });
+    setThaiStartPrepare(formattedDate)
+  }, [start_prepare])
+  useEffect(() => {
     const formattedDate = new Date(end_prepare).toLocaleDateString('th-TH', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-  });
-  setThaiEndPrepare(formattedDate)
-  },[end_prepare])
-  useEffect(()=>{
+    });
+    setThaiEndPrepare(formattedDate)
+  }, [end_prepare])
+  useEffect(() => {
     const formattedDate = new Date(start_event).toLocaleDateString('th-TH', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-  });
-  setThaiStartEvent(formattedDate)
-  },[start_event])
-  useEffect(()=>{
+    });
+    setThaiStartEvent(formattedDate)
+  }, [start_event])
+  useEffect(() => {
     const formattedDate = new Date(end_event).toLocaleDateString('th-TH', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-  });
-  setThaiEndEvent(formattedDate)
-  },[end_event])
-  useEffect(()=>{
+    });
+    setThaiEndEvent(formattedDate)
+  }, [end_event])
+  useEffect(() => {
     const formattedDate = new Date(deadline).toLocaleDateString('th-TH', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
-  });
-  setThaiDeadLine(formattedDate)
-  },[deadline])
+    });
+    setThaiDeadLine(formattedDate)
+  }, [deadline])
 
 
-  useEffect(()=>{
-    
+  useEffect(() => {
+
     console.log(thaistart_prepare)
     console.log(thaiend_prepare)
     console.log(thaistart_event)
     console.log(thaiend_event)
     console.log(thaideadline)
-  },[thaiend_event,thaiend_prepare,thaistart_event,thaistart_prepare,thaideadline])
+  }, [thaiend_event, thaiend_prepare, thaistart_event, thaistart_prepare, thaideadline])
   return (
     <>
       {/* วนค่าจากdatabase  */}
@@ -272,9 +275,8 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                                 className="table-margin"
                                 size="sm"
                                 type="text"
-                                placeholder={`สถานที่จัดโครงการที่ ${
-                                  index + 1
-                                }`}
+                                placeholder={`สถานที่จัดโครงการที่ ${index + 1
+                                  }`}
                                 onChange={(event) => {
                                   switch (index) {
                                     case 0:
@@ -346,7 +348,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
                         <Form.Label>วันเริ่มต้น (จัดเตรียม) :</Form.Label>
                         <DatePicker
                           selected={start_prepare}
-                          onChange={(date) => 
+                          onChange={(date) =>
                             setStartPrepare(date)}
                           dateFormat="dd/MM/yyyy"
                           placeholderText="เลือกวันเริ่มต้น"

@@ -51,7 +51,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
 
   const createProject = () => {
     const listSSB = +listSSBT + +listSSBNT;
-    
+
     Axios.put(
       `http://localhost:3001/student/project/p_budget/create/${id_projects}`,
       {
@@ -343,7 +343,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
 
         listSSBNT: listSSBNT,
 
-        listSSB:listSSB,
+        listSSB: listSSB,
         // C
         listC1: listC[0],
         listC2: listC[1],
@@ -464,7 +464,10 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
           text: "ใส่ข้อมูล หมวดถัดไป",
           icon: "success",
         })
-        switchToCSDindicator();
+        setTimeout(() => {
+          switchToCSDindicator();
+        }, 500); // Adjust the delay if needed
+
       })
       .catch((error) => {
         console.error("Error creating project:", error);
@@ -557,7 +560,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
     setListSSA(formattedSumA);
   }, [listSA]);
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   //
   //                      ListBT
@@ -896,7 +899,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
   const [listSAll, setListSAll] = useState(0);
   const [thailistSAll, setThaiListSAll] = useState(0);
 
-useEffect(() => {
+  useEffect(() => {
     // Convert string values back to integers and filter out non-numeric values for each list
     const numericValuesSA = listSA
       .map((value) => parseInt(value.replace(/,/g, '')))
@@ -930,7 +933,7 @@ useEffect(() => {
     );
 
 
-    
+
     // Calculate total sum
     const totalSum = sumSA + sumSBT + sumSBNT + sumSC + Number(listSETC);
 
@@ -939,7 +942,7 @@ useEffect(() => {
 
     // Set listSAll to the formatted total sum
     setListSAll(formattedTotalSum);
-}, [listSA, listSBT, listSBNT, listSC, listSETC]);
+  }, [listSA, listSBT, listSBNT, listSC, listSETC]);
 
 
   function ThaiNumberToText(num) {
@@ -1053,12 +1056,12 @@ useEffect(() => {
     setThaiListSAll(ThaiNumberToText(listSAll));
   }, [listSAll]);
 
-  useEffect(() => {}, [listSSA]);
+  useEffect(() => { }, [listSSA]);
 
   return (
     <>
-    <Col md="9">
-      {/* <div style={{ width: "79%", marginLeft: "1%" }}> */}
+      <Col md="9">
+        {/* <div style={{ width: "79%", marginLeft: "1%" }}> */}
         <Card>
           <CardHeader
             style={{
@@ -2033,7 +2036,7 @@ useEffect(() => {
             </Button>
           </CardFooter>
         </Card>
-      {/* </div> */}
+        {/* </div> */}
       </Col>
     </>
   );

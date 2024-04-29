@@ -146,14 +146,14 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("AAAAAAAAAAAA")
     console.log(id_projects)
-  },[id_projects])
+  }, [id_projects])
 
   const createProject = () => {
     console.log("Creating project...");
-  
+
     // Create project data object
     const projectData = {
       principles_and_reasons1,
@@ -180,7 +180,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
       problem3,
       result3,
     };
-  
+
     // Send project data to the server
     Axios.put(`http://localhost:3001/student/project/create2/${id_projects}`, projectData)
       .then(() => {
@@ -192,15 +192,18 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
         console.error("Error creating project:", error);
         // Handle the error, e.g., show a notification to the user
       });
-      Swal.fire({
-        title: "บันทึกโครงการหน้า  ลักษณะโครงการ",
-        text: "ใส่ข้อมูล หมวดถัดไป",
-        icon: "success",
-      })
+    Swal.fire({
+      title: "บันทึกโครงการหน้า  ลักษณะโครงการ",
+      text: "ใส่ข้อมูล หมวดถัดไป",
+      icon: "success",
+    })
     // Switch to CSD person view
-    switchToCSDPerson();
+    setTimeout(() => {
+      switchToCSDPerson();
+    }, 500); // Adjust the delay if needed
+
   };
-  
+
 
   return (
     <>

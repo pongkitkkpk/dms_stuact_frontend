@@ -111,7 +111,6 @@ function NewProjectDocument() {
 
   return (
     <>
-    <h1>{id_projects}</h1>
     <Container fluid ref={containerRef}>
       
       <Row>

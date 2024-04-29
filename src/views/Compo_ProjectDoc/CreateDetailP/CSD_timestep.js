@@ -442,36 +442,36 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     return dateString ? new Date(dateString).getMonth() + 1 : null; // Adding 1 because getMonth returns zero-based index
   };
   useEffect(() => {
-    setStartM1(getMFromDate(start_duration_table1)); 
-    setStartM2(getMFromDate(start_duration_table2)); 
-    setStartM3(getMFromDate(start_duration_table3)); 
-    setStartM4(getMFromDate(start_duration_table4)); 
-    setStartM5(getMFromDate(start_duration_table5)); 
-    setStartM6(getMFromDate(start_duration_table6)); 
-    setStartM7(getMFromDate(start_duration_table7)); 
-    setStartM8(getMFromDate(start_duration_table8)); 
-    setStartM9(getMFromDate(start_duration_table9)); 
-    setStartM10(getMFromDate(start_duration_table10)); 
-    setStartM11(getMFromDate(start_duration_table11)); 
-    setStartM12(getMFromDate(start_duration_table12)); 
-    setStartM13(getMFromDate(start_duration_table13)); 
-    setStartM14(getMFromDate(start_duration_table14)); 
-    setStartM15(getMFromDate(start_duration_table15)); 
+    setStartM1(getMFromDate(start_duration_table1));
+    setStartM2(getMFromDate(start_duration_table2));
+    setStartM3(getMFromDate(start_duration_table3));
+    setStartM4(getMFromDate(start_duration_table4));
+    setStartM5(getMFromDate(start_duration_table5));
+    setStartM6(getMFromDate(start_duration_table6));
+    setStartM7(getMFromDate(start_duration_table7));
+    setStartM8(getMFromDate(start_duration_table8));
+    setStartM9(getMFromDate(start_duration_table9));
+    setStartM10(getMFromDate(start_duration_table10));
+    setStartM11(getMFromDate(start_duration_table11));
+    setStartM12(getMFromDate(start_duration_table12));
+    setStartM13(getMFromDate(start_duration_table13));
+    setStartM14(getMFromDate(start_duration_table14));
+    setStartM15(getMFromDate(start_duration_table15));
 
-    setEndM1(getMFromDate(end_duration_table1)); 
-    setEndM2(getMFromDate(end_duration_table2)); 
-    setEndM3(getMFromDate(end_duration_table3)); 
-    setEndM4(getMFromDate(end_duration_table4)); 
-    setEndM5(getMFromDate(end_duration_table5)); 
-    setEndM6(getMFromDate(end_duration_table6)); 
-    setEndM7(getMFromDate(end_duration_table7)); 
-    setEndM8(getMFromDate(end_duration_table8)); 
-    setEndM9(getMFromDate(end_duration_table9)); 
-    setEndM10(getMFromDate(end_duration_table10)); 
-    setEndM11(getMFromDate(end_duration_table11)); 
-    setEndM12(getMFromDate(end_duration_table12)); 
-    setEndM13(getMFromDate(end_duration_table13)); 
-    setEndM14(getMFromDate(end_duration_table14)); 
+    setEndM1(getMFromDate(end_duration_table1));
+    setEndM2(getMFromDate(end_duration_table2));
+    setEndM3(getMFromDate(end_duration_table3));
+    setEndM4(getMFromDate(end_duration_table4));
+    setEndM5(getMFromDate(end_duration_table5));
+    setEndM6(getMFromDate(end_duration_table6));
+    setEndM7(getMFromDate(end_duration_table7));
+    setEndM8(getMFromDate(end_duration_table8));
+    setEndM9(getMFromDate(end_duration_table9));
+    setEndM10(getMFromDate(end_duration_table10));
+    setEndM11(getMFromDate(end_duration_table11));
+    setEndM12(getMFromDate(end_duration_table12));
+    setEndM13(getMFromDate(end_duration_table13));
+    setEndM14(getMFromDate(end_duration_table14));
     setEndM15(getMFromDate(end_duration_table15));
 
   }, [
@@ -809,12 +809,15 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
         console.error("There was an error!", error);
         // Handle error, if needed
       });
-      Swal.fire({
-        title: "บันทึกโครงการหน้า  ขั้นตอนและแผนดำเนินงาน",
-        text: "ใส่ข้อมูล หมวดถัดไป",
-        icon: "success",
-      })
-    switchToCSDBudget();
+    Swal.fire({
+      title: "บันทึกโครงการหน้า  ขั้นตอนและแผนดำเนินงาน",
+      text: "ใส่ข้อมูล หมวดถัดไป",
+      icon: "success",
+    })
+    setTimeout(() => {
+      switchToCSDBudget();
+    }, 500); // Adjust the delay if needed
+
   };
   const getProjectData = () => {
     Axios.get(
@@ -847,7 +850,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       setDeadLine(deadline);
     });
   };
-  
+
   const [start_prepare, setStartPrepare] = useState("");
   const [end_prepare, setEndPrepare] = useState("");
   const [start_event, setStartEvent] = useState("");

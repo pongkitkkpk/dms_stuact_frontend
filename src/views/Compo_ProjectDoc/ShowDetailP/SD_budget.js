@@ -148,16 +148,23 @@ function SD_budget({ id_project }) {
       setListETC(responseData.listETC);
       setListSETC(responseData.listSETC);
       
-      setTypeACount(responseData.TypeACount);
-      setTypeBTCount(responseData.TypeBTCount);
-      setTypeBNTCount(responseData.TypeBNTCount);
-      setTypeCCount(responseData.TypeCCount);
+      const ACount = responseData.TypeACount + 1; 
+      setTypeACount(ACount);
+      const BTCount = responseData.TypeBTCount + 1; 
+      setTypeBTCount(BTCount);
+      const BNTCount = responseData.TypeBNTCount + 1; 
+      setTypeBNTCount(BNTCount);
+      const CCount = responseData.TypeCCount + 1; 
+      setTypeCCount(CCount);
+      
     });
   };
 
   useEffect(() => {
     getProjectData();
   }, [id_project]);
+
+
 
   const handleEditClick = () => {
     setIsEditMode(true);
