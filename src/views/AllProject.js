@@ -9,6 +9,7 @@ import {
   Button,
   InputGroup,
   Form,
+  Dropdown
 } from "react-bootstrap";
 import Admin from "layouts/Admin";
 import Swal from "sweetalert2";
@@ -56,7 +57,9 @@ function AllProject() {
         project.responsible_agency
           .toLowerCase()
           .includes(searchQuery.toLowerCase())) ||
-      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
+      (project.project_number &&
+        project.project_number.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search 
     );
   });
 
@@ -135,9 +138,7 @@ function AllProject() {
   const stepTitles = [
     " ร่างคำขออนุมัติ",
     " ดำเนินการขออนุมัติ",
-    " รออนุมัติโครงการ",
     " โครงการอนุมัติ",
-    " รอเงินโครงการอนุมัติ",
     " เงินโครงการอนุมัติ",
     " รอสรุปผลโครงการ",
     " ร่างสรุปผลโครงการ",
@@ -157,11 +158,86 @@ function AllProject() {
     " ปิดโครงการ": "#8000ff",
   };
 
+
+
+
+  const [selectedStatus, setSelectedStatus] = useState('');
+
+
+  const uniqueStatusList = [...new Set(filterProjectList.map(val => val.project_phase))];
+  uniqueStatusList.reverse();
+
+  const statusCounts = {};
+
+  filterProjectList.forEach(val => {
+    statusCounts[val.project_phase] = (statusCounts[val.project_phase] || 0) + 1;
+  });
+  const totalProjectCount = filterProjectList.length;
   return (
     <>
       <Container fluid>
         <Row>
           <Col md="12">
+            <Dropdown>
+              <Dropdown.Toggle variant="primary" id="dropdown-status">
+                {selectedStatus ? selectedStatus : `โปรเจค (${totalProjectCount})`}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {/* Render dropdown item to show all projects */}
+                <Dropdown.Item
+                  onClick={() => setSelectedStatus('')}
+                >
+                  แสดงทั้งหมด
+                </Dropdown.Item>
+
+                {/* Render dropdown items with status and count */}
+                {uniqueStatusList.map((status, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    onClick={() => setSelectedStatus(status)}
+                    disabled={!statusCounts[status]}
+                  >
+                    {/* Render badge and count */}
+                    <div className="d-flex justify-content-between align-items-center">
+                      <span
+                        className={`badge badge-${status === "ร่างคำขออนุมัติ"
+                          ? "draft"
+                          : status === "ดำเนินการขออนุมัติ"
+                            ? "progress"
+                            : status === "รออนุมัติ"
+                              ? "wait-progress"
+                              : status === "โครงการอนุมัติ"
+                                ? "approved"
+                                : status === "รอเงินโครงการอนุมัติ"
+                                  ? "wait-approved-budget"
+                                  : status === "เงินโครงการอนุมัติ"
+                                    ? "approved-budget"
+                                    : status === "รอสรุปผลโครงการ"
+                                      ? "wait-summary-draft"
+                                      : status === "ร่างสรุปผลโครงการ"
+                                        ? "summary-draft"
+                                        : status === "ดำเนินการสรุปผล"
+                                          ? "summary-progress"
+                                          : status === "ปิดโครงการ"
+                                            ? "closed"
+                                            : ""
+                          }`}
+                        style={{
+                          marginRight: "1%",
+                          backgroundColor: stepColors[status],
+                        }}
+                      >
+                        {status}
+                      </span>
+                      <span>({statusCounts[status] || 0})</span>
+                    </div>
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+
+
+
             <InputGroup className="mb-3" style={{ width: "100%" }}>
               <Form.Control
                 placeholder="ค้นหา"
@@ -180,94 +256,95 @@ function AllProject() {
 
             </div>
             {filterProjectList.map((val, index) => {
-              return (
-                <Card
-                  style={{ marginBottom: "5px" }}
-                  key={index}
-                  className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
-                    ? "draft"
-                    : val.project_phase === "ดำเนินการขออนุมัติ"
-                      ? "progress"
-                      : val.project_phase === "รออนุมัติโครงการ"
-                        ? "wait-progress"
-                        : val.project_phase === "โครงการอนุมัติ"
-                          ? "approved"
-                          : val.project_phase === "รอเงินโครงการอนุมัติ"
-                            ? "wait-approved-budget"
-                            : val.project_phase === "เงินโครงการอนุมัติ"
-                              ? "approved-budget"
-                              : val.project_phase === "รอสรุปผลโครงการ"
-                                ? "wait-summary-draft"
-                                : val.project_phase === "ร่างสรุปผลโครงการ"
-                                  ? "summary-draft"
-                                  : val.project_phase === "ดำเนินการสรุปผล"
-                                    ? "summary-progress"
-                                    : val.project_phase === "ปิดโครงการ"
-                                      ? "closed"
-                                      : ""
-                    }`}
+              if (val.project_phase === selectedStatus || selectedStatus === '') {
+                return (
+                  <Card
+                    style={{ marginBottom: "5px" }}
+                    key={index}
+                    className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
+                      ? "draft"
+                      : val.project_phase === "ดำเนินการขออนุมัติ"
+                        ? "progress"
+                        : val.project_phase === "รออนุมัติโครงการ"
+                          ? "wait-progress"
+                          : val.project_phase === "โครงการอนุมัติ"
+                            ? "approved"
+                            : val.project_phase === "รอเงินโครงการอนุมัติ"
+                              ? "wait-approved-budget"
+                              : val.project_phase === "เงินโครงการอนุมัติ"
+                                ? "approved-budget"
+                                : val.project_phase === "รอสรุปผลโครงการ"
+                                  ? "wait-summary-draft"
+                                  : val.project_phase === "ร่างสรุปผลโครงการ"
+                                    ? "summary-draft"
+                                    : val.project_phase === "ดำเนินการสรุปผล"
+                                      ? "summary-progress"
+                                      : val.project_phase === "ปิดโครงการ"
+                                        ? "closed"
+                                        : ""
+                      }`}
 
-                >
-                  <Card.Body>
-                    <div className="status-tag">
-                      <span
-                        className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
-                          ? "draft"
-                          : val.project_phase === "ดำเนินการขออนุมัติ"
-                            ? "progress"
-                            : val.project_phase === "รออนุมัติ"
-                              ? "wait-progress"
-                              : val.project_phase === "โครงการอนุมัติ"
-                                ? "approved"
-                                : val.project_phase === "รอเงินโครงการอนุมัติ"
-                                  ? "wait-approved-budget"
-                                  : val.project_phase === "เงินโครงการอนุมัติ"
-                                    ? "approved-budget"
-                                    : val.project_phase === "รอสรุปผลโครงการ"
-                                      ? "wait-summary-draft"
-                                      : val.project_phase === "ร่างสรุปผลโครงการ"
-                                        ? "summary-draft"
-                                        : val.project_phase === "ดำเนินการสรุปผล"
-                                          ? "summary-progress"
-                                          : val.project_phase === "ปิดโครงการ"
-                                            ? "closed"
-                                            : ""
-                          }`}
-                        style={{
-                          marginRight: "1%",
-                          backgroundColor: stepColors[val.project_phase],
-                        }}
-                      >
-                        {val.project_phase}
-                      </span>
-                      <span
-                        className={`badge badge-"warning"`}
-                      // className={`badge badge-"warning"`} ดำขาว
-                      >
-                        {val.responsible_agency}
-                      </span>
-                    </div>
-
-                    <div className="d-flex flex-column">
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div
-                          className="align-items-center"
-                          style={{ fontSize: "18px", fontWeight: "bold" }}
+                  >
+                    <Card.Body>
+                      <div className="status-tag">
+                        <span
+                          className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
+                            ? "draft"
+                            : val.project_phase === "ดำเนินการขออนุมัติ"
+                              ? "progress"
+                              : val.project_phase === "รออนุมัติ"
+                                ? "wait-progress"
+                                : val.project_phase === "โครงการอนุมัติ"
+                                  ? "approved"
+                                  : val.project_phase === "รอเงินโครงการอนุมัติ"
+                                    ? "wait-approved-budget"
+                                    : val.project_phase === "เงินโครงการอนุมัติ"
+                                      ? "approved-budget"
+                                      : val.project_phase === "รอสรุปผลโครงการ"
+                                        ? "wait-summary-draft"
+                                        : val.project_phase === "ร่างสรุปผลโครงการ"
+                                          ? "summary-draft"
+                                          : val.project_phase === "ดำเนินการสรุปผล"
+                                            ? "summary-progress"
+                                            : val.project_phase === "ปิดโครงการ"
+                                              ? "closed"
+                                              : ""
+                            }`}
+                          style={{
+                            marginRight: "1%",
+                            backgroundColor: stepColors[val.project_phase],
+                          }}
                         >
-                          {val.project_name}id {val.id}
-                          <p className="card-category">{val.project_number}</p>
-                        </div>
+                          {val.project_phase}
+                        </span>
+                        <span
+                          className={`badge badge-"warning"`}
+                        // className={`badge badge-"warning"`} ดำขาว
+                        >
+                          {val.responsible_agency}
+                        </span>
+                      </div>
 
-                        <div className="d-flex justify-content-end">
-                          <div className="d-inline-flex align-items-end">
-                            <Button
-                              className="btn-details"
-                              variant="warning"
-                              onClick={() => handleShowDetail(val.id)}
-                            >
-                              แสดงรายละเอียด
-                            </Button>
-                            {/* {val.project_phase === "ร่างคำขออนุมัติ" && ( */}
+                      <div className="d-flex flex-column">
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div
+                            className="align-items-center"
+                            style={{ fontSize: "18px", fontWeight: "bold" }}
+                          >
+                            {val.project_name}id {val.id}
+                            <p className="card-category">{val.project_number}</p>
+                          </div>
+
+                          <div className="d-flex justify-content-end">
+                            <div className="d-inline-flex align-items-end">
+                              <Button
+                                className="btn-details"
+                                variant="warning"
+                                onClick={() => handleShowDetail(val.id)}
+                              >
+                                แสดงรายละเอียด
+                              </Button>
+                              {/* {val.project_phase === "ร่างคำขออนุมัติ" && ( */}
                               <Button
                                 style={{ marginLeft: "5px" }}
                                 className="btn-decrease"
@@ -276,37 +353,41 @@ function AllProject() {
                               >
                                 ลบ
                               </Button>
-                            {/* )} */}
+                              {/* )} */}
+                            </div>
                           </div>
+
                         </div>
-
                       </div>
-                    </div>
 
-                    <div className="stats">
-                      <i className="fas fa-history"></i>
-                      <span> สร้าง {formatDate(val.created_at)} </span>
+                      <div className="stats">
+                        <i className="fas fa-history"></i>
+                        <span> สร้าง {formatDate(val.created_at)} </span>
 
-                      <i
-                        className="fas fa-history"
-                        style={{ marginLeft: "10px" }}
-                      ></i>
-                      <span>
-                        {val.updated_at === null
-                          ? " อัพเดท ----"
-                          : ` อัพเดท ${formatDate(val.updated_at)}`}
-                      </span>
-                      <span> </span>
+                        <i
+                          className="fas fa-history"
+                          style={{ marginLeft: "10px" }}
+                        ></i>
+                        <span>
+                          {val.updated_at === null
+                            ? " อัพเดท ----"
+                            : ` อัพเดท ${formatDate(val.updated_at)}`}
+                        </span>
+                        <span> </span>
 
-                      <i
-                        className="fas fa-pencil-alt"
-                        style={{ marginLeft: "10px" }}
-                      ></i>
-                      <span> {val.id_student}</span>
-                    </div>
-                  </Card.Body>
-                </Card>
-              );
+                        <i
+                          className="fas fa-pencil-alt"
+                          style={{ marginLeft: "10px" }}
+                        ></i>
+                        <span> {val.id_student}</span>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                );
+              } else {
+                // If the project's phase does not match the selectedStatus, return null
+                return null;
+              }
             })}
           </Col>
         </Row>
