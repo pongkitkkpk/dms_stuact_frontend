@@ -9,7 +9,7 @@ import {
   Button,
   InputGroup,
   Form,
-  Dropdown
+  Dropdown,
 } from "react-bootstrap";
 import Admin from "layouts/Admin";
 import Swal from "sweetalert2";
@@ -58,8 +58,10 @@ function AllProject() {
           .toLowerCase()
           .includes(searchQuery.toLowerCase())) ||
       (project.project_number &&
-        project.project_number.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search 
+        project.project_number
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      (yearlyString && yearlyString.includes(searchQuery.toLowerCase())) // Include yearly in the search
     );
   });
 
@@ -82,7 +84,6 @@ function AllProject() {
       });
     }
   };
-
 
   useEffect(() => {
     getProjects();
@@ -158,19 +159,18 @@ function AllProject() {
     " ปิดโครงการ": "#8000ff",
   };
 
+  const [selectedStatus, setSelectedStatus] = useState("");
 
-
-
-  const [selectedStatus, setSelectedStatus] = useState('');
-
-
-  const uniqueStatusList = [...new Set(filterProjectList.map(val => val.project_phase))];
+  const uniqueStatusList = [
+    ...new Set(filterProjectList.map((val) => val.project_phase)),
+  ];
   uniqueStatusList.reverse();
 
   const statusCounts = {};
 
-  filterProjectList.forEach(val => {
-    statusCounts[val.project_phase] = (statusCounts[val.project_phase] || 0) + 1;
+  filterProjectList.forEach((val) => {
+    statusCounts[val.project_phase] =
+      (statusCounts[val.project_phase] || 0) + 1;
   });
   const totalProjectCount = filterProjectList.length;
   return (
@@ -178,138 +178,144 @@ function AllProject() {
       <Container fluid>
         <Row>
           <Col md="12">
-            <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-status">
-                {selectedStatus ? selectedStatus : `โปรเจค (${totalProjectCount})`}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {/* Render dropdown item to show all projects */}
-                <Dropdown.Item
-                  onClick={() => setSelectedStatus('')}
+            <div className="d-flex justify-content-center align-items-center" style={{marginTop:"-5px"}}>
+              <Dropdown className="align-items-center">
+                <Dropdown.Toggle
+                  variant="warning"
+                  id="dropdown-status"
+                  className="btn-details"
                 >
-                  แสดงทั้งหมด
-                </Dropdown.Item>
+                  {selectedStatus
+                    ? selectedStatus
+                    : `โครงการทั้งหมด (${totalProjectCount})`}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {/* Render dropdown item to show all projects */}
+                  <Dropdown.Item onClick={() => setSelectedStatus("")}>
+                    <div>แสดงโครงการทั้งหมด</div>
+                  </Dropdown.Item>
 
-                {/* Render dropdown items with status and count */}
-                {uniqueStatusList.map((status, index) => (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={() => setSelectedStatus(status)}
-                    disabled={!statusCounts[status]}
-                  >
-                    {/* Render badge and count */}
-                    <div className="d-flex justify-content-between align-items-center">
-                      <span
-                        className={`badge badge-${status === "ร่างคำขออนุมัติ"
-                          ? "draft"
-                          : status === "ดำเนินการขออนุมัติ"
-                            ? "progress"
-                            : status === "รออนุมัติ"
+                  {/* Render dropdown items with status and count */}
+                  {uniqueStatusList.map((status, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={() => setSelectedStatus(status)}
+                      disabled={!statusCounts[status]}
+                    >
+                      {/* Render badge and count */}
+                      <div className="d-flex justify-content-between align-items-center">
+                        <span
+                          className={`badge badge-${
+                            status === "ร่างคำขออนุมัติ"
+                              ? "draft"
+                              : status === "ดำเนินการขออนุมัติ"
+                              ? "progress"
+                              : status === "รออนุมัติ"
                               ? "wait-progress"
                               : status === "โครงการอนุมัติ"
-                                ? "approved"
-                                : status === "รอเงินโครงการอนุมัติ"
-                                  ? "wait-approved-budget"
-                                  : status === "เงินโครงการอนุมัติ"
-                                    ? "approved-budget"
-                                    : status === "รอสรุปผลโครงการ"
-                                      ? "wait-summary-draft"
-                                      : status === "ร่างสรุปผลโครงการ"
-                                        ? "summary-draft"
-                                        : status === "ดำเนินการสรุปผล"
-                                          ? "summary-progress"
-                                          : status === "ปิดโครงการ"
-                                            ? "closed"
-                                            : ""
+                              ? "approved"
+                              : status === "รอเงินโครงการอนุมัติ"
+                              ? "wait-approved-budget"
+                              : status === "เงินโครงการอนุมัติ"
+                              ? "approved-budget"
+                              : status === "รอสรุปผลโครงการ"
+                              ? "wait-summary-draft"
+                              : status === "ร่างสรุปผลโครงการ"
+                              ? "summary-draft"
+                              : status === "ดำเนินการสรุปผล"
+                              ? "summary-progress"
+                              : status === "ปิดโครงการ"
+                              ? "closed"
+                              : ""
                           }`}
-                        style={{
-                          marginRight: "1%",
-                          backgroundColor: stepColors[status],
-                        }}
-                      >
-                        {status}
-                      </span>
-                      <span>({statusCounts[status] || 0})</span>
-                    </div>
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
+                          style={{
+                            marginRight: "1%",
+                            backgroundColor: stepColors[status],
+                          }}
+                        >
+                          {status}
+                        </span>
+                        <span>({statusCounts[status] || 0})</span>
+                      </div>
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
 
-
-
-            <InputGroup className="mb-3" style={{ width: "100%" }}>
-              <Form.Control
-                placeholder="ค้นหา"
-                type="text"
-                aria-describedby="basic-addon2"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <InputGroup.Text>
-                <i className="fa fa-search" aria-hidden="true"></i>
-              </InputGroup.Text>
-            </InputGroup>
-
-            <br />
-            <div>
-
+              <InputGroup className="align-items-center" style={{ width: "100%", marginLeft:"10px" }}>
+                <Form.Control
+                  placeholder="ค้นหา"
+                  type="text"
+                  aria-describedby="basic-addon2"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <InputGroup.Text>
+                  <i className="fa fa-search" aria-hidden="true" style={{marginTop:"4.5px", marginBottom:"4.5px"}}></i>
+                </InputGroup.Text>
+              </InputGroup>
             </div>
+            <br />
+            <div></div>
             {filterProjectList.map((val, index) => {
-              if (val.project_phase === selectedStatus || selectedStatus === '') {
+              if (
+                val.project_phase === selectedStatus ||
+                selectedStatus === ""
+              ) {
                 return (
                   <Card
                     style={{ marginBottom: "5px" }}
                     key={index}
-                    className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
-                      ? "draft"
-                      : val.project_phase === "ดำเนินการขออนุมัติ"
+                    className={`card-with-border-${
+                      val.project_phase === "ร่างคำขออนุมัติ"
+                        ? "draft"
+                        : val.project_phase === "ดำเนินการขออนุมัติ"
                         ? "progress"
                         : val.project_phase === "รออนุมัติโครงการ"
-                          ? "wait-progress"
-                          : val.project_phase === "โครงการอนุมัติ"
-                            ? "approved"
-                            : val.project_phase === "รอเงินโครงการอนุมัติ"
-                              ? "wait-approved-budget"
-                              : val.project_phase === "เงินโครงการอนุมัติ"
-                                ? "approved-budget"
-                                : val.project_phase === "รอสรุปผลโครงการ"
-                                  ? "wait-summary-draft"
-                                  : val.project_phase === "ร่างสรุปผลโครงการ"
-                                    ? "summary-draft"
-                                    : val.project_phase === "ดำเนินการสรุปผล"
-                                      ? "summary-progress"
-                                      : val.project_phase === "ปิดโครงการ"
-                                        ? "closed"
-                                        : ""
-                      }`}
-
+                        ? "wait-progress"
+                        : val.project_phase === "โครงการอนุมัติ"
+                        ? "approved"
+                        : val.project_phase === "รอเงินโครงการอนุมัติ"
+                        ? "wait-approved-budget"
+                        : val.project_phase === "เงินโครงการอนุมัติ"
+                        ? "approved-budget"
+                        : val.project_phase === "รอสรุปผลโครงการ"
+                        ? "wait-summary-draft"
+                        : val.project_phase === "ร่างสรุปผลโครงการ"
+                        ? "summary-draft"
+                        : val.project_phase === "ดำเนินการสรุปผล"
+                        ? "summary-progress"
+                        : val.project_phase === "ปิดโครงการ"
+                        ? "closed"
+                        : ""
+                    }`}
                   >
                     <Card.Body>
                       <div className="status-tag">
                         <span
-                          className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
-                            ? "draft"
-                            : val.project_phase === "ดำเนินการขออนุมัติ"
+                          className={`badge badge-${
+                            val.project_phase === "ร่างคำขออนุมัติ"
+                              ? "draft"
+                              : val.project_phase === "ดำเนินการขออนุมัติ"
                               ? "progress"
                               : val.project_phase === "รออนุมัติ"
-                                ? "wait-progress"
-                                : val.project_phase === "โครงการอนุมัติ"
-                                  ? "approved"
-                                  : val.project_phase === "รอเงินโครงการอนุมัติ"
-                                    ? "wait-approved-budget"
-                                    : val.project_phase === "เงินโครงการอนุมัติ"
-                                      ? "approved-budget"
-                                      : val.project_phase === "รอสรุปผลโครงการ"
-                                        ? "wait-summary-draft"
-                                        : val.project_phase === "ร่างสรุปผลโครงการ"
-                                          ? "summary-draft"
-                                          : val.project_phase === "ดำเนินการสรุปผล"
-                                            ? "summary-progress"
-                                            : val.project_phase === "ปิดโครงการ"
-                                              ? "closed"
-                                              : ""
-                            }`}
+                              ? "wait-progress"
+                              : val.project_phase === "โครงการอนุมัติ"
+                              ? "approved"
+                              : val.project_phase === "รอเงินโครงการอนุมัติ"
+                              ? "wait-approved-budget"
+                              : val.project_phase === "เงินโครงการอนุมัติ"
+                              ? "approved-budget"
+                              : val.project_phase === "รอสรุปผลโครงการ"
+                              ? "wait-summary-draft"
+                              : val.project_phase === "ร่างสรุปผลโครงการ"
+                              ? "summary-draft"
+                              : val.project_phase === "ดำเนินการสรุปผล"
+                              ? "summary-progress"
+                              : val.project_phase === "ปิดโครงการ"
+                              ? "closed"
+                              : ""
+                          }`}
                           style={{
                             marginRight: "1%",
                             backgroundColor: stepColors[val.project_phase],
@@ -319,7 +325,7 @@ function AllProject() {
                         </span>
                         <span
                           className={`badge badge-"warning"`}
-                        // className={`badge badge-"warning"`} ดำขาว
+                          // className={`badge badge-"warning"`} ดำขาว
                         >
                           {val.responsible_agency}
                         </span>
@@ -332,7 +338,9 @@ function AllProject() {
                             style={{ fontSize: "18px", fontWeight: "bold" }}
                           >
                             {val.project_name}id {val.id}
-                            <p className="card-category">{val.project_number}</p>
+                            <p className="card-category">
+                              {val.project_number}
+                            </p>
                           </div>
 
                           <div className="d-flex justify-content-end">
@@ -349,14 +357,15 @@ function AllProject() {
                                 style={{ marginLeft: "5px" }}
                                 className="btn-decrease"
                                 variant="danger"
-                                onClick={() => handleDeleteProject(val.id, val.project_name)}
+                                onClick={() =>
+                                  handleDeleteProject(val.id, val.project_name)
+                                }
                               >
                                 ลบ
                               </Button>
                               {/* )} */}
                             </div>
                           </div>
-
                         </div>
                       </div>
 

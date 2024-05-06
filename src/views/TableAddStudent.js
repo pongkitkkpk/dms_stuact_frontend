@@ -79,7 +79,6 @@ function TableAddStudent() {
       setLEVEL_DESC(getuserapi.message2.LEVEL_DESC); //ปริญญาตรี 4 ปี / 5 ปี
       setFAC_NAME_THAI(getuserapi.message2.FAC_NAME_THAI); //วิทยาลัยเทคโนโลยีอุตสาหกรรม
     }
-
   }, [getuserapi]);
 
   useEffect(() => {
@@ -153,7 +152,8 @@ function TableAddStudent() {
     const numericCodeagency = codeagency.replace(/\D/g, "");
     const numericCodeworkgroup = codeworkgroup.replace(/\D/g, "");
 
-    const yearlyString = typeof yearly === 'string' ? yearly : yearly.toString();
+    const yearlyString =
+      typeof yearly === "string" ? yearly : yearly.toString();
 
     // Extract the last two characters of the string
     const lastTwoCharacters = yearlyString.slice(-2);
@@ -165,29 +165,86 @@ function TableAddStudent() {
     setCodebooksome(newCodebooksome);
     setCodebooksomeoutyear(newCodebooksomeoutyear);
 
-    if (clubName === 'องค์การนักศึกษา มจพ.กรุงเทพฯ' || clubName === 'สภานักศึกษา มจพ.กรุงเทพฯ') {
+    if (
+      clubName === "องค์การนักศึกษา มจพ.กรุงเทพฯ" ||
+      clubName === "สภานักศึกษา มจพ.กรุงเทพฯ"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'องค์การนักศึกษา มจพ.ปราจีนบุรี' || clubName === 'สภานักศึกษา มจพ.ปราจีนบุรี') {
+    } else if (
+      clubName === "องค์การนักศึกษา มจพ.ปราจีนบุรี" ||
+      clubName === "สภานักศึกษา มจพ.ปราจีนบุรี"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'องค์การนักศึกษา มจพ.ระยอง' || clubName === 'สภานักศึกษา มจพ.ระยอง') {
+    } else if (
+      clubName === "องค์การนักศึกษา มจพ.ระยอง" ||
+      clubName === "สภานักศึกษา มจพ.ระยอง"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'ชมรมวิทยุสมัครเล่น' || clubName === 'ชมรมถ่ายภาพ' || clubName === 'ชมรมคอมพิวเตอร์' || clubName === 'ชมรมภาษาต่างประเทศ' || clubName === 'ชมรมสื่อสิ่งพิมพ์') {
+    } else if (
+      clubName === "ชมรมวิทยุสมัครเล่น" ||
+      clubName === "ชมรมถ่ายภาพ" ||
+      clubName === "ชมรมคอมพิวเตอร์" ||
+      clubName === "ชมรมภาษาต่างประเทศ" ||
+      clubName === "ชมรมสื่อสิ่งพิมพ์"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายวิชาการ");
-    } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
+    } else if (
+      clubName === "ชมรมพุทธศาสน์" ||
+      clubName === "ชมรมมุสลิม" ||
+      clubName === "ชมรมคริสต์" ||
+      clubName === "ชมรมดนตรีสากล" ||
+      clubName === "ชมรมดนตรีไทยมงกุฎวดี" ||
+      clubName === "ชมรมศิลปการแสดง" ||
+      clubName === "ชมรมสันทนาการ" ||
+      clubName === "ชมรมดนตรีไทย-สากล" ||
+      clubName === "ชมรมท่องเที่ยว"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
-    } else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+    } else if (
+      clubName === "ชมรมชาวเหนือ" ||
+      clubName === "ชมรมปาล์มทักษิณ" ||
+      clubName === "ชมรมอีสาน" ||
+      clubName === "ชมรมอาสาพัฒนา" ||
+      clubName === "ชมรมอนุรักษ์พัฒนา" ||
+      clubName === "ชมรมชีวิตและสุขภาพ"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
-    } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
+    } else if (
+      clubName === "ชมรมฟุตบอล" ||
+      clubName === "ชมรมรักบี้ฟุตบอล" ||
+      clubName === "ชมรมวอลเลย์บอล" ||
+      clubName === "ชมรมบาสเกตบอล" ||
+      clubName === "ชมรมตะกร้อ" ||
+      clubName === "ชมรมฟันดาบ" ||
+      clubName === "ชมรมแบตมินตัน" ||
+      clubName === "ชมรมซอฟท์บอล" ||
+      clubName === "ชมรมเทควันโด" ||
+      clubName === "ชมรมยูโด" ||
+      clubName === "ชมรมเทเบิลเทนนิส" ||
+      clubName === "ชมรมเปตอง" ||
+      clubName === "ชมรมบริดจ์" ||
+      clubName === "ชมรมหมากกระดาน" ||
+      clubName === "ชมรมยิงปืน" ||
+      clubName === "ชมรมกรีฑา" ||
+      clubName === "ชมรมเทนนิส" ||
+      clubName === "ชมรมกอล์ฟ" ||
+      clubName === "ชมรมว่ายน้ำ" ||
+      clubName === "ชมรมเพาะกาย" ||
+      clubName === "ชมรมมวยสากลสมัครเล่น"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
-    } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
+    } else if (
+      clubName === "ชมรมลูกหนัง" ||
+      clubName === "ชมรมจักรยานเพื่อสุขภาพ"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
     }
 
     Axios.post("http://localhost:3001/admin/user/createUser", {
       id_student: username,
       name_student: name_student,
-      Phone:Phone,
-      AgencyAdvisor:AgencyAdvisor,
+      Phone: Phone,
+      AgencyAdvisor: AgencyAdvisor,
       department: FAC_NAME_THAI,
       position: position,
       clubName: clubName, // Change to match the column name in the table
@@ -202,7 +259,7 @@ function TableAddStudent() {
       codeworkgroup: codeworkgroup,
       codebooksome: newCodebooksome,
       codebooksomeoutyear: newCodebooksomeoutyear,
-      agencyGroupName: agencyGroupName
+      agencyGroupName: agencyGroupName,
     })
       .then(() => {
         setUserList([
@@ -224,7 +281,7 @@ function TableAddStudent() {
             codeworkgroup: codeworkgroup,
             codebooksome: newCodebooksome,
             codebooksomeoutyear: newCodebooksomeoutyear,
-            agencyGroupName: agencyGroupName
+            agencyGroupName: agencyGroupName,
           },
         ]);
         // Reload the page after adding a user
@@ -237,43 +294,113 @@ function TableAddStudent() {
   const [agencyGroupName, setAgencyGroupName] = useState("");
 
   useEffect(() => {
-    if (clubName === 'องค์การนักศึกษา มจพ.กรุงเทพฯ' || clubName === 'สภานักศึกษา มจพ.กรุงเทพฯ') {
+    if (
+      clubName === "องค์การนักศึกษา มจพ.กรุงเทพฯ" ||
+      clubName === "สภานักศึกษา มจพ.กรุงเทพฯ"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'องค์การนักศึกษา มจพ.ปราจีนบุรี' || clubName === 'สภานักศึกษา มจพ.ปราจีนบุรี') {
+    } else if (
+      clubName === "องค์การนักศึกษา มจพ.ปราจีนบุรี" ||
+      clubName === "สภานักศึกษา มจพ.ปราจีนบุรี"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'องค์การนักศึกษา มจพ.ระยอง' || clubName === 'สภานักศึกษา มจพ.ระยอง') {
+    } else if (
+      clubName === "องค์การนักศึกษา มจพ.ระยอง" ||
+      clubName === "สภานักศึกษา มจพ.ระยอง"
+    ) {
       setAgencyGroupName("องค์กรนักศึกษาส่วนกลาง");
-    } else if (clubName === 'ชมรมวิทยุสมัครเล่น' || clubName === 'ชมรมถ่ายภาพ' || clubName === 'ชมรมคอมพิวเตอร์' || clubName === 'ชมรมภาษาต่างประเทศ' || clubName === 'ชมรมสื่อสิ่งพิมพ์') {
+    } else if (
+      clubName === "ชมรมวิทยุสมัครเล่น" ||
+      clubName === "ชมรมถ่ายภาพ" ||
+      clubName === "ชมรมคอมพิวเตอร์" ||
+      clubName === "ชมรมภาษาต่างประเทศ" ||
+      clubName === "ชมรมสื่อสิ่งพิมพ์"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายวิชาการ");
-    } else if (clubName === 'ชมรมพุทธศาสน์' || clubName === 'ชมรมมุสลิม' || clubName === 'ชมรมคริสต์' || clubName === 'ชมรมดนตรีสากล' || clubName === 'ชมรมดนตรีไทยมงกุฎวดี' || clubName === 'ชมรมศิลปการแสดง' || clubName === 'ชมรมสันทนาการ' || clubName === 'ชมรมดนตรีไทย-สากล' || clubName === 'ชมรมท่องเที่ยว') {
+    } else if (
+      clubName === "ชมรมพุทธศาสน์" ||
+      clubName === "ชมรมมุสลิม" ||
+      clubName === "ชมรมคริสต์" ||
+      clubName === "ชมรมดนตรีสากล" ||
+      clubName === "ชมรมดนตรีไทยมงกุฎวดี" ||
+      clubName === "ชมรมศิลปการแสดง" ||
+      clubName === "ชมรมสันทนาการ" ||
+      clubName === "ชมรมดนตรีไทย-สากล" ||
+      clubName === "ชมรมท่องเที่ยว"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายศิลปวัฒนธรรม");
-    } else if (clubName === 'ชมรมชาวเหนือ' || clubName === 'ชมรมปาล์มทักษิณ' || clubName === 'ชมรมอีสาน' || clubName === 'ชมรมอาสาพัฒนา' || clubName === 'ชมรมอนุรักษ์พัฒนา' || clubName === 'ชมรมชีวิตและสุขภาพ') {
+    } else if (
+      clubName === "ชมรมชาวเหนือ" ||
+      clubName === "ชมรมปาล์มทักษิณ" ||
+      clubName === "ชมรมอีสาน" ||
+      clubName === "ชมรมอาสาพัฒนา" ||
+      clubName === "ชมรมอนุรักษ์พัฒนา" ||
+      clubName === "ชมรมชีวิตและสุขภาพ"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์");
-    } else if (clubName === 'ชมรมฟุตบอล' || clubName === 'ชมรมรักบี้ฟุตบอล' || clubName === 'ชมรมวอลเลย์บอล' || clubName === 'ชมรมบาสเกตบอล' || clubName === 'ชมรมตะกร้อ' || clubName === 'ชมรมฟันดาบ' || clubName === 'ชมรมแบตมินตัน' || clubName === 'ชมรมซอฟท์บอล' || clubName === 'ชมรมเทควันโด' || clubName === 'ชมรมยูโด' || clubName === 'ชมรมเทเบิลเทนนิส' || clubName === 'ชมรมเปตอง' || clubName === 'ชมรมบริดจ์' || clubName === 'ชมรมหมากกระดาน' || clubName === 'ชมรมยิงปืน' || clubName === 'ชมรมกรีฑา' || clubName === 'ชมรมเทนนิส' || clubName === 'ชมรมกอล์ฟ' || clubName === 'ชมรมว่ายน้ำ' || clubName === 'ชมรมเพาะกาย' || clubName === 'ชมรมมวยสากลสมัครเล่น') {
+    } else if (
+      clubName === "ชมรมฟุตบอล" ||
+      clubName === "ชมรมรักบี้ฟุตบอล" ||
+      clubName === "ชมรมวอลเลย์บอล" ||
+      clubName === "ชมรมบาสเกตบอล" ||
+      clubName === "ชมรมตะกร้อ" ||
+      clubName === "ชมรมฟันดาบ" ||
+      clubName === "ชมรมแบตมินตัน" ||
+      clubName === "ชมรมซอฟท์บอล" ||
+      clubName === "ชมรมเทควันโด" ||
+      clubName === "ชมรมยูโด" ||
+      clubName === "ชมรมเทเบิลเทนนิส" ||
+      clubName === "ชมรมเปตอง" ||
+      clubName === "ชมรมบริดจ์" ||
+      clubName === "ชมรมหมากกระดาน" ||
+      clubName === "ชมรมยิงปืน" ||
+      clubName === "ชมรมกรีฑา" ||
+      clubName === "ชมรมเทนนิส" ||
+      clubName === "ชมรมกอล์ฟ" ||
+      clubName === "ชมรมว่ายน้ำ" ||
+      clubName === "ชมรมเพาะกาย" ||
+      clubName === "ชมรมมวยสากลสมัครเล่น"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
-    } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
+    } else if (
+      clubName === "ชมรมลูกหนัง" ||
+      clubName === "ชมรมจักรยานเพื่อสุขภาพ"
+    ) {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
     }
-    console.log("ASDASDFAS")
-    console.log(clubName)
-    console.log(agencyGroupName)
+    console.log("ASDASDFAS");
+    console.log(clubName);
+    console.log(agencyGroupName);
   }, [clubName]);
   return (
     <>
       <Container fluid>
         <Card className="strpied-tabled-with-hover">
-          <Card.Header>
-            <Card.Title as="h4">
-              area เพิ่ม role ของบุคคลนศ และอาจารย์ที่ปรึกษา
-            </Card.Title>
-            <p className="card-category">Here is a subtitle for this table</p>
+          <Card.Header
+            style={{
+              marginBottom: "-2px",
+              backgroundColor: "#FF8B13",
+              color: "white",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "16px",
+                paddingBottom: "10px",
+                paddingTop: "0px",
+              }}
+            >
+              เพิ่มบทบาทของนักศึกษาและอาจารย์ที่ปรึกษา
+            </div>
           </Card.Header>
           <Card.Body>
             <Form.Group className="mb-3">
-              <Form.Label htmlFor="IDCode">Username :</Form.Label>
+              <Form.Label htmlFor="IDCode">
+                ICIT Account ( ชื่อผู้ใช้ ) :
+              </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter ID Code"
+                placeholder="Username"
                 onChange={(event) => {
                   setFusername(event.target.value);
                 }}
@@ -281,10 +408,11 @@ function TableAddStudent() {
               <Button
                 onClick={checkuserinfoapi}
                 type="submit"
-                variant="info"
+                variant="warning"
                 style={{ marginTop: "1%" }}
+                className="btn-details"
               >
-                ค้นหารหัส icit
+                ค้นหา ICIT Account
               </Button>
               <Modal
                 show={showModal}
@@ -292,15 +420,12 @@ function TableAddStudent() {
                 style={{ top: "-20%", maxHeight: "100vh" }}
                 dialogClassName="custom-modal"
               >
-                <Modal.Header>
-                  <Modal.Title>
-                    <div>ข้อมูลรายละเอียดของ icit account</div>
-
-                  </Modal.Title>
+                <Modal.Header style={{backgroundColor:"#535353", paddingBottom:"15px", paddingTop:"15px", color:"white"}}>
+                  <div>รายละเอียดของ ICIT Account</div>
                 </Modal.Header>
                 <Modal.Body>
                   <div>
-                    <Table className="table">
+                    <Table className="table table-bordered table-striped" >
                       <tbody>
                         <tr>
                           <td
@@ -311,9 +436,11 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            <div> Account Type</div>
+                            <div>ประเภทของบัญชี</div>
                           </td>
-                          <td style={{ border: "none" }}><div>{account_type}</div></td>
+                          <td style={{ border: "none" }}>
+                            <div>{account_type}</div>
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -323,9 +450,11 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            <div>Username</div>
+                            <div>ชื่อผู้ใช้</div>
                           </td>
-                          <td style={{ border: "none" }}><div>{username}</div></td>
+                          <td style={{ border: "none" }}>
+                            <div>{username}</div>
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -335,9 +464,11 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            <div>Display Name</div>
+                            <div>ชื่อ-นามสกุล (ไทย)</div>
                           </td>
-                          <td style={{ border: "none" }}><div>{name_student}</div></td>
+                          <td style={{ border: "none" }}>
+                            <div>{name_student}</div>
+                          </td>
                         </tr>
                         <tr>
                           <td
@@ -347,13 +478,12 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            <div> First Name (English)</div>
+                            <div>ชื่อ-นามสกุล (อังกฤษ)</div>
                           </td>
                           <td style={{ border: "none" }}>
                             <div>
                               {firstname_en} {lastname_en}
                             </div>
-
                           </td>
                         </tr>
                         <tr>
@@ -364,7 +494,7 @@ function TableAddStudent() {
                               color: "#fff",
                             }}
                           >
-                            <div>Email</div>
+                            <div>อีเมลมหาวิทยาลัย</div>
                           </td>
                           <td style={{ border: "none" }}>
                             <Form.Control
@@ -376,7 +506,8 @@ function TableAddStudent() {
                               onChange={(event) => {
                                 setEmail(event.target.value);
                               }}
-                            /></td>
+                            />
+                          </td>
                         </tr>
                         {account_type === "personel" && (
                           <>
@@ -399,8 +530,8 @@ function TableAddStudent() {
                                   onChange={(event) => {
                                     setPhone(event.target.value);
                                   }}
-                                /></td>
-
+                                />
+                              </td>
                             </tr>
 
                             <tr>
@@ -422,8 +553,8 @@ function TableAddStudent() {
                                   onChange={(event) => {
                                     setAgencyAdvisor(event.target.value);
                                   }}
-                                /></td>
-
+                                />
+                              </td>
                             </tr>
                           </>
                         )}
@@ -437,7 +568,7 @@ function TableAddStudent() {
                                   color: "#fff",
                                 }}
                               >
-                                <div>คณะ</div>
+                                <div>สังกัด</div>
                               </td>
                               <td style={{ border: "none" }}>
                                 <div>{FAC_NAME_THAI}</div>
@@ -490,11 +621,17 @@ function TableAddStudent() {
                       </tbody>
                     </Table>
                   </div>
-                  <p>กรุณากรอกข้อมมูล ปปปปปปปปปปปปปปปปปปปปปปปปปปปปปป</p>
-                  <Table className="table">
+                  
+                  <Table className="table table-bordered table-striped">
+                    <thead style={{backgroundColor:"#535353"}}>
+                      <tr>
+                        <td style={{ border: "none" }}><div style={{color:"white"}}>กรุณากรอกรายละเอียดเพิ่มเติม</div></td>
+                        <td style={{ border: "none" }}></td>
+                      </tr>
+                    </thead>
                     <tbody>
                       <tr>
-                        <td>
+                        <td style={{backgroundColor:"#FF8B13", color:"white"}}>
                           <div>ปีการศึกษาที่ดูแล</div>{" "}
                         </td>
                         <td>
@@ -505,13 +642,13 @@ function TableAddStudent() {
                             onChange={(e) => setYearly(e.target.value)}
                             placeholder="Enter Yearly Value"
                             style={{ width: "55%" }}
-                            className="form-control"
+                            className="form-control font-form-control"
                           />
                         </td>
                       </tr>
                       {account_type === "students" && (
                         <tr>
-                          <td>
+                          <td style={{backgroundColor:"#FF8B13", color:"white"}}>
                             <div>ตำแหน่ง</div>{" "}
                           </td>
                           <td>
@@ -521,7 +658,7 @@ function TableAddStudent() {
                               }}
                               required
                               style={{ width: "70%" }}
-                              className="form-select"
+                              className="form-select font-form-control"
                             >
                               <option value="">
                                 <div>โปรดเลือกตำแหน่ง</div>
@@ -538,7 +675,7 @@ function TableAddStudent() {
                       )}
                       {account_type === "personel" && (
                         <tr>
-                          <td>
+                          <td style={{backgroundColor:"#FF8B13", color:"white"}}>
                             <div>ตำแหน่ง</div>{" "}
                           </td>
                           <td>
@@ -561,7 +698,7 @@ function TableAddStudent() {
                         </tr>
                       )}
                       <tr>
-                        <td>
+                        <td style={{backgroundColor:"#FF8B13", color:"white"}}>
                           <div>หน่วยงาน</div>{" "}
                         </td>
                         <td>
@@ -645,7 +782,9 @@ function TableAddStudent() {
                       {positionagency === "smo" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td><div>สโมสรนักศึกษา</div></td>
+                          <td>
+                            <div>สโมสรนักศึกษา</div>
+                          </td>
                           <td>
                             <select
                               onChange={(event) => {
@@ -690,7 +829,9 @@ function TableAddStudent() {
                       {positionagency === "etc" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td><div>หน่วยงาน</div></td>
+                          <td>
+                            <div>หน่วยงาน</div>
+                          </td>
                           <td>
                             <select
                               onChange={(event) => {

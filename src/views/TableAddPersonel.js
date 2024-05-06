@@ -223,7 +223,7 @@ function TableAddPersonel() {
       <Container fluid>
         <Card className="strpied-tabled-with-hover">
           <Card.Header>
-            <Card.Title as="h4">area เพิ่ม role ของบุคลากร </Card.Title>
+            <Card.Title as="h4">เพิ่มบทบาทของบุคลากร</Card.Title>
             <p className="card-category">Here is a subtitle for this table</p>
           </Card.Header>
           <Card.Body>

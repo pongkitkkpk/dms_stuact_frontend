@@ -69,7 +69,7 @@ function Header() {
               onClick={(e) => e.preventDefault()}
               className="mr-2"
             >
-              <div>ระบบจัดการโครงการ</div>
+              <div>ระบบจัดการโครงการสำหรับงานกิจกรรมนักศึกษา</div>
             </Navbar.Brand>
           </div>
 
