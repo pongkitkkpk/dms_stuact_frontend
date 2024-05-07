@@ -379,7 +379,7 @@ function TableAddStudent() {
           <Card.Header
             style={{
               marginBottom: "-2px",
-              backgroundColor: "#FF8B13",
+              backgroundColor: "#535353",
               color: "white",
             }}
           >
@@ -631,7 +631,7 @@ function TableAddStudent() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td style={{backgroundColor:"#FF8B13", color:"white"}}>
+                        <td style={{backgroundColor:"#FF8B13", color:"white", width:"40%"}}>
                           <div>ปีการศึกษาที่ดูแล</div>{" "}
                         </td>
                         <td>
@@ -640,7 +640,7 @@ function TableAddStudent() {
                             id="yearly"
                             value={yearly}
                             onChange={(e) => setYearly(e.target.value)}
-                            placeholder="Enter Yearly Value"
+                            placeholder="กรอกปีการศึกษา"
                             style={{ width: "55%" }}
                             className="form-control font-form-control"
                           />
@@ -657,11 +657,11 @@ function TableAddStudent() {
                                 setPosition(event.target.value);
                               }}
                               required
-                              style={{ width: "70%" }}
+                              style={{ width: "70%", height:"37px" }}
                               className="form-select font-form-control"
                             >
                               <option value="">
-                                <div>โปรดเลือกตำแหน่ง</div>
+                                <div>กรุณาเลือก ตำแหน่ง</div>
                               </option>
                               <option value="SH">
                                 <div>ประธานสภา/นายกองค์การ/ประธานชมรม</div>
@@ -684,11 +684,11 @@ function TableAddStudent() {
                                 setPosition(event.target.value);
                               }}
                               required
-                              style={{ width: "70%" }}
-                              className="form-select"
+                              style={{ width: "70%", height:"37px" }}
+                              className="form-select font-form-control"
                             >
                               <option value="">
-                                <div>โปรดเลือกตำแหน่ง</div>
+                                <div>กรุณาเลือก ตำแหน่ง</div>
                               </option>
                               <option value="AD">
                                 <div>อาจารย์ที่ปรึกษา</div>
@@ -707,11 +707,11 @@ function TableAddStudent() {
                               setPositionagency(event.target.value);
                             }}
                             required
-                            style={{ width: "70%" }}
-                            className="form-select"
+                            style={{ width: "70%", height:"37px" }}
+                            className="form-select font-form-control"
                           >
                             <option value="">
-                              <div>โปรดเลือกหน่วยงาน</div>
+                              <div>กรุณาเลือก หน่วยงาน</div>
                             </option>
                             <option value="center">
                               <div>หน่วยงานกลาง</div>
@@ -728,8 +728,8 @@ function TableAddStudent() {
                       {positionagency === "center" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td>
-                            <div>ชมรม/หน่วยงาน/องค์กร</div>{" "}
+                          <td style={{backgroundColor:"#FF8B13", color:"white"}}>
+                            <div>องค์กร</div>{" "}
                           </td>
                           <td>
                             <select
@@ -744,11 +744,11 @@ function TableAddStudent() {
                                 setClubname(selectedText);
                               }}
                               required
-                              className="form-select"
-                              style={{ width: "70%" }}
+                              className="form-select font-form-control"
+                              style={{ width: "70%", height:"37px"}}
                             >
                               <option value="">
-                                กรุณาเลือก ชมรม/หน่วยงาน/องค์กร
+                                กรุณาเลือก องค์กร
                               </option>
                               {setCode.Divison.D04.Agency.map(
                                 (agencyGroup, index) => {
@@ -782,7 +782,7 @@ function TableAddStudent() {
                       {positionagency === "smo" && (
                         // Render something when "หน่วยงานกลาง" is selected
                         <tr>
-                          <td>
+                          <td style={{backgroundColor:"#FF8B13", color:"white"}}>
                             <div>สโมสรนักศึกษา</div>
                           </td>
                           <td>
@@ -797,8 +797,8 @@ function TableAddStudent() {
                                 setClubname(selectedText);
                               }}
                               required
-                              className="form-select"
-                              style={{ width: "70%" }}
+                              className="form-select font-form-control"
+                              style={{ width: "70%", height:"37px" }}
                             >
                               <option value="">กรุณาเลือก สโมสรนักศึกษา</option>
                               {setCode.Divison.D02.Agency.map(
@@ -874,13 +874,14 @@ function TableAddStudent() {
                 </Modal.Body>
                 <Modal.Footer>
                   <Button
-                    variant="secondary"
+                    variant="danger"
                     onClick={() => setShowModal(false)}
+                    className="btn-decrease"
                   >
-                    Close
+                    ยกเลิก
                   </Button>
-                  <Button variant="primary" onClick={addUser}>
-                    Save changes
+                  <Button variant="success" onClick={addUser} className="btn-budget-increase">
+                    บันทึก
                   </Button>
                 </Modal.Footer>
               </Modal>
