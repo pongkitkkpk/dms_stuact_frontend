@@ -400,7 +400,7 @@ function TableAddStudent() {
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Username"
+                placeholder="ชื่อผู้ใช้ ICIT Account"
                 onChange={(event) => {
                   setFusername(event.target.value);
                 }}
