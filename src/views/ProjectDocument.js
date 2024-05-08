@@ -11,6 +11,7 @@ import SD_indicator from "./Compo_ProjectDoc/ShowDetailP/SD_indicator";
 import SD_addfile from "./Compo_ProjectDoc/ShowDetailP/SD_addfile";
 
 import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
+import SD_studentgetmoney from "./Compo_ProjectDoc/ShowDetailP/SD_studentgetmoney";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
 import Swal from "sweetalert2";
@@ -124,7 +125,7 @@ function ProjectDocument() {
 
 
           Axios.put(`http://localhost:3001/admin/updateusebudget/${project_name}`, {
-            allow_budget:allow_budget
+            allow_budget: allow_budget
           })
             .then((response) => {
               console.log("response.data");
@@ -263,7 +264,7 @@ function ProjectDocument() {
           </button>
         </div>
       )}
-      {/* ยืนยัน  */}
+      {/* ดำเนินการขออนุมัติ  */}
       {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
         <div className="d-flex justify-content-end">
           <button
@@ -296,7 +297,7 @@ function ProjectDocument() {
 
         </div>
       )}
-      {/* ส่งร่างสรุปผลโครงการ */}
+      {/* เงินโครงการอนุมัติ */}
       {storedUser.account_type === "students" && currentStepProject == 4 && (
         <div className="d-flex justify-content-end">
           <button
@@ -310,7 +311,8 @@ function ProjectDocument() {
           </button>
         </div>
       )}
-      {/* ดำเนินการสรุปผล */}
+      {/* ร่างสรุปผลโครงการ
+ */}
       {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 5 && (
         <div className="d-flex justify-content-end">
           <button
@@ -556,6 +558,41 @@ function ProjectDocument() {
                       </a>
                     </td>
                   </tr>
+                  <tr
+                    className="list-group-item"
+                    style={{ backgroundColor: "#535353" }}
+                  >
+                    <th>
+                      <a href="#section1">
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          รายละเอียดนักศึกษารับเงิน
+                        </div>
+                      </a>
+                    </th>
+                  </tr>
+                  <tr
+                    className={
+                      currentStepSideBar === "SD_studentgetmoney"
+                        ? "list-group-item active"
+                        : "list-group-item"
+                    }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() => toggleStep("SD_studentgetmoney")}
+                        style={{ display: "inline-block", width: "100%" }}
+                      >
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          3.1 รายละเอียดนักศึกษารับเงิน
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
                 </table>
               </Card.Body>
             </Card>
@@ -585,6 +622,9 @@ function ProjectDocument() {
           )}
           {currentStepSideBar === "SD_showedit" && (
             <SD_showedit id_project={id_project} currentStepProject={currentStepProject} />
+          )}
+          {currentStepSideBar === "SD_studentgetmoney" && (
+            <SD_studentgetmoney id_project={id_project} currentStepProject={currentStepProject} />
           )}
         </Row>
       </Container>
