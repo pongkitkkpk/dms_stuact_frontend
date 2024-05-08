@@ -32,9 +32,10 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
     const [codeclub, setCodeclub] = useState("");
     const [yearly, setYearly] = useState("");
 
-    const [namestuact_receive, setNameStuact_receive] = useState("");
+
     const [namestudent_receive, setNameStudent_receive] = useState("");
     const [numberstudent_receive, setNumberStudent_receive] = useState(0);
+    const [namestuact_receive, setNameStuact_receive] = useState("");
     const [remainingBudget, setRemainingBudget] = useState(0);
 
     const [Getuserapi, setGetuserapi] = useState(0);
@@ -222,6 +223,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                     <CardBody>
                         <div>
                             <h1>ยอดทั้งหมด {net_budget}</h1>
+                            <h1>เหลือ {remainingBudget}</h1>
                         </div>
                         <Table striped="columns">
                             <tbody>
@@ -373,28 +375,15 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                             marginBottom: "10px",
                         }}
                     >
-                        {isEditMode ? (
-                            <>
-                                <Button
-                                    variant="success"
-                                    type="submit"
-                                    className="ml-5 mb-3 btn-budget-increase"
-                                    style={{ fontSize: "14px" }}
-                                    onClick={handleSaveClick}
-                                >
-                                    Save
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    className="ml-5 mb-3 btn-budget-decrease"
-                                    style={{ fontSize: "14px" }}
-                                    variant="danger"
-                                    onClick={handleBackClick}
-                                >
-                                    Back
-                                </Button>
-                            </>
-                        ) : null}
+                        <Button
+                            
+                            type="submit"
+                            variant="warning"
+                            className="btn-dataupdate"
+                            style={{ fontSize: "14px" }}
+                        >
+                            บันทึกข้อมูล
+                        </Button>
                     </CardFooter>
                 </Card>
             </Col>
