@@ -32,8 +32,13 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
     const [codeclub, setCodeclub] = useState("");
     const [yearly, setYearly] = useState("");
 
+    const [namestuact_receive, setNameStuact_receive] = useState("");
     const [namestudent_receive, setNameStudent_receive] = useState("");
     const [numberstudent_receive, setNumberStudent_receive] = useState(0);
+    const [remainingBudget, setRemainingBudget] = useState(0);
+
+    const [Getuserapi, setGetuserapi] = useState(0);
+
 
 
 
@@ -53,6 +58,18 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                 response.data[0].person3_name
             ].filter(personName => personName !== null && personName !== '');
             setPersonList(newPersonList);
+        });
+
+    };
+
+    const [stuactpersonList, setStuactPersonList] = useState([]);
+
+    const getStuactProjectData = () => {
+        Axios.get(
+            `http://localhost:3001/admin/stuactusers`
+        ).then((response) => {
+            setStuactPersonList(response.data);
+
         });
 
     };
@@ -80,27 +97,35 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
         getProjectNetData();
     }, [project_name]);
 
-    // useEffect(() => {
-    //     console.log("Personlist");
-    //     console.log(personList);
-    // }, [personList]);
+    useEffect(() => {
+        getStuactProjectData();
+    }, [namestuact_receive]);
+
+    useEffect(() => {
+        console.log("stuactpersonList");
+        stuactpersonList.forEach((person, index) => {
+            console.log(`Student ${index + 1}: ${person.name_student}`);
+        });
+    }, [stuactpersonList]);
+
 
     const calculateRemainingBudget = () => {
-        // Ensure net_budget is a string before trying to remove commas
-        const netBudgetString = typeof net_budget === 'string' ? net_budget : net_budget.toString();
-        // Remove commas and convert net_budget to a number
-        const netbudget = parseFloat(netBudgetString.replace(/,/g, ''));
-        // Convert numberstudent_receive to a number without commas
-        const receivedBudget = parseFloat(numberstudent_receive.replace(/,/g, ''));
-        console.log("net_budget after conversion:", netbudget); 
-        console.log("receivedBudget:", receivedBudget);
-        return (netbudget - receivedBudget).toLocaleString("en-US");
+        const netbudget = parseFloat(net_budget.toString().replace(/,/g, ''));
+        const receivedBudgetall = parseFloat(numberstudent_receive.toString().replace(/,/g, ''));
+        return (netbudget - receivedBudgetall).toLocaleString("en-US");
     };
-    
-    
-    
-    
-    
+
+
+    useEffect(() => {
+        const remainingBudget = calculateRemainingBudget();
+        setRemainingBudget(remainingBudget);
+    }, [net_budget, numberstudent_receive]);
+
+    useEffect(() => {
+        console.log("remainingBudget" + remainingBudget)
+    }, [remainingBudget])
+
+
 
     const handleSaveClick = () => {
         const editpage = "ข้อมูลพื้นฐานโครงการ";
@@ -257,35 +282,24 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                                                         />
                                                     </td>
 
-                                                    {/* <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            className="font-form-control"
-                                                            placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
-                                                            value={
-                                                                yearly
-                                                            }
-                                                            readOnly
-                                                        />
-                                                    </td> */}
-
                                                     <td style={{ verticalAlign: "middle" }}>
                                                         <Form.Control
                                                             size="sm"
                                                             type="text"
                                                             className="font-form-control"
                                                             placeholder="จำนวนเงิน"
-                                                            value={numberstudent_receive}
+                                                            value={numberstudent_receive.toLocaleString("en-US")}
                                                             onChange={(event) => {
-                                                                const value = Number(
-                                                                    event.target.value.replace(/,/g, "")
-                                                                );
-                                                                setNumberStudent_receive(value.toLocaleString("en-US"));
+                                                                let value = Number(event.target.value.replace(/,/g, ""));
+                                                                const netbudget = parseFloat(net_budget.toString().replace(/,/g, ''));
+                                                                if (value > netbudget) {
+                                                                    value = netbudget;
+                                                                }
+                                                                setNumberStudent_receive(value);
                                                             }}
-
                                                         />
                                                     </td>
+
                                                     <td>
                                                         <div>บาท</div>
                                                     </td>
@@ -298,7 +312,6 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                                                             placeholder="จำนวนเงิน"
                                                             value={calculateRemainingBudget()}
                                                             readOnly
-
                                                         />
                                                     </td>
                                                     <td>
@@ -319,13 +332,10 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                                         <Table striped="columns">
                                             <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
                                                 <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
-                                                    <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>รายชื่อนักศึกษารับเงิน</th>
-                                                    <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>หน่วยงาน</th>
-
+                                                    <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>กรอก ICIT Account</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <tr style={{ backgroundColor: "white" }}>
 
                                                     <td style={{ verticalAlign: "middle" }}>
@@ -335,66 +345,18 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                                                             size="sm"
                                                             onChange={(event) => {
                                                                 const selectedValue = event.target.value;
-                                                                setProjectName(selectedValue);
+                                                                setNameStuact_receive(selectedValue);
                                                             }}
                                                         >
-                                                            <option value="">เลือกนักศึกษารับเงิน</option>
-                                                            {personList.map((personName, index) => (
-                                                                <option key={index} value={personName}>
-                                                                    {personName}
+                                                            <option value="">เลือกบุคลากรรับเรื่อง</option>
+                                                            {Array.isArray(stuactpersonList) && stuactpersonList.map((person, index) => (
+                                                                <option key={index} value={person.name_student}>
+                                                                    {person.name_student}
                                                                 </option>
                                                             ))}
-
                                                         </Form.Control>
-
-
-                                                    </td>
-
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            className="font-form-control"
-                                                            placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
-                                                            value={
-                                                                responsible_agency
-                                                            }
-                                                            readOnly
-                                                        />
-
-                                                    </td>
-
-                                                    {/* <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            className="font-form-control"
-                                                            placeholder="เบอร์ติดต่อ ผู้รับผิดชอบโครงการ คนที่ 1"
-                                                            value={
-                                                                yearly
-                                                            }
-                                                            readOnly
-                                                        />
-                                                    </td> */}
-
-                                                    <td style={{ verticalAlign: "middle" }}>
-                                                        <Form.Control
-                                                            size="sm"
-                                                            type="text"
-                                                            className="font-form-control"
-                                                            placeholder="จำนวนเงิน"
-                                                        // value={student_receive}
-                                                        // onChange={(event) => {
-                                                        //     const value = Number(
-                                                        //         event.target.value.replace(/,/g, "")
-                                                        //     );
-                                                        //     setStudent_receive(value.toLocaleString("en-US"));
-                                                        // }}
-
-                                                        />
                                                     </td>
                                                 </tr>
-
                                             </tbody>
                                         </Table>
                                     </td>

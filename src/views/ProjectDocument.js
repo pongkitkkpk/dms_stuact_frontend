@@ -12,6 +12,7 @@ import SD_addfile from "./Compo_ProjectDoc/ShowDetailP/SD_addfile";
 
 import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
 import SD_studentgetmoney from "./Compo_ProjectDoc/ShowDetailP/SD_studentgetmoney";
+import SD_nottoday from "./Compo_ProjectDoc/ShowDetailP/SD_nottoday";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
 import Swal from "sweetalert2";
@@ -580,10 +581,18 @@ function ProjectDocument() {
                     }
                   >
                     <td>
+
                       <a
                         href="#"
-                        onClick={() => toggleStep("SD_studentgetmoney")}
+                        onClick={() => {
+                          if (currentStepProject !== 4 && currentStepProject !== 5) {
+                            toggleStep("SD_nottoday");
+                          } else {
+                            toggleStep("SD_studentgetmoney");
+                          }
+                        }}
                         style={{ display: "inline-block", width: "100%" }}
+
                       >
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
@@ -625,6 +634,13 @@ function ProjectDocument() {
           )}
           {currentStepSideBar === "SD_studentgetmoney" && (
             <SD_studentgetmoney id_project={id_project} currentStepProject={currentStepProject} />
+          )}
+
+
+
+
+          {currentStepSideBar === "SD_nottoday" && (
+            <SD_nottoday id_project={id_project} currentStepProject={currentStepProject} />
           )}
         </Row>
       </Container>

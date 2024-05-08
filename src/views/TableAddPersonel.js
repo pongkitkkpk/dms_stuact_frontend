@@ -400,14 +400,14 @@ function TableAddPersonel() {
                             >
                               <option>เลือกบลาๆ</option>
                               <option value="Stuact">
-                                บุคลการกองกิจการนักศึกษา
+                                บุคลากรกองกิจการนักศึกษา
                               </option>
                             </select>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <div>ฝ่าย</div>
+                            <div>ส่วนงาน</div>
                           </td>
                           <td>
                             <select
