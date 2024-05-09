@@ -90,6 +90,20 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
             });
     };
 
+    const getHistoryProjectData = () => {
+        Axios.get(
+            `http://localhost:3001/gethistorystudentgetmoney/${project_name}`
+        )
+            .then((response) => {
+                setNet_budget(response.data[0].net_budget);
+            })
+            .catch((error) => {
+                console.error("Error fetching project net data:", error);
+                setNet_budget(0);
+
+            });
+    };
+
     useEffect(() => {
         getProjectData();
     }, [id_project]);
@@ -127,49 +141,34 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
     }, [remainingBudget])
 
 
-
-    const handleSaveClick = () => {
-        const editpage = "ข้อมูลพื้นฐานโครงการ";
-        Swal.fire({
-            title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
-            text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "บันทึก",
-            cancelButtonText: "ยกเลิก",
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Your Axios PUT request code goes here
-                Axios.put(
-                    `http://localhost:3001/student/project/edit/${id_project}`,
-                    editData
-                )
-                    .then((response) => {
-                        console.log(response.data);
-                        window.location.reload();
-                    })
-                    .catch((error) => {
-                        console.error("Error creating project:", error);
-                    });
-
-                Axios.post(
-                    `http://localhost:3001/student/project/edit/history/${id_project}`,
-                    { codeclub, editpage, id_student }
-                )
-                    .then((response) => {
-                        console.log("Data saved successfully:", response.data);
-                        window.location.reload();
-                    })
-                    .catch((error) => {
-                        console.error("Error saving data:", error);
-                    });
-                Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
-            }
-        });
-    };
+        const createstudentdetmoney = () => {
+            Swal.fire({
+                title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
+                text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "บันทึก",
+                cancelButtonText: "ยกเลิก",
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Axios.post(
+                        `http://localhost:3001/studentgetmoney/${id_project}`,
+                        {project_name,namestudent_receive,numberstudent_receive,namestuact_receive,remainingBudget}
+                    )
+                        .then((response) => {
+                            console.log(response.data);
+                            window.location.reload();
+                        })
+                        .catch((error) => {
+                            console.error("Error creating project:", error);
+                        });
+                    Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+                }
+            });
+        };
 
 
     const handleBackClick = () => {
@@ -376,7 +375,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                         }}
                     >
                         <Button
-                            
+                            onClick={createstudentdetmoney}
                             type="submit"
                             variant="warning"
                             className="btn-dataupdate"
