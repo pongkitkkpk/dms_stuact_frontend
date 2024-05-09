@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 
-function SD_indicator({ id_project }) {
+function SD_indicator({ id_project , currentStepProject}) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -254,7 +254,7 @@ function SD_indicator({ id_project }) {
     <>
       <Col md="9">
         <Card>
-          {!isEditMode && (
+        {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

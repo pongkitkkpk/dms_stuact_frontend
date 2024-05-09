@@ -11,12 +11,14 @@ import SD_indicator from "./Compo_ProjectDoc/ShowDetailP/SD_indicator";
 import SD_addfile from "./Compo_ProjectDoc/ShowDetailP/SD_addfile";
 
 import SD_showedit from "./Compo_ProjectDoc/ShowDetailP/SD_showedit";
+import SD_showlogstatus from "./Compo_ProjectDoc/ShowDetailP/SD_showlogstatus";
 import SD_studentgetmoney from "./Compo_ProjectDoc/ShowDetailP/SD_studentgetmoney";
 import SD_nottoday from "./Compo_ProjectDoc/ShowDetailP/SD_nottoday";
 
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
 import Swal from "sweetalert2";
 import Axios from "axios";
+
 
 function ProjectDocument() {
   const storedUserData = sessionStorage.getItem("user");
@@ -123,7 +125,19 @@ function ProjectDocument() {
           }).catch((error) => {
             console.error("Error creating project:", error);
           });
-
+          Axios.post(`http://localhost:3001/insertlogState/${id_project}`, {
+            project_name,
+            codeclub,
+            project_phase,
+            editor_name,
+          })
+            .then((response) => {
+              console.log("response.data");
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error("Error creating project:", error);
+            });
 
           Axios.put(`http://localhost:3001/admin/updateusebudget/${project_name}`, {
             allow_budget: allow_budget
@@ -203,6 +217,19 @@ function ProjectDocument() {
           .catch((error) => {
             console.error("Error creating project:", error);
           });
+        Axios.post(`http://localhost:3001/insertlogState/${id_project}`, {
+          project_name,
+          codeclub,
+          project_phase,
+          editor_name,
+        })
+          .then((response) => {
+            console.log("response.data");
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("Error creating project:", error);
+          });
         Axios.post("http://localhost:3001/sendEmail", {
           email: storedUser.email,
           subject: `อัพเดท สถานะโครงการ ${project_name} เป็น ${DBproject_phase}`,
@@ -214,6 +241,7 @@ function ProjectDocument() {
           .catch((error) => {
             console.error("Error sending email:", error);
           });
+
         Swal.fire(
           "Success!",
           "You have proceeded to the next step.",
@@ -560,6 +588,27 @@ function ProjectDocument() {
                     </td>
                   </tr>
                   <tr
+                    className={
+                      currentStepSideBar === "SD_showlogstatus"
+                        ? "list-group-item active"
+                        : "list-group-item"
+                    }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() => toggleStep("SD_showlogstatus")}
+                        style={{ display: "inline-block", width: "100%" }}
+                      >
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          2.2 แสดงสถานะการอัพเดต
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
                     className="list-group-item"
                     style={{ backgroundColor: "#535353" }}
                   >
@@ -631,6 +680,9 @@ function ProjectDocument() {
           )}
           {currentStepSideBar === "SD_showedit" && (
             <SD_showedit id_project={id_project} currentStepProject={currentStepProject} />
+          )}
+          {currentStepSideBar === "SD_showlogstatus" && (
+            <SD_showlogstatus id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_studentgetmoney" && (
             <SD_studentgetmoney id_project={id_project} currentStepProject={currentStepProject} />

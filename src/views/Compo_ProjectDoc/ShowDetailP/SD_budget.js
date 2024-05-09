@@ -148,13 +148,13 @@ function SD_budget({ id_project }) {
       setListETC(responseData.listETC);
       setListSETC(responseData.listSETC);
       
-      const ACount = responseData.TypeACount + 1; 
+      const ACount = +responseData.TypeACount ; 
       setTypeACount(ACount);
-      const BTCount = responseData.TypeBTCount + 1; 
+      const BTCount = +responseData.TypeBTCount ; 
       setTypeBTCount(BTCount);
-      const BNTCount = responseData.TypeBNTCount + 1; 
+      const BNTCount = +responseData.TypeBNTCount ; 
       setTypeBNTCount(BNTCount);
-      const CCount = responseData.TypeCCount + 1; 
+      const CCount = +responseData.TypeCCount ; 
       setTypeCCount(CCount);
       
     });
@@ -212,9 +212,7 @@ function SD_budget({ id_project }) {
 
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
-  useEffect(() => {
-    console.log(listA);
-  }, [listA]);
+
   // const handleSaveClick = () => {
   //   const editpage = "งบประมาณโครงการ"
   //   Axios.put(
@@ -1092,9 +1090,10 @@ function SD_budget({ id_project }) {
     });
   };
 
+
   
   const increaseTypeACount = () => {
-    if (+TypeACount < 15) {
+    if (TypeACount < 15) {
       setTypeACount(+TypeACount + 1);
     }
   };
@@ -1349,14 +1348,14 @@ function SD_budget({ id_project }) {
   const [listSSBNT, setListSSBNT] = useState(1);
   const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
-  useEffect(() => {
-    console.log(listBNT);
-    console.log(listNBNT);
-    console.log(listNNBNT);
-    console.log(listTPBNT);
-    console.log(listSBNT);
-    console.log(listSSBNT);
-  }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT]);
+  // useEffect(() => {
+  //   console.log(listBNT);
+  //   console.log(listNBNT);
+  //   console.log(listNNBNT);
+  //   console.log(listTPBNT);
+  //   console.log(listSBNT);
+  //   console.log(listSSBNT);
+  // }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT]);
   const increaseTypeBNTCount = () => {
     if (+TypeBNTCount < 10) {
       setTypeBNTCount(+TypeBNTCount + 1);

@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 
-function SD_locationtime({ id_project }) {
+function SD_locationtime({ id_project, currentStepProject }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -263,7 +263,7 @@ function SD_locationtime({ id_project }) {
       {/* วนค่าจากdatabase  */}
       <Col md="9">
         <Card>
-          {!isEditMode && (
+        {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

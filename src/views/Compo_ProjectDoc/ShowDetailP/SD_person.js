@@ -14,7 +14,7 @@ import {
   Table,
 } from "react-bootstrap";
 
-function SD_person({ id_project }) {
+function SD_person({ id_project, currentStepProject }) {
 
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
@@ -596,7 +596,7 @@ function SD_person({ id_project }) {
     <>
       <Col md="9">
         <Card>
-          {!isEditMode && (
+        {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

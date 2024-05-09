@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 
-function SD_timestep({ id_project }) {
+function SD_timestep({ id_project , currentStepProject}) {
 
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
@@ -52,6 +52,7 @@ function SD_timestep({ id_project }) {
   const [start_duration_table1, setStartDurationTable1] = useState("");
   const [end_duration_table1, setEndDurationTable1] = useState("");
   const [responsible_table1, setResponsibleTable1] = useState([]);
+
   const handleresponsibleTable1Change = (event) => {
     const name = event.target.value;
     if (responsible_table1.includes(name)) {
@@ -347,7 +348,7 @@ function SD_timestep({ id_project }) {
       setEndDurationTable13(response.data[0].end_duration_table13);
       setEndDurationTable14(response.data[0].end_duration_table14);
       setEndDurationTable15(response.data[0].end_duration_table15);
-      setTopictableCount(response.data[0].TopictableCount);
+      setTopictableCount(+response.data[0].TopictableCount);
 
       const namesArray1 = response.data[0].responsibleTable1str
         .split(",")
@@ -1305,7 +1306,7 @@ function SD_timestep({ id_project }) {
     <>
       <Col md="9">
         <Card>
-          {!isEditMode && (
+          {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"
