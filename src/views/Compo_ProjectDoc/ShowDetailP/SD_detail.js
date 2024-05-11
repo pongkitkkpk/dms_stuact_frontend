@@ -187,14 +187,44 @@ function SD_detail({ id_project, currentStepProject }) {
   };
 
   const handleDownloadClick = () => {
-    console.log("asdfasd");
-    // Save data here
-    Axios.get(`http://localhost:3001/student/download/${id_project}`).then(
-      (response) => {
-        console.log(response.data);
-      }
-    );
+    window.location.href = `http://localhost:3001/student/download/${id_project}`;
   };
+
+  // const handleDownloadClick = () => {
+  //   Axios.get(`http://localhost:3001/student/download/${id_project}`, {
+  //     responseType: 'arraybuffer', // Ensure the response is treated as an array buffer
+  //   })
+  //   .then(response => {
+  //     // Create a Blob from the response data with the appropriate MIME type
+  //     const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      
+  //     // Create a URL for the Blob
+  //     const url = window.URL.createObjectURL(blob);
+      
+  //     // Create a temporary link element to trigger the download
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.setAttribute('download', `e-doc-${id_project}.docx`);
+      
+  //     // Append the link to the DOM and simulate a click
+  //     document.body.appendChild(link);
+  //     link.click();
+  
+  //     // Clean up by removing the link from the DOM and revoking the URL
+  //     document.body.removeChild(link);
+  //     window.URL.revokeObjectURL(url);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error downloading document:', error);
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Oops...',
+  //       text: 'An error occurred while downloading the document!',
+  //     });
+  //   });
+  // };
+  
+  
 
   return (
     <>
