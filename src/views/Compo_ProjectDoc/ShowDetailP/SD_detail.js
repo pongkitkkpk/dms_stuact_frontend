@@ -124,10 +124,9 @@ function SD_detail({ id_project, currentStepProject }) {
       cancelButtonColor: "#d33",
       confirmButtonText: "บันทึก",
       cancelButtonText: "ยกเลิก",
-      reverseButtons: true,
+      // reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        // Your Axios PUT request code goes here
         Axios.put(
           `http://localhost:3001/student/project/edit/${id_project}`,
           editData
@@ -175,7 +174,7 @@ function SD_detail({ id_project, currentStepProject }) {
       showCancelButton: true,
       confirmButtonText: "Yes, proceed",
       cancelButtonText: "No, cancel",
-      reverseButtons: true,
+      // reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         setIsEditMode(false);
