@@ -393,13 +393,13 @@ function ProjectDocument() {
                     style={{ backgroundColor: "#535353" }}
                   >
                     <th>
-                      <a href="#section1">
-                        <div
-                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
-                        >
-                          แบบขออนุมัติโครงการ
-                        </div>
-                      </a>
+
+                      <div
+                        style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                      >
+                        <a><div>แบบขออนุมัติโครงการ</div></a>
+                      </div>
+
                     </th>
                   </tr>
                   <tr
@@ -557,13 +557,14 @@ function ProjectDocument() {
                     style={{ backgroundColor: "#535353" }}
                   >
                     <th>
-                      <a href="#section1">
-                        <div
-                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
-                        >
-                          แบบขออนุมัติโครงการ
-                        </div>
-                      </a>
+
+                      <div
+                        style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                      >
+                        <a><div>ประวัติการแก้ไข/อัพเดทสถานะ</div></a>
+
+                      </div>
+
                     </th>
                   </tr>
                   <tr
@@ -613,13 +614,14 @@ function ProjectDocument() {
                     style={{ backgroundColor: "#535353" }}
                   >
                     <th>
-                      <a href="#section1">
-                        <div
-                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
-                        >
-                          รายละเอียดนักศึกษารับเงิน
-                        </div>
-                      </a>
+
+                      <div
+                        style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                      >
+                        <a><div>รายละเอียดนักศึกษารับเงิน</div></a>
+
+                      </div>
+
                     </th>
                   </tr>
                   <tr

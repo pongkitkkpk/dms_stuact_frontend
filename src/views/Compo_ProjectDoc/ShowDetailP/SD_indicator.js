@@ -15,8 +15,9 @@ import {
   Table,
 } from "react-bootstrap";
 import Axios from "axios";
+import Swal from 'sweetalert2';
 
-function SD_indicator({ id_project , currentStepProject}) {
+function SD_indicator({ id_project, currentStepProject }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -189,72 +190,144 @@ function SD_indicator({ id_project , currentStepProject}) {
     setIsEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    const editpage = "ความคาดหวังของโครงการ"
-    setIsEditMode(false);
+  // const handleSaveClick = () => {
+  //   const editpage = "ความคาดหวังของโครงการ"
+  //   setIsEditMode(false);
 
-    if (window.confirm("Do you want to save changes?")) {
-      Axios.put(`http://localhost:3001/student/project/indicator/edit/${id_project}`, {
-        volume1: volume1,
-        volume2: volume2,
-        volume3: volume3,
-        volume4: volume4,
-        volume5: volume5,
-        quality1: quality1,
-        quality2: quality2,
-        quality3: quality3,
-        quality4: quality4,
-        quality5: quality5,
-        expresult1: expresult1,
-        expresult2: expresult2,
-        expresult3: expresult3,
-        expresult4: expresult4,
-        expresult5: expresult5,
-        is_1follow: is_1follow,
-        is_2follow: is_2follow,
-        is_3follow: is_3follow,
-        is_4follow: is_4follow,
-        is_etcfollow: is_etcfollow,
-        etcfollow: etcfollow,
-      })
-        .then((response) => {
-          // Handle success
-          console.log("Data saved successfully:", response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          // Handle error
-          console.error("Error saving data:", error);
-        });
-      Axios.post(
-        `http://localhost:3001/student/project/edit/history/${id_project}`,
-        { codeclub, editpage, id_student }
-      )
-        .then((response) => {
-          console.log("Data saved successfully:", response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
-    }
+  //   if (window.confirm("Do you want to save changes?")) {
+  //     Axios.put(`http://localhost:3001/student/project/indicator/edit/${id_project}`, {
+  //       volume1: volume1,
+  //       volume2: volume2,
+  //       volume3: volume3,
+  //       volume4: volume4,
+  //       volume5: volume5,
+  //       quality1: quality1,
+  //       quality2: quality2,
+  //       quality3: quality3,
+  //       quality4: quality4,
+  //       quality5: quality5,
+  //       expresult1: expresult1,
+  //       expresult2: expresult2,
+  //       expresult3: expresult3,
+  //       expresult4: expresult4,
+  //       expresult5: expresult5,
+  //       is_1follow: is_1follow,
+  //       is_2follow: is_2follow,
+  //       is_3follow: is_3follow,
+  //       is_4follow: is_4follow,
+  //       is_etcfollow: is_etcfollow,
+  //       etcfollow: etcfollow,
+  //     })
+  //       .then((response) => {
+  //         // Handle success
+  //         console.log("Data saved successfully:", response.data);
+  //         window.location.reload();
+  //       })
+  //       .catch((error) => {
+  //         // Handle error
+  //         console.error("Error saving data:", error);
+  //       });
+  //     Axios.post(
+  //       `http://localhost:3001/student/project/edit/history/${id_project}`,
+  //       { codeclub, editpage, id_student }
+  //     )
+  //       .then((response) => {
+  //         console.log("Data saved successfully:", response.data);
+  //         window.location.reload();
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error saving data:", error);
+  //       });
+  //   }
+  // };
+
+  const handleSaveClick = () => {
+    const editpage = "ความคาดหวังของโครงการ";
+    Swal.fire({
+      title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
+      text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "บันทึก",
+      cancelButtonText: "ยกเลิก",
+      // reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.put(
+          `http://localhost:3001/student/project/indicator/edit/${id_project}`, {
+          volume1: volume1,
+          volume2: volume2,
+          volume3: volume3,
+          volume4: volume4,
+          volume5: volume5,
+          quality1: quality1,
+          quality2: quality2,
+          quality3: quality3,
+          quality4: quality4,
+          quality5: quality5,
+          expresult1: expresult1,
+          expresult2: expresult2,
+          expresult3: expresult3,
+          expresult4: expresult4,
+          expresult5: expresult5,
+          is_1follow: is_1follow,
+          is_2follow: is_2follow,
+          is_3follow: is_3follow,
+          is_4follow: is_4follow,
+          is_etcfollow: is_etcfollow,
+          etcfollow: etcfollow,
+        }
+        )
+          .then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error creating project:", error);
+          });
+
+        Axios.post(
+          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          { codeclub, editpage, id_student }
+        )
+          .then((response) => {
+            console.log("Data saved successfully:", response.data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+          });
+        Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+      }
+    });
   };
 
   const handleBackClick = () => {
-    const confirmBack = window.confirm(
-      "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ"
-    );
+    Swal.fire({
+      title: "Are you sure?",
+      text: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, proceed",
+      cancelButtonText: "No, cancel",
+      // reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsEditMode(false);
+        setEditData(originalData);
+        window.location.reload();
 
-    if (confirmBack) {
-      setIsEditMode(false);
-      setEditData(originalData);
-    }
+        Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+      }
+    });
   };
   return (
     <>
       <Col md="9">
         <Card>
-        {currentStepProject <= 3 && !isEditMode && (
+          {currentStepProject <= 3 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"
@@ -290,7 +363,7 @@ function SD_indicator({ id_project , currentStepProject}) {
                 {/* ตัวชี้วัด(ด้านปริมาณ) */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    <div><p className="title" style={{marginBottom:"0"}}>ตัวชี้วัด</p><p className="title" style={{marginBottom:"0"}}>(ด้านปริมาณ)</p></div>
+                    <div><p className="title" style={{ marginBottom: "0" }}>ตัวชี้วัด</p><p className="title" style={{ marginBottom: "0" }}>(ด้านปริมาณ)</p></div>
                   </td>
                   <td className="back-side-td">
                     <Table>
@@ -374,7 +447,7 @@ function SD_indicator({ id_project , currentStepProject}) {
                     className="head-side-td-swp"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div><p className="title" style={{marginBottom:"0"}}>ตัวชี้วัด</p><p className="title" style={{marginBottom:"0"}}>(ด้านคุณภาพ)</p></div>
+                    <div><p className="title" style={{ marginBottom: "0" }}>ตัวชี้วัด</p><p className="title" style={{ marginBottom: "0" }}>(ด้านคุณภาพ)</p></div>
                   </td>
                   <td className="back-side-td">
                     <Table>
