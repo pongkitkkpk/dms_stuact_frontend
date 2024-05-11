@@ -185,7 +185,7 @@ function TableAddPersonel() {
       codeagency: codeagency,
       codeworkgroup: codeworkgroup,
       codebooksome: newCodebooksome,
-      codebooksomeoutyear:newCodebooksomeoutyear
+      codebooksomeoutyear: newCodebooksomeoutyear,
     })
       .then(() => {
         setUserList([
@@ -208,7 +208,7 @@ function TableAddPersonel() {
             codeagency: codeagency,
             codeworkgroup: codeworkgroup,
             codebooksome: newCodebooksome,
-            codebooksomeoutyear:newCodebooksomeoutyear
+            codebooksomeoutyear: newCodebooksomeoutyear,
           },
         ]);
         // Reload the page after adding a user
@@ -222,16 +222,31 @@ function TableAddPersonel() {
     <>
       <Container fluid>
         <Card className="strpied-tabled-with-hover">
-          <Card.Header>
-            <Card.Title as="h4">เพิ่มบทบาทของบุคลากร</Card.Title>
-            <p className="card-category">Here is a subtitle for this table</p>
+          <Card.Header
+            style={{
+              marginBottom: "-2px",
+              backgroundColor: "#535353",
+              color: "white",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "16px",
+                paddingBottom: "10px",
+                paddingTop: "0px",
+              }}
+            >
+              เพิ่มบทบาทของบุคลากร
+            </div>
           </Card.Header>
           <Card.Body>
             <Form.Group className="mb-3">
-              <Form.Label htmlFor="IDCode">Username :</Form.Label>
+              <Form.Label htmlFor="IDCode">
+                ICIT Account ( ชื่อผู้ใช้ ) :
+              </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter ID Code"
+                placeholder="ชื่อผู้ใช้ ICIT Account"
                 onChange={(event) => {
                   setFusername(event.target.value);
                 }}
@@ -239,10 +254,11 @@ function TableAddPersonel() {
               <Button
                 onClick={checkuserinfoapi}
                 type="submit"
-                variant="info"
+                variant="warning"
                 style={{ marginTop: "1%" }}
+                className="btn-details"
               >
-                ค้นหารหัส icit
+                ค้นหา ICIT Account
               </Button>
               {/* is_personel */}
               {true && (
@@ -252,14 +268,19 @@ function TableAddPersonel() {
                   style={{ top: "-20%", maxHeight: "100vh" }}
                   dialogClassName="custom-modal"
                 >
-                  <Modal.Header>
-                    <Modal.Title>
-                      ข้อมูลรายละเอียดของ icit account 
-                    </Modal.Title>
+                  <Modal.Header
+                    style={{
+                      backgroundColor: "#535353",
+                      paddingBottom: "15px",
+                      paddingTop: "15px",
+                      color: "white",
+                    }}
+                  >
+                    <div>รายละเอียดของ ICIT Account</div>
                   </Modal.Header>
                   <Modal.Body>
                     <div>
-                      <Table className="table">
+                      <Table className="table table-bordered table-striped">
                         <tbody>
                           <tr>
                             <td
@@ -270,46 +291,10 @@ function TableAddPersonel() {
                                 color: "#fff",
                               }}
                             >
-                              Account Type
-                            </td>
-                            <td style={{ border: "none" }}>{account_type}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              Username
-                            </td>
-                            <td style={{ border: "none" }}>{username}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              Display Name
-                            </td>
-                            <td style={{ border: "none" }}>{name_student}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              First Name (English)
+                              <div>ประเภทของบัญชี</div>
                             </td>
                             <td style={{ border: "none" }}>
-                              {firstname_en} {lastname_en}
+                              <div>{account_type}</div>
                             </td>
                           </tr>
                           <tr>
@@ -320,46 +305,10 @@ function TableAddPersonel() {
                                 color: "#fff",
                               }}
                             >
-                              Email
-                            </td>
-                            <td style={{ border: "none" }}>{email}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              คณะ
-                            </td>
-                            <td style={{ border: "none" }}>{FAC_NAME_THAI}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              วิทยาเขต
-                            </td>
-                            <td style={{ border: "none" }}>{CAMPUS_NAME}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              style={{
-                                backgroundColor: "#FF8B13",
-                                border: "none",
-                                color: "#fff",
-                              }}
-                            >
-                              สถานะ
+                              <div>ชื่อผู้ใช้</div>
                             </td>
                             <td style={{ border: "none" }}>
-                              {STU_STATUS_DESC}
+                              <div>{username}</div>
                             </td>
                           </tr>
                           <tr>
@@ -370,23 +319,71 @@ function TableAddPersonel() {
                                 color: "#fff",
                               }}
                             >
-                              หลักสูตร
+                              <div>ชื่อ-นามสกุล (ไทย)</div>
                             </td>
-                            <td style={{ border: "none" }}>{LEVEL_DESC}</td>
+                            <td style={{ border: "none" }}>
+                              <div>{name_student}</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                border: "none",
+                                color: "#fff",
+                              }}
+                            >
+                              <div>ชื่อ-นามสกุล (อังกฤษ)</div>
+                            </td>
+                            <td style={{ border: "none" }}>
+                              <div>
+                                {firstname_en} {lastname_en}
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                border: "none",
+                                color: "#fff",
+                              }}
+                            >
+                              <div>อีเมลมหาวิทยาลัย</div>
+                            </td>
+                            <td style={{ border: "none" }}>
+                              <div>{email}</div>
+                            </td>
                           </tr>
                         </tbody>
                       </Table>
                     </div>
 
-                    <div>
+                    {/* <div>
                       ตำแหน่งแสดงชื่อ รายละเอียด ของนศ. ชั้นปีการศึกษา วิทยาเขต
                       xxxxxxxxxxxxxxxx
-                    </div>
+                    </div> */}
 
                     <Table>
+                      <thead style={{ backgroundColor: "#535353" }}>
+                        <tr>
+                          <td style={{ border: "none" }}>
+                            <div style={{ color: "white" }}>
+                              กรุณากรอกรายละเอียดเพิ่มเติม
+                            </div>
+                          </td>
+                          <td style={{ border: "none" }}></td>
+                        </tr>
+                      </thead>
                       <tbody>
                         <tr>
-                          <td>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              color: "white",
+                              width: "40%",
+                            }}
+                          >
                             <div>ตำแหน่ง</div>
                           </td>
                           <td>
@@ -396,9 +393,10 @@ function TableAddPersonel() {
                                 setPosition(event.target.value);
                               }}
                               required
-                              style={{ width: "70%" }}
+                              style={{ width: "70%", height: "37px" }}
+                              className="form-select font-form-control"
                             >
-                              <option>เลือกบลาๆ</option>
+                              <option>กรุณาเลือก ตำแหน่ง</option>
                               <option value="Stuact">
                                 บุคลากรกองกิจการนักศึกษา
                               </option>
@@ -406,8 +404,13 @@ function TableAddPersonel() {
                           </td>
                         </tr>
                         <tr>
-                          <td>
-                            <div>ส่วนงาน</div>
+                          <td
+                            style={{
+                              backgroundColor: "#FF8B13",
+                              color: "white",
+                            }}
+                          >
+                            <div>สังกัด</div>
                           </td>
                           <td>
                             <select
@@ -422,9 +425,10 @@ function TableAddPersonel() {
                                 setClubname(selectedText);
                               }}
                               required
-                              style={{ width: "70%" }}
+                              style={{ width: "70%", height: "37px" }}
+                              className="form-select font-form-control"
                             >
-                              <option>กรุณาเลือก</option>
+                              <option>กรุณาเลือก สังกัด</option>
                               {Object.keys(setCode.Divison).map(
                                 (divisionKey) =>
                                   (divisionKey === "D01" ||
@@ -444,7 +448,12 @@ function TableAddPersonel() {
                         </tr>
                         {codedivision === "D01" && (
                           <tr>
-                            <td>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                color: "white",
+                              }}
+                            >
                               <div>หน่วยงาน </div>
                             </td>
                             <td>
@@ -460,9 +469,10 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "70%" }} // Set the width to fit the container
+                                style={{ width: "70%", height: "37px" }}
+                                className="form-select font-form-control" // Set the width to fit the container
                               >
-                                <option>กรุณาเลือก</option>
+                                <option>กรุณาเลือก หน่วยงาน</option>
                                 {setCode.Divison.D01.Agency.map(
                                   (agencyGroup, index) => (
                                     <optgroup
@@ -491,7 +501,12 @@ function TableAddPersonel() {
                         )}
                         {codedivision === "D02" && (
                           <tr>
-                            <td>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                color: "white",
+                              }}
+                            >
                               <div>หน่วยงาน</div>
                             </td>
                             <td>
@@ -507,9 +522,10 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "70%" }}
+                                style={{ width: "70%", height: "37px" }}
+                                className="form-select font-form-control"
                               >
-                                <option>กรุณาเลือก</option>
+                                <option>กรุณาเลือก หน่วยงาน</option>
                                 {setCode.Divison.D02.Agency.map(
                                   (agencyGroup, index) =>
                                     agencyGroup.name !==
@@ -538,7 +554,12 @@ function TableAddPersonel() {
                         )}
                         {codedivision === "D03" && (
                           <tr>
-                            <td>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                color: "white",
+                              }}
+                            >
                               <div>หน่วยงาน</div>
                             </td>
                             <td>
@@ -554,7 +575,8 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "70%" }}
+                                style={{ width: "70%", height: "37px" }}
+                                className="form-select font-form-control"
                               >
                                 <option>กรุณาเลือก</option>
                                 {setCode.Divison.D03.Agency.map(
@@ -583,7 +605,12 @@ function TableAddPersonel() {
                         )}
                         {codedivision === "D05" && (
                           <tr>
-                            <td>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                color: "white",
+                              }}
+                            >
                               <div>หน่วยงาน</div>
                             </td>
                             <td>
@@ -599,7 +626,8 @@ function TableAddPersonel() {
                                   setClubname(selectedText);
                                 }}
                                 required
-                                style={{ width: "70%" }}
+                                style={{ width: "70%", height: "37px" }}
+                                className="form-select font-form-control"
                               >
                                 <option>กรุณาเลือก</option>
                                 {Object.keys(setCode.Divison.D05.Agency).map(
@@ -620,7 +648,12 @@ function TableAddPersonel() {
                             (agencyGroup, index) =>
                               agencyGroup[codeagency]?.WorkGroup && (
                                 <tr key={index}>
-                                  <td>
+                                  <td
+                                    style={{
+                                      backgroundColor: "#FF8B13",
+                                      color: "white",
+                                    }}
+                                  >
                                     <div>กลุ่มงาน </div>
                                   </td>
                                   <td>
@@ -636,9 +669,12 @@ function TableAddPersonel() {
                                         console.log("workgrop" + codeworkgroup);
                                       }}
                                       required
-                                      style={{ width: "70%" }} // Set the width to fit the container
+                                      style={{ width: "70%", height: "37px" }}
+                                      className="form-select font-form-control" // Set the width to fit the container
                                     >
-                                      <option value="">กรุณาเลือก</option>
+                                      <option value="">
+                                        กรุณาเลือก กลุ่มงาน
+                                      </option>
                                       {Object.keys(
                                         agencyGroup[codeagency].WorkGroup
                                       ).map((workGroupKey) => (
@@ -656,8 +692,13 @@ function TableAddPersonel() {
                           )}
                         {codedivision === "D01" && codeworkgroup === "G01" && (
                           <tr>
-                            <td>
-                              <div>ฝ่ายงาน</div>
+                            <td
+                              style={{
+                                backgroundColor: "#FF8B13",
+                                color: "white",
+                              }}
+                            >
+                              <div>ฝ่ายงานที่ดูแล</div>
                             </td>
                             <td>
                               <select
@@ -668,9 +709,10 @@ function TableAddPersonel() {
                                   setClubGroup(selectedText);
                                 }}
                                 required
-                                style={{ width: "70%" }} // Set the width to fit the container
+                                style={{ width: "70%", height: "37px" }}
+                                className="form-select font-form-control" // Set the width to fit the container
                               >
-                                <option>กรุณาเลือก</option>
+                                <option>กรุณาเลือก ฝ่ายงานที่ดูแล</option>
                                 <option value="องค์กรนักศึกษาส่วนกลาง">
                                   องค์กรนักศึกษาส่วนกลาง
                                 </option>
@@ -695,13 +737,18 @@ function TableAddPersonel() {
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
-                      variant="secondary"
+                      variant="danger"
                       onClick={() => setShowModal(false)}
+                      className="btn-decrease"
                     >
-                      Close
+                      ยกเลิก
                     </Button>
-                    <Button variant="primary" onClick={addUser}>
-                      Save changes
+                    <Button
+                      variant="success"
+                      onClick={addUser}
+                      className="btn-budget-increase"
+                    >
+                      บันทึก
                     </Button>
                   </Modal.Footer>
                 </Modal>
