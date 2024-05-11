@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Card, Button, Col, Row } from "react-bootstrap";
+import { Table, Card, Button, Col, Row,Form } from "react-bootstrap";
 import Axios from "axios";
 
 function DetailBudgetStudent() {
@@ -137,6 +137,26 @@ function DetailBudgetStudent() {
 
       <h1>{`${clubName}`}</h1>
       <div>
+      <Form.Control
+          as="select"
+          className="font-form-control"
+          size="sm"
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // setNameStudent_receive(selectedValue);
+          }}
+        >
+          <option value="">เลือกปีการศึกษา</option>
+          {Array.from(
+            new Set(ProjectList.map((personName) => personName.yearly))
+          ) // Filter unique years
+            .sort((a, b) => a - b) // Sort years
+            .map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+        </Form.Control>
         <form>
           <label htmlFor="yearly">Yearly:</label>
           <input
