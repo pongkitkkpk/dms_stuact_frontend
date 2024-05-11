@@ -614,29 +614,25 @@ function ProjectDocument() {
                     style={{ backgroundColor: "#535353" }}
                   >
                     <th>
-
                       <div
                         style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                       >
                         <a><div>รายละเอียดนักศึกษารับเงิน</div></a>
-
                       </div>
-
                     </th>
                   </tr>
-                  <tr
-                    className={
-                      currentStepSideBar === "SD_studentgetmoney"
-                        ? "list-group-item active"
-                        : "list-group-item"
-                    }
+                  <tr className={
+                    currentStepSideBar === "SD_studentgetmoney"
+                      ? "list-group-item active"
+                      : "list-group-item"
+                  }
                   >
                     <td>
-
                       <a
                         href="#"
                         onClick={() => {
-                          if (currentStepProject !== 4 && currentStepProject !== 5) {
+                          // if (currentStepProject !== 4 && currentStepProject !== 5) {
+                          if (currentStepProject <= 3 ) {
                             toggleStep("SD_nottoday");
                           } else {
                             toggleStep("SD_studentgetmoney");
@@ -653,12 +649,106 @@ function ProjectDocument() {
                       </a>
                     </td>
                   </tr>
+
+                  <tr
+                    className="list-group-item"
+                    style={{ backgroundColor: "#535353" }}
+                  >
+                    <th>
+                      <div
+                        style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                      >
+                        <a><div>ปิดโครงการ</div></a>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr className={
+                    currentStepSideBar === "SD_"
+                      ? "list-group-item active"
+                      : "list-group-item"
+                  }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          if (currentStepProject <= 4 ) {
+                            toggleStep("SD_nottoday");
+                          } else {
+                            toggleStep("SD_");
+                          }
+                        }}
+                        style={{ display: "inline-block", width: "100%" }}
+
+                      >
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          4.1 ปิดโครงการ1
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className={
+                    currentStepSideBar === "SD_"
+                      ? "list-group-item active"
+                      : "list-group-item"
+                  }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          if (currentStepProject <= 4 ) {
+                            toggleStep("SD_nottoday");
+                          } else {
+                            toggleStep("SD_");
+                          }
+                        }}
+                        style={{ display: "inline-block", width: "100%" }}
+
+                      >
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          4.2 ปิดโครงการ2
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className={
+                    currentStepSideBar === "SD_"
+                      ? "list-group-item active"
+                      : "list-group-item"
+                  }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          if (currentStepProject <= 4 ) {
+                            toggleStep("SD_nottoday");
+                          } else {
+                            toggleStep("SD_");
+                          }
+                        }}
+                        style={{ display: "inline-block", width: "100%" }}
+
+                      >
+                        <div
+                          style={{ fontFamily: "Bai Jamjuree", color: "white" }}
+                        >
+                          4.3 ปิดโครงการ3
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
                 </table>
               </Card.Body>
             </Card>
           </Col>
 
-          {/* Conditionally render components based on currentStep */}
+          {/* แบบขออนุมัติโครงการ */}
           {currentStepSideBar === "SD_Detail" && (
             <SD_detail id_project={id_project} currentStepProject={currentStepProject} />
           )}
@@ -680,19 +770,22 @@ function ProjectDocument() {
           {currentStepSideBar === "SD_indicator" && (
             <SD_indicator id_project={id_project} currentStepProject={currentStepProject} />
           )}
+          {/* ประวัติการแก้ไข/อัพเดทสถานะ */}
           {currentStepSideBar === "SD_showedit" && (
             <SD_showedit id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {currentStepSideBar === "SD_showlogstatus" && (
             <SD_showlogstatus id_project={id_project} currentStepProject={currentStepProject} />
           )}
+          {/* รายละเอียดนักศึกษารับเงิน */}
           {currentStepSideBar === "SD_studentgetmoney" && (
             <SD_studentgetmoney id_project={id_project} currentStepProject={currentStepProject} />
           )}
+          {/* ปิดโครงการ */}
 
 
 
-
+          {/* นอกเหนือ */}
           {currentStepSideBar === "SD_nottoday" && (
             <SD_nottoday id_project={id_project} currentStepProject={currentStepProject} />
           )}
