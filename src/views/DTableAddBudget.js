@@ -70,7 +70,7 @@ function DTableAddBudget() {
     <>
       <DAddSplitBudget />
       <div>
-        <h1>งบประมาณของโครงการทั้งหมด</h1>
+        <h1>งบประมาณของโครงการทั้งหมดa  </h1>
         <span>
           <select
             onChange={(event) => {
@@ -103,6 +103,9 @@ function DTableAddBudget() {
                 event.target.options[event.target.selectedIndex]
                   .text;
               setClubname(selectedText);
+              const selectedIndex = event.target.selectedIndex;
+             
+
             }}
             required
             className="form-select"

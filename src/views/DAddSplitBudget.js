@@ -19,6 +19,7 @@ function DAddSplitBudget() {
   const createNetProject = () => {
     Axios.post(`http://localhost:3001/admin/createNetProject`, {
       project_name: project_name,
+      AgnecyGroupName:AgnecyGroupName,
       responsible_agency: clubName,
       campus: campus,
       yearly: yearly,
