@@ -67,19 +67,35 @@ useEffect(()=>{
   const [NetList, setNetList] = useState([])
   const [net_budget, setNet_budget] = useState("");
   const getNetProject = () => {
-    Axios.get(`http://localhost:3001/student/project/getBudgetclubName/${responsible_agency}/${yearly}`).then((response) => {
-      setNetList(response.data);
-      setNet_budget(response.data[0].net_budget)
-    });
+    try {
+      Axios.get(`http://localhost:3001/student/project/getBudgetclubName/${responsible_agency}/${yearly}`)
+        .then((response) => {
+          setNetList(response.data);
+          console.log("NetList")
+          console.log(NetList)
+        })
+        .catch((error) => {
+          console.error("Error fetching net project:", error);
+          // Handle error state here if needed
+        });
+    } catch (error) {
+      console.error("Error in getNetProject:", error);
+      // Handle error state here if needed
+    }
   };
 
+  useEffect(() => {
+    const netProject = NetList.find(item => item.project_name === project_name);
+    if (netProject) {
+      setNet_budget(netProject.net_budget);
+    }
+  }, [NetList, project_name]);
+  
   useEffect(() => {
     getNetProject();
   }, [])
 
-  useEffect(() => {
-    console.log(studentuser)
-  }, [studentuser])
+ 
 
   const minDate = new Date();
 

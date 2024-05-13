@@ -22,6 +22,9 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
     const id_student = storedUser.username;
     const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
 
+    useEffect(()=>{
+        console.log(storedUser.account_type == "students")
+    },[storedUser])
     const [project_name, setProjectName] = useState("");
 
 
@@ -44,6 +47,11 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
 
 
     const [personList, setPersonList] = useState([]);
+    useEffect(() => {
+        getProjectData();
+        getHistoryProjectData();
+
+    }, [id_project]);
 
     const getProjectData = () => {
         Axios.get(
@@ -77,9 +85,12 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
 
     const [net_budget, setNet_budget] = useState("");
     const [netall_budget, setNetall_budget] = useState("");
+    useEffect(() => {
+        getProjectNetData();
+    }, [yearly]);
     const getProjectNetData = () => {
         Axios.get(
-            `http://localhost:3001/student/project/getBudgetProjectName/${project_name}`
+            `http://localhost:3001/student/project/getBudgetProjectName/${project_name}/${yearly}`
         )
             .then((response) => {
                 setNetall_budget(response.data[0].net_budget);
@@ -117,14 +128,9 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
             setNet_budget(netall_budget);
         }
     }, [Netused_budget, netall_budget]);
-    useEffect(() => {
-        getProjectData();
-        getHistoryProjectData();
-    }, [id_project]);
+   
 
-    useEffect(() => {
-        getProjectNetData();
-    }, [project_name]);
+
 
     useEffect(() => {
         getStuactProjectData();
@@ -164,7 +170,18 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
             if (result.isConfirmed) {
                 Axios.post(
                     `http://localhost:3001/studentgetmoney/${id_project}`,
-                    { project_name, namestudent_receive, numberstudent_receive, namestuact_receive, remainingBudget }
+                    { project_name, yearly, namestudent_receive, numberstudent_receive, namestuact_receive, remainingBudget }
+                )
+                    .then((response) => {
+                        console.log(response.data);
+                        window.location.reload();
+                    })
+                    .catch((error) => {
+                        console.error("Error creating project:", error);
+                    });
+                Axios.post(
+                    `http://localhost:3001/updateprojectusebudget/${id_project}`,
+                    { project_name, yearly, namestudent_receive, numberstudent_receive, namestuact_receive, remainingBudget }
                 )
                     .then((response) => {
                         console.log(response.data);

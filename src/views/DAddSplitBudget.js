@@ -17,9 +17,15 @@ function DAddSplitBudget() {
   const [net_budget, setNetBudget] = useState("");
 
 
+  const [AgnecyGroupName, setAgnecyGroupName] = useState("");
+
+
+
+
   const createNetProject = () => {
     Axios.post(`http://localhost:3001/admin/createNetProject`, {
       project_name: project_name,
+      AgnecyGroupName:AgnecyGroupName,
       responsible_agency: clubName,
       campus: campus,
       yearly: yearly,
@@ -169,10 +175,15 @@ function DAddSplitBudget() {
                               setCodedivision("D04");
                               setCodeagency(event.target.value);
 
-                              const selectedText =
-                                event.target.options[event.target.selectedIndex]
-                                  .text;
+                              const selectedText = event.target.options[event.target.selectedIndex].text;
                               setClubname(selectedText);
+
+                              // Logging agencyGroup.name
+                              const selectedIndex = event.target.selectedIndex;
+                              const selectedOptgroup = event.target[selectedIndex].parentNode.label;
+                              console.log("Selected Agency Group:", selectedOptgroup);
+                              setAgnecyGroupName(selectedOptgroup)
+
                             }}
                             required
                             className="form-select"
@@ -185,13 +196,14 @@ function DAddSplitBudget() {
                             {setCode.Divison.D04.Agency.map(
                               (agencyGroup, index) => {
                                 const campusData = agencyGroup[campus]; // Get data for the selected campus
+
                                 return (
                                   campusData && (
                                     <optgroup
                                       key={index}
                                       label={agencyGroup.name}
                                     >
-  
+
                                       {Object.keys(campusData).map(
                                         (agencyKey) =>
                                           agencyKey !== "name" && (
@@ -229,7 +241,7 @@ function DAddSplitBudget() {
                             size="sm"
                             type="text"
                             placeholder={`งบประมาณสุทธิ`}
-                            value={net_budget}      
+                            value={net_budget}
                             onChange={(event) => {
                               const value = Number(
                                 event.target.value.replace(/,/g, "")
