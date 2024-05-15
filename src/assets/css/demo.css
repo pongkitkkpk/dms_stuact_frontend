@@ -1013,13 +1013,16 @@
 }
 
 .btn-budget-increase {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #ffffff;
   transition: background-color 0.3s ease;
   border-radius: 20px;
 }
 
 .btn-budget-increase:hover {
-  border-color: #28a745;
-  background-color: #28a745;
+  border-color: #34ce57;
+  background-color: #34ce57;
   color: #ffffff;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }

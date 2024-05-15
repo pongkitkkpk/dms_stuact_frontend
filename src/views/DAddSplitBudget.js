@@ -66,7 +66,7 @@ function DAddSplitBudget() {
             marginBottom: "0px",
           }}
         >
-          <Table striped="columns">
+          <Table striped="columns" style={{marginBottom:"0px"}}>
             <tbody>
               <tr style={{ backgroundColor: "white" }}>
                 <Table striped="columns">
@@ -265,8 +265,7 @@ function DAddSplitBudget() {
               justifyContent: "center",
               alignItems: "center",
               marginBottom: "10px",
-              marginTop: "0px",
-              paddingTop: "0px",
+              paddingBottom: "20px",
               border: "none",
               backgroundColor: "white",
             }}
@@ -274,8 +273,8 @@ function DAddSplitBudget() {
             <Button
               onClick={createNetProject}
               type="submit"
-              variant="warning"
-              className="btn-dataupdate"
+              variant="success"
+              className="btn-budget-increase"
               style={{ fontSize: "14px" }}
             >
               บันทึกข้อมูล
