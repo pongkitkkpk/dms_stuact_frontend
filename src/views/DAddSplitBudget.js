@@ -19,7 +19,7 @@ function DAddSplitBudget() {
   const createNetProject = () => {
     Axios.post(`http://localhost:3001/admin/createNetProject`, {
       project_name: project_name,
-      AgnecyGroupName:AgnecyGroupName,
+      AgnecyGroupName: AgnecyGroupName,
       responsible_agency: clubName,
       campus: campus,
       yearly: yearly,
@@ -259,30 +259,29 @@ function DAddSplitBudget() {
               </tr>
             </tbody>
           </Table>
-        </CardBody>
-
-        <CardFooter
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "10px",
-            marginTop: "0px",
-            paddingTop: "0px",
-            border: "none",
-            backgroundColor: "white",
-          }}
-        >
-          <Button
-            onClick={createNetProject}
-            type="submit"
-            variant="warning"
-            className="btn-dataupdate"
-            style={{ fontSize: "14px" }}
+          <CardFooter
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: "10px",
+              marginTop: "0px",
+              paddingTop: "0px",
+              border: "none",
+              backgroundColor: "white",
+            }}
           >
-            บันทึกข้อมูล
-          </Button>
-        </CardFooter>
+            <Button
+              onClick={createNetProject}
+              type="submit"
+              variant="warning"
+              className="btn-dataupdate"
+              style={{ fontSize: "14px" }}
+            >
+              บันทึกข้อมูล
+            </Button>
+          </CardFooter>
+        </CardBody>
       </Col>
     </>
   );

@@ -15,6 +15,10 @@ import SD_showlogstatus from "./Compo_ProjectDoc/ShowDetailP/SD_showlogstatus";
 import SD_studentgetmoney from "./Compo_ProjectDoc/ShowDetailP/SD_studentgetmoney";
 import SD_nottoday from "./Compo_ProjectDoc/ShowDetailP/SD_nottoday";
 
+import SD_finalperson from "./Compo_ProjectDoc/ShowDetailP/SD_finalperson";
+import SD_finalindicator from "./Compo_ProjectDoc/ShowDetailP/SD_finalindicator";
+import SD_finalbudget from "./Compo_ProjectDoc/ShowDetailP/SD_finalbudget";
+
 import ArrowProgressBar from "./Compo_ProjectDoc/ArrowProgressBar";
 import Swal from "sweetalert2";
 import Axios from "axios";
@@ -663,7 +667,7 @@ function ProjectDocument() {
                     </th>
                   </tr>
                   <tr className={
-                    currentStepSideBar === "SD_"
+                    currentStepSideBar === "SD_finalperson"
                       ? "list-group-item active"
                       : "list-group-item"
                   }
@@ -675,7 +679,7 @@ function ProjectDocument() {
                           if (currentStepProject <= 4 ) {
                             toggleStep("SD_nottoday");
                           } else {
-                            toggleStep("SD_");
+                            toggleStep("SD_finalperson");
                           }
                         }}
                         style={{ display: "inline-block", width: "100%" }}
@@ -684,13 +688,13 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.1 ปิดโครงการ1
+                          4.1 ปิดโครงการ จำนวนผู้เข้าร่วมโครงการ
                         </div>
                       </a>
                     </td>
                   </tr>
                   <tr className={
-                    currentStepSideBar === "SD_"
+                    currentStepSideBar === "SD_finalindicator"
                       ? "list-group-item active"
                       : "list-group-item"
                   }
@@ -702,7 +706,7 @@ function ProjectDocument() {
                           if (currentStepProject <= 4 ) {
                             toggleStep("SD_nottoday");
                           } else {
-                            toggleStep("SD_");
+                            toggleStep("SD_finalindicator");
                           }
                         }}
                         style={{ display: "inline-block", width: "100%" }}
@@ -711,13 +715,13 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.2 ปิดโครงการ2
+                          4.2 ปิดโครงการ2 ความสำเร็จของตัวชี้วัดโครงการ และค่าเป้าหมาย
                         </div>
                       </a>
                     </td>
                   </tr>
                   <tr className={
-                    currentStepSideBar === "SD_"
+                    currentStepSideBar === "SD_finalbudget"
                       ? "list-group-item active"
                       : "list-group-item"
                   }
@@ -729,7 +733,7 @@ function ProjectDocument() {
                           if (currentStepProject <= 4 ) {
                             toggleStep("SD_nottoday");
                           } else {
-                            toggleStep("SD_");
+                            toggleStep("SD_finalbudget");
                           }
                         }}
                         style={{ display: "inline-block", width: "100%" }}
@@ -738,7 +742,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.3 ปิดโครงการ3
+                          4.3 ปิดโครงการ3 งบประมาณค่าใช้จ่าย
                         </div>
                       </a>
                     </td>
@@ -782,7 +786,15 @@ function ProjectDocument() {
             <SD_studentgetmoney id_project={id_project} currentStepProject={currentStepProject} />
           )}
           {/* ปิดโครงการ */}
-
+          {currentStepSideBar === "SD_finalperson" && (
+            <SD_finalperson id_project={id_project} currentStepProject={currentStepProject} />
+          )}
+          {currentStepSideBar === "SD_finalindicator" && (
+            <SD_finalindicator id_project={id_project} currentStepProject={currentStepProject} />
+          )}
+          {currentStepSideBar === "SD_finalbudget" && (
+            <SD_finalbudget id_project={id_project} currentStepProject={currentStepProject} />
+          )}
 
 
           {/* นอกเหนือ */}
