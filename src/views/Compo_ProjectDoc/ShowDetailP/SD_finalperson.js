@@ -36,7 +36,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
   const getProjectData = () => {
     Axios.get(
       // ใส่ api แก้ตาม finalperson 
-      `http://localhost:3001/student/project/person/getidproject/${id_project}`
+      `http://localhost:3001/student/project/finalperson/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
@@ -108,7 +108,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
 
   
   const handleSaveClick = () => {
-    const editpage = "กลุ่มเป้าหมายโครงการ";
+    const editpage = "กลุ่มเป้าหมายโครงการ ปิดโครวการ";
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
@@ -122,7 +122,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/person/edit/${id_project}`,
+          `http://localhost:3001/student/project/finalperson/edit/${id_project}`,
           editData
         )
           .then((response) => {

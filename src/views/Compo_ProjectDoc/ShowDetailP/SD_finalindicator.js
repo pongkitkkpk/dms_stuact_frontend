@@ -34,37 +34,12 @@ function SD_finalindicator({ id_project, currentStepProject }) {
   const [volume4, setVolume4] = useState("");
   const [volume5, setVolume5] = useState("");
   // ผลที่คาดว่าจะได้รับ
-  const [VolumeCount, setVolumecount] = useState(1);
-  const increaseVolumeCount = () => {
-    if (VolumeCount < 5) {
-      setVolumecount(VolumeCount + 1);
-    }
-  };
-  const decreaseVolumeCount = () => {
-    if (VolumeCount > 1) {
-      setVolumecount(VolumeCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (VolumeCount) {
-        case 4:
-          setVolume5("");
-          break;
-        case 3:
-          setVolume4("");
-          break;
-        case 2:
-          setVolume3("");
-          break;
-        case 1:
-          setVolume2("");
-          break;
-        case 0:
-          setVolume1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
+
+  const [expresultvolume1, setexpresultVolume1] = useState("");
+  const [expresultvolume2, setexpresultVolume2] = useState("");
+  const [expresultvolume3, setexpresultVolume3] = useState("");
+  const [expresultvolume4, setexpresultVolume4] = useState("");
+  const [expresultvolume5, setexpresultVolume5] = useState("");
 
   const [quality1, setQuality1] = useState("");
   const [quality2, setQuality2] = useState("");
@@ -72,37 +47,12 @@ function SD_finalindicator({ id_project, currentStepProject }) {
   const [quality4, setQuality4] = useState("");
   const [quality5, setQuality5] = useState("");
   // ผลที่คาดว่าจะได้รับ
-  const [QualityCount, setQualitycount] = useState(1);
-  const increaseQualityCount = () => {
-    if (QualityCount < 5) {
-      setQualitycount(QualityCount + 1);
-    }
-  };
-  const decreaseQualityCount = () => {
-    if (QualityCount > 1) {
-      setQualitycount(QualityCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (QualityCount) {
-        case 4:
-          setQuality5("");
-          break;
-        case 3:
-          setQuality4("");
-          break;
-        case 2:
-          setQuality3("");
-          break;
-        case 1:
-          setQuality2("");
-          break;
-        case 0:
-          setQuality1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
+  const [expresultquality1, setexpresultQuality1] = useState("");
+  const [expresultquality2, setexpresultQuality2] = useState("");
+  const [expresultquality3, setexpresultQuality3] = useState("");
+  const [expresultquality4, setexpresultQuality4] = useState("");
+  const [expresultquality5, setexpresultQuality5] = useState("");
+
 
   const [expresult1, setExpresult1] = useState("");
   const [expresult2, setExpresult2] = useState("");
@@ -110,37 +60,8 @@ function SD_finalindicator({ id_project, currentStepProject }) {
   const [expresult4, setExpresult4] = useState("");
   const [expresult5, setExpresult5] = useState("");
   // ผลที่คาดว่าจะได้รับ
-  const [ExpresultCount, setExpresultcount] = useState(1);
-  const increaseExpresultCount = () => {
-    if (ExpresultCount < 5) {
-      setExpresultcount(ExpresultCount + 1);
-    }
-  };
-  const decreaseExpresultCount = () => {
-    if (ExpresultCount > 1) {
-      setExpresultcount(ExpresultCount - 1);
-      // Reset corresponding studentTypeNumber state variables to 0
-      switch (ExpresultCount) {
-        case 4:
-          setExpresult5("");
-          break;
-        case 3:
-          setExpresult4("");
-          break;
-        case 2:
-          setExpresult3("");
-          break;
-        case 1:
-          setExpresult2("");
-          break;
-        case 0:
-          setExpresult1("");
-          break;
-        default:
-        // Handle other cases if needed
-      }
-    }
-  };
+
+
 
   const [is_1follow, setIs_1follow] = useState(false);
   const [is_2follow, setIs_2follow] = useState(false);
@@ -166,11 +87,21 @@ function SD_finalindicator({ id_project, currentStepProject }) {
       setVolume3(response.data[0].volume3);
       setVolume4(response.data[0].volume4);
       setVolume5(response.data[0].volume5);
+      setexpresultVolume1(response.data[0].expresultvolume1);
+      setexpresultVolume2(response.data[0].expresultvolume2);
+      setexpresultVolume3(response.data[0].expresultvolume3);
+      setexpresultVolume4(response.data[0].expresultvolume4);
+      setexpresultVolume5(response.data[0].expresultvolume5);
       setQuality1(response.data[0].quality1);
       setQuality2(response.data[0].quality2);
       setQuality3(response.data[0].quality3);
       setQuality4(response.data[0].quality4);
       setQuality5(response.data[0].quality5);
+      setexpresultQuality1(response.data[0].expresultquality1);
+      setexpresultQuality2(response.data[0].expresultquality2);
+      setexpresultQuality3(response.data[0].expresultquality3);
+      setexpresultQuality4(response.data[0].expresultquality4);
+      setexpresultQuality5(response.data[0].expresultquality5);
       setExpresult1(response.data[0].expresult1);
       setExpresult2(response.data[0].expresult2);
       setExpresult3(response.data[0].expresult3);
@@ -187,6 +118,7 @@ function SD_finalindicator({ id_project, currentStepProject }) {
   useEffect(() => {
     getProjectData();
   }, [id_project]);
+
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -207,18 +139,28 @@ function SD_finalindicator({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/indicator/edit/${id_project}`,
+          `http://localhost:3001/student/project/finalindicator/edit/${id_project}`,
           {
             volume1: volume1,
             volume2: volume2,
             volume3: volume3,
             volume4: volume4,
             volume5: volume5,
+            expresultvolume1:expresultvolume1,
+            expresultvolume2:expresultvolume2,
+            expresultvolume3:expresultvolume3,
+            expresultvolume4:expresultvolume4,
+            expresultvolume5:expresultvolume5,
             quality1: quality1,
             quality2: quality2,
             quality3: quality3,
             quality4: quality4,
             quality5: quality5,
+            expresultquality1:expresultquality1,
+            expresultquality2:expresultquality2,
+            expresultquality3:expresultquality3,
+            expresultquality4:expresultquality4,
+            expresultquality5:expresultquality5,
             expresult1: expresult1,
             expresult2: expresult2,
             expresult3: expresult3,
@@ -353,10 +295,10 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={volume1}
+                            value={expresultvolume1}
                             placeholder={`ผลการข้อที่ ${1}`}
                             onChange={(event) => {
-                              setVolume1(event.target.value);
+                              setexpresultVolume1(event.target.value);
                             }}
                             readOnly={!isEditMode}
                           />
@@ -381,10 +323,10 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={volume2}
-                            placeholder={`ผลการข้อที่ ${1}`}
+                            value={expresultvolume2}
+                            placeholder={`ผลการข้อที่ ${2}`}
                             onChange={(event) => {
-                              setVolume2(event.target.value);
+                              setexpresultVolume2(event.target.value);
                             }}
                             readOnly={!isEditMode}
                           />
