@@ -146,21 +146,21 @@ function SD_finalindicator({ id_project, currentStepProject }) {
             volume3: volume3,
             volume4: volume4,
             volume5: volume5,
-            expresultvolume1:expresultvolume1,
-            expresultvolume2:expresultvolume2,
-            expresultvolume3:expresultvolume3,
-            expresultvolume4:expresultvolume4,
-            expresultvolume5:expresultvolume5,
+            expresultvolume1: expresultvolume1,
+            expresultvolume2: expresultvolume2,
+            expresultvolume3: expresultvolume3,
+            expresultvolume4: expresultvolume4,
+            expresultvolume5: expresultvolume5,
             quality1: quality1,
             quality2: quality2,
             quality3: quality3,
             quality4: quality4,
             quality5: quality5,
-            expresultquality1:expresultquality1,
-            expresultquality2:expresultquality2,
-            expresultquality3:expresultquality3,
-            expresultquality4:expresultquality4,
-            expresultquality5:expresultquality5,
+            expresultquality1: expresultquality1,
+            expresultquality2: expresultquality2,
+            expresultquality3: expresultquality3,
+            expresultquality4: expresultquality4,
+            expresultquality5: expresultquality5,
             expresult1: expresult1,
             expresult2: expresult2,
             expresult3: expresult3,
@@ -303,8 +303,9 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             readOnly={!isEditMode}
                           />
                         </tr>
+                        <hr></hr>
                         <tr style={{ backgroundColor: "white" }}>
-                          เป้าหมายด้านปริมาณข้อที่2 รอแก้ก็อปๆ :
+                          เป้าหมายด้านปริมาณข้อที่ 2  :
                           <Form.Control
                             className="table-margin"
                             size="sm"
@@ -331,7 +332,9 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             readOnly={!isEditMode}
                           />
                         </tr>
+                        <hr></hr>
                         <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านปริมาณข้อที่ 3  :
                           <Form.Control
                             className="table-margin"
                             size="sm"
@@ -345,6 +348,22 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <tr style={{ backgroundColor: "white" }}>
+                          ผลการ :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            value={expresultvolume3}
+                            placeholder={`ผลการข้อที่ ${3}`}
+                            onChange={(event) => {
+                              setexpresultVolume3(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านปริมาณข้อที่ 4 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
@@ -358,6 +377,22 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <tr style={{ backgroundColor: "white" }}>
+                          ผลการ :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            value={expresultvolume4}
+                            placeholder={`ผลการข้อที่ ${4}`}
+                            onChange={(event) => {
+                              setexpresultVolume4(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านปริมาณข้อที่ 5 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
@@ -370,6 +405,21 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             readOnly={!isEditMode}
                           />
                         </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          ผลการ :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            value={expresultvolume5}
+                            placeholder={`ผลการข้อที่ ${5}`}
+                            onChange={(event) => {
+                              setexpresultVolume5(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
                       </tbody>
                     </Table>
                   </td>
@@ -410,6 +460,21 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             readOnly={!isEditMode}
                           />
                         </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          ผลการด้านคุณภาพ ข้อที่ 1 :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`ผลการด้านคุณภาพ ข้อที่${1}`}
+                            value={expresultquality1}
+                            onChange={(event) => {
+                              setexpresultQuality1(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
                         <tr style={{ backgroundColor: "white" }}>
                           ผลการ :
                           <Form.Control
