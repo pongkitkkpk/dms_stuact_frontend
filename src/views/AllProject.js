@@ -22,7 +22,9 @@ function AllProject() {
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
   const strcodebooksome = storedUser.codebooksome;
   useEffect(() => {
+    console.log(storedUser);
     console.log(storedUser.account_type);
+    console.log(storedUser.position);
   }, [storedUser]);
 
   const [projectList, setProjectList] = useState([]);

@@ -9,10 +9,11 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import AdminLayout from 'layouts/Admin.js';
 import GuestLayout from 'layouts/Guest.js';
 import StudentLayout from 'layouts/Student.js';
-import { AuthProvider } from 'Auth/AuthContext'; // Import AuthProvider
+import { AuthProvider } from 'Auth/AuthContext'; 
 
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
-  // s
+  
+  // if i need set roles in account_type(have a student)
   const storedUserData = sessionStorage.getItem('user');
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.account_type; // Accessing the account_type property
@@ -23,12 +24,11 @@ const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
       {...rest}
       render={(props) => {
         if (!sessionStorage.getItem('isLogged')) {
-          // Redirect to guest login if not authenticated
           return <Redirect to="/guest/login" />;
         }
-        // Check if the user has the required role
+     
         if (roles && !roles.includes(storedUserRole)) {
-          // Redirect to unauthorized page if the user doesn't have the required role
+        
           return <Redirect to="/unauthorized" />;
         }
         return <Component {...props} />;

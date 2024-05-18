@@ -455,6 +455,12 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
         listSETC: listSETC,
         listSAll: listSAll,
         thailistSAll: thailistSAll,
+
+        TypeACount:TypeACount,
+        TypeBTCount:TypeBTCount,
+        TypeBNTCount:TypeBNTCount,
+        TypeCCount:TypeCCount
+        
       }
     )
       .then((response) => {

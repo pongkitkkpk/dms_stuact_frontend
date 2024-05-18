@@ -87,7 +87,7 @@ function ProjectDocument() {
 
   //ถ้าใช้function นี้จะเพิ่มproject number ของจริง ใช้ตอนโครงการอนุมัติ
   const handleNextStepPleaseAllow = () => {
-    console.log("ADSFASDFAsd")
+
     Axios.get(
       `http://localhost:3001/student/project/getNameProjectYearly/${project_name}/${codeclub}/${yearly}`
     ).then((response) => {

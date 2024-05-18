@@ -164,6 +164,7 @@ function SD_budget({ id_project }) {
     getProjectData();
   }, [id_project]);
 
+ 
 
 
   const handleEditClick = () => {
@@ -212,7 +213,9 @@ function SD_budget({ id_project }) {
 
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
-
+  useEffect(()=>{
+    console.log(TypeACount)
+  },[TypeACount])
   // const handleSaveClick = () => {
   //   const editpage = "งบประมาณโครงการ"
   //   Axios.put(

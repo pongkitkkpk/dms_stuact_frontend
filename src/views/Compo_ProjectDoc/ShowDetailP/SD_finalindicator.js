@@ -304,6 +304,7 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <hr></hr>
+                        
                         <tr style={{ backgroundColor: "white" }}>
                           เป้าหมายด้านปริมาณข้อที่ 2  :
                           <Form.Control
