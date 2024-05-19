@@ -108,7 +108,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
 
   
   const handleSaveClick = () => {
-    const editpage = "กลุ่มเป้าหมายโครงการ ปิดโครวการ";
+    const editpage = "กลุ่มเป้าหมายโครงการ ปิดโครงการ";
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",

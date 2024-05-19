@@ -59,10 +59,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
     getProjectData();
   }, [id_project]);
 
-  useEffect(() => {
-    console.log("editDAta")
-    console.log(editData)
-  }, [editData])
+
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -70,7 +67,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 
 
   const handleSaveClick = () => {
-    const editpage = "กลุ่มเป้าหมายโครงการ";
+    const editpage = "งบประมาณ ปิดโครงการ";
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
@@ -84,7 +81,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/person/edit/${id_project}`,
+          `http://localhost:3001/student/project/finalbudget/edit/${id_project}`,
           editData
         )
           .then((response) => {
@@ -143,23 +140,53 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 
 
   useEffect(() => {
-    const NumberSSA = listSSA ? parseFloat(listSSA.toString().replace(/,/g, '')) : 0;
-    const NumberSSB = listSSB ? parseFloat(listSSB.toString().replace(/,/g, '')) : 0;
-    const NumberSSC = listSSC ? parseFloat(listSSC.toString().replace(/,/g, '')) : 0;
+  if (typeof listSSA === 'undefined') {
+    setListSSA(0);
+  }
+  if (typeof listSSB === 'undefined') {
+    setListSSB(0);
+  }
+  if (typeof listSSC === 'undefined') {
+    setListSSC(0);
+  }
   
+}, [listSSA, listSSB, listSSC]);
+
+
+
+  useEffect(() => {
+
+    const NumberSSA = editData.listSSA ? parseFloat(editData.listSSA.toString().replace(/,/g, '')) : 0;
+    const NumberSSB = editData.listSSB ? parseFloat(editData.listSSB.toString().replace(/,/g, '')) : 0; 
+    const NumberSSC = editData.listSSC ? parseFloat(editData.listSSC.toString().replace(/,/g, '')) : 0;
+    
     if (!isNaN(NumberSSA) && !isNaN(NumberSSB) && !isNaN(NumberSSC)) {
       const total = NumberSSA + NumberSSB + NumberSSC;
       setListSSAll(total);
-  
-      // Calculate Refundtotal
       const Refundtotal = allow_budget - total;
-      // Update Refundtotal state or perform any other action with it
+      setRefundtotal(Refundtotal.toLocaleString("en-US"))
       console.log("Refundtotal:", Refundtotal);
     }
-  }, [listSSA, listSSB, listSSC, allow_budget]);
+    setEditData({
+      ...editData,
+      listSSA: NumberSSA.toLocaleString("en-US"),
+      listSSB: NumberSSB.toLocaleString("en-US"),
+      listSSC: NumberSSC.toLocaleString("en-US"),
+      refundtotal: Refundtotal.toLocaleString("en-US"),
+      
+    });
+  }, [editData.listSSA, editData.listSSB, editData.listSSC, allow_budget]);
+
+  useEffect(()=>{
+    console.log(editData)
+  },[editData])
   
 
-
+useEffect(()=>{
+  console.log("edit ssa")
+  console.log(editData)
+  console.log(editData.listSSA ?? 0) // when editData.listSSA = 0 it show NaN i need show 0
+},[editData])
 
 
   return (
@@ -272,27 +299,29 @@ function SD_finalbudget({ id_project, currentStepProject }) {
                               ค่าตอบแทน
                             </div>
                           </th>
-
                         </tr>
                       </thead>
 
                       <tbody>
-
                         <tr style={{ backgroundColor: "white" }}>
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={listSSA}
-                            placeholder={`ด้านปริมาณข้อที่ ${1}`}
+                            value={isEditMode ? (editData.listSSA ?? 0).toLocaleString("en-US") : (originalData.listSSA ?? 0).toLocaleString("en-US")}
+                            placeholder={`ค่าตอบแทน ${1}`}
                             onChange={(event) => {
-                              setListSSA(event.target.value);
+                              const newValue = event.target.value;
+                              const formattedValue = parseFloat(newValue.replace(/,/g, ''));
+                              setEditData({
+                                ...editData,
+                                listSSA: isNaN(formattedValue) ? 0 : formattedValue,
+                              });
                             }}
+                            
                             readOnly={!isEditMode}
                           />
                         </tr>
-
-
                       </tbody>
                     </Table>
 
@@ -328,22 +357,24 @@ function SD_finalbudget({ id_project, currentStepProject }) {
                       </thead>
 
                       <tbody>
-
                         <tr style={{ backgroundColor: "white" }}>
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={listSSB}
-                            placeholder={`ด้านปริมาณข้อที่ ${1}`}
+                            placeholder={`ค่าใช้สอย ${1}`}
+                            value={isEditMode ? (editData.listSSB ?? 0).toLocaleString("en-US") : (originalData.listSSB ?? 0).toLocaleString("en-US")}
                             onChange={(event) => {
-                              setListSSB(event.target.value);
+                              const newValue = event.target.value;
+                              const formattedValue = parseFloat(newValue.replace(/,/g, ''));
+                              setEditData({
+                                ...editData,
+                                listSSB: isNaN(formattedValue) ? 0 : formattedValue,
+                              });
                             }}
                             readOnly={!isEditMode}
                           />
                         </tr>
-
-
                       </tbody>
                     </Table>
 
@@ -379,22 +410,24 @@ function SD_finalbudget({ id_project, currentStepProject }) {
                       </thead>
 
                       <tbody>
-
                         <tr style={{ backgroundColor: "white" }}>
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={listSSC}
-                            placeholder={`ด้านปริมาณข้อที่ ${1}`}
+                            placeholder={`ค่าวัสดุ ${1}`}
+                            value={isEditMode ? (editData.listSSC ?? 0).toLocaleString("en-US") : (originalData.listSSC ?? 0).toLocaleString("en-US")}
                             onChange={(event) => {
-                              setListSSC(event.target.value);
+                              const newValue = event.target.value;
+                              const formattedValue = parseFloat(newValue.replace(/,/g, ''));
+                              setEditData({
+                                ...editData,
+                                listSSC: isNaN(formattedValue) ? 0 : formattedValue,
+                              });
                             }}
                             readOnly={!isEditMode}
                           />
                         </tr>
-
-
                       </tbody>
                     </Table>
 
@@ -432,7 +465,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
                         }}
                         size="sm"
                         type="text"
-                        value={editData.listSAll}
+                        value={Refundtotal}
                         disabled
                       />
                       <div

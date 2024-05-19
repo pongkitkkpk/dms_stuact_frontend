@@ -40,6 +40,8 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
   //
   //                          ListA
   //
+
+
   const [listA, setListA] = useState(Array.from({ length: 15 }, () => ""));
   const [listNA, setListNA] = useState(Array.from({ length: 15 }, () => ""));
   const [listTA, setListTA] = useState(Array.from({ length: 15 }, () => ""));
@@ -49,8 +51,15 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
 
+
+
   const createProject = () => {
-    const listSSB = +listSSBT + +listSSBNT;
+    const listSSBTnumber = parseFloat(listSSBT?.toString().replace(/,/g, '') || 0);
+    const listSSBNTnumber = parseFloat(listSSBNT?.toString().replace(/,/g, '') || 0);
+    const sumBT_BBNT = listSSBTnumber + listSSBNTnumber;
+
+    const listSSB = sumBT_BBNT.toLocaleString("en-US");
+
 
     Axios.put(
       `http://localhost:3001/student/project/p_budget/create/${id_projects}`,
@@ -716,14 +725,14 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
   const [listSSBNT, setListSSBNT] = useState(1);
   const [TypeBNTCount, setTypeBNTCount] = useState(1);
 
-  useEffect(() => {
-    console.log(listBNT);
-    console.log(listNBNT);
-    console.log(listNNBNT);
-    console.log(listTPBNT);
-    console.log(listSBNT);
-    console.log(listSSBNT);
-  }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT]);
+  // useEffect(() => {
+  //   console.log(listBNT);
+  //   console.log(listNBNT);
+  //   console.log(listNNBNT);
+  //   console.log(listTPBNT);
+  //   console.log(listSBNT);
+  //   console.log(listSSBNT);
+  // }, [listBNT, listNBNT, listNNBNT, listTPBNT, listSBNT, listSSBNT]);
   const increaseTypeBNTCount = () => {
     if (TypeBNTCount < 10) {
       setTypeBNTCount(TypeBNTCount + 1);
@@ -1062,7 +1071,6 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
     setThaiListSAll(ThaiNumberToText(listSAll));
   }, [listSAll]);
 
-  useEffect(() => { }, [listSSA]);
 
   return (
     <>

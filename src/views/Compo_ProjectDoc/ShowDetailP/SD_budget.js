@@ -660,7 +660,11 @@ function SD_budget({ id_project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         // Your Axios PUT request code goes here
-        const listSSB = listSSBT + listSSBNT;
+        const listSSBTnumber = parseFloat(listSSBT?.toString().replace(/,/g, '') || 0);
+        const listSSBNTnumber = parseFloat(listSSBNT?.toString().replace(/,/g, '') || 0);
+        const sumBT_BBNT = listSSBTnumber + listSSBNTnumber;
+    
+        const listSSB = sumBT_BBNT.toLocaleString("en-US");
         Axios.put(
           `http://localhost:3001/student/project/p_budget/create/${id_project}`,
           {

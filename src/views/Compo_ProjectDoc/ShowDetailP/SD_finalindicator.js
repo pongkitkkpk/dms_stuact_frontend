@@ -125,7 +125,7 @@ function SD_finalindicator({ id_project, currentStepProject }) {
   };
 
   const handleSaveClick = () => {
-    const editpage = "ความคาดหวังของโครงการ";
+    const editpage = "ความคาดหวังของโครงการ ปิดโครงการ";
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
