@@ -64,7 +64,7 @@ const dashboardRoutes = [
     component: Dashboard,
     layout: "/admin"
   },
- 
+
   {
     path: "/user",
     name: "User Profile",
@@ -72,7 +72,7 @@ const dashboardRoutes = [
     component: UserProfile,
     layout: "/admin"
   },
-  
+
   {
     path: "/typography",
     name: "Typography",
@@ -110,7 +110,58 @@ const dashboardRoutes = [
   }
 ];
 
-const GuestRoutes =[
+const StuactRoutes = [
+  {
+    path: "/project-doc/:id_project", // Add route parameter for id_project
+    component: ProjectDocument,
+    layout: "/stuact"
+  },
+  {
+    path: "/tablestudent",
+    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
+    icon: "nc-icon nc-notes",
+    component: TableListStudent,
+    layout: "/stuact"
+  },
+  {
+    path: "/tablepersonal",
+    name: "ตารางจัดการบทบาท(บุคลากร)",
+    icon: "nc-icon nc-notes",
+    component: TableListPersonel,
+    layout: "/stuact"
+  },
+  {
+    path: "/allproject",
+    name: "โครงการทั้งหมด",
+    icon: "nc-icon nc-notes",
+    component: AllProject,
+    layout: "/stuact"
+  },
+  {
+    path: "/addbudgetproject",
+    name: "เพิ่มงบประมาณ",
+    icon: "nc-icon nc-notes",
+    component: DTableAddBudget,
+    layout: "/stuact"
+  },
+  {
+    path: "/Listbudgetproject",
+    name: "ดูงบประมาณทั้งหมด",
+    icon: "nc-icon nc-circle-09",
+    component: DetailBudget,
+    layout: "/stuact"
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: "nc-icon nc-chart-pie-35",
+    component: Dashboard,
+    layout: "/stuact"
+  },
+
+  
+];
+const GuestRoutes = [
   {
     path: "/login",
     name: "เข้าสู่ระบบ",
@@ -127,7 +178,7 @@ const GuestRoutes =[
 
 ];
 
-const StudentRoutes =[
+const StudentRoutes = [
   {
     path: "/project-doc/:id_project", // Add route parameter for id_project
     component: ProjectDocument,
@@ -139,7 +190,7 @@ const StudentRoutes =[
     icon: "nc-icon nc-notes",
     component: NewProjectDocument,
     layout: "/students",
-    color:"#ffc404"
+    color: "#ffc404"
   },
   {
     path: "/allproject",
@@ -147,7 +198,7 @@ const StudentRoutes =[
     icon: "nc-icon nc-notes",
     component: AllProject,
     layout: "/students",
-    color:"#ffff"
+    color: "#ffff"
   },
   {
     path: "/dashboard",
@@ -155,7 +206,7 @@ const StudentRoutes =[
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
     layout: "/students",
-    color:"#32fefe"
+    color: "#32fefe"
   },
   {
     path: "/Listbudgetproject",
@@ -166,5 +217,5 @@ const StudentRoutes =[
   },
 
 ];
-export { StudentRoutes,GuestRoutes};
+export { StuactRoutes, StudentRoutes, GuestRoutes };
 export default dashboardRoutes;

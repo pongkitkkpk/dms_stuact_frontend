@@ -7,6 +7,7 @@ import './assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0';
 import './assets/css/demo.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import AdminLayout from 'layouts/Admin.js';
+import StuactLayout from 'layouts/Stuact.js';
 import GuestLayout from 'layouts/Guest.js';
 import StudentLayout from 'layouts/Student.js';
 import { AuthProvider } from 'Auth/AuthContext'; 
@@ -18,7 +19,7 @@ const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.account_type; // Accessing the account_type property
   // 
-  console.log(storedUser)
+
   return (
     <Route
       {...rest}
@@ -27,10 +28,9 @@ const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
           return <Redirect to="/guest/login" />;
         }
      
-        if (roles && !roles.includes(storedUserRole)) {
-        
-          return <Redirect to="/unauthorized" />;
-        }
+        // if (roles && !roles.includes(storedUserRole)) {
+        //   return <Redirect to="/unauthorized" />;
+        // }
         return <Component {...props} />;
       }}
     />
@@ -57,9 +57,15 @@ ReactDOM.render(
           component={AdminLayout}
           roles={['admin']}
         />
+         <ProtectedRoute
+          path="/Stuact"
+          component={StuactLayout}
+          roles={['Stuact']}
+        />
+        
 
         {/* Redirect any other routes to guest login */}
-        <Redirect to="/guest/login" />
+        {/* <Redirect to="/guest/login" /> */}
       </Switch>
     </BrowserRouter>
   </AuthProvider>,

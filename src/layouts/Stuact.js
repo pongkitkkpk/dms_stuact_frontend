@@ -5,12 +5,11 @@ import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
-
-import { StudentRoutes } from "routes.js"; 
+import { StuactRoutes } from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
-function Student() {
+function Stuact() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
@@ -20,9 +19,9 @@ function Student() {
   const location = useLocation();
   const mainPanel = React.useRef(null);
 
-  const getRoutes = () => { 
-    return StudentRoutes.map((prop, key) => { 
-      if (prop.layout === "/students") {
+  const getRoutes = () => {
+    return StuactRoutes.map((prop, key) => {
+      if (prop.layout === "/stuact") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -65,13 +64,13 @@ function Student() {
   };
   
 
+
   return (
     <>
       <Sidebar
         color={color}
         image={hasImage ? image : ""}
-        routes={StudentRoutes} 
-
+        routes={StuactRoutes}
       />
       <div className="wrapper" style={{ overflow: "hidden" }}>
         <div
@@ -80,8 +79,14 @@ function Student() {
           style={{
             transition: "margin-left 0.5s ease, width 0.5s ease",
             width: isMainpanelHovered && !isMainpanelNormal ? "96%" :
+            // isMainpanelHovered && isMainpanelNormal ? "90%" :
             !isMainpanelHovered && isMainpanelNormal ? "83%" :
             "96%"
+
+            // width: isMainpanelHovered ? "96%" : (isMainpanelNormal ? "83%" : "96%"),  //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelHovered ? "83%" : (isMainpanelNormal ? "96%" : "83%"), //not work for the first time but after use it's work 
+            // width: isMainpanelNormal ? "83%" : (isMainpanelHovered ? "96%" : "83%"), //work for the first time that open website but when use after that it's not work at all.
+            // width: isMainpanelNormal ? "96%" : (isMainpanelHovered ? "83%" : "96%"), //not work for the first time but after use it's work 
           }}
           onMouseEnter={handleMainpanelMouseEnter}
           onMouseLeave={handleMainpanelMouseLeave}
@@ -106,4 +111,4 @@ function Student() {
   );
 }
 
-export default Student;
+export default Stuact;

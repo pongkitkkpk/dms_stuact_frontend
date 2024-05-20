@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
       sessionStorage.setItem('user', JSON.stringify(adminUser));
       history.push('/admin');
     } else {
-      // If credentials are invalid, show an alert
 
       try {
 
@@ -47,36 +46,45 @@ export const AuthProvider = ({ children }) => {
           }
         );
 
-        // console.log(response)
-        // console.log(response.data.status)
-        // Check if the authentication was successful
-
         if (response.data.status === 'success') {
-          console.log(response.data)
+
           const studentUsersResponse = await axios.get("http://localhost:3001/student/users");
           const studentUsersData = studentUsersResponse.data;
           const matchingStudent = studentUsersData.find(student => student.id_student === response.data.message.username);
-          if (matchingStudent){
+
+
+          if (matchingStudent) {
             setIsAuthenticated(true);
             setUser(response.data.message);
-            
-            // console.log(response.data.message.account_type)
-            const studentUser = { username: response.data.message.username, role: response.data.message.account_type };
+
+            const studentUser = { username: response.data.message.username, role: matchingStudent.position };
             setUser(studentUser);
-            const combinedUserData = { ...response.data.message, ...response.data.message2,...matchingStudent };
+            const combinedUserData = { ...response.data.message, ...response.data.message2, ...matchingStudent };
             sessionStorage.setItem('isLogged', 'true');
             sessionStorage.setItem('user', JSON.stringify(combinedUserData));
-            console.log(sessionStorage)
-            history.replace(`/${response.data.message.account_type}/allproject`);
+
+            if (matchingStudent.account_type === "personel" && matchingStudent.position == "Admin") {
+              history.push('/admin');
+            }
+            else if (matchingStudent.account_type === "personel" && matchingStudent.position == "Stuact") {
+              console.log("Stuact part")
+              history.replace(`/stuact/allproject`);
+            }
+            else if (matchingStudent.account_type === "personel" && matchingStudent.position == "AD") {
+              history.replace(`/adviser/allproject`);
+            }
+            else if (matchingStudent.account_type === "students") {
+              history.replace(`/${response.data.message.account_type}/allproject`);
+            }
           }
-          else{
+          else {
             alert('ไม่มีข้อมูล ในระบบ dms โปรดติดต่อเจ้าหน้าที่');
           }
           // console.log(response.data.message.username)
-         
+
 
         } else {
-          alert('Authentication failed. รหัสicitผิดผลาดjjojojooj');
+          alert('Authentication failed. รหัสicitผิดผลาด');
         }
       } catch (error) {
         console.error('Error during login:', error);
@@ -93,6 +101,8 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUser({});
   };
+
+
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, handleLogin, handleLogout }}>
