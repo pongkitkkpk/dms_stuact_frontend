@@ -180,7 +180,7 @@ function AllProject() {
       <Container fluid>
         <Row>
           <Col md="12">
-            <div className="d-flex justify-content-center align-items-center" style={{marginTop:"-5px"}}>
+            <div className="d-flex justify-content-center align-items-center" style={{ marginTop: "-5px" }}>
               <Dropdown className="align-items-center">
                 <Dropdown.Toggle
                   variant="warning"
@@ -207,29 +207,28 @@ function AllProject() {
                       {/* Render badge and count */}
                       <div className="d-flex justify-content-between align-items-center">
                         <span
-                          className={`badge badge-${
-                            status === "ร่างคำขออนุมัติ"
+                          className={`badge badge-${status === "ร่างคำขออนุมัติ"
                               ? "draft"
                               : status === "ดำเนินการขออนุมัติ"
-                              ? "progress"
-                              : status === "รออนุมัติ"
-                              ? "wait-progress"
-                              : status === "โครงการอนุมัติ"
-                              ? "approved"
-                              : status === "รอเงินโครงการอนุมัติ"
-                              ? "wait-approved-budget"
-                              : status === "เงินโครงการอนุมัติ"
-                              ? "approved-budget"
-                              : status === "รอสรุปผลโครงการ"
-                              ? "wait-summary-draft"
-                              : status === "ร่างสรุปผลโครงการ"
-                              ? "summary-draft"
-                              : status === "ดำเนินการสรุปผล"
-                              ? "summary-progress"
-                              : status === "ปิดโครงการ"
-                              ? "closed"
-                              : ""
-                          }`}
+                                ? "progress"
+                                : status === "รออนุมัติ"
+                                  ? "wait-progress"
+                                  : status === "โครงการอนุมัติ"
+                                    ? "approved"
+                                    : status === "รอเงินโครงการอนุมัติ"
+                                      ? "wait-approved-budget"
+                                      : status === "เงินโครงการอนุมัติ"
+                                        ? "approved-budget"
+                                        : status === "รอสรุปผลโครงการ"
+                                          ? "wait-summary-draft"
+                                          : status === "ร่างสรุปผลโครงการ"
+                                            ? "summary-draft"
+                                            : status === "ดำเนินการสรุปผล"
+                                              ? "summary-progress"
+                                              : status === "ปิดโครงการ"
+                                                ? "closed"
+                                                : ""
+                            }`}
                           style={{
                             marginRight: "1%",
                             backgroundColor: stepColors[status],
@@ -244,7 +243,7 @@ function AllProject() {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <InputGroup className="align-items-center" style={{ width: "100%", marginLeft:"10px" }}>
+              <InputGroup className="align-items-center" style={{ width: "100%", marginLeft: "10px" }}>
                 <Form.Control
                   placeholder="ค้นหา"
                   type="text"
@@ -253,7 +252,7 @@ function AllProject() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <InputGroup.Text>
-                  <i className="fa fa-search" aria-hidden="true" style={{marginTop:"4.5px", marginBottom:"4.5px"}}></i>
+                  <i className="fa fa-search" aria-hidden="true" style={{ marginTop: "4.5px", marginBottom: "4.5px" }}></i>
                 </InputGroup.Text>
               </InputGroup>
             </div>
@@ -268,56 +267,54 @@ function AllProject() {
                   <Card
                     style={{ marginBottom: "5px" }}
                     key={index}
-                    className={`card-with-border-${
-                      val.project_phase === "ร่างคำขออนุมัติ"
+                    className={`card-with-border-${val.project_phase === "ร่างคำขออนุมัติ"
                         ? "draft"
                         : val.project_phase === "ดำเนินการขออนุมัติ"
-                        ? "progress"
-                        : val.project_phase === "รออนุมัติโครงการ"
-                        ? "wait-progress"
-                        : val.project_phase === "โครงการอนุมัติ"
-                        ? "approved"
-                        : val.project_phase === "รอเงินโครงการอนุมัติ"
-                        ? "wait-approved-budget"
-                        : val.project_phase === "เงินโครงการอนุมัติ"
-                        ? "approved-budget"
-                        : val.project_phase === "รอสรุปผลโครงการ"
-                        ? "wait-summary-draft"
-                        : val.project_phase === "ร่างสรุปผลโครงการ"
-                        ? "summary-draft"
-                        : val.project_phase === "ดำเนินการสรุปผล"
-                        ? "summary-progress"
-                        : val.project_phase === "ปิดโครงการ"
-                        ? "closed"
-                        : ""
-                    }`}
+                          ? "progress"
+                          : val.project_phase === "รออนุมัติโครงการ"
+                            ? "wait-progress"
+                            : val.project_phase === "โครงการอนุมัติ"
+                              ? "approved"
+                              : val.project_phase === "รอเงินโครงการอนุมัติ"
+                                ? "wait-approved-budget"
+                                : val.project_phase === "เงินโครงการอนุมัติ"
+                                  ? "approved-budget"
+                                  : val.project_phase === "รอสรุปผลโครงการ"
+                                    ? "wait-summary-draft"
+                                    : val.project_phase === "ร่างสรุปผลโครงการ"
+                                      ? "summary-draft"
+                                      : val.project_phase === "ดำเนินการสรุปผล"
+                                        ? "summary-progress"
+                                        : val.project_phase === "ปิดโครงการ"
+                                          ? "closed"
+                                          : ""
+                      }`}
                   >
                     <Card.Body>
                       <div className="status-tag">
                         <span
-                          className={`badge badge-${
-                            val.project_phase === "ร่างคำขออนุมัติ"
+                          className={`badge badge-${val.project_phase === "ร่างคำขออนุมัติ"
                               ? "draft"
                               : val.project_phase === "ดำเนินการขออนุมัติ"
-                              ? "progress"
-                              : val.project_phase === "รออนุมัติ"
-                              ? "wait-progress"
-                              : val.project_phase === "โครงการอนุมัติ"
-                              ? "approved"
-                              : val.project_phase === "รอเงินโครงการอนุมัติ"
-                              ? "wait-approved-budget"
-                              : val.project_phase === "เงินโครงการอนุมัติ"
-                              ? "approved-budget"
-                              : val.project_phase === "รอสรุปผลโครงการ"
-                              ? "wait-summary-draft"
-                              : val.project_phase === "ร่างสรุปผลโครงการ"
-                              ? "summary-draft"
-                              : val.project_phase === "ดำเนินการสรุปผล"
-                              ? "summary-progress"
-                              : val.project_phase === "ปิดโครงการ"
-                              ? "closed"
-                              : ""
-                          }`}
+                                ? "progress"
+                                : val.project_phase === "รออนุมัติ"
+                                  ? "wait-progress"
+                                  : val.project_phase === "โครงการอนุมัติ"
+                                    ? "approved"
+                                    : val.project_phase === "รอเงินโครงการอนุมัติ"
+                                      ? "wait-approved-budget"
+                                      : val.project_phase === "เงินโครงการอนุมัติ"
+                                        ? "approved-budget"
+                                        : val.project_phase === "รอสรุปผลโครงการ"
+                                          ? "wait-summary-draft"
+                                          : val.project_phase === "ร่างสรุปผลโครงการ"
+                                            ? "summary-draft"
+                                            : val.project_phase === "ดำเนินการสรุปผล"
+                                              ? "summary-progress"
+                                              : val.project_phase === "ปิดโครงการ"
+                                                ? "closed"
+                                                : ""
+                            }`}
                           style={{
                             marginRight: "1%",
                             backgroundColor: stepColors[val.project_phase],
@@ -327,7 +324,7 @@ function AllProject() {
                         </span>
                         <span
                           className={`badge badge-"warning"`}
-                          // className={`badge badge-"warning"`} ดำขาว
+                        // className={`badge badge-"warning"`} ดำขาว
                         >
                           {val.responsible_agency}
                         </span>
@@ -355,17 +352,17 @@ function AllProject() {
                                 แสดงรายละเอียด
                               </Button>
                               {/* {val.project_phase === "ร่างคำขออนุมัติ" && ( */}
-                              <Button
-                                style={{ marginLeft: "5px" }}
-                                className="btn-decrease"
-                                variant="danger"
-                                onClick={() =>
-                                  handleDeleteProject(val.id, val.project_name)
-                                }
-                              >
-                                ลบ
-                              </Button>
-                              {/* )} */}
+                                <Button
+                                  style={{ marginLeft: "5px" }}
+                                  className="btn-decrease"
+                                  variant="danger"
+                                  onClick={() =>
+                                    handleDeleteProject(val.id, val.project_name)
+                                  }
+                                >
+                                  ลบ
+                                </Button>
+                              {/*  )} */}
                             </div>
                           </div>
                         </div>

@@ -30,14 +30,21 @@ function DAddSplitBudget() {
     })
       .then((response) => {
         // Handle success response
-        console.log("Net project created successfully:", response.data);
-        window.location.reload();
+        console.log("Net project created successfully:");
       })
       .catch((error) => {
         // Handle error response
         console.error("Error creating net project:", error);
         // You can display an error message to the user or perform other actions here
       });
+      Swal.fire({
+        title: `บันทึกการ เพิ่มงบประมาณโครงการ ${project_name} เรียบร้อยแล้ว`,
+        text: "ใส่ข้อมูล หมวดถัดไป",
+        icon: "success",
+      }).then(() => {
+        window.location.reload();
+      });
+      
   };
 
   return (

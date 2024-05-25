@@ -14,7 +14,8 @@ import {
   Form,
 } from "react-bootstrap";
 import TableAddPersonel from "./TableAddPersonel";
-import setCode from "./setCode.json";
+import Swal from "sweetalert2";
+
 
 function TableListPersonel() {
   const [userList, setUserList] = useState([]);
@@ -24,18 +25,6 @@ function TableListPersonel() {
     Axios.get("http://localhost:3001/admin/stuactusers").then((response) => {
       setUserList(response.data);
     });
-  };
-
-  const deleteUser = (id) => {
-    Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id}`).then(
-      (response) => {
-        setUserList(
-          userList.filter((val) => {
-            return val.id !== id; // Use 'id' instead of 'idStudent'
-          })
-        );
-      }
-    );
   };
 
   useEffect(() => {
@@ -62,6 +51,35 @@ function TableListPersonel() {
     );
   });
 
+  const handleDeleteProject = (id_project, name_student) => {
+    Swal.fire({
+      className: "title",
+      title: `คุณต้องการลบรายชื่อ "${name_student}" ใช่หรือไม่?`,
+      text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ยกเลิก",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id_project}`)
+          .then((response) => {
+            setUserList(
+              userList.filter((val) => {
+                return val.id !== id_project; // Use 'id_project' instead of 'id'
+              })
+            );
+          })
+          .catch((error) => {
+            console.error("Error deleting project:", error);
+          });
+      }
+    });
+  };
+  
   return (
     <>
       <TableAddPersonel />
@@ -252,8 +270,10 @@ function TableListPersonel() {
                             <td>
                               {" "}
                               <button
-                                className="btn btn-danger"
-                                onClick={() => deleteUser(val.id)}
+                                variant="danger"
+                                style={{borderColor:"#F33E3E"}}
+                                className="btn btn-budget-decrease"
+                                onClick={() => handleDeleteProject(val.id, val.name_student)}
                               >
                                 <div>ลบ</div>
                               </button>

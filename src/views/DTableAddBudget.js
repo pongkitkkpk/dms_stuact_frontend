@@ -49,10 +49,10 @@ function DTableAddBudget() {
       const sortedData = response.data.sort((a, b) => {
         if (a.AgencyGroupName < b.AgencyGroupName) return 1;
         if (a.AgencyGroupName > b.AgencyGroupName) return -1;
-  
+
         if (a.responsible_agency < b.responsible_agency) return 1;
         if (a.responsible_agency > b.responsible_agency) return -1;
-  
+
         return a.yearly - b.yearly;
       });
       setNetList(sortedData);
@@ -65,13 +65,42 @@ function DTableAddBudget() {
 
 
 
-  const handleDelete = (id) => {
-    Axios.delete(`http://localhost:3001/admin/deleteNetProject/${id}`).then((response) => {
-      setNetList(
-        NetList.filter((val) => {
-          return val.id !== id;
-        })
-      );
+  // const handleDelete = (id) => {
+  //   Axios.delete(`http://localhost:3001/admin/deleteNetProject/${id}`).then((response) => {
+  //     setNetList(
+  //       NetList.filter((val) => {
+  //         return val.id !== id;
+  //       })
+  //     );
+  //   });
+  // };
+
+  const handleDeleteProject = (id,project_name) => {
+    Swal.fire({
+      className: "title",
+      title: `คุณต้องการลบงบประมาณโครงการ "${project_name}" ใช่หรือไม่?`,
+      text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ยกเลิก",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.delete(`http://localhost:3001/admin/deleteNetProject/${id}`)
+          .then((response) => {
+            setNetList(
+              NetList.filter((val) => {
+                return val.id !== id;
+              })
+            );
+          })
+          .catch((error) => {
+            console.error("Error deleting project:", error);
+          });
+      }
     });
   };
   const currentYear = new Date().getFullYear() + 543;
@@ -92,7 +121,7 @@ function DTableAddBudget() {
       <DAddSplitBudget />
       <div>
         <Form.Group>
-         
+
           <Form.Control
             as="select"
             className="font-form-control"
@@ -247,6 +276,14 @@ function DTableAddBudget() {
                   <td>บาท</td>
                   <td>
                     <Button
+                      variant="danger"
+                      style={{ borderColor: "#F33E3E" }}
+                      className="btn btn-budget-decrease"
+                      onClick={() => handleDeleteProject(project.id,project.project_name)}
+                    >
+                      <div>ลบ</div>
+                    </Button>
+                    {/* <Button
                       onClick={() => handleDelete(project.id)}
                       type="submit"
                       variant="success"
@@ -254,8 +291,8 @@ function DTableAddBudget() {
                       style={{ fontSize: "14px" }}
                     >
                       ลบ
-                    </Button>
-                    
+                    </Button> */}
+
                   </td>
                 </tr>
               );
@@ -280,11 +317,11 @@ function DTableAddBudget() {
                     >
                       ลบ
                     </Button>
-                    
+
                   </td>
                 </tr>
               );
-            } 
+            }
             // อันนี้เลือกแค่ปี
             else if ("เลือกทั้งหมด ชมรม/หน่วยงาน/องค์กร" === clubName && (!yearselect || yearselect === project.yearly)) {
               return (
@@ -305,12 +342,12 @@ function DTableAddBudget() {
                     >
                       ลบ
                     </Button>
-                    
+
                   </td>
                 </tr>
               );
-            } 
-            
+            }
+
             else {
               return null;
             }
