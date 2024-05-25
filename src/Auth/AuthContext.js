@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             sessionStorage.setItem('isLogged', 'true');
             sessionStorage.setItem('user', JSON.stringify(combinedUserData));
 
-            if (matchingStudent.account_type === "personel" && matchingStudent.position == "Admin") {
+            if (matchingStudent.position == "Admin") {
               history.push('/admin');
             }
             else if (matchingStudent.account_type === "personel" && matchingStudent.position == "Stuact") {
