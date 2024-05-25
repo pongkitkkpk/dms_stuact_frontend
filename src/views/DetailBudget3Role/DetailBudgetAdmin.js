@@ -7,9 +7,20 @@ function DetailBudgetAdmin() {
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
 
   const [clubName, setClubName] = useState("");
-  const currentYear = new Date().getFullYear();
-  const [yearly, setYearly] = useState((currentYear + 543).toString());
+  const [yearly, setYearly] = useState("");
 
+  const selectYear = new Date().getFullYear() + 543;
+  const startYear = selectYear - 5;
+  const endYear = selectYear + 5;
+  const years = [];
+  for (let year = startYear; year <= endYear; year++) {
+    years.push(year);
+  }
+
+  const handleChange = (event) => {
+    const selectedValue = event.target.value;
+    setYearly(selectedValue);
+  };
   const [responsible_agency, setResponsible_agency] = useState("");
   const [ProjectList, setProjectList] = useState([]);
   const [totalNetBudget, setTotalNetBudget] = useState(0);
@@ -71,9 +82,10 @@ function DetailBudgetAdmin() {
   useEffect(() => {
     console.log("yearly")
     console.log(yearly)
+    console.log("BudgetList")
     console.log(BudgetList)
     console.log(ProjectList)
-  }, [BudgetList, yearly,ProjectList])
+  }, [BudgetList, yearly, ProjectList])
 
 
   // ตอนทั้งหมด แยกแต่ละฝ่าย
@@ -124,10 +136,11 @@ function DetailBudgetAdmin() {
     setTotalLeftBudget(totalNetBudget - totalAllowBudget);
   }, [totalNetBudget, totalAllowBudget]);
 
+
   return (
     <>
       <h1>budget admin</h1>
-      
+
       <Row>
         <Col>
           <Card>
@@ -205,26 +218,22 @@ function DetailBudgetAdmin() {
 
       <h1>{`${clubName}`}</h1>
       <div>
-        <Form.Control
-          as="select"
-          className="font-form-control"
-          size="sm"
-          onChange={(event) => {
-            const selectedValue = event.target.value;
-            setYearly(selectedValue)
-          }}
-        >
-          <option value="">เลือกปีการศึกษา</option>
-          {Array.from(
-            new Set(BudgetList.map((personName) => personName.yearly))
-          ) // Filter unique years
-            .sort((a, b) => a - b) // Sort years
-            .map((year, index) => (
-              <option key={index} value={year}>
+        <Form.Group>
+
+          <Form.Control
+            as="select"
+            className="font-form-control"
+            size="sm"
+            onChange={handleChange}
+          >
+            <option value="">เลือกปีการศึกษา(ทั้งหมด +- 7 ปี)</option>
+            {years.map((year) => (
+              <option key={year} value={year}>
                 {year}
               </option>
             ))}
-        </Form.Control>
+          </Form.Control>
+        </Form.Group>
 
         <Form.Control
           as="select"
@@ -322,18 +331,32 @@ function DetailBudgetAdmin() {
               </tr>
             </thead>
             <tbody>
-              {ProjectList.map((project, index) => (
-                <tr key={index} style={{ backgroundColor: "white" }}>
-                  <td>{project.project_number}</td>
-                  <td>{project.project_name}</td>
-                  <td>{project.responsible_agency}</td>
-                  <td>{project.yearly}</td>
-                  <td>{project.net_budget}</td>
-                  <td>{Number(project.allow_budget).toLocaleString()}</td>
-                  
-                </tr>
-              ))}
+              {BudgetList.map((project, index) => {
+                // Find the corresponding project in ProjectList
+                const matchingProject = ProjectList.find(p => p.project_name === project.project_name);
+                console.log("matchingProject")
+                console.log(matchingProject)
+                return (
+                  <tr key={index} style={{ backgroundColor: "white" }}>
+                    {matchingProject ? (
+                      <td>{matchingProject.project_number}</td>
+                    ) : (
+                      <td></td>
+                    )}
+                    
+                    <td>{project.project_name}</td>
+                    <td>{project.responsible_agency}</td>
+                    <td>{project.yearly}</td>
+                    <td>{project.net_budget}</td>
+                    <td>{Number(project.allow_budget).toLocaleString()}</td>
+
+                    {/* Add additional data from matchingProject if needed */}
+
+                  </tr>
+                );
+              })}
             </tbody>
+
           </Table>
         )}
 

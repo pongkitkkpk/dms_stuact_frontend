@@ -8,6 +8,7 @@ import setCode from "./setCode.json";
 function DAddSplitBudget() {
   const [project_name, setProjectName] = useState("");
   const [responsible_agency, setResponsibleAgency] = useState("");
+  const [AgnecyGroupName, setAgnecyGroupName] = useState("");
   const [yearly, setYearly] = useState("2566");
 
   const [campus, setCampus] = useState("Bangkok");
@@ -15,6 +16,8 @@ function DAddSplitBudget() {
   const [codeagency, setCodeagency] = useState("");
   const [clubName, setClubname] = useState("");
   const [net_budget, setNetBudget] = useState("");
+
+
 
   const createNetProject = () => {
     Axios.post(`http://localhost:3001/admin/createNetProject`, {
@@ -66,7 +69,7 @@ function DAddSplitBudget() {
             marginBottom: "0px",
           }}
         >
-          <Table striped="columns" style={{marginBottom:"0px"}}>
+          <Table striped="columns" style={{ marginBottom: "0px" }}>
             <tbody>
               <tr style={{ backgroundColor: "white" }}>
                 <Table striped="columns">
@@ -179,6 +182,13 @@ function DAddSplitBudget() {
                               event.target.options[event.target.selectedIndex]
                                 .text;
                             setClubname(selectedText);
+                            console.log(selectedText)
+                            console.log(event.target.selectedIndex)
+                            const agencyGroupName =
+                              event.target.options[event.target.selectedIndex].getAttribute('data-agencygroup');
+
+                            setClubname(selectedText);
+                            setAgnecyGroupName(agencyGroupName);
                           }}
                           required
                           className="form-select font-form-control"
@@ -203,6 +213,7 @@ function DAddSplitBudget() {
                                           <option
                                             key={agencyKey}
                                             value={agencyKey}
+                                            data-agencygroup={agencyGroup.name}
                                           >
                                             {` ${campusData[agencyKey]}`}
                                           </option>

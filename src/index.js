@@ -65,7 +65,7 @@ ReactDOM.render(
         
 
         {/* Redirect any other routes to guest login */}
-        {/* <Redirect to="/guest/login" /> */}
+        <Redirect to="/guest/login" />
       </Switch>
     </BrowserRouter>
   </AuthProvider>,
