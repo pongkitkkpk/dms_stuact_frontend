@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Card, Button, Col, Row, Form } from "react-bootstrap";
 import Axios from "axios";
-
+import setCode from "../setCode.json";
 function DetailBudgetAdmin() {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
@@ -270,6 +270,8 @@ function DetailBudgetAdmin() {
         </Form.Control>
 
 
+
+
         {AgnecyGroupName !== 'ทั้งหมด' && (
           <Table striped="columns">
             <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
@@ -343,7 +345,7 @@ function DetailBudgetAdmin() {
                     ) : (
                       <td></td>
                     )}
-                    
+
                     <td>{project.project_name}</td>
                     <td>{project.responsible_agency}</td>
                     <td>{project.yearly}</td>
