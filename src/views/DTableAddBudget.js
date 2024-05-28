@@ -249,15 +249,15 @@ function DTableAddBudget() {
               </th>
               <th
                 style={{
-                  width: "20%",
+                  width: "5%",
                   color: "white",
                   // fontWeight: "bold",
                 }}
               >
                 งบประมาณสุทธิ
               </th>
-              <th style={{ width: "5%" }}></th>
-              <th style={{ width: "15%" }}></th>
+              <th style={{ width: "5%"}}></th>
+              <th style={{ width: "20%"}}></th>
             </tr>
           </thead>
           <tbody>
@@ -271,11 +271,11 @@ function DTableAddBudget() {
                 return (
                   <tr key={index} style={{ backgroundColor: "white" }}>
                     {/* <td>{project.id}</td> */}
-                    <td>{project.project_name}</td>
+                    <td><div>{project.project_name}</div></td>
                     <td>{project.responsible_agency}</td>
                     <td>{project.yearly}</td>
                     <td>{project.net_budget}</td>
-                    <td className="font-form-control">บาท</td>
+                    <td className="font-alert" style={{justifyItems:"start"}}>บาท</td>
                     <td>
                       <Button
                         variant="danger"
@@ -285,7 +285,7 @@ function DTableAddBudget() {
                           handleDeleteProject(project.id, project.project_name)
                         }
                       >
-                        <div>ลบ</div>
+                        <div style={{fontSize:"14px"}}>ลบ</div>
                       </Button>
                       {/* <Button
                       onClick={() => handleDelete(project.id)}
@@ -312,7 +312,7 @@ function DTableAddBudget() {
                     <td>{project.responsible_agency}</td>
                     <td>{project.yearly}</td>
                     <td>{project.net_budget}</td>
-                    <td>บาท</td>
+                    <td style={{backgroundColor:"red"}}>บาท</td>
                     <td>
                       <Button
                         onClick={() => handleDelete(project.id)}
