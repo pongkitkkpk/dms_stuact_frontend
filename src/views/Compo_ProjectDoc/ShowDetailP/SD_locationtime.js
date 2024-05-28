@@ -44,9 +44,10 @@ function SD_locationtime({ id_project, currentStepProject }) {
   const [created_at, setCreated_At] = useState(new Date());
   const [updated_at, setUpdated_at] = useState("");
   const [onlymonthstart, setOnlyMonthStart] = useState("");
-  const [showdeadline, setShowDeadLine] = useState("");
+  const [showdeadline, setShowDeadLine] = useState(deadline);
 
-  //
+  
+ 
   const minDate = new Date();
   const [codeclub, setCodeclub] = useState("");
   const [yearly_countsketch,setYearlyCountSketch]=useState("");
@@ -212,22 +213,23 @@ function SD_locationtime({ id_project, currentStepProject }) {
       const year = endReportDate.getFullYear();
   
       const a = `${year}-${month}-${day}`;
-      console.log("New deadline:", a);
+      // console.log("New deadline:", a);
   
       // Update editData using the functional form of setEditData
       setEditData((prevEditData) => ({
         ...prevEditData,
         deadline: a,
       }));
-      console.log("Updated editData:", editData);
+      // console.log("Updated editData:", editData);
   
       setDeadLine(a);
-      console.log("Updated editData:", deadline);
+      // console.log("Updated editData:", deadline);
       setShowDeadLine(`${day}/${month}/${year}`);
     }
   }, [editData.end_event]); 
+
   useEffect(() => {
-    console.log("Updated editData2:", deadline);
+    // console.log("Updated editData2:", deadline);
     setEditData((prevEditData) => ({
         ...prevEditData,
         deadline: deadline,
@@ -298,23 +300,28 @@ function SD_locationtime({ id_project, currentStepProject }) {
         thaideadline: formattedDate,
       });
     setThaiDeadLine(formattedDate);
-    console.log("BBBBBBBBBBBBBBB")
-    console.log(formattedDate)
+    // console.log("BBBBBBBBBBBBBBB")
+    // console.log(formattedDate)
   }, [editData.deadline]);
 
-  useEffect(() => {
-    console.log(thaistart_prepare);
-    console.log(thaiend_prepare);
-    console.log(thaistart_event);
-    console.log(thaiend_event);
-    console.log(thaideadline);
-  }, [
-    thaiend_event,
-    thaiend_prepare,
-    thaistart_event,
-    thaistart_prepare,
-    thaideadline,
-  ]);
+  // useEffect(() => {
+  //   console.log(thaistart_prepare);
+  //   console.log(thaiend_prepare);
+  //   console.log(thaistart_event);
+  //   console.log(thaiend_event);
+  //   console.log(thaideadline);
+  // }, [
+  //   thaiend_event,
+  //   thaiend_prepare,
+  //   thaistart_event,
+  //   thaistart_prepare,
+  //   thaideadline,
+  // ]);
+
+  useEffect(()=>{
+    setShowDeadLine(deadline)
+  },[deadline])
+  
   return (
     <>
       {/* วนค่าจากdatabase  */}
@@ -572,13 +579,11 @@ function SD_locationtime({ id_project, currentStepProject }) {
                     style={{ verticalAlign: "top" }}
                   >
                     <div>วันกำหนดส่งโครงการ</div>
-                    {/* <p className="detail-prodoc">
-                      กำหนด 30 วัน หลังจากวันดำเนินงาน
-                    </p> */}
+                    
                   </td>
                   <td>
                     <div className="d-flex align-items-center">
-                      {/* <Form.Label className="mr-2">วันส่งรายงาน:</Form.Label> */}
+                      
                       <input
                         type="text"
                         value={showdeadline}

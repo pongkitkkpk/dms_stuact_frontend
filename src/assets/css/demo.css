@@ -896,12 +896,12 @@
 }
 
 .card-with-border-summary-draft {
-  border-left: 4px solid #0000ff; 
+  border-left: 4px solid #0001ff; 
   position: relative;
 }
 
 .card-with-border-summary-progress {
-  border-left: 4px solid #0000ff; 
+  border-left: 4px solid #00008f; 
   position: relative;
 }
 
@@ -939,15 +939,18 @@
 }
 
 .badge-summary-draft {
-  background-color: #0000ff; 
+  background-color: #0001ff; 
+  color: #ffff;
 }
 
 .badge-summary-progress {
-  background-color: #0000ff; 
+  background-color: #00008f; 
+  color: #ffff;
 }
 
 .badge-closed {
   background-color: #8000ff; 
+  color: #ffff;
 }
 
 
