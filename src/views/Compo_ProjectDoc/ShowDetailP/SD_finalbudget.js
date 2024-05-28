@@ -46,11 +46,8 @@ function SD_finalbudget({ id_project, currentStepProject }) {
     Axios.get(
       `http://localhost:3001/student/project/getidproject/${id_project}`
     ).then((response) => {
-      
-      setAllowBudget(response.data[0].allow_budget);
-
-
-
+      const net = response.data[0].net_budget
+      setAllowBudget(parseFloat(net.toString().replace(/,/g, '')));
     });
   };
 
@@ -133,7 +130,6 @@ function SD_finalbudget({ id_project, currentStepProject }) {
   };
 
 
-  // ********************************************** ผู้บริหาร *********************************************
   const [listSSA, setListSSA] = useState("");
   const [listSSB, setListSSB] = useState("");
 
@@ -157,6 +153,10 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 }, [listSSA, listSSB, listSSC]);
 
 
+useEffect(() => {
+  console.log("allow_budget")
+  console.log(allow_budget)
+}, [allow_budget]);
 
 useEffect(() => {
   const NumberSSA = editData.listSSA ? parseFloat(editData.listSSA.toString().replace(/,/g, '')) : 0;
@@ -183,16 +183,10 @@ useEffect(() => {
 }, [editData.listSSA, editData.listSSB, editData.listSSC, allow_budget]);
 
 
-  useEffect(()=>{
-    console.log(editData)
-  },[editData])
+
   
 
-useEffect(()=>{
-  console.log("edit ssa")
-  console.log(editData)
-  console.log(editData.listSSA ?? 0) // when editData.listSSA = 0 it show NaN i need show 0
-},[editData])
+
 
 
   return (

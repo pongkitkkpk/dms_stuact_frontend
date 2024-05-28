@@ -158,14 +158,14 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
     const createstudentdetmoney = () => {
         Swal.fire({
             title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
-            text: `การบันทึกข้อมูลจะไม่สามารถยกเลิกได้ นักศึกษา${namestudent_receive} บุคากรรับเรื่อง${namestuact_receive} จำนวนเงิน${numberstudent_receive}`,
+            text: `การบันทึกข้อมูลจะไม่สามารถยกเลิกได้ นักศึกษา${namestudent_receive} บุคคากรรับเรื่อง${namestuact_receive} จำนวนเงิน ${numberstudent_receive.toLocaleString()} บาท`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "บันทึก",
             cancelButtonText: "ยกเลิก",
-            // reverseButtons: true,
+            reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 Axios.post(
