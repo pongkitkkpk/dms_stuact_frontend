@@ -186,8 +186,11 @@ function SD_detail({ id_project, currentStepProject }) {
     });
   };
 
-  const handleDownloadClick = () => {
-    window.location.href = `http://localhost:3001/student/download/${id_project}`;
+  const handleDownloadClick04 = () => {
+    window.location.href = `http://localhost:3001/student/download04/${id_project}`;
+  };
+  const handleDownloadClick06 = () => {
+    window.location.href = `http://localhost:3001/student/download06/${id_project}`;
   };
 
   // const handleDownloadClick = () => {
@@ -197,19 +200,19 @@ function SD_detail({ id_project, currentStepProject }) {
   //   .then(response => {
   //     // Create a Blob from the response data with the appropriate MIME type
   //     const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      
+
   //     // Create a URL for the Blob
   //     const url = window.URL.createObjectURL(blob);
-      
+
   //     // Create a temporary link element to trigger the download
   //     const link = document.createElement('a');
   //     link.href = url;
   //     link.setAttribute('download', `e-doc-${id_project}.docx`);
-      
+
   //     // Append the link to the DOM and simulate a click
   //     document.body.appendChild(link);
   //     link.click();
-  
+
   //     // Clean up by removing the link from the DOM and revoking the URL
   //     document.body.removeChild(link);
   //     window.URL.revokeObjectURL(url);
@@ -223,8 +226,8 @@ function SD_detail({ id_project, currentStepProject }) {
   //     });
   //   });
   // };
-  
-  
+
+
 
   return (
     <>
@@ -266,19 +269,25 @@ function SD_detail({ id_project, currentStepProject }) {
               <tbody>
                 {/* download เอกสาร */}
                 {!isEditMode && (
-                  <tr style={{ backgroundColor: "white" }}>
-                    <td
-                      className="head-side-td"
-                      style={{ verticalAlign: "center" }}
-                    >
-                      <div>Download e-docx</div>
-                    </td>
-                    <td style={{ verticalAlign: "middle" }}>
-                      <Button variant="primary" className="btn-download-file" onClick={handleDownloadClick}>
-                        <div style={{fontSize:"14px"}}>ดาวน์โหลด (.docx)</div>
-                      </Button>
-                    </td>
-                  </tr>
+                  <>
+                    <tr style={{ backgroundColor: "white" }}>
+                      <td
+                        className="head-side-td"
+                        style={{ verticalAlign: "center" }}
+                      >
+                        <div>Download e-docx</div>
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <Button variant="primary" className="btn-download-file" onClick={handleDownloadClick04}>
+                          <div style={{ fontSize: "14px" }}>ดาวน์โหลด กนศ.04 (.docx)</div>
+                        </Button>
+                        <Button style={{ marginLeft:"2%"}} variant="primary" className="btn-download-file" onClick={handleDownloadClick06}>
+                          <div style={{ fontSize: "14px" }}>ดาวน์โหลด กนศ.06 (.docx)</div>
+                        </Button>
+                      </td>
+                    </tr>
+                   
+                  </>
                 )}
 
                 {/* ชื่อโครงการ */}
@@ -309,8 +318,8 @@ function SD_detail({ id_project, currentStepProject }) {
                     className="head-side-td"
                     style={{ verticalAlign: "top" }}
                   >
-                    <div><p className="title" style={{marginBottom:"0"}}>หน่วยงาน</p><p className="title" style={{marginBottom:"0"}}>ที่รับผิดชอบ</p></div>
-                    
+                    <div><p className="title" style={{ marginBottom: "0" }}>หน่วยงาน</p><p className="title" style={{ marginBottom: "0" }}>ที่รับผิดชอบ</p></div>
+
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                     <Form.Control
@@ -385,7 +394,7 @@ function SD_detail({ id_project, currentStepProject }) {
                 {/* เบอร์อาจารย์ที่ปรึกษา  db */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td-swp">
-                    <div><p className="title" style={{marginBottom:"0"}}>เบอร์ติดต่อ</p><p className="title" style={{marginBottom:"0"}}>อาจารย์ปรึกษา</p></div>
+                    <div><p className="title" style={{ marginBottom: "0" }}>เบอร์ติดต่อ</p><p className="title" style={{ marginBottom: "0" }}>อาจารย์ปรึกษา</p></div>
                     {/* <p className="detail-prodoc">
                       ข้อมูลอัตโนมัติจากหน่วยงานที่รับผิดชอบ
                     </p> */}
@@ -410,14 +419,14 @@ function SD_detail({ id_project, currentStepProject }) {
                 {/* ผู้รับผิดชอบโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                  <div><p className="title" style={{marginBottom:"0"}}>ผู้รับผิดชอบ</p><p className="title" style={{marginBottom:"0"}}>โครงการ</p></div>
+                    <div><p className="title" style={{ marginBottom: "0" }}>ผู้รับผิดชอบ</p><p className="title" style={{ marginBottom: "0" }}>โครงการ</p></div>
                   </td>
                   <td className="back-side-td">
                     <Table striped="columns">
                       <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
                         <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
-                          <th style={{color: "white", fontSize:"14px", fontWeight:"bold"}}>ชื่อ-สกุล</th>
-                          <th style={{color: "white", fontSize:"14px", fontWeight:"bold"}}>โทรศัพท์</th>
+                          <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>ชื่อ-สกุล</th>
+                          <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>โทรศัพท์</th>
                         </tr>
                       </thead>
                       <tbody>

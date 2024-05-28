@@ -420,7 +420,7 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                             readOnly={!isEditMode}
                           />
                         </tr>
-                        <hr></hr>
+                        
                       </tbody>
                     </Table>
                   </td>
@@ -476,27 +476,15 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <hr></hr>
+                        
                         <tr style={{ backgroundColor: "white" }}>
-                          ผลการ :
+                          เป้าหมายด้านคุณภาพ ข้อที่2 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            placeholder={`ด้านคุณภาพข้อที่ ${1}`}
-                            value={quality1}
-                            onChange={(event) => {
-                              setQuality1(event.target.value);
-                            }}
-                            readOnly={!isEditMode}
-                          />
-                        </tr>
-                        <tr style={{ backgroundColor: "white" }}>
-                          <Form.Control
-                            className="table-margin"
-                            size="sm"
-                            type="text"
-                            value={quality2}
                             placeholder={`ด้านคุณภาพข้อที่ ${2}`}
+                            value={quality2}
                             onChange={(event) => {
                               setQuality2(event.target.value);
                             }}
@@ -504,12 +492,29 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <tr style={{ backgroundColor: "white" }}>
+                          ผลการด้านคุณภาพ ข้อที่ 2 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={quality3}
+                            placeholder={`ผลการด้านคุณภาพ ข้อที่${2}`}
+                            value={expresultquality2}
+                            onChange={(event) => {
+                              setexpresultQuality2(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
+
+                        <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านคุณภาพ ข้อที่3 :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
                             placeholder={`ด้านคุณภาพข้อที่ ${3}`}
+                            value={quality3}
                             onChange={(event) => {
                               setQuality3(event.target.value);
                             }}
@@ -517,12 +522,29 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <tr style={{ backgroundColor: "white" }}>
+                          ผลการด้านคุณภาพ ข้อที่ 3 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={quality4}
+                            placeholder={`ผลการด้านคุณภาพ ข้อที่${3}`}
+                            value={expresultquality3}
+                            onChange={(event) => {
+                              setexpresultQuality3(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
+
+                        <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านคุณภาพ ข้อที่4 :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
                             placeholder={`ด้านคุณภาพข้อที่ ${4}`}
+                            value={quality4}
                             onChange={(event) => {
                               setQuality4(event.target.value);
                             }}
@@ -530,22 +552,55 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                           />
                         </tr>
                         <tr style={{ backgroundColor: "white" }}>
+                          ผลการด้านคุณภาพ ข้อที่ 4 :
                           <Form.Control
                             className="table-margin"
                             size="sm"
                             type="text"
-                            value={quality5}
+                            placeholder={`ผลการด้านคุณภาพ ข้อที่${4}`}
+                            value={expresultquality4}
+                            onChange={(event) => {
+                              setexpresultQuality4(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        <hr></hr>
+
+                        <tr style={{ backgroundColor: "white" }}>
+                          เป้าหมายด้านคุณภาพ ข้อที่ 5 :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
                             placeholder={`ด้านคุณภาพข้อที่ ${5}`}
+                            value={quality5}
                             onChange={(event) => {
                               setQuality5(event.target.value);
                             }}
                             readOnly={!isEditMode}
                           />
                         </tr>
+                        <tr style={{ backgroundColor: "white" }}>
+                          ผลการด้านคุณภาพ ข้อที่ 5 :
+                          <Form.Control
+                            className="table-margin"
+                            size="sm"
+                            type="text"
+                            placeholder={`ผลการด้านคุณภาพ ข้อที่${5}`}
+                            value={expresultquality5}
+                            onChange={(event) => {
+                              setexpresultQuality5(event.target.value);
+                            }}
+                            readOnly={!isEditMode}
+                          />
+                        </tr>
+                        
                       </tbody>
                     </Table>
                   </td>
                 </tr>
+
                 {/* ผลที่คาดว่าจะได้รับ */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
@@ -626,6 +681,7 @@ function SD_finalindicator({ id_project, currentStepProject }) {
                     </Table>
                   </td>
                 </tr>
+
                 {/* วิธีติดตามผล */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td

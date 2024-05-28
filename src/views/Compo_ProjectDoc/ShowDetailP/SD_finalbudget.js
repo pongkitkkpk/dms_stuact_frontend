@@ -38,7 +38,6 @@ function SD_finalbudget({ id_project, currentStepProject }) {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
       setListSSA(response.data[0].listSSA); 
-      // if response.data[0].listSSA == 
       setListSSB(response.data[0].listSSB);
       setListSSC(response.data[0].listSSC);
       setListSSAll(response.data[0].listSSAll);
@@ -68,6 +67,11 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 
   const handleSaveClick = () => {
     const editpage = "งบประมาณ ปิดโครงการ";
+    setEditData({
+      ...editData,
+      listSSAll: listSSA.toLocaleString("en-US"),
+
+    });
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
@@ -154,28 +158,30 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 
 
 
-  useEffect(() => {
+useEffect(() => {
+  const NumberSSA = editData.listSSA ? parseFloat(editData.listSSA.toString().replace(/,/g, '')) : 0;
+  const NumberSSB = editData.listSSB ? parseFloat(editData.listSSB.toString().replace(/,/g, '')) : 0; 
+  const NumberSSC = editData.listSSC ? parseFloat(editData.listSSC.toString().replace(/,/g, '')) : 0;
+  
+  if (!isNaN(NumberSSA) && !isNaN(NumberSSB) && !isNaN(NumberSSC)) {
+    const total = NumberSSA + NumberSSB + NumberSSC;
+    setListSSAll(total);
+    const Refundtotal = allow_budget - total;
+    setRefundtotal(Refundtotal.toLocaleString("en-US"));
+    console.log("total:", total);
 
-    const NumberSSA = editData.listSSA ? parseFloat(editData.listSSA.toString().replace(/,/g, '')) : 0;
-    const NumberSSB = editData.listSSB ? parseFloat(editData.listSSB.toString().replace(/,/g, '')) : 0; 
-    const NumberSSC = editData.listSSC ? parseFloat(editData.listSSC.toString().replace(/,/g, '')) : 0;
     
-    if (!isNaN(NumberSSA) && !isNaN(NumberSSB) && !isNaN(NumberSSC)) {
-      const total = NumberSSA + NumberSSB + NumberSSC;
-      setListSSAll(total);
-      const Refundtotal = allow_budget - total;
-      setRefundtotal(Refundtotal.toLocaleString("en-US"))
-      console.log("Refundtotal:", Refundtotal);
-    }
     setEditData({
       ...editData,
       listSSA: NumberSSA.toLocaleString("en-US"),
       listSSB: NumberSSB.toLocaleString("en-US"),
       listSSC: NumberSSC.toLocaleString("en-US"),
+      listSAll: total.toLocaleString("en-US"),
       refundtotal: Refundtotal.toLocaleString("en-US"),
-      
     });
-  }, [editData.listSSA, editData.listSSB, editData.listSSC, allow_budget]);
+  }
+}, [editData.listSSA, editData.listSSB, editData.listSSC, allow_budget]);
+
 
   useEffect(()=>{
     console.log(editData)
