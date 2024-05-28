@@ -183,9 +183,9 @@ function AllProject() {
             <div className="d-flex justify-content-center align-items-center" style={{ marginTop: "-5px" }}>
               <Dropdown className="align-items-center">
                 <Dropdown.Toggle
-                  variant="warning"
+                  variant="secondary"
                   id="dropdown-status"
-                  className="btn-details"
+                  className="btn-all-projects"
                 >
                   {selectedStatus
                     ? selectedStatus

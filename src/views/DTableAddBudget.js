@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Form, Col, Table } from "react-bootstrap";
+import { Button, Card, Form, Col, Table, Row } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import Axios from "axios";
@@ -15,8 +15,8 @@ function DTableAddBudget() {
   const ClubGroup = storedUser.ClubGroup;
 
   useEffect(() => {
-    console.log(storedUser)
-  }, [storedUser])
+    console.log(storedUser);
+  }, [storedUser]);
 
   const [clubGroup, setClubGroup] = useState(ClubGroup); //องค์กรนักศึกษาส่วนกลาง
   const [codeclub, setCodeclub] = useState("");
@@ -45,25 +45,25 @@ function DTableAddBudget() {
   // } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
   //   setAgencyGroupName("ชมรมฝ่ายกีฬา");
   const getNetProject = () => {
-    Axios.get('http://localhost:3001/admin/getallNetProject').then((response) => {
-      const sortedData = response.data.sort((a, b) => {
-        if (a.AgencyGroupName < b.AgencyGroupName) return 1;
-        if (a.AgencyGroupName > b.AgencyGroupName) return -1;
+    Axios.get("http://localhost:3001/admin/getallNetProject").then(
+      (response) => {
+        const sortedData = response.data.sort((a, b) => {
+          if (a.AgencyGroupName < b.AgencyGroupName) return 1;
+          if (a.AgencyGroupName > b.AgencyGroupName) return -1;
 
-        if (a.responsible_agency < b.responsible_agency) return 1;
-        if (a.responsible_agency > b.responsible_agency) return -1;
+          if (a.responsible_agency < b.responsible_agency) return 1;
+          if (a.responsible_agency > b.responsible_agency) return -1;
 
-        return a.yearly - b.yearly;
-      });
-      setNetList(sortedData);
-    });
+          return a.yearly - b.yearly;
+        });
+        setNetList(sortedData);
+      }
+    );
   };
 
   useEffect(() => {
     getNetProject();
   }, []);
-
-
 
   // const handleDelete = (id) => {
   //   Axios.delete(`http://localhost:3001/admin/deleteNetProject/${id}`).then((response) => {
@@ -75,7 +75,7 @@ function DTableAddBudget() {
   //   });
   // };
 
-  const handleDeleteProject = (id,project_name) => {
+  const handleDeleteProject = (id, project_name) => {
     Swal.fire({
       className: "title",
       title: `คุณต้องการลบงบประมาณโครงการ "${project_name}" ใช่หรือไม่?`,
@@ -104,8 +104,8 @@ function DTableAddBudget() {
     });
   };
   const currentYear = new Date().getFullYear() + 543;
-  const startYear = currentYear - 5;
-  const endYear = currentYear + 5;
+  const startYear = currentYear - 10;
+  const endYear = currentYear;
   const years = [];
   const [yearselect, setYearselect] = useState("");
   for (let year = startYear; year <= endYear; year++) {
@@ -119,86 +119,90 @@ function DTableAddBudget() {
   return (
     <>
       <DAddSplitBudget />
-      <div>
-        <Form.Group>
+      <div style={{ marginLeft: "15px", marginTop: "2%", marginBottom: "1%" }}>
+        <Row>
+          <Col md="2" style={{alignContent:"space-around"}}>
+            <div style={{fontSize:"15px"}}>งบประมาณของโครงการทั้งหมด</div>
+          </Col>
 
-          <Form.Control
-            as="select"
-            className="font-form-control"
-            size="sm"
-            onChange={handleChange}
-          >
-            <option value="">เลือกปีการศึกษา(ทั้งหมด +- 7 ปี)</option>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
+          <Col md="2">
+            <Form.Group>
+              <Form.Control
+                as="select"
+                className="font-form-control"
+                size="sm"
+                onChange={handleChange}
+              >
+                <option value="">กรุณาเลือก ปีการศึกษา</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+
+          <Col md="2">
+            <Form.Control
+              as="select"
+              onChange={(event) => {
+                setCampus(event.target.value); // Update the selected campus
+                setClubname("");
+              }}
+              className="form-select"
+              style={{ width: "100%" }}
+              size="sm"
+            >
+              <option value="">
+                <div>กรุณาเลือก วิทยาเขต</div>
               </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <span>
-          <Form.Control
-            as="select"
-            onChange={(event) => {
-              setCampus(event.target.value); // Update the selected campus
-              setClubname("");
-            }}
-            className="form-select"
-            style={{ width: "100%" }}
-          >
-            <option value="Bangkok">
-              <div>กรุงเทพ</div>
-            </option>
-            <option value="Prachin">
-              <div>ปราจีนบุรี</div>
-            </option>
-            <option value="Rayong">
-              {" "}
-              <div>ระยอง</div>
-            </option>
-            {/* Add more options as needed */}
-          </Form.Control>
-        </span>
-        <span>
-          <Form.Control
-            as="select"
-            onChange={(event) => {
-              setCodedivision("D04");
-              setCodeagency(event.target.value);
+              <option value="Bangkok">
+                <div>กรุงเทพฯ</div>
+              </option>
+              <option value="Prachin">
+                <div>ปราจีนบุรี</div>
+              </option>
+              <option value="Rayong">
+                {" "}
+                <div>ระยอง</div>
+              </option>
+              {/* Add more options as needed */}
+            </Form.Control>
+          </Col>
 
-              const selectedText =
-                event.target.options[event.target.selectedIndex]
-                  .text;
-              setClubname(selectedText);
-              const selectedIndex = event.target.selectedIndex;
+          <Col md="2">
+            <Form.Control
+              as="select"
+              onChange={(event) => {
+                setCodedivision("D04");
+                setCodeagency(event.target.value);
 
-              console.log(selectedText)
-            }}
-            required
-            className="form-select"
-            style={{ width: "100%" }}
-          >
-            <option value="all">
-              <div>เลือกทั้งหมด ชมรม/หน่วยงาน/องค์กร</div>
-            </option>
+                const selectedText =
+                  event.target.options[event.target.selectedIndex].text;
+                setClubname(selectedText);
+                const selectedIndex = event.target.selectedIndex;
 
-            {setCode.Divison.D04.Agency.map(
-              (agencyGroup, index) => {
+                console.log(selectedText);
+              }}
+              required
+              className="form-select"
+              style={{ width: "100%" }}
+              size="sm"
+            >
+              <option value="all">
+                <div>กรุณาเลือก หน่วยงาน</div>
+              </option>
+
+              {setCode.Divison.D04.Agency.map((agencyGroup, index) => {
                 const campusData = agencyGroup[campus]; // Get data for the selected campus
                 return (
                   campusData && (
-                    <optgroup
-                      key={index}
-                      label={agencyGroup.name}
-                    >
-
+                    <optgroup key={index} label={agencyGroup.name}>
                       {Object.keys(campusData).map(
                         (agencyKey) =>
                           agencyKey !== "name" && (
-                            <option
-                              key={agencyKey}
-                              value={agencyKey}
-                            >
+                            <option key={agencyKey} value={agencyKey}>
                               {` ${campusData[agencyKey]}`}
                             </option>
                           )
@@ -206,84 +210,84 @@ function DTableAddBudget() {
                     </optgroup>
                   )
                 );
-              }
-            )}
-          </Form.Control>
-        </span>
+              })}
+            </Form.Control>
+          </Col>
+        </Row>
       </div>
-      <Table striped="columns">
-        <thead
-          style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}
-        >
-          <tr
-            style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}
-          >
-            <th style={{ width: "5%" }}></th>
-            <th
-              style={{
-                width: "50%",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              ชื่อโครงการ
-            </th>
-            <th
-              style={{
-                width: "20%",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              หน่วยงาน
-            </th>
-            <th
-              style={{
-                width: "15%",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              ปีการศึกษา
-            </th>
-            <th
-              style={{
-                width: "20%",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              งบประมาณสุทธิ
-            </th>
-            <th style={{ width: "5%" }}></th>
-            <th style={{ width: "15%" }}></th>
-
-          </tr>
-        </thead>
-        <tbody>
-
-
-          {NetList.map((project, index) => {
-            // อันนี้ไม่ได้เลือกอะไรเลย
-            if (!clubName && project.campus === campus && (!yearselect || yearselect === project.yearly)) {
-              return (
-                <tr key={index} style={{ backgroundColor: "white" }}>
-                  <td>{project.id}</td>
-                  <td>{project.project_name}</td>
-                  <td>{project.responsible_agency}</td>
-                  <td>{project.yearly}</td>
-                  <td>{project.net_budget}</td>
-                  <td>บาท</td>
-                  <td>
-                    <Button
-                      variant="danger"
-                      style={{ borderColor: "#F33E3E" }}
-                      className="btn btn-budget-decrease"
-                      onClick={() => handleDeleteProject(project.id,project.project_name)}
-                    >
-                      <div>ลบ</div>
-                    </Button>
-                    {/* <Button
+      <Col md="12">
+        <Table striped="columns">
+          <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
+            <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
+              {/* <th style={{ width: "5%" }}></th> */}
+              <th
+                style={{
+                  width: "60%",
+                  color: "white",
+                  // fontWeight: "bold",
+                }}
+              >
+                ชื่อโครงการ
+              </th>
+              <th
+                style={{
+                  width: "20%",
+                  color: "white",
+                  // fontWeight: "bold",
+                }}
+              >
+                หน่วยงาน
+              </th>
+              <th
+                style={{
+                  width: "10%",
+                  color: "white",
+                  // fontWeight: "bold",
+                }}
+              >
+                ปีการศึกษา
+              </th>
+              <th
+                style={{
+                  width: "20%",
+                  color: "white",
+                  // fontWeight: "bold",
+                }}
+              >
+                งบประมาณสุทธิ
+              </th>
+              <th style={{ width: "5%" }}></th>
+              <th style={{ width: "15%" }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {NetList.map((project, index) => {
+              // อันนี้ไม่ได้เลือกอะไรเลย
+              if (
+                !clubName &&
+                project.campus === campus &&
+                (!yearselect || yearselect === project.yearly)
+              ) {
+                return (
+                  <tr key={index} style={{ backgroundColor: "white" }}>
+                    {/* <td>{project.id}</td> */}
+                    <td>{project.project_name}</td>
+                    <td>{project.responsible_agency}</td>
+                    <td>{project.yearly}</td>
+                    <td>{project.net_budget}</td>
+                    <td className="font-form-control">บาท</td>
+                    <td>
+                      <Button
+                        variant="danger"
+                        style={{ borderColor: "#F33E3E" }}
+                        className="btn btn-budget-decrease"
+                        onClick={() =>
+                          handleDeleteProject(project.id, project.project_name)
+                        }
+                      >
+                        <div>ลบ</div>
+                      </Button>
+                      {/* <Button
                       onClick={() => handleDelete(project.id)}
                       type="submit"
                       variant="success"
@@ -292,76 +296,72 @@ function DTableAddBudget() {
                     >
                       ลบ
                     </Button> */}
-
-                  </td>
-                </tr>
-              );
-            }
-            // อันนี้เลือกทั้ง 2 ทั้งปี และ ชมรม 
-            else if (project.responsible_agency === clubName && yearselect === project.yearly) {
-              return (
-                <tr key={index} style={{ backgroundColor: "white" }}>
-                  <td>{project.id}</td>
-                  <td>{project.project_name}</td>
-                  <td>{project.responsible_agency}</td>
-                  <td>{project.yearly}</td>
-                  <td>{project.net_budget}</td>
-                  <td>บาท</td>
-                  <td>
-                    <Button
-                      onClick={() => handleDelete(project.id)}
-                      type="submit"
-                      variant="success"
-                      className="btn-budget-increase"
-                      style={{ fontSize: "14px" }}
-                    >
-                      ลบ
-                    </Button>
-
-                  </td>
-                </tr>
-              );
-            }
-            // อันนี้เลือกแค่ปี
-            else if ("เลือกทั้งหมด ชมรม/หน่วยงาน/องค์กร" === clubName && (!yearselect || yearselect === project.yearly)) {
-              return (
-                <tr key={index} style={{ backgroundColor: "white" }}>
-                  <td>{project.id}</td>
-                  <td>{project.project_name}</td>
-                  <td>{project.responsible_agency}</td>
-                  <td>{project.yearly}</td>
-                  <td>{project.net_budget}</td>
-                  <td>บาท</td>
-                  <td>
-                    <Button
-                      onClick={() => handleDelete(project.id)}
-                      type="submit"
-                      variant="success"
-                      className="btn-budget-increase"
-                      style={{ fontSize: "14px" }}
-                    >
-                      ลบ
-                    </Button>
-
-                  </td>
-                </tr>
-              );
-            }
-
-            else {
-              return null;
-            }
-          })}
-
-
-
-
-
-        </tbody>
-      </Table>
+                    </td>
+                  </tr>
+                );
+              }
+              // อันนี้เลือกทั้ง 2 ทั้งปี และ ชมรม
+              else if (
+                project.responsible_agency === clubName &&
+                yearselect === project.yearly
+              ) {
+                return (
+                  <tr key={index} style={{ backgroundColor: "white" }}>
+                    <td>{project.id}</td>
+                    <td>{project.project_name}</td>
+                    <td>{project.responsible_agency}</td>
+                    <td>{project.yearly}</td>
+                    <td>{project.net_budget}</td>
+                    <td>บาท</td>
+                    <td>
+                      <Button
+                        onClick={() => handleDelete(project.id)}
+                        type="submit"
+                        variant="success"
+                        className="btn-budget-increase"
+                        style={{ fontSize: "14px" }}
+                      >
+                        ลบ
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              }
+              // อันนี้เลือกแค่ปี
+              else if (
+                "เลือกทั้งหมด ชมรม/หน่วยงาน/องค์กร" === clubName &&
+                (!yearselect || yearselect === project.yearly)
+              ) {
+                return (
+                  <tr key={index} style={{ backgroundColor: "white" }}>
+                    <td>{project.id}</td>
+                    <td>{project.project_name}</td>
+                    <td>{project.responsible_agency}</td>
+                    <td>{project.yearly}</td>
+                    <td>{project.net_budget}</td>
+                    <td>บาท</td>
+                    <td>
+                      <Button
+                        onClick={() => handleDelete(project.id)}
+                        type="submit"
+                        variant="success"
+                        className="btn-budget-increase"
+                        style={{ fontSize: "14px" }}
+                      >
+                        ลบ
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </tbody>
+        </Table>
+      </Col>
     </>
   );
 }
 
 export default DTableAddBudget;
-
