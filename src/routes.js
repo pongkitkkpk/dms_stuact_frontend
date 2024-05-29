@@ -32,7 +32,7 @@ const dashboardRoutes = [
   },
   {
     path: "/Listbudgetproject",
-    name: "ดูงบประมาณทั้งหมด",
+    name: "งบประมาณทั้งหมด",
     icon: "nc-icon nc-circle-09",
     component: DetailBudget,
     layout: "/admin",
@@ -48,7 +48,7 @@ const dashboardRoutes = [
   },
   {
     path: "/tablestudent",
-    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
+    name: "จัดการบทบาทนักศึกษาและที่ปรึกษา",
     icon: "nc-icon nc-notes",
     component: TableListStudent,
     layout: "/admin",
@@ -56,7 +56,7 @@ const dashboardRoutes = [
   },
   {
     path: "/tablepersonal",
-    name: "ตารางจัดการบทบาท(บุคลากร)",
+    name: "จัดการบทบาทบุคลากร",
     icon: "nc-icon nc-notes",
     component: TableListPersonel,
     layout: "/admin",

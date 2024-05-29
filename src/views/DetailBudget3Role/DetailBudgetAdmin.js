@@ -232,7 +232,7 @@ function DetailBudgetAdmin() {
       <Col md="12">
         <div style={{ marginLeft: "15px", marginTop: "0%", marginBottom: "1%" }}>
           <Row>
-            <Col md="2" style={{ alignContent: "space-around" }}>
+            <Col md="2" style={{ alignContent: "space-around", justifyItems:"start", paddingLeft:"0%" }}>
               <div style={{ fontSize: "15px" }}>งบประมาณของโครงการทั้งหมด</div>
             </Col>
             <Col md="2">
@@ -242,7 +242,7 @@ function DetailBudgetAdmin() {
                 size="sm"
                 onChange={handleChange}
               >
-                <option value="">เลือก ปีการศึกษา</option>
+                <option value="">กรุณาเลือก ปีการศึกษา</option>
                 {years.map((year) => (
                   <option key={year} value={year}>
                     {year}
@@ -250,7 +250,7 @@ function DetailBudgetAdmin() {
                 ))}
               </Form.Control>
             </Col>
-            <Col md="2">
+            <Col md="4">
               <Form.Control
                 as="select"
                 className="font-form-control"
@@ -264,7 +264,7 @@ function DetailBudgetAdmin() {
                 required
                 style={{ width: "70%" }} // Set the width to fit the container
               >
-                <option>กรุณาเลือก</option>
+                <option>กรุณาเลือก หน่วยงาน</option>
                 <option value="ทั้งหมด">
                   ทั้งหมด
                 </option>
@@ -302,55 +302,55 @@ function DetailBudgetAdmin() {
                   style={{
                     width: "10%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>เลขรหัสโครงการ</div>
+                  เลขรหัสโครงการ
                 </th>
                 <th
                   style={{
                     width: "30%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>ชื่อโครงการ</div>
+                  ชื่อโครงการ
                 </th>
                 <th
                   style={{
                     width: "15%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>หน่วยงาน</div>
+                  หน่วยงาน
                 </th>
                 <th
                   style={{
                     width: "10%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>ปีการศึกษา</div>
+                  ปีการศึกษา
                 </th>
                 <th
                   style={{
                     width: "20%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>งบประมาณที่อนุมัติ</div>
+                  งบประมาณที่อนุมัติ
                 </th>
                 <th
                   style={{
                     width: "20%",
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>งบประมาณที่ใช้จริง</div>
+                  งบประมาณที่ใช้จริง
                 </th>
               </tr>
             </thead>
@@ -391,34 +391,35 @@ function DetailBudgetAdmin() {
                 <th
                   style={{
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>หน่วยงาน</div>
+                  หน่วยงาน
                 </th>
                 <th
                   style={{
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>ปีการศึกษา</div>
+                 
                 </th>
                 <th
                   style={{
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                   }}
                 >
-                  <div>งบประมาณที่อนุมัติ</div>
+                  งบประมาณที่อนุมัติ
                 </th>
                 <th
                   style={{
                     color: "white",
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
+                    // fontSize:"50px"
                   }}
                 >
-                  <div>งบประมาณที่ใช้จริง</div>
+                  งบประมาณที่ใช้จริง
                 </th>
               </tr>
             </thead>
@@ -434,10 +435,10 @@ function DetailBudgetAdmin() {
 
                 return (
                   <tr key={index} style={{ backgroundColor: "white" }}>
-                    <td>{groupName}</td>
+                    <td><div>{groupName}</div></td>
                     <td>{/* You need to implement logic to calculate total yearly */}</td>
-                    <td>{totalNetBudget.toLocaleString()}</td>
-                    <td>{totalAllowBudget.toLocaleString()}</td>
+                    <td><div>{totalNetBudget.toLocaleString()}</div></td>
+                    <td><div>{totalAllowBudget.toLocaleString()}</div></td>
                   </tr>
                 );
               })}
