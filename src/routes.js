@@ -23,40 +23,48 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/tablestudent",
-    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
-    icon: "nc-icon nc-notes",
-    component: TableListStudent,
-    layout: "/admin"
-  },
-  {
-    path: "/tablepersonal",
-    name: "ตารางจัดการบทบาท(บุคลากร)",
-    icon: "nc-icon nc-notes",
-    component: TableListPersonel,
-    layout: "/admin"
-  },
-  {
     path: "/allproject",
     name: "โครงการทั้งหมด",
     icon: "nc-icon nc-notes",
     component: AllProject,
-    layout: "/admin"
-  },
-  {
-    path: "/addbudgetproject",
-    name: "เพิ่มงบประมาณ",
-    icon: "nc-icon nc-notes",
-    component: DTableAddBudget,
-    layout: "/admin"
+    layout: "/admin",
+    color: "#fff2e5"
   },
   {
     path: "/Listbudgetproject",
     name: "ดูงบประมาณทั้งหมด",
     icon: "nc-icon nc-circle-09",
     component: DetailBudget,
-    layout: "/admin"
+    layout: "/admin",
+    color: "#ffd9b3"
   },
+  {
+    path: "/addbudgetproject",
+    name: "เพิ่มงบประมาณ",
+    icon: "nc-icon nc-notes",
+    component: DTableAddBudget,
+    layout: "/admin",
+    color: "#ffc080"
+  },
+  {
+    path: "/tablestudent",
+    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
+    icon: "nc-icon nc-notes",
+    component: TableListStudent,
+    layout: "/admin",
+    color: "#ffa64d"
+  },
+  {
+    path: "/tablepersonal",
+    name: "ตารางจัดการบทบาท(บุคลากร)",
+    icon: "nc-icon nc-notes",
+    component: TableListPersonel,
+    layout: "/admin",
+    color: "#ff8d1a"
+  },
+  
+  
+  
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -117,63 +125,73 @@ const StuactRoutes = [
     layout: "/stuact"
   },
   {
-    path: "/tablestudent",
-    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
-    icon: "nc-icon nc-notes",
-    component: TableListStudent,
-    layout: "/stuact"
-  },
-  {
-    path: "/tablepersonal",
-    name: "ตารางจัดการบทบาท(บุคลากร)",
-    icon: "nc-icon nc-notes",
-    component: TableListPersonel,
-    layout: "/stuact"
-  },
-  {
     path: "/allproject",
     name: "โครงการทั้งหมด",
     icon: "nc-icon nc-notes",
     component: AllProject,
-    layout: "/stuact"
-  },
-  {
-    path: "/addbudgetproject",
-    name: "เพิ่มงบประมาณ",
-    icon: "nc-icon nc-notes",
-    component: DTableAddBudget,
-    layout: "/stuact"
+    layout: "/stuact",
+    color: "#fffbb3"
   },
   {
     path: "/Listbudgetproject",
     name: "ดูงบประมาณทั้งหมด",
     icon: "nc-icon nc-circle-09",
     component: DetailBudget,
-    layout: "/stuact"
+    layout: "/stuact",
+    color: "#fff880"
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-pie-35",
-    component: Dashboard,
-    layout: "/stuact"
+    path: "/addbudgetproject",
+    name: "เพิ่มงบประมาณ",
+    icon: "nc-icon nc-notes",
+    component: DTableAddBudget,
+    layout: "/stuact",
+    color: "#fff44d"
   },
+  {
+    path: "/tablestudent",
+    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
+    icon: "nc-icon nc-notes",
+    component: TableListStudent,
+    layout: "/stuact",
+    color: "#fff21a"
+  },
+  {
+    path: "/tablepersonal",
+    name: "ตารางจัดการบทบาท(บุคลากร)",
+    icon: "nc-icon nc-notes",
+    component: TableListPersonel,
+    layout: "/stuact",
+    color: "#e6d800"
+  },
+  
+  
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-chart-pie-35",
+  //   component: Dashboard,
+  //   layout: "/stuact"
+  // },
 
   
 ];
-const GuestRoutes = [
+const AdviserRoutes = [
   {
-    path: "/login",
-    name: "เข้าสู่ระบบ",
+    path: "/allproject",
+    name: "โครงการทั้งหมด",
     icon: "nc-icon nc-notes",
-    component: Login,
-    layout: "/guest"
-  }, {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
-    layout: "/guest"
+    component: AllProject,
+    layout: "/adviser",
+    color: "#80ff80"
+  },
+  {
+    path: "/Listbudgetproject",
+    name: "ดูงบประมาณ",
+    icon: "nc-icon nc-circle-09",
+    component: DetailBudget,
+    layout: "/adviser",
+    color: "#1aff1a"
   },
 
 ];
@@ -190,7 +208,7 @@ const StudentRoutes = [
     icon: "nc-icon nc-notes",
     component: NewProjectDocument,
     layout: "/students",
-    color: "#ffc404"
+    color: "#8080ff"
   },
   {
     path: "/allproject",
@@ -198,24 +216,36 @@ const StudentRoutes = [
     icon: "nc-icon nc-notes",
     component: AllProject,
     layout: "/students",
-    color: "#ffff"
-  },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-pie-35",
-    component: Dashboard,
-    layout: "/students",
-    color: "#32fefe"
+    color: "#4d4dff"
   },
   {
     path: "/Listbudgetproject",
-    name: "User Profile",
+    name: "งบประมาณ",
     icon: "nc-icon nc-circle-09",
     component: DetailBudget,
-    layout: "/students"
+    layout: "/students",
+    color: "#1a1aff"
   },
 
 ];
-export { StuactRoutes, StudentRoutes, GuestRoutes };
+
+const GuestRoutes = [
+  {
+    path: "/login",
+    name: "เข้าสู่ระบบ",
+    icon: "nc-icon nc-notes",
+    component: Login,
+    layout: "/guest",
+    // color: "#1a1aff"
+  }, 
+  {
+    path: "/maps",
+    name: "Maps",
+    icon: "nc-icon nc-pin-3",
+    component: Maps,
+    layout: "/guest"
+  },
+
+];
+export { StuactRoutes, StudentRoutes, GuestRoutes,AdviserRoutes };
 export default dashboardRoutes;

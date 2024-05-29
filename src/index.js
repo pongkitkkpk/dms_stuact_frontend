@@ -10,6 +10,7 @@ import AdminLayout from 'layouts/Admin.js';
 import StuactLayout from 'layouts/Stuact.js';
 import GuestLayout from 'layouts/Guest.js';
 import StudentLayout from 'layouts/Student.js';
+import AdviserLayout from 'layouts/Adviser.js';
 import { AuthProvider } from 'Auth/AuthContext'; 
 
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
@@ -61,6 +62,11 @@ ReactDOM.render(
           path="/Stuact"
           component={StuactLayout}
           roles={['Stuact']}
+        />
+        <ProtectedRoute
+          path="/adviser"
+          component={AdviserLayout}
+          roles={['adviser']}
         />
         
 

@@ -67,7 +67,6 @@ export const AuthProvider = ({ children }) => {
               history.push('/admin');
             }
             else if (matchingStudent.account_type === "personel" && matchingStudent.position == "Stuact") {
-              console.log("Stuact part")
               history.replace(`/stuact/allproject`);
             }
             else if (matchingStudent.account_type === "personel" && matchingStudent.position == "AD") {
