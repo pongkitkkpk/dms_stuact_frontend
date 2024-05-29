@@ -240,7 +240,7 @@ function DTableAddBudget() {
               </th>
               <th
                 style={{
-                  width: "10%",
+                  width: "8%",
                   color: "white",
                   // fontWeight: "bold",
                 }}
@@ -249,7 +249,7 @@ function DTableAddBudget() {
               </th>
               <th
                 style={{
-                  width: "5%",
+                  width: "7%",
                   color: "white",
                   // fontWeight: "bold",
                 }}
@@ -272,9 +272,9 @@ function DTableAddBudget() {
                   <tr key={index} style={{ backgroundColor: "white" }}>
                     {/* <td>{project.id}</td> */}
                     <td><div>{project.project_name}</div></td>
-                    <td>{project.responsible_agency}</td>
-                    <td>{project.yearly}</td>
-                    <td>{project.net_budget}</td>
+                    <td><div>{project.responsible_agency}</div></td>
+                    <td><div>{project.yearly}</div></td>
+                    <td><div>{project.net_budget}</div></td>
                     <td className="font-alert" style={{justifyItems:"start"}}>บาท</td>
                     <td>
                       <Button

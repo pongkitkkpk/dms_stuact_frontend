@@ -10,8 +10,8 @@ function DetailBudgetAdmin() {
   const [yearly, setYearly] = useState("");
 
   const selectYear = new Date().getFullYear() + 543;
-  const startYear = selectYear - 5;
-  const endYear = selectYear + 5;
+  const startYear = selectYear - 10;
+  const endYear = selectYear;
   const years = [];
   for (let year = startYear; year <= endYear; year++) {
     years.push(year);
@@ -139,83 +139,95 @@ function DetailBudgetAdmin() {
 
   return (
     <>
-      <h1>budget admin</h1>
-
-      <Row>
-        <Col>
-          <Card>
-            <Card.Header
-              style={{
-                backgroundColor: "rgba(255, 139, 19, 1)",
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              <div>{`งบประมาณของ ${clubName}`}</div>
-            </Card.Header>
-            <Card.Body>
-              <Row>
-                {/* งบประมาณที่อนุมัติ */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{
-                        backgroundColor: "blue",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      งบประมาณที่อนุมัติ
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalNetBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>อนุมัติ</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                {/* งบประมาณตั้งเบิกแล้ว */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      งบประมาณตั้งเบิกแล้ว
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalAllowBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>ยอดเงินปัจจุบัน</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                {/* งบประมาณคงเหลือ */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      งบประมาณคงเหลือ
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalLeftowBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>คงเหลือ</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-
+      <Col md="12">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header
+                style={{
+                  backgroundColor: "#535353",
+                  color: "white",
+                  // fontWeight: "bold",
+                  textAlign: "center",
+                  paddingBottom: "10px",
+                  paddingTop: "10px"
+                }}
+              >
+                {/* <div>{`งบประมาณของ ${clubName}`}</div> */}
+                <div>งบประมาณกิจกรรมนักศึกษาส่วนกลาง</div>
+              </Card.Header>
+              <Card.Body style={{ paddingBottom: "0px", paddingTop: "2%", paddingLeft: "2%", paddingRight: "2%" }}>
+                <Row>
+                  {/* งบประมาณที่อนุมัติ */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          textAlign: "center",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px"
+                        }}
+                      >
+                        งบประมาณที่อนุมัติ
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{color:"#28a745", textAlign:"center"}}><div>{`${totalNetBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{color:"#28a745", textAlign:"center", marginTop:"5px"}} className="font-form-control">อนุมัติ</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  {/* งบประมาณตั้งเบิกแล้ว */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px",
+                          textAlign:"center"
+                        }}
+                      >
+                        งบประมาณตั้งเบิกแล้ว
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{textAlign:"center", fontWeight:"bold"}}><div>{`${totalAllowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{textAlign:"center", marginTop:"5px"}} className="font-form-control">ยอดเงินปัจจุบัน</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  {/* งบประมาณคงเหลือ */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px",
+                          textAlign:"center"
+                        }}
+                      >
+                        งบประมาณคงเหลือ
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{textAlign:"center", fontWeight:"bold"}}><div>{`${totalLeftowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{textAlign:"center", marginTop:"5px"}} className="font-form-control">คงเหลือ</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Col>
       <h1>{`${clubName}`}</h1>
       <div>
         <Form.Group>
@@ -226,7 +238,7 @@ function DetailBudgetAdmin() {
             size="sm"
             onChange={handleChange}
           >
-            <option value="">เลือกปีการศึกษา(ทั้งหมด +- 7 ปี)</option>
+            <option value="">เลือก ปีการศึกษา</option>
             {years.map((year) => (
               <option key={year} value={year}>
                 {year}
