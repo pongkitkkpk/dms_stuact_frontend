@@ -174,8 +174,8 @@ function DetailBudgetAdmin() {
                         งบประมาณที่อนุมัติ
                       </Card.Header>
                       <Card.Body>
-                        <Card.Title style={{color:"#28a745", textAlign:"center"}}><div>{`${totalNetBudget.toLocaleString()}`}</div></Card.Title>
-                        <Card.Text style={{color:"#28a745", textAlign:"center", marginTop:"5px"}} className="font-form-control">อนุมัติ</Card.Text>
+                        <Card.Title style={{ color: "#28a745", textAlign: "center" }}><div>{`${totalNetBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ color: "#28a745", textAlign: "center", marginTop: "5px" }} className="font-form-control">อนุมัติ</Card.Text>
                       </Card.Body>
                     </Card>
                   </Col>
@@ -189,14 +189,14 @@ function DetailBudgetAdmin() {
                           // fontWeight: "bold",
                           paddingBottom: "10px",
                           paddingTop: "10px",
-                          textAlign:"center"
+                          textAlign: "center"
                         }}
                       >
                         งบประมาณตั้งเบิกแล้ว
                       </Card.Header>
                       <Card.Body>
-                        <Card.Title style={{textAlign:"center", fontWeight:"bold"}}><div>{`${totalAllowBudget.toLocaleString()}`}</div></Card.Title>
-                        <Card.Text style={{textAlign:"center", marginTop:"5px"}} className="font-form-control">ยอดเงินปัจจุบัน</Card.Text>
+                        <Card.Title style={{ textAlign: "center", fontWeight: "bold" }}><div>{`${totalAllowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ textAlign: "center", marginTop: "5px" }} className="font-form-control">ยอดเงินปัจจุบัน</Card.Text>
                       </Card.Body>
                     </Card>
                   </Col>
@@ -210,76 +210,86 @@ function DetailBudgetAdmin() {
                           // fontWeight: "bold",
                           paddingBottom: "10px",
                           paddingTop: "10px",
-                          textAlign:"center"
+                          textAlign: "center"
                         }}
                       >
                         งบประมาณคงเหลือ
                       </Card.Header>
                       <Card.Body>
-                        <Card.Title style={{textAlign:"center", fontWeight:"bold"}}><div>{`${totalLeftowBudget.toLocaleString()}`}</div></Card.Title>
-                        <Card.Text style={{textAlign:"center", marginTop:"5px"}} className="font-form-control">คงเหลือ</Card.Text>
+                        <Card.Title style={{ textAlign: "center", fontWeight: "bold" }}><div>{`${totalLeftowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ textAlign: "center", marginTop: "5px" }} className="font-form-control">คงเหลือ</Card.Text>
                       </Card.Body>
                     </Card>
                   </Col>
-                  
+
                 </Row>
               </Card.Body>
             </Card>
           </Col>
         </Row>
       </Col>
-      <h1>{`${clubName}`}</h1>
-      <div>
-        <Form.Group>
+      {/* <h1>{`${clubName}`}</h1> */}
+      <Col md="12">
+        <div style={{ marginLeft: "15px", marginTop: "0%", marginBottom: "1%" }}>
+          <Row>
+            <Col md="2" style={{ alignContent: "space-around" }}>
+              <div style={{ fontSize: "15px" }}>งบประมาณของโครงการทั้งหมด</div>
+            </Col>
+            <Col md="2">
+              <Form.Control
+                as="select"
+                className="font-form-control"
+                size="sm"
+                onChange={handleChange}
+              >
+                <option value="">เลือก ปีการศึกษา</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </Form.Control>
+            </Col>
+            <Col md="2">
+              <Form.Control
+                as="select"
+                className="font-form-control"
+                size="sm"
+                onChange={(e) => {
+                  const selectedText =
+                    e.target.options[e.target.selectedIndex]
+                      .text;
+                  setAgnecyGroupName(selectedText);
+                }}
+                required
+                style={{ width: "70%" }} // Set the width to fit the container
+              >
+                <option>กรุณาเลือก</option>
+                <option value="ทั้งหมด">
+                  ทั้งหมด
+                </option>
+                <option value="องค์กรนักศึกษาส่วนกลาง">
+                  องค์กรนักศึกษาส่วนกลาง
+                </option>
+                <option value="ชมรมฝ่ายวิชาการ">
+                  ชมรมฝ่ายวิชาการ
+                </option>
+                <option value="ชมรมฝ่ายศิลปวัฒนธรรม">
+                  ชมรมฝ่ายศิลปวัฒนธรรม
+                </option>
+                <option value="ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์">
+                  ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์
+                </option>
+                <option value="ชมรมฝ่ายกีฬา">
+                  ชมรมฝ่ายกีฬา
+                </option>
+              </Form.Control>
+            </Col>
+          </Row>
+        </div>
 
-          <Form.Control
-            as="select"
-            className="font-form-control"
-            size="sm"
-            onChange={handleChange}
-          >
-            <option value="">เลือก ปีการศึกษา</option>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
 
-        <Form.Control
-          as="select"
-          className="font-form-control"
-          size="sm"
-          onChange={(e) => {
-            const selectedText =
-              e.target.options[e.target.selectedIndex]
-                .text;
-            setAgnecyGroupName(selectedText);
-          }}
-          required
-          style={{ width: "70%" }} // Set the width to fit the container
-        >
-          <option>กรุณาเลือก</option>
-          <option value="ทั้งหมด">
-            ทั้งหมด
-          </option>
-          <option value="องค์กรนักศึกษาส่วนกลาง">
-            องค์กรนักศึกษาส่วนกลาง
-          </option>
-          <option value="ชมรมฝ่ายวิชาการ">
-            ชมรมฝ่ายวิชาการ
-          </option>
-          <option value="ชมรมฝ่ายศิลปวัฒนธรรม">
-            ชมรมฝ่ายศิลปวัฒนธรรม
-          </option>
-          <option value="ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์">
-            ชมรมฝ่ายอาสาพัฒนาและบำเพ็ญประโยชน์
-          </option>
-          <option value="ชมรมฝ่ายกีฬา">
-            ชมรมฝ่ายกีฬา
-          </option>
-        </Form.Control>
+
 
 
 
@@ -437,7 +447,7 @@ function DetailBudgetAdmin() {
 
 
 
-      </div>
+      </Col>
     </>
   );
 }

@@ -144,9 +144,7 @@ function NewProjectDocument() {
                   <tr className={cSD_indicator ? "list-group-item active" : "list-group-item"}>
                     <td><a href="#" onClick={cSD_indicator ? CSD_indicatorComponent : null} style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.7 ความคาดหวังของโครงการ</div></a></td>
                   </tr>
-                  <tr>
-                    <td className="list-group-item"><a href="#section1-6" style={{ display: "inline-block", width: "100%" }}><div style={{fontFamily: 'Bai Jamjuree', color: "white"}}>1.8 เอกสารเพิ่มเติม</div></a></td>
-                  </tr>
+                  
                 </table>
               </Card.Body>
 

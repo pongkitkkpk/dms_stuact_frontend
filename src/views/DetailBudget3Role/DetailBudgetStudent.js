@@ -12,8 +12,8 @@ function DetailBudgetStudent() {
   const [clubName, setClubName] = useState(strclubName);
   const [yearly, setYearly] = useState(stryearly);
   const selectYear = new Date().getFullYear() + 543;
-  const startYear = selectYear - 5;
-  const endYear = selectYear + 5;
+  const startYear = selectYear - 10;
+  const endYear = selectYear;
   const years = [];
   for (let year = startYear; year <= endYear; year++) {
     years.push(year);
@@ -41,7 +41,7 @@ function DetailBudgetStudent() {
       });
     }
   }, [responsible_agency, yearly]);
-  
+
   useEffect(() => {
     if (yearly) {
       Axios.get(
@@ -54,15 +54,11 @@ function DetailBudgetStudent() {
     }
   }, [responsible_agency, yearly]);
 
-  useEffect(() => {
-    console.log(storedUser);
-  }, [storedUser]);
 
   useEffect(() => {
     let sumnet = 0;
     let sumallow = 0;
     ProjectList.forEach((project) => {
-      console.log()
       if (project.net_budget) {
         const net_budget = project.net_budget.replace(/,/g, "");
         sumnet += parseFloat(net_budget);
@@ -84,97 +80,121 @@ function DetailBudgetStudent() {
 
   return (
     <>
+      <Col md="12">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header
+                style={{
+                  backgroundColor: "#535353",
+                  color: "white",
+                  // fontWeight: "bold",
+                  textAlign: "center",
+                  paddingBottom: "10px",
+                  paddingTop: "10px"
+                }}
+              >
+                {/* <div>{`งบประมาณของ ${clubName}`}</div> */}
+                <div>งบประมาณกิจกรรมนักศึกษาส่วนกลาง</div>
+              </Card.Header>
+              <Card.Body style={{ paddingBottom: "0px", paddingTop: "2%", paddingLeft: "2%", paddingRight: "2%" }}>
+                <Row>
+                  {/* งบประมาณที่อนุมัติ */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          textAlign: "center",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px"
+                        }}
+                      >
+                        งบประมาณที่อนุมัติ
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{ color: "#28a745", textAlign: "center" }}><div>{`${totalNetBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ color: "#28a745", textAlign: "center", marginTop: "5px" }} className="font-form-control">อนุมัติ</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  {/* งบประมาณตั้งเบิกแล้ว */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px",
+                          textAlign: "center"
+                        }}
+                      >
+                        งบประมาณตั้งเบิกแล้ว
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{ textAlign: "center", fontWeight: "bold" }}><div>{`${totalAllowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ textAlign: "center", marginTop: "5px" }} className="font-form-control">ยอดเงินปัจจุบัน</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  {/* งบประมาณคงเหลือ */}
+                  <Col>
+                    <Card>
+                      <Card.Header
+                        style={{
+                          backgroundColor: "#FF8B13",
+                          color: "white",
+                          // fontWeight: "bold",
+                          paddingBottom: "10px",
+                          paddingTop: "10px",
+                          textAlign: "center"
+                        }}
+                      >
+                        งบประมาณคงเหลือ
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title style={{ textAlign: "center", fontWeight: "bold" }}><div>{`${totalLeftowBudget.toLocaleString()}`}</div></Card.Title>
+                        <Card.Text style={{ textAlign: "center", marginTop: "5px" }} className="font-form-control">คงเหลือ</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
 
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Col>
 
-      <Row>
-        <Col>
-          <Card>
-            <Card.Header
-              style={{
-                backgroundColor: "rgba(255, 139, 19, 1)",
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              <div>{`งบประมาณของ ${clubName}`}</div>
-            </Card.Header>
-            <Card.Body>
-              <Row>
-                {/* งบประมาณที่อนุมัติ */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{ backgroundColor: "blue", color: "white", fontWeight: "bold" }}
-                    >
-                      งบประมาณที่อนุมัติ
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalNetBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>
-                        อนุมัติ
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                {/* งบประมาณตั้งเบิกแล้ว */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{ backgroundColor: "green", color: "white", fontWeight: "bold" }}
-                    >
-                      งบประมาณตั้งเบิกแล้ว
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalAllowBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>
-                        ยอดเงินปัจับัน
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                {/* งบประมาณคงเหลือ */}
-                <Col>
-                  <Card>
-                    <Card.Header
-                      style={{ backgroundColor: "green", color: "white", fontWeight: "bold" }}
-                    >
-                      งบประมาณคงเหลือ
-                    </Card.Header>
-                    <Card.Body>
-                      <Card.Title>{`${totalLeftowBudget.toLocaleString()}`}</Card.Title>
-                      <Card.Text>
-                        คงเหลือ
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      {/* <h1>{`${clubName}`}</h1> */}
+      <Col md="12">
+        <div style={{ marginLeft: "15px", marginTop: "0%", marginBottom: "1%" }}>
+          <Row>
+            <Col md="2" style={{ alignContent: "space-around" }}>
+              <div style={{ fontSize: "15px" }}>งบประมาณของโครงการทั้งหมด</div>
+            </Col>
+            <Col md="2">
+              <Form.Control
+                as="select"
+                className="font-form-control"
+                size="sm"
+                onChange={handleChange}
+              >
+                <option value="">เลือก ปีการศึกษา</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </Form.Control>
+            </Col>
+          </Row>
+        </div>
 
-
-
-      <h1>{`${clubName}`}</h1>
-      <div>
-        <Form.Group>
-
-          <Form.Control
-            as="select"
-            className="font-form-control"
-            size="sm"
-            onChange={handleChange}
-          >
-            <option value="">เลือกปีการศึกษา(ทั้งหมด +- 7 ปี)</option>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
 
 
         <Table striped="columns">
@@ -242,33 +262,33 @@ function DetailBudgetStudent() {
             </tr>
           </thead>
           <tbody>
-              {BudgetList.map((project, index) => {
-                // Find the corresponding project in ProjectList
-                const matchingProject = ProjectList.find(p => p.project_name === project.project_name);
-                console.log("matchingProject")
-                console.log(matchingProject)
-                return (
-                  <tr key={index} style={{ backgroundColor: "white" }}>
-                    {matchingProject ? (
-                      <td>{matchingProject.project_number}</td>
-                    ) : (
-                      <td></td>
-                    )}
-                    
-                    <td>{project.project_name}</td>
-                    <td>{project.responsible_agency}</td>
-                    <td>{project.yearly}</td>
-                    <td>{project.net_budget}</td>
-                    <td>{Number(project.allow_budget).toLocaleString()}</td>
+            {BudgetList.map((project, index) => {
+              // Find the corresponding project in ProjectList
+              const matchingProject = ProjectList.find(p => p.project_name === project.project_name);
+              console.log("matchingProject")
+              console.log(matchingProject)
+              return (
+                <tr key={index} style={{ backgroundColor: "white" }}>
+                  {matchingProject ? (
+                    <td>{matchingProject.project_number}</td>
+                  ) : (
+                    <td></td>
+                  )}
 
-                    {/* Add additional data from matchingProject if needed */}
+                  <td>{project.project_name}</td>
+                  <td>{project.responsible_agency}</td>
+                  <td>{project.yearly}</td>
+                  <td>{project.net_budget}</td>
+                  <td>{Number(project.allow_budget).toLocaleString()}</td>
 
-                  </tr>
-                );
-              })}
-            </tbody>
+                  {/* Add additional data from matchingProject if needed */}
+
+                </tr>
+              );
+            })}
+          </tbody>
         </Table>
-      </div>
+      </Col>
     </>
   );
 }
