@@ -144,7 +144,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
     // window.scrollTo({ top: 0, behavior: 'smooth' });
     Swal.fire({
       title: "บันทึกโครงการหน้า  สถานที่และเวลาดำเนินการ",
-      text: "ใส่ข้อมูล หมวดถัดไป",
+      text: "",
       icon: "success",
     })
     setTimeout(() => {

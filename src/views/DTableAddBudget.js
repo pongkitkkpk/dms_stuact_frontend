@@ -100,8 +100,16 @@ function DTableAddBudget() {
           .catch((error) => {
             console.error("Error deleting project:", error);
           });
+          Swal.fire({
+            className: "title",
+            title: `ลบงบประมาณโครงการ "${project_name}" สำเร็จ!`,
+            text: "",
+            icon: "success",
+          });
       }
+      
     });
+    
   };
   const currentYear = new Date().getFullYear() + 543;
   const startYear = currentYear - 10;

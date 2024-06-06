@@ -184,20 +184,20 @@ function SD_budget({ id_project }) {
 
   const handleBackClick = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ',
-      icon: 'warning',
+      title: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม?",
+      text: "ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, proceed',
-      cancelButtonText: 'No, cancel',
-      reverseButtons: true,
+      confirmButtonText: "ใช่,ฉันต้องการข้อมูลเดิม",
+      cancelButtonText: "ยกเลิก",
+      // reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         setIsEditMode(false);
         setEditData(originalData);
         window.location.reload();
 
-        Swal.fire('Cancelled!', 'Your changes have been reverted.', 'success');
+        Swal.fire("ยกเลิกการแก้ไข!", "การแก้ไขของคุณจะไม่บันทึกเข้าสู่ระบบ", "success");
       }
     });
   };
@@ -1092,7 +1092,7 @@ function SD_budget({ id_project }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-          Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+          Swal.fire("บันทึกการแก้ไข เรียบร้อย!", "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.", "success");
       }
     });
   };

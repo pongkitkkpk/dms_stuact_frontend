@@ -811,7 +811,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       });
     Swal.fire({
       title: "บันทึกโครงการหน้า  ขั้นตอนและแผนดำเนินงาน",
-      text: "ใส่ข้อมูล หมวดถัดไป",
+      text: "",
       icon: "success",
     })
     setTimeout(() => {

@@ -55,7 +55,7 @@ function TableListPersonel() {
     Swal.fire({
       className: "title",
       title: `คุณต้องการลบรายชื่อ "${name_student}" ใช่หรือไม่?`,
-      text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
+      text: "",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -75,6 +75,12 @@ function TableListPersonel() {
           })
           .catch((error) => {
             console.error("Error deleting project:", error);
+          });
+          Swal.fire({
+            className: "title",
+            title: `ลบรายชื่อ "${name_student}" สำเร็จ!`,
+            text: "",
+            icon: "success",
           });
       }
     });

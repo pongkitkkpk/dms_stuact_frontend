@@ -174,8 +174,8 @@ function CSD_indicator({ id_projects }) {
         // Handle error, if needed
       });
       Swal.fire({
-        title: "เสร็จโครงการเสร็จสิ้น?",
-        text: "ทำการเพิ่มโครงการแล้ว",
+        title: "กระบวนการสร้างโครงการเสร็จสิ้น",
+        text: "",
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {

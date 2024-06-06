@@ -190,7 +190,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                     .catch((error) => {
                         console.error("Error creating project:", error);
                     });
-                Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+                    Swal.fire("บันทึกการแก้ไข เรียบร้อย!", "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.", "success");
                 window.location.reload();
             }
         });

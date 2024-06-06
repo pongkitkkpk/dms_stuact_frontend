@@ -39,7 +39,7 @@ function DAddSplitBudget() {
       });
       Swal.fire({
         title: `บันทึกการ เพิ่มงบประมาณโครงการ ${project_name} เรียบร้อยแล้ว`,
-        text: "ใส่ข้อมูล หมวดถัดไป",
+        text: "",
         icon: "success",
       }).then(() => {
         window.location.reload();

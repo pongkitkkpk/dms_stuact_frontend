@@ -392,7 +392,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
       });
     Swal.fire({
       title: "บันทึกโครงการหน้า  กลุ่มเป้าหมายโครงการ",
-      text: "ใส่ข้อมูล หมวดถัดไป",
+      text: "",
       icon: "success",
     })
     setTimeout(() => {

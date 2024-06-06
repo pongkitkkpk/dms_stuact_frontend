@@ -194,7 +194,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
       });
     Swal.fire({
       title: "บันทึกโครงการหน้า  ลักษณะโครงการ",
-      text: "ใส่ข้อมูล หมวดถัดไป",
+      text: "",
       icon: "success",
     })
     // Switch to CSD person view

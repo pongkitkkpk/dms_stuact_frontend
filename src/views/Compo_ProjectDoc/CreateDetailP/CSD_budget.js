@@ -476,7 +476,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
         console.log(response.data);
         Swal.fire({
           title: "บันทึกโครงการหน้า  งบประมาณโครงการ",
-          text: "ใส่ข้อมูล หมวดถัดไป",
+          text: "",
           icon: "success",
         })
         setTimeout(() => {

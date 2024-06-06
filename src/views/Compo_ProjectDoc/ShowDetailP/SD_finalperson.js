@@ -32,7 +32,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
   // api นีตอนสร้าง person http://localhost:3001/student/project/p_person/create/
   // ใช้ new table p_finalperson 
 
-  
+
   const getProjectData = () => {
     Axios.get(
       // ใส่ api แก้ตาม finalperson 
@@ -106,7 +106,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
     setIsEditMode(true);
   };
 
-  
+
   const handleSaveClick = () => {
     const editpage = "กลุ่มเป้าหมายโครงการ ปิดโครงการ";
     Swal.fire({
@@ -144,19 +144,19 @@ function SD_finalperson({ id_project, currentStepProject }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-        Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+        Swal.fire("บันทึกการแก้ไข เรียบร้อย!", "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.", "success");
       }
     });
   };
 
   const handleBackClick = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
+      title: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม?",
+      text: "ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, proceed",
-      cancelButtonText: "No, cancel",
+      confirmButtonText: "ใช่,ฉันต้องการข้อมูลเดิม",
+      cancelButtonText: "ยกเลิก",
       // reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -164,7 +164,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
         setEditData(originalData);
         window.location.reload();
 
-        Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+        Swal.fire("ยกเลิกการแก้ไข!", "การแก้ไขของคุณจะไม่บันทึกเข้าสู่ระบบ", "success");
       }
     });
   };
@@ -570,7 +570,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
       setEditData(updatedEditData);
     }
   };
- 
+
   useEffect(() => {
     let totalExpertCount = 0;
 
@@ -622,17 +622,17 @@ function SD_finalperson({ id_project, currentStepProject }) {
     <>
       <Col md="9">
         <Card>
-        
-            <Button
-              type="submit"
-              className="btn-dataupdate"
-              style={{ fontSize: "14px", margin: "1%" }}
-              variant="primary"
-              onClick={handleEditClick}
-            >
-              แก้ไขข้อมูล
-            </Button>
-          
+        {currentStepProject <= 6 && !isEditMode && (
+          <Button
+            type="submit"
+            className="btn-dataupdate"
+            style={{ fontSize: "14px", margin: "1%" }}
+            variant="primary"
+            onClick={handleEditClick}
+          >
+            แก้ไขข้อมูล
+          </Button>
+        )}
           <CardHeader
             style={{
               backgroundColor: "#535353",
@@ -707,11 +707,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   value={
                                     isEditMode
                                       ? editData[
-                                          `executiveType${index + 1}Name`
-                                        ]
+                                      `executiveType${index + 1}Name`
+                                      ]
                                       : originalData[
-                                          `executiveType${index + 1}Name`
-                                        ]
+                                      `executiveType${index + 1}Name`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -767,11 +767,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   value={
                                     isEditMode
                                       ? editData[
-                                          `executiveType${index + 1}Number`
-                                        ]
+                                      `executiveType${index + 1}Number`
+                                      ]
                                       : originalData[
-                                          `executiveType${index + 1}Number`
-                                        ]
+                                      `executiveType${index + 1}Number`
+                                      ]
                                   }
                                   placeholder={`ประเภทที่ ${index + 1}`}
                                   onChange={(event) => {
@@ -927,17 +927,16 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder={`คณาจารย์ / บุคลากรประเภทที่ ${
-                                    index + 1
-                                  }`}
+                                  placeholder={`คณาจารย์ / บุคลากรประเภทที่ ${index + 1
+                                    }`}
                                   value={
                                     isEditMode
                                       ? editData[
-                                          `professorType${index + 1}Name`
-                                        ]
+                                      `professorType${index + 1}Name`
+                                      ]
                                       : originalData[
-                                          `professorType${index + 1}Name`
-                                        ]
+                                      `professorType${index + 1}Name`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -994,11 +993,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   value={
                                     isEditMode
                                       ? editData[
-                                          `professorType${index + 1}Number`
-                                        ]
+                                      `professorType${index + 1}Number`
+                                      ]
                                       : originalData[
-                                          `professorType${index + 1}Number`
-                                        ]
+                                      `professorType${index + 1}Number`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -1146,15 +1145,14 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   className="font-form-control"
                                   size="sm"
                                   type="text"
-                                  placeholder={`นักศึกษาประเภทที่  ${
-                                    index + 1
-                                  }`}
+                                  placeholder={`นักศึกษาประเภทที่  ${index + 1
+                                    }`}
                                   value={
                                     isEditMode
                                       ? editData[`studentType${index + 1}Name`]
                                       : originalData[
-                                          `studentType${index + 1}Name`
-                                        ]
+                                      `studentType${index + 1}Name`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -1211,11 +1209,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                   value={
                                     isEditMode
                                       ? editData[
-                                          `studentType${index + 1}Number`
-                                        ]
+                                      `studentType${index + 1}Number`
+                                      ]
                                       : originalData[
-                                          `studentType${index + 1}Number`
-                                        ]
+                                      `studentType${index + 1}Number`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -1375,8 +1373,8 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                     isEditMode
                                       ? editData[`expertType${index + 1}Name`]
                                       : originalData[
-                                          `expertType${index + 1}Name`
-                                        ]
+                                      `expertType${index + 1}Name`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;
@@ -1434,8 +1432,8 @@ function SD_finalperson({ id_project, currentStepProject }) {
                                     isEditMode
                                       ? editData[`expertType${index + 1}Number`]
                                       : originalData[
-                                          `expertType${index + 1}Number`
-                                        ]
+                                      `expertType${index + 1}Number`
+                                      ]
                                   }
                                   onChange={(event) => {
                                     const newValue = event.target.value;

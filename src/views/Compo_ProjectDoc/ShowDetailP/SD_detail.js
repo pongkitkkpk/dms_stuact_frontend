@@ -150,7 +150,7 @@ function SD_detail({ id_project, currentStepProject }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-        Swal.fire("save เรียบร้อย!", "Your changes have been reverted.", "success");
+        Swal.fire("บันทึกการแก้ไข เรียบร้อย!", "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.", "success");
       }
     });
   };
@@ -168,12 +168,12 @@ function SD_detail({ id_project, currentStepProject }) {
 
   const handleBackClick = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
+      title: "คุณต้องการยกเลิกกลับไปเป็นข้อมูลเดิมใช่ไหม?",
+      text: "ข้อมูลที่คุณกรอกไปจะไม่บันทึกลงระบบ",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, proceed",
-      cancelButtonText: "No, cancel",
+      confirmButtonText: "ใช่,ฉันต้องการข้อมูลเดิม",
+      cancelButtonText: "ยกเลิก",
       // reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -181,7 +181,7 @@ function SD_detail({ id_project, currentStepProject }) {
         setEditData(originalData);
         window.location.reload();
 
-        Swal.fire("Cancelled!", "Your changes have been reverted.", "success");
+        Swal.fire("ยกเลิกการแก้ไข!", "การแก้ไขของคุณจะไม่บันทึกเข้าสู่ระบบ", "success");
       }
     });
   };
