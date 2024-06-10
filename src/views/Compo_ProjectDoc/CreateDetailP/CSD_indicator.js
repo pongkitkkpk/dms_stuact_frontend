@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // react-bootstrap components
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import {
   Button,
   Card,
@@ -18,7 +18,6 @@ import {
 import Axios from "axios";
 
 function CSD_indicator({ id_projects }) {
-
   const [volume1, setVolume1] = useState("");
   const [volume2, setVolume2] = useState("");
   const [volume3, setVolume3] = useState("");
@@ -93,7 +92,8 @@ function CSD_indicator({ id_projects }) {
         // Handle other cases if needed
       }
     }
-  }; QualityCount
+  };
+  QualityCount;
 
   const [expresult1, setExpresult1] = useState("");
   const [expresult2, setExpresult2] = useState("");
@@ -141,47 +141,50 @@ function CSD_indicator({ id_projects }) {
   const [etcfollow, setEtcfollow] = useState("");
 
   const createIndicator = () => {
-    Axios.put(`http://localhost:3001/student/project/p_indicator/create/${id_projects}`, {
-      volume1,
-      volume2,
-      volume3,
-      volume4,
-      volume5,
-      quality1,
-      quality2,
-      quality3,
-      quality4,
-      quality5,
-      expresult1,
-      expresult2,
-      expresult3,
-      expresult4,
-      expresult5,
-      is_1follow,
-      is_2follow,
-      is_3follow,
-      is_4follow,
-      is_etcfollow,
-      etcfollow
-    })
+    Axios.put(
+      `http://localhost:3001/student/project/p_indicator/create/${id_projects}`,
+      {
+        volume1,
+        volume2,
+        volume3,
+        volume4,
+        volume5,
+        quality1,
+        quality2,
+        quality3,
+        quality4,
+        quality5,
+        expresult1,
+        expresult2,
+        expresult3,
+        expresult4,
+        expresult5,
+        is_1follow,
+        is_2follow,
+        is_3follow,
+        is_4follow,
+        is_etcfollow,
+        etcfollow,
+      }
+    )
       .then((response) => {
         console.log(response.data);
-        
+
         // Handle success, if needed
       })
       .catch((error) => {
         console.error("There was an error!", error);
         // Handle error, if needed
       });
-      Swal.fire({
-        title: "กระบวนการสร้างโครงการเสร็จสิ้น",
-        text: "",
-        icon: "success",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = '/students/allproject';
-        }
-      });
+    Swal.fire({
+      title: "กระบวนการสร้างโครงการเสร็จสิ้น",
+      text: "",
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/students/allproject";
+      }
+    });
   };
   return (
     <>
@@ -221,41 +224,37 @@ function CSD_indicator({ id_projects }) {
                         <tr></tr>
                       </thead>
                       <tbody>
-                        {Array.from({ length: VolumeCount }).map(
-                          (_, index) => (
-                            <tr
-                              key={index}
-                              style={{ backgroundColor: "white" }}
-                            >
-                              <Form.Control
-                                className="table-margin"
-                                size="sm"
-                                type="text"
-                                placeholder={`ด้านปริมาณข้อที่ ${index + 1}`}
-                                onChange={(event) => {
-                                  switch (index) {
-                                    case 0:
-                                      setVolume1(event.target.value);
-                                      break;
-                                    case 1:
-                                      setVolume2(event.target.value);
-                                      break;
-                                    case 2:
-                                      setVolume3(event.target.value);
-                                      break;
-                                    case 3:
-                                      setVolume4(event.target.value);
-                                      break;
-                                    case 4:
-                                      setVolume5(event.target.value);
-                                      break;
-                                    default:
-                                    // Handle other cases if needed
-                                  }
-                                }}
-                              />
-                            </tr>
-                          ))}
+                        {Array.from({ length: VolumeCount }).map((_, index) => (
+                          <tr key={index} style={{ backgroundColor: "white" }}>
+                            <Form.Control
+                              className="table-margin"
+                              size="sm"
+                              type="text"
+                              placeholder={`ด้านปริมาณข้อที่ ${index + 1}`}
+                              onChange={(event) => {
+                                switch (index) {
+                                  case 0:
+                                    setVolume1(event.target.value);
+                                    break;
+                                  case 1:
+                                    setVolume2(event.target.value);
+                                    break;
+                                  case 2:
+                                    setVolume3(event.target.value);
+                                    break;
+                                  case 3:
+                                    setVolume4(event.target.value);
+                                    break;
+                                  case 4:
+                                    setVolume5(event.target.value);
+                                    break;
+                                  default:
+                                  // Handle other cases if needed
+                                }
+                              }}
+                            />
+                          </tr>
+                        ))}
                       </tbody>
                     </Table>
                     <div
@@ -272,7 +271,7 @@ function CSD_indicator({ id_projects }) {
                           onClick={increaseVolumeCount}
                         >
                           <div style={{ fontSize: "14px" }}>
-                            เพิ่มหลักการและเหตุผล
+                            เพิ่มตัวชี้วัดด้านปริมาณ
                           </div>
                         </Button>
                       )}
@@ -293,7 +292,10 @@ function CSD_indicator({ id_projects }) {
 
                 {/* ตัวชี้วัด(ด้านคุณภาพ) */}
                 <tr style={{ backgroundColor: "white" }}>
-                  <td className="head-side-td-swp" style={{ verticalAlign: "top" }}>
+                  <td
+                    className="head-side-td-swp"
+                    style={{ verticalAlign: "top" }}
+                  >
                     <div>ตัวชี้วัด </div>
                     <p>(ด้านคุณภาพ)</p>
                   </td>
@@ -337,7 +339,8 @@ function CSD_indicator({ id_projects }) {
                                 }}
                               />
                             </tr>
-                          ))}
+                          )
+                        )}
                       </tbody>
                     </Table>
                     <div
@@ -354,7 +357,7 @@ function CSD_indicator({ id_projects }) {
                           onClick={increaseQualityCount}
                         >
                           <div style={{ fontSize: "14px" }}>
-                            เพิ่มหลักการและเหตุผล
+                            เพิ่มตัวชี้วัดด้านคุณภาพ
                           </div>
                         </Button>
                       )}
@@ -418,7 +421,8 @@ function CSD_indicator({ id_projects }) {
                                 }}
                               />
                             </tr>
-                          ))}
+                          )
+                        )}
                       </tbody>
                     </Table>
                     <div
@@ -435,7 +439,7 @@ function CSD_indicator({ id_projects }) {
                           onClick={increaseExpresultCount}
                         >
                           <div style={{ fontSize: "14px" }}>
-                            เพิ่มหลักการและเหตุผล
+                            เพิ่มผลที่คาดหวัง
                           </div>
                         </Button>
                       )}
@@ -459,18 +463,29 @@ function CSD_indicator({ id_projects }) {
                     <div>วิธีติดตามผลประเมินผลโครงการ/กิจกรรม</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="1"
                         checked={is_1follow}
                         onChange={() => setIs_1follow(!is_1follow)}
-
                       />
                       {`    `}รายงานผลดำเนินโครงการ (Report)
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="2"
@@ -480,7 +495,13 @@ function CSD_indicator({ id_projects }) {
                       {`    `}แบบสอบถามประเมินผล (Questionnaires)
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="3"
@@ -490,7 +511,13 @@ function CSD_indicator({ id_projects }) {
                       {`    `}แบบสังเกตการณ์ (Observation)
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="4"
@@ -500,18 +527,23 @@ function CSD_indicator({ id_projects }) {
                       {`    `}แบบการสัมภาษณ์ (Interview)
                     </label>
                     <br />
-                    <label style={{ marginLeft: "10px", fontSize: "14px", color: "black" }}>
+                    <label
+                      style={{
+                        marginLeft: "10px",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                    >
                       <input
                         type="checkbox"
                         value="5"
                         checked={is_etcfollow}
                         onChange={() => setIs_etcfollow(!is_etcfollow)}
                       />
-                      {'    '}อื่นๆ
+                      {"    "}อื่นๆ
                       {is_etcfollow && (
-
                         <Form.Control
-                        style={{marginLeft:"10%",marginTop:"5%"}}
+                          style={{ marginLeft: "10%", marginTop: "5%" }}
                           className="table-margin"
                           size="sm"
                           type="text"
@@ -519,10 +551,8 @@ function CSD_indicator({ id_projects }) {
                           placeholder={`ผลที่คาดว่าจะได้รับ`}
                           onChange={(e) => setEtcfollow(e.target.value)}
                         />
-
                       )}
                     </label>
-
                   </td>
                 </tr>
               </tbody>

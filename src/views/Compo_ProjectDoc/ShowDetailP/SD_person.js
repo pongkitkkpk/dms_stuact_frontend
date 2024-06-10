@@ -648,7 +648,7 @@ function SD_person({ id_project, currentStepProject }) {
     <>
       <Col md="9">
         <Card>
-        {currentStepProject <= 3 && !isEditMode && (
+        {currentStepProject <= 2 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

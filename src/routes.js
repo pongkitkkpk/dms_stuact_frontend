@@ -25,7 +25,7 @@ const dashboardRoutes = [
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-bullet-list-67",
     component: AllProject,
     layout: "/admin",
     color: "#fff2e5"
@@ -33,7 +33,7 @@ const dashboardRoutes = [
   {
     path: "/Listbudgetproject",
     name: "งบประมาณทั้งหมด",
-    icon: "nc-icon nc-circle-09",
+    icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/admin",
     color: "#ffd9b3"
@@ -41,7 +41,7 @@ const dashboardRoutes = [
   {
     path: "/addbudgetproject",
     name: "เพิ่มงบประมาณ",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-preferences-circle-rotate",
     component: DTableAddBudget,
     layout: "/admin",
     color: "#ffc080"
@@ -49,7 +49,7 @@ const dashboardRoutes = [
   {
     path: "/tablestudent",
     name: "จัดการบทบาทนักศึกษาและที่ปรึกษา",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-ruler-pencil",
     component: TableListStudent,
     layout: "/admin",
     color: "#ffa64d"
@@ -57,7 +57,7 @@ const dashboardRoutes = [
   {
     path: "/tablepersonal",
     name: "จัดการบทบาทบุคลากร",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-single-02",
     component: TableListPersonel,
     layout: "/admin",
     color: "#ff8d1a"
@@ -65,57 +65,57 @@ const dashboardRoutes = [
   
   
   
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-pie-35",
-    component: Dashboard,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-chart-pie-35",
+  //   component: Dashboard,
+  //   layout: "/admin"
+  // },
 
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "nc-icon nc-circle-09",
-    component: UserProfile,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/user",
+  //   name: "User Profile",
+  //   icon: "nc-icon nc-circle-09",
+  //   component: UserProfile,
+  //   layout: "/admin"
+  // },
 
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-paper-2",
-    component: Typography,
-    layout: "/admin"
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-atom",
-    component: Icons,
-    layout: "/admin"
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
-    layout: "/admin"
-  },
-  {
-    path: "/test",
-    name: "test",
-    icon: "nc-icon nc-pin-3",
-    component: test,
-    layout: "/admin"
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/user"
-  }
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   icon: "nc-icon nc-paper-2",
+  //   component: Typography,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-atom",
+  //   component: Icons,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/maps",
+  //   name: "Maps",
+  //   icon: "nc-icon nc-pin-3",
+  //   component: Maps,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/test",
+  //   name: "test",
+  //   icon: "nc-icon nc-pin-3",
+  //   component: test,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Notifications,
+  //   layout: "/user"
+  // }
 ];
 
 const StuactRoutes = [
@@ -127,15 +127,15 @@ const StuactRoutes = [
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-bullet-list-67",
     component: AllProject,
     layout: "/stuact",
     color: "#fffbb3"
   },
   {
     path: "/Listbudgetproject",
-    name: "ดูงบประมาณทั้งหมด",
-    icon: "nc-icon nc-circle-09",
+    name: "งบประมาณทั้งหมด",
+    icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/stuact",
     color: "#fff880"
@@ -143,23 +143,23 @@ const StuactRoutes = [
   {
     path: "/addbudgetproject",
     name: "เพิ่มงบประมาณ",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-preferences-circle-rotate",
     component: DTableAddBudget,
     layout: "/stuact",
     color: "#fff44d"
   },
   {
     path: "/tablestudent",
-    name: "ตารางจัดการบทบาท(นักศึกษาและที่ปรึกษา)",
-    icon: "nc-icon nc-notes",
+    name: "จัดการบทบาทนักศึกษาและที่ปรึกษา",
+    icon: "nc-icon nc-ruler-pencil",
     component: TableListStudent,
     layout: "/stuact",
     color: "#fff21a"
   },
   {
     path: "/tablepersonal",
-    name: "ตารางจัดการบทบาท(บุคลากร)",
-    icon: "nc-icon nc-notes",
+    name: "จัดการบทบาทบุคลากร",
+    icon: "nc-icon nc-single-02",
     component: TableListPersonel,
     layout: "/stuact",
     color: "#e6d800"
@@ -180,7 +180,7 @@ const AdviserRoutes = [
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-bullet-list-67",
     component: AllProject,
     layout: "/adviser",
     color: "#80ff80"
@@ -188,7 +188,7 @@ const AdviserRoutes = [
   {
     path: "/Listbudgetproject",
     name: "ดูงบประมาณ",
-    icon: "nc-icon nc-circle-09",
+    icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/adviser",
     color: "#1aff1a"
@@ -213,15 +213,15 @@ const StudentRoutes = [
   {
     path: "/allproject",
     name: "โครงการทั้งหมด",
-    icon: "nc-icon nc-notes",
+    icon: "nc-icon nc-bullet-list-67",
     component: AllProject,
     layout: "/students",
     color: "#4d4dff"
   },
   {
     path: "/Listbudgetproject",
-    name: "งบประมาณ",
-    icon: "nc-icon nc-circle-09",
+    name: "ดูงบประมาณ",
+    icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/students",
     color: "#1a1aff"

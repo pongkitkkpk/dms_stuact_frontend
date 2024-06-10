@@ -198,12 +198,12 @@ function ProjectDocument() {
 
   const handleNextStep = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: `คุณต้องการปลาๆใช่หรือไม่? ${project_phase}`,
+      title: "ต้องการอัพเดตสถานะ?",
+      text: `คุณต้องการอัพเดตสถานะโครงการใช่หรือไม่? ${project_phase}`,
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Yes, proceed",
-      cancelButtonText: "Cancel",
+      confirmButtonText: "ใช่, ดำเนินการต่อ",
+      cancelButtonText: "ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
@@ -236,8 +236,8 @@ function ProjectDocument() {
           });
         Axios.post("http://localhost:3001/sendEmail", {
           email: storedUser.email,
-          subject: `อัพเดท สถานะโครงการ ${project_name} เป็น ${DBproject_phase}`,
-          message: "Your project has proceeded to the next step.",
+          subject: `อัพเดต สถานะโครงการ ${project_name} เป็น ${DBproject_phase}`,
+          message: "โปรเจคได้รับการอัพเดตสถานะเรียบร้อยแล้ว",
         })
           .then((response) => {
             console.log(response.data);
@@ -247,8 +247,8 @@ function ProjectDocument() {
           });
 
         Swal.fire(
-          "Success!",
-          "You have proceeded to the next step.",
+          "สำเร็จ!",
+          "โปรเจคเข้าสู่สถานะถัดไปเรียบร้อยแล้ว",
           "success"
         );
       }
@@ -261,14 +261,14 @@ function ProjectDocument() {
 
   return (
     <>
-      <h1>{id_project}</h1>
+      
       <ArrowProgressBar
         steps={totalSteps}
         currentStepProject={currentStepProject}
       />
 
       {/* Render buttons to handle next and previous steps */}
-      {storedUser.account_type === "admin" && currentStepProject != 1 && (
+      {/* {storedUser.account_type === "admin" && currentStepProject != 1 && (
         <div className="d-flex justify-content-end">
           <button onClick={handlePrevStep} disabled={currentStepProject === 1}>
             Previous Step
@@ -282,7 +282,7 @@ function ProjectDocument() {
             Next Step
           </button>
         </div>
-      )}
+      )} */}
       {/* ร่างคำขออนุมัติ */}
       {storedUser.account_type === "students" && currentStepProject == 1 && (
         <div className="d-flex justify-content-end">
@@ -565,7 +565,7 @@ function ProjectDocument() {
                       <div
                         style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                       >
-                        <a><div>ประวัติการแก้ไข/อัพเดทสถานะ</div></a>
+                        <a><div>ประวัติการแก้ไข/อัพเดตสถานะ</div></a>
 
                       </div>
 
@@ -715,7 +715,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.2 ปิดโครงการ2 ความสำเร็จของตัวชี้วัดโครงการ และค่าเป้าหมาย
+                          4.2 ปิดโครงการ ความสำเร็จของตัวชี้วัดโครงการ และค่าเป้าหมาย
                         </div>
                       </a>
                     </td>
@@ -742,7 +742,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.3 ปิดโครงการ3 งบประมาณค่าใช้จ่าย
+                          4.3 ปิดโครงการ งบประมาณค่าใช้จ่าย
                         </div>
                       </a>
                     </td>

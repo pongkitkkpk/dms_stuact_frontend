@@ -71,7 +71,7 @@ function SD_showlogstatus({ id_project }) {
                 {/* ชื่อโครงการ */}
                 <tr style={{ backgroundColor: "white" }}>
                   <td className="head-side-td" style={{ verticalAlign: "top" }}>
-                    <div>การแก้ไข</div>
+                    <div>การอัพเดต</div>
                   </td>
                   <td style={{ verticalAlign: "middle" }}>
                   

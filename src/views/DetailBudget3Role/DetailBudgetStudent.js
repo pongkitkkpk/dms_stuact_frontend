@@ -94,8 +94,8 @@ function DetailBudgetStudent() {
                   paddingTop: "10px"
                 }}
               >
-                {/* <div>{`งบประมาณของ ${clubName}`}</div> */}
-                <div>งบประมาณกิจกรรมนักศึกษาส่วนกลาง</div>
+                <div>{`งบประมาณของ ${clubName}`}</div>
+                {/* <div>งบประมาณกิจกรรมนักศึกษา {}</div> */}
               </Card.Header>
               <Card.Body style={{ paddingBottom: "0px", paddingTop: "2%", paddingLeft: "2%", paddingRight: "2%" }}>
                 <Row>

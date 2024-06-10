@@ -3,9 +3,8 @@ import { Button, Card, Form, Col, Table } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { CardBody, CardFooter } from "reactstrap";
 import Axios from "axios";
-import Swal from 'sweetalert2';
-function SD_budget({ id_project }) {
-
+import Swal from "sweetalert2";
+function SD_budget({ id_project, currentStepProject  }) {
   const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
@@ -147,25 +146,21 @@ function SD_budget({ id_project }) {
 
       setListETC(responseData.listETC);
       setListSETC(responseData.listSETC);
-      
-      const ACount = +responseData.TypeACount ; 
+
+      const ACount = +responseData.TypeACount;
       setTypeACount(ACount);
-      const BTCount = +responseData.TypeBTCount ; 
+      const BTCount = +responseData.TypeBTCount;
       setTypeBTCount(BTCount);
-      const BNTCount = +responseData.TypeBNTCount ; 
+      const BNTCount = +responseData.TypeBNTCount;
       setTypeBNTCount(BNTCount);
-      const CCount = +responseData.TypeCCount ; 
+      const CCount = +responseData.TypeCCount;
       setTypeCCount(CCount);
-      
     });
   };
 
   useEffect(() => {
     getProjectData();
   }, [id_project]);
-
- 
-
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -197,7 +192,11 @@ function SD_budget({ id_project }) {
         setEditData(originalData);
         window.location.reload();
 
-        Swal.fire("ยกเลิกการแก้ไข!", "การแก้ไขของคุณจะไม่บันทึกเข้าสู่ระบบ", "success");
+        Swal.fire(
+          "ยกเลิกการแก้ไข!",
+          "การแก้ไขของคุณจะไม่บันทึกเข้าสู่ระบบ",
+          "success"
+        );
       }
     });
   };
@@ -213,9 +212,9 @@ function SD_budget({ id_project }) {
 
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
-  useEffect(()=>{
-    console.log(TypeACount)
-  },[TypeACount])
+  useEffect(() => {
+    console.log(TypeACount);
+  }, [TypeACount]);
   // const handleSaveClick = () => {
   //   const editpage = "งบประมาณโครงการ"
   //   Axios.put(
@@ -645,9 +644,8 @@ function SD_budget({ id_project }) {
   //       });
   // };
 
-
   const handleSaveClick = () => {
-    const editpage = "งบประมาณโครงการ"
+    const editpage = "งบประมาณโครงการ";
     Swal.fire({
       title: "คุณต้องการบันทึกข้อมูลใช่ไหม?",
       text: "การบันทึกข้อมูลจะไม่สามารถยกเลิกได้",
@@ -660,10 +658,14 @@ function SD_budget({ id_project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         // Your Axios PUT request code goes here
-        const listSSBTnumber = parseFloat(listSSBT?.toString().replace(/,/g, '') || 0);
-        const listSSBNTnumber = parseFloat(listSSBNT?.toString().replace(/,/g, '') || 0);
+        const listSSBTnumber = parseFloat(
+          listSSBT?.toString().replace(/,/g, "") || 0
+        );
+        const listSSBNTnumber = parseFloat(
+          listSSBNT?.toString().replace(/,/g, "") || 0
+        );
         const sumBT_BBNT = listSSBTnumber + listSSBNTnumber;
-    
+
         const listSSB = sumBT_BBNT.toLocaleString("en-US");
         Axios.put(
           `http://localhost:3001/student/project/p_budget/create/${id_project}`,
@@ -896,7 +898,7 @@ function SD_budget({ id_project }) {
             listSBT18: listSBT[17],
             listSBT19: listSBT[18],
             listSBT20: listSBT[19],
-    
+
             listSSBT: listSSBT,
             // BNT
             listBNT1: listBNT[0],
@@ -953,9 +955,9 @@ function SD_budget({ id_project }) {
             listSBNT8: listSBNT[7],
             listSBNT9: listSBNT[8],
             listSBNT10: listSBNT[9],
-    
+
             listSSBNT: listSSBNT,
-            listSSB:listSSB,
+            listSSB: listSSB,
             // C
             listC1: listC[0],
             listC2: listC[1],
@@ -1061,7 +1063,7 @@ function SD_budget({ id_project }) {
             listSC18: listSC[17],
             listSC19: listSC[18],
             listSC20: listSC[19],
-    
+
             listSSC: listSSC,
             listETC: listETC,
             listSETC: listSETC,
@@ -1080,10 +1082,10 @@ function SD_budget({ id_project }) {
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-  
+
         Axios.post(
           `http://localhost:3001/student/project/edit/history/${id_project}`,
-          {codeclub, editpage, id_student}
+          { codeclub, editpage, id_student }
         )
           .then((response) => {
             console.log("Data saved successfully:", response.data);
@@ -1092,13 +1094,15 @@ function SD_budget({ id_project }) {
           .catch((error) => {
             console.error("Error saving data:", error);
           });
-          Swal.fire("บันทึกการแก้ไข เรียบร้อย!", "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.", "success");
+        Swal.fire(
+          "บันทึกการแก้ไข เรียบร้อย!",
+          "การแก้ไขของคุณจำเป็นต้อง refresh หน้าใหม่.",
+          "success"
+        );
       }
     });
   };
 
-
-  
   const increaseTypeACount = () => {
     if (TypeACount < 15) {
       setTypeACount(+TypeACount + 1);
@@ -1727,7 +1731,7 @@ function SD_budget({ id_project }) {
       <Col md="9">
         {/* <div style={{ width: "79%", marginLeft: "1%" }}> */}
         <Card>
-          {!isEditMode && (
+          {currentStepProject <= 2 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

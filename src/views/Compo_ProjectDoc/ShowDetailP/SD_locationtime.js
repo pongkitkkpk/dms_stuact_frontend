@@ -327,7 +327,7 @@ function SD_locationtime({ id_project, currentStepProject }) {
       {/* วนค่าจากdatabase  */}
       <Col md="9">
         <Card>
-        {currentStepProject <= 3 && !isEditMode && (
+        {currentStepProject <= 2 && !isEditMode && (
             <Button
               type="submit"
               className="btn-dataupdate"

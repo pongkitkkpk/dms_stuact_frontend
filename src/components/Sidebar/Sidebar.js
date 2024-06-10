@@ -134,11 +134,11 @@ function Sidebar({ color, image, routes }) {
             className="simple-text logo-mini mx-1"
           >
             <div className="logo-img">
-              <img src={logo} alt="..." />
+              {/* <img src={logo} alt="..." /> */}
             </div>
           </a>
-          <a className="simple-text" href="http://www..com">
-            DMS KMUTNB
+          <a className="simple-text" href="">
+            <div>DMS KMUTNB</div>
           </a>
         </div>
         <Nav>

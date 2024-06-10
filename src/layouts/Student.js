@@ -13,7 +13,7 @@ import sidebarImage from "assets/img/sidebar-3.jpg";
 function Student() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
-  const [hasImage, setHasImage] = React.useState(true);
+  const [hasImage, setHasImage] = React.useState(false);
 
   const [isMainpanelHovered, setIsMainpanelHovered] = useState(false);
   const [isMainpanelNormal, setIsMainpanelNormal] = useState(false);
@@ -94,14 +94,14 @@ function Student() {
           <Footer />
         </div>
       </div>
-      <FixedPlugin
+      {/* <FixedPlugin
         hasImage={hasImage}
         setHasImage={() => setHasImage(!hasImage)}
         color={color}
         setColor={(color) => setColor(color)}
         image={image}
         setImage={(image) => setImage(image)}
-      />
+      /> */}
     </>
   );
 }

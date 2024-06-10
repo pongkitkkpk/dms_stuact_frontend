@@ -336,7 +336,8 @@ function AllProject() {
                             className="align-items-center"
                             style={{ fontSize: "18px", fontWeight: "bold" }}
                           >
-                            {val.project_name}id {val.id}
+                            {val.project_name}
+                            {/* id {val.id} */}
                             <p className="card-category">
                               {val.project_number}
                             </p>
@@ -351,7 +352,7 @@ function AllProject() {
                               >
                                 แสดงรายละเอียด
                               </Button>
-                              {/* {val.project_phase === "ร่างคำขออนุมัติ" && ( */}
+                              {val.project_phase === "ร่างคำขออนุมัติ" && (
                                 <Button
                                   style={{ marginLeft: "5px" }}
                                   className="btn-decrease"
@@ -362,7 +363,7 @@ function AllProject() {
                                 >
                                   ลบ
                                 </Button>
-                              {/*  )} */}
+                                )} 
                             </div>
                           </div>
                         </div>
