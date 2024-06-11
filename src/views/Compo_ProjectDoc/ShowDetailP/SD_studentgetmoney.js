@@ -229,10 +229,6 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                     </CardHeader>
                     <CardBody>
 
-                        <div>
-                            <h1>ยอดทั้งหมด {netall_budget}</h1>
-
-                        </div>
 
                         {/* ยอดเก่า */}
                         {history_budget.length > 0 && (
