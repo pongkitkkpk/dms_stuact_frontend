@@ -20,17 +20,16 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async (username, password, history) => {
     // ***************************admin****************************************
-    if (username === 'admin' && password === 'admin') {
-      setIsAuthenticated(true);
-      const adminUser = { username: 'admin', account_type: 'admin' };
-      setUser(adminUser);
-      sessionStorage.setItem('isLogged', 'true');
-      sessionStorage.setItem('user', JSON.stringify(adminUser));
-      history.push('/admin');
-    } else {
+    // if (username === 'admin' && password === 'admin') {
+    //   setIsAuthenticated(true);
+    //   const adminUser = { username: 'admin', account_type: 'admin' };
+    //   setUser(adminUser);
+    //   sessionStorage.setItem('isLogged', 'true');
+    //   sessionStorage.setItem('user', JSON.stringify(adminUser));
+    //   history.push('/admin');
+    // } else {
 
       try {
-
         const response = await axios.post(
           "http://localhost:3001/api/authen",
           {
@@ -89,7 +88,7 @@ export const AuthProvider = ({ children }) => {
         console.error('Error during login:', error);
         alert('An error occurred during login. Please try again later.');
       }
-    }
+    // }
   };
 
 

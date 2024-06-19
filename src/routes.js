@@ -156,14 +156,14 @@ const StuactRoutes = [
     layout: "/stuact",
     color: "#fff21a"
   },
-  {
-    path: "/tablepersonal",
-    name: "จัดการบทบาทบุคลากร",
-    icon: "nc-icon nc-single-02",
-    component: TableListPersonel,
-    layout: "/stuact",
-    color: "#e6d800"
-  },
+  // {
+  //   path: "/tablepersonal",
+  //   name: "จัดการบทบาทบุคลากร",
+  //   icon: "nc-icon nc-single-02",
+  //   component: TableListPersonel,
+  //   layout: "/stuact",
+  //   color: "#e6d800"
+  // },
   
   
   // {
@@ -238,13 +238,13 @@ const GuestRoutes = [
     layout: "/guest",
     // color: "#1a1aff"
   }, 
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
-    layout: "/guest"
-  },
+  // {
+  //   path: "/maps",
+  //   name: "Maps",
+  //   icon: "nc-icon nc-pin-3",
+  //   component: Maps,
+  //   layout: "/guest"
+  // },
 
 ];
 export { StuactRoutes, StudentRoutes, GuestRoutes,AdviserRoutes };

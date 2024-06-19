@@ -67,9 +67,11 @@ function AllProject() {
     );
   });
 
+
   const getProjects = () => {
-    if (storedUser.account_type == "admin") {
+    if (storedUser.position == "Admin") {
       Axios.get(`http://localhost:3001/admin/allprojects`).then((response) => {
+        console.log("ASDFASDFasdfsad")
         setProjectList(response.data);
       });
     } else if (storedUser.position === "Stuact") {

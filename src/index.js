@@ -1,34 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/css/animate.min.css';
-import './assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0';
-import './assets/css/demo.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import AdminLayout from 'layouts/Admin.js';
-import StuactLayout from 'layouts/Stuact.js';
-import GuestLayout from 'layouts/Guest.js';
-import StudentLayout from 'layouts/Student.js';
-import AdviserLayout from 'layouts/Adviser.js';
-import { AuthProvider } from 'Auth/AuthContext'; 
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/css/animate.min.css";
+import "./assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
+import "./assets/css/demo.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import AdminLayout from "layouts/Admin.js";
+import StuactLayout from "layouts/Stuact.js";
+import GuestLayout from "layouts/Guest.js";
+import StudentLayout from "layouts/Student.js";
+import AdviserLayout from "layouts/Adviser.js";
+import { AuthProvider } from "Auth/AuthContext";
 
 const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
-  
   // if i need set roles in account_type(have a student)
-  const storedUserData = sessionStorage.getItem('user');
+  const storedUserData = sessionStorage.getItem("user");
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const storedUserRole = storedUser.account_type; // Accessing the account_type property
-  // 
+  //
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (!sessionStorage.getItem('isLogged')) {
+        if (!sessionStorage.getItem("isLogged")) {
           return <Redirect to="/guest/login" />;
         }
-     
+
         // if (roles && !roles.includes(storedUserRole)) {
         //   return <Redirect to="/unauthorized" />;
         // }
@@ -38,10 +37,12 @@ const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
   );
 };
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <AuthProvider> {/* Wrap the application with AuthProvider */}
+  <AuthProvider>
+    {" "}
+    {/* Wrap the application with AuthProvider */}
     <BrowserRouter>
       <Switch>
         {/* Public routes accessible by anyone */}
@@ -51,24 +52,23 @@ ReactDOM.render(
         <ProtectedRoute
           path="/students"
           component={StudentLayout}
-          roles={['students']}
+          roles={["students"]}
         />
         <ProtectedRoute
           path="/admin"
           component={AdminLayout}
-          roles={['admin']}
+          roles={["admin"]}
         />
-         <ProtectedRoute
+        <ProtectedRoute
           path="/Stuact"
           component={StuactLayout}
-          roles={['Stuact']}
+          roles={["Stuact"]}
         />
         <ProtectedRoute
           path="/adviser"
           component={AdviserLayout}
-          roles={['adviser']}
+          roles={["adviser"]}
         />
-        
 
         {/* Redirect any other routes to guest login */}
         <Redirect to="/guest/login" />
@@ -77,4 +77,3 @@ ReactDOM.render(
   </AuthProvider>,
   rootElement
 );
-
