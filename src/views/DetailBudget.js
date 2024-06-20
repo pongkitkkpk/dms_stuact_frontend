@@ -28,7 +28,7 @@ function DetailBudget() {
     {account_type == "students" && <DetailBudgetStudent />}
     {position == "AD" && <DetailBudgetStudent />}
     {position == "Stuact" && <DetailBudgetAdmin />}
-    {position == "admin" && <DetailBudgetAdmin />}
+    {position == "Admin" && <DetailBudgetAdmin />}
     
   </>
   );

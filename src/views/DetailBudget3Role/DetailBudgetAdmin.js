@@ -79,13 +79,13 @@ function DetailBudgetAdmin() {
 
   }, [AgnecyGroupName, yearly]);
 
-  useEffect(() => {
-    console.log("yearly")
-    console.log(yearly)
-    console.log("BudgetList")
-    console.log(BudgetList)
-    console.log(ProjectList)
-  }, [BudgetList, yearly, ProjectList])
+  // useEffect(() => {
+  //   console.log("yearly")
+  //   console.log(yearly)
+  //   console.log("BudgetList")
+  //   console.log(BudgetList)
+  //   console.log(ProjectList)
+  // }, [BudgetList, yearly, ProjectList])
 
 
   // ตอนทั้งหมด แยกแต่ละฝ่าย
@@ -228,7 +228,7 @@ function DetailBudgetAdmin() {
           </Col>
         </Row>
       </Col>
-      {/* <h1>{`${clubName}`}</h1> */}
+  
       <Col md="12">
         <div style={{ marginLeft: "15px", marginTop: "0%", marginBottom: "1%" }}>
           <Row>

@@ -315,21 +315,22 @@ function DTableAddBudget() {
               ) {
                 return (
                   <tr key={index} style={{ backgroundColor: "white" }}>
-                    <td>{project.id}</td>
+                    {/* <td>{project.id}</td> */}
                     <td>{project.project_name}</td>
                     <td>{project.responsible_agency}</td>
                     <td>{project.yearly}</td>
                     <td>{project.net_budget}</td>
-                    <td style={{backgroundColor:"red"}}>บาท</td>
+                    {/* <td style={{backgroundColor:"red"}}>บาท</td> */}
                     <td>
-                      <Button
-                        onClick={() => handleDelete(project.id)}
-                        type="submit"
-                        variant="success"
-                        className="btn-budget-increase"
-                        style={{ fontSize: "14px" }}
+                    <Button
+                        variant="danger"
+                        style={{ borderColor: "#F33E3E" }}
+                        className="btn btn-budget-decrease"
+                        onClick={() =>
+                          handleDeleteProject(project.id, project.project_name)
+                        }
                       >
-                        ลบ
+                        <div style={{fontSize:"14px"}}>ลบ</div>
                       </Button>
                     </td>
                   </tr>
