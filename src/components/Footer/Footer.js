@@ -24,7 +24,7 @@ class Footer extends Component {
       <footer className="footer px-0 px-lg-3">
         <Container fluid>
           <nav>
-            <ul className="footer-menu">
+            {/* <ul className="footer-menu">
               <li>
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
                   Home
@@ -45,11 +45,15 @@ class Footer extends Component {
                   Blog
                 </a>
               </li>
-            </ul>
+            </ul> */}
             <p className="copyright text-center">
-              © {new Date().getFullYear()}{" "}
-              <a href="http://www.google.com">asdfsaaawerwer</a>, made with
-              love for a better web
+              {/* © {new Date().getFullYear()}{" "} */}
+              <div>
+              @ 2024 {" "} Nawapat Pongkit EnET
+              </div>
+              
+              {/* <a href="http://www.google.com">asdfsaaawerwer</a>, made with
+              love for a better web */}
             </p>
           </nav>
         </Container>
