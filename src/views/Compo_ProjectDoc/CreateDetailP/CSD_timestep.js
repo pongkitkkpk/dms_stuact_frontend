@@ -671,7 +671,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     }
 
     Axios.put(
-      `http://localhost:3001/student/project/p_timestep/create/${id_projects}`,
+      `${process.env.REACT_APP_API_URL}/student/project/p_timestep/create/${id_projects}`,
       {
         codeclub,
         yearly_countsketch,
@@ -802,7 +802,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
       }
     )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         // Handle success, if needed
       })
       .catch((error) => {
@@ -821,7 +821,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   };
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_projects}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_projects}`
     ).then((response) => {
       setProjectData(response.data);
 
@@ -860,7 +860,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {
-    Axios.get("http://localhost:3001/student/project/p_person").then(
+    Axios.get(`${process.env.REACT_APP_API_URL}/student/project/p_person`).then(
       (response) => {
         setPPersonData(response.data);
       }
@@ -875,7 +875,7 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
     const idinperson = pPersonData.filter(
       (person) => person.id_projects === id_projects
     );
-    console.log("id" + id_projects);
+
 
     // Assuming idinperson is an array and you want to get data from the first element
     if (idinperson.length > 0) {
@@ -888,10 +888,10 @@ function CSD_timestep({ id_projects, switchToCSDBudget }) {
 
 
   useEffect(() => {
-    console.log("person1" + person1);
-    console.log("person2" + person2);
-    console.log("person3" + person3);
-    // 'person1', 'person2', 'person3' will have the updated values here
+    // console.log("person1" + person1);
+    // console.log("person2" + person2);
+    // console.log("person3" + person3);
+    // // 'person1', 'person2', 'person3' will have the updated values here
     const names = [
       person1 !== "" ? person1 : null,
       person2 !== "" ? person2 : null,

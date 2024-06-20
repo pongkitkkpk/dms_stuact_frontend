@@ -30,10 +30,7 @@ function CSD_detail({ setIdProjects, switchToCSDDetail2 }) {
   const clubName = storedUser.clubName;
   const yearsession = storedUser.yearly;
 
-useEffect(()=>{
-  console.log(clubName)
-  console.log(storedUser)
-},[clubName])
+
   // ตัวแปรส่งค่าไปยัง database
   const [id_student, setId_student] = useState(studentuser);
   const [project_name, setProjectName] = useState("");
@@ -66,13 +63,14 @@ useEffect(()=>{
   //==========================
   const [NetList, setNetList] = useState([])
   const [net_budget, setNet_budget] = useState("");
+
+ 
   const getNetProject = () => {
     try {
-      Axios.get(`http://localhost:3001/student/project/getBudgetclubName/${responsible_agency}/${yearly}`)
+      Axios.get(`${process.env.REACT_APP_API_URL}/student/project/getBudgetclubName/${responsible_agency}/${yearly}`)
         .then((response) => {
           setNetList(response.data);
-          console.log("NetList")
-          console.log(NetList)
+         
         })
         .catch((error) => {
           console.error("Error fetching net project:", error);
@@ -116,7 +114,7 @@ useEffect(()=>{
       // Make API call
       axios
         .post(
-          "http://localhost:3001/api/userInfo",
+          `${process.env.REACT_APP_API_URL}/api/userInfo`,
           {
             username: newpersonicit,
           },
@@ -274,7 +272,7 @@ useEffect(()=>{
   const [AgnecyGroupName, setAgnecyGroupName] = useState("");
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/student/users").then((response) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}/student/users`).then((response) => {
       setUserList(response.data);
     });
   };
@@ -317,9 +315,8 @@ useEffect(()=>{
   const addBasicProject = () => {
     
     Axios.get(
-      `http://localhost:3001/student/project/getcodeclub/${codeclub}`
+      `${process.env.REACT_APP_API_URL}/student/project/getcodeclub/${codeclub}`
     ).then((response) => {
-      console.log(response.data)
       const existingProject = response.data.find(
         (project) => project.codeclub === codeclub
       );
@@ -336,8 +333,8 @@ useEffect(()=>{
         // setProjectNumber หลังกรอกครบทุกหน้าเรียบร้อยแล้ว
         // setProjectNumber(codeclub+formattedYearlyCount)
         const newProjectId = response.data[0].id; // Assuming the id is the correct property
-        console.log("newProject")
-        console.log(newProjectId + 1)
+        // console.log("newProject")
+        // console.log(newProjectId + 1)
         setIdProjects(newProjectId + 1);
         createProject(formattedYearlyCount);
         
@@ -350,7 +347,7 @@ useEffect(()=>{
 
   const createProject = (yearlyCountsketch) => {
     const projectNameToUse = project_name === "etc" ? customProjectName : project_name;
-    Axios.post("http://localhost:3001/student/project/create/", {
+    Axios.post(`${process.env.REACT_APP_API_URL}/student/project/create/`, {
       id_student: id_student,
       project_name: projectNameToUse,
       project_number: project_number,

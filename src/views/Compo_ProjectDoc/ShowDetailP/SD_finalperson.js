@@ -36,7 +36,7 @@ function SD_finalperson({ id_project, currentStepProject }) {
   const getProjectData = () => {
     Axios.get(
       // ใส่ api แก้ตาม finalperson 
-      `http://localhost:3001/student/project/finalperson/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/finalperson/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
@@ -122,11 +122,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/finalperson/edit/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/finalperson/edit/${id_project}`,
           editData
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -134,11 +134,11 @@ function SD_finalperson({ id_project, currentStepProject }) {
           });
 
         Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/edit/history/${id_project}`,
           { codeclub, editpage, id_student }
         )
           .then((response) => {
-            console.log("Data saved successfully:", response.data);
+            // console.log("Data saved successfully:", response.data);
             window.location.reload();
           })
           .catch((error) => {

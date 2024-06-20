@@ -20,7 +20,7 @@ function DAddSplitBudget() {
 
 
   const createNetProject = () => {
-    Axios.post(`http://localhost:3001/admin/createNetProject`, {
+    Axios.post(`${process.env.REACT_APP_API_URL}/admin/createNetProject`, {
       project_name: project_name,
       AgnecyGroupName: AgnecyGroupName,
       responsible_agency: clubName,
@@ -189,8 +189,8 @@ function DAddSplitBudget() {
                               event.target.options[event.target.selectedIndex]
                                 .text;
                             setClubname(selectedText);
-                            console.log(selectedText)
-                            console.log(event.target.selectedIndex)
+                            // console.log(selectedText)
+                            // console.log(event.target.selectedIndex)
                             const agencyGroupName =
                               event.target.options[event.target.selectedIndex].getAttribute('data-agencygroup');
 

@@ -146,10 +146,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
     }
   };
 
-  useEffect(() => {
-    console.log("AAAAAAAAAAAA")
-    console.log(id_projects)
-  }, [id_projects])
+
 
   const createProject = () => {
     console.log("Creating project...");
@@ -182,7 +179,7 @@ function CSD_detail2({ id_projects, switchToCSDPerson }) {
     };
 
     // Send project data to the server
-    Axios.put(`http://localhost:3001/student/project/create2/${id_projects}`, projectData)
+    Axios.put(`${process.env.REACT_APP_API_URL}/student/project/create2/${id_projects}`, projectData)
       .then(() => {
         console.log("Project created successfully");
         // Update local state with the new project

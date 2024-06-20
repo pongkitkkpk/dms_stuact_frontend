@@ -87,7 +87,7 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
   };
 
   const createProject = (yearlyCountsketch) => {
-    Axios.put(`http://localhost:3001/student/project/create3/${id_projects}`, {
+    Axios.put(`${process.env.REACT_APP_API_URL}/student/project/create3/${id_projects}`, {
       location1: location1,
       location2: location2,
       location3: location3,
@@ -219,14 +219,14 @@ function CSD_locationtime({ id_projects, switchToCSDTimestep }) {
   }, [deadline])
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(thaistart_prepare)
-    console.log(thaiend_prepare)
-    console.log(thaistart_event)
-    console.log(thaiend_event)
-    console.log(thaideadline)
-  }, [thaiend_event, thaiend_prepare, thaistart_event, thaistart_prepare, thaideadline])
+  //   console.log(thaistart_prepare)
+  //   console.log(thaiend_prepare)
+  //   console.log(thaistart_event)
+  //   console.log(thaiend_event)
+  //   console.log(thaideadline)
+  // }, [thaiend_event, thaiend_prepare, thaistart_event, thaistart_prepare, thaideadline])
   return (
     <>
       {/* วนค่าจากdatabase  */}

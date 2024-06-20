@@ -17,7 +17,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
 
   const getpPersonData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_projects}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_projects}`
     ).then((response) => {
       setPPersonData(response.data);
     });
@@ -62,7 +62,7 @@ function CSD_budget({ id_projects, switchToCSDindicator }) {
 
 
     Axios.put(
-      `http://localhost:3001/student/project/p_budget/create/${id_projects}`,
+      `${process.env.REACT_APP_API_URL}/student/project/p_budget/create/${id_projects}`,
       {
         // A
         listA1: listA[0],

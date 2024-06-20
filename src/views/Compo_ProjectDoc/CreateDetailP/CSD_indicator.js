@@ -142,7 +142,7 @@ function CSD_indicator({ id_projects }) {
 
   const createIndicator = () => {
     Axios.put(
-      `http://localhost:3001/student/project/p_indicator/create/${id_projects}`,
+      `${process.env.REACT_APP_API_URL}/student/project/p_indicator/create/${id_projects}`,
       {
         volume1,
         volume2,
@@ -168,7 +168,7 @@ function CSD_indicator({ id_projects }) {
       }
     )
       .then((response) => {
-        console.log(response.data);
+        
 
         // Handle success, if needed
       })

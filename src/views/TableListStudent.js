@@ -20,7 +20,7 @@ function TableListStudent() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/admin/studentusers").then((response) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}/admin/studentusers`).then((response) => {
       setUserList(response.data);
     });
   };
@@ -39,7 +39,7 @@ function TableListStudent() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id_project}`)
+        Axios.delete(`${process.env.REACT_APP_API_URL}/admin/user/deleteUser/${id_project}`)
           .then((response) => {
             setUserList(
               userList.filter((val) => {
@@ -229,7 +229,7 @@ function TableListStudent() {
                             <td>
                               <div>
                                 {val.name_student}
-                                {console.log(val)}
+                                {/* {console.log(val)} */}
                               </div>
                             </td>
                             {/* email */}

@@ -33,7 +33,7 @@ function DetailBudgetStudent() {
   useEffect(() => {
     if (yearly) {
       Axios.get(
-        `http://localhost:3001/student/studentallprojects/${clubName}/${yearly}`
+        `${process.env.REACT_APP_API_URL}/student/studentallprojects/${clubName}/${yearly}`
       ).then((response) => {
         setProjectList(response.data);
       }).catch((error) => {
@@ -45,7 +45,7 @@ function DetailBudgetStudent() {
   useEffect(() => {
     if (yearly) {
       Axios.get(
-        `http://localhost:3001/student/project/getBudgetclubName/${clubName}/${yearly}`
+        `${process.env.REACT_APP_API_URL}/student/project/getBudgetclubName/${clubName}/${yearly}`
       ).then((response) => {
         setBudgetList(response.data);
       }).catch((error) => {
@@ -265,8 +265,8 @@ function DetailBudgetStudent() {
             {BudgetList.map((project, index) => {
               // Find the corresponding project in ProjectList
               const matchingProject = ProjectList.find(p => p.project_name === project.project_name);
-              console.log("matchingProject")
-              console.log(matchingProject)
+              // console.log("matchingProject")
+              // console.log(matchingProject)
               return (
                 <tr key={index} style={{ backgroundColor: "white" }}>
                   {matchingProject ? (

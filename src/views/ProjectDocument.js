@@ -46,7 +46,7 @@ function ProjectDocument() {
   const [originalData, setOriginalData] = useState({});
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setCodeclub(response.data[0].codeclub);
@@ -62,7 +62,7 @@ function ProjectDocument() {
   }, [id_project]);
 
   const getStateData = () => {
-    Axios.get(`http://localhost:3001/getState/${id_project}`).then(
+    Axios.get(`${process.env.REACT_APP_API_URL}/getState/${id_project}`).then(
       (response) => {
         setDBProject_phase(response.data[0].project_phase);
       }
@@ -89,10 +89,10 @@ function ProjectDocument() {
   const handleNextStepPleaseAllow = () => {
 
     Axios.get(
-      `http://localhost:3001/student/project/getNameProjectYearly/${project_name}/${codeclub}/${yearly}`
+      `${process.env.REACT_APP_API_URL}/student/project/getNameProjectYearly/${project_name}/${codeclub}/${yearly}`
     ).then((response) => {
       const allow_budget = response.data[0].allow_budget
-      console.log(allow_budget)
+      // console.log(allow_budget)
       let maxYearlyCount = 0;
       response.data.forEach((project) => {
         const yearlyCount = parseInt(project.yearly_count);
@@ -116,39 +116,39 @@ function ProjectDocument() {
       }).then((result) => {
         if (result.isConfirmed) {
           setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-          Axios.put(`http://localhost:3001/student/firstupdateState/${id_project}`, {
+          Axios.put(`${process.env.REACT_APP_API_URL}/student/firstupdateState/${id_project}`, {
             project_name,
             codeclub,
             project_phase,
             CountYear: newYearlyCount,
             project_number: newProject_number
           }).then((response) => {
-            console.log("response.data");
-            console.log(response.data);
+            // console.log("response.data");
+            // console.log(response.data);
             // window.location.reload();
           }).catch((error) => {
             console.error("Error creating project:", error);
           });
-          Axios.post(`http://localhost:3001/insertlogState/${id_project}`, {
+          Axios.post(`${process.env.REACT_APP_API_URL}/insertlogState/${id_project}`, {
             project_name,
             codeclub,
             project_phase,
             editor_name,
           })
             .then((response) => {
-              console.log("response.data");
-              console.log(response.data);
+              // console.log("response.data");
+              // console.log(response.data);
             })
             .catch((error) => {
               console.error("Error creating project:", error);
             });
 
-          Axios.put(`http://localhost:3001/admin/updateusebudget/${project_name}`, {
+          Axios.put(`${process.env.REACT_APP_API_URL}/admin/updateusebudget/${project_name}`, {
             allow_budget: allow_budget
           })
             .then((response) => {
-              console.log("response.data");
-              console.log(response.data);
+              // console.log("response.data");
+              // console.log(response.data);
               // window.location.reload();
             })
             .catch((error) => {
@@ -192,7 +192,7 @@ function ProjectDocument() {
       "ดำเนินการสรุปผล",
       "ปิดโครงการ",
     ];
-    console.log(currentStepProject);
+    // console.log(currentStepProject);
     setProject_phase(stepNames[currentStepProject - 1] || "");
   }, [currentStepProject]);
 
@@ -207,40 +207,40 @@ function ProjectDocument() {
     }).then((result) => {
       if (result.isConfirmed) {
         setCurrentStepProject((prevStep) => Math.min(prevStep + 1, totalSteps));
-        Axios.put(`http://localhost:3001/updateState/${id_project}`, {
+        Axios.put(`${process.env.REACT_APP_API_URL}/updateState/${id_project}`, {
           project_name,
           codeclub,
           project_phase,
           editor_name,
         })
           .then((response) => {
-            console.log("response.data");
-            console.log(response.data);
+            // console.log("response.data");
+            // console.log(response.data);
             // window.location.reload();
           })
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-        Axios.post(`http://localhost:3001/insertlogState/${id_project}`, {
+        Axios.post(`${process.env.REACT_APP_API_URL}/insertlogState/${id_project}`, {
           project_name,
           codeclub,
           project_phase,
           editor_name,
         })
           .then((response) => {
-            console.log("response.data");
-            console.log(response.data);
+            // console.log("response.data");
+            // console.log(response.data);
           })
           .catch((error) => {
             console.error("Error creating project:", error);
           });
-        Axios.post("http://localhost:3001/sendEmail", {
+        Axios.post(`${process.env.REACT_APP_API_URL}/sendEmail`, {
           email: storedUser.email,
           subject: `อัพเดต สถานะโครงการ ${project_name} เป็น ${DBproject_phase}`,
           message: "โปรเจคได้รับการอัพเดตสถานะเรียบร้อยแล้ว",
         })
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
           })
           .catch((error) => {
             console.error("Error sending email:", error);

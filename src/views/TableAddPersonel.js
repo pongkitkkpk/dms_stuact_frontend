@@ -79,7 +79,7 @@ function TableAddPersonel() {
       setLEVEL_DESC(getuserapi.message2.LEVEL_DESC); //ปริญญาตรี 4 ปี / 5 ปี
       setFAC_NAME_THAI(getuserapi.message2.FAC_NAME_THAI); //วิทยาลัยเทคโนโลยีอุตสาหกรรม
     }
-    console.log(username);
+    // console.log(username);
   }, [getuserapi]);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ function TableAddPersonel() {
       // Make API call
       axios
         .post(
-          "http://localhost:3001/api/userInfo",
+          `${process.env.REACT_APP_API_URL}/api/userInfo`,
           {
             username: fusername,
           },
@@ -167,7 +167,7 @@ function TableAddPersonel() {
     const newCodebooksomeoutyear = `${campusAbbreviation}${"yy"}${numericCodedivision}${numericCodeagency}${numericCodeworkgroup}`;
     setCodebooksome(newCodebooksome);
     setCodebooksomeoutyear(newCodebooksomeoutyear);
-    Axios.post("http://localhost:3001/admin/user/createUser", {
+    Axios.post(`${process.env.REACT_APP_API_URL}/admin/user/createUser`, {
       id_student: username,
       name_student: name_student,
       department: "",
@@ -417,7 +417,7 @@ function TableAddPersonel() {
                               aria-label="Default select example"
                               onChange={(event) => {
                                 setCodedivision(event.target.value);
-                                console.log(codedivision);
+                                // console.log(codedivision)
                                 const selectedText =
                                   event.target.options[
                                     event.target.selectedIndex
@@ -666,7 +666,7 @@ function TableAddPersonel() {
                                             e.target.selectedIndex
                                           ].text;
                                         setWorkGroup(selectedText);
-                                        console.log("workgrop" + codeworkgroup);
+                                        // console.log("workgrop" + codeworkgroup);
                                       }}
                                       required
                                       style={{ width: "70%", height: "37px" }}

@@ -45,8 +45,8 @@ function SD_addfile({ id_project }) {
 
   // Function to handle file upload
   const handleFileUploadtoDB = async (index) => {
-    console.log("Attempting to upload file...");
-    console.log(index);
+    // console.log("Attempting to upload file...");
+    // console.log(index);
     const file = files[0];
     if (!file) {
       console.log("No file selected.");
@@ -54,15 +54,14 @@ function SD_addfile({ id_project }) {
     }
 
     try {
-      console.log("File selected:", file.name);
-      console.log("Project ID:", id_project);
+
 
       const formData = new FormData();
       formData.append("pdfFile", file);
       formData.append("projectId", id_project);
 
       const response = await Axios.post(
-        "http://localhost:3001/student/upload-pdf",
+        `${process.env.REACT_APP_API_URL}/student/upload-pdf`,
         formData,
         {
           headers: {
@@ -71,16 +70,16 @@ function SD_addfile({ id_project }) {
         }
       );
 
-      console.log("File upload response:", response.data);
+      // console.log("File upload response:", response.data);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
   };
   
-  useEffect(() => {
-    // console.log(files[1].name)
-    console.log("Selected files:", files);
-  }, [files]);
+  // useEffect(() => {
+  //   // console.log(files[1].name)
+  //   console.log("Selected files:", files);
+  // }, [files]);
 
   return (
     <>

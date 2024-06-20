@@ -33,7 +33,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/finalbudget/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/finalbudget/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
@@ -44,7 +44,7 @@ function SD_finalbudget({ id_project, currentStepProject }) {
     });
 
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_project}`
     ).then((response) => {
       const net = response.data[0].net_budget
       setAllowBudget(parseFloat(net.toString().replace(/,/g, '')));
@@ -82,11 +82,11 @@ function SD_finalbudget({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/finalbudget/edit/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/finalbudget/edit/${id_project}`,
           editData
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -94,11 +94,11 @@ function SD_finalbudget({ id_project, currentStepProject }) {
           });
 
         Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/edit/history/${id_project}`,
           { codeclub, editpage, id_student }
         )
           .then((response) => {
-            console.log("Data saved successfully:", response.data);
+            // console.log("Data saved successfully:", response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -153,10 +153,10 @@ function SD_finalbudget({ id_project, currentStepProject }) {
 }, [listSSA, listSSB, listSSC]);
 
 
-useEffect(() => {
-  console.log("allow_budget")
-  console.log(allow_budget)
-}, [allow_budget]);
+// useEffect(() => {
+//   console.log("allow_budget")
+//   console.log(allow_budget)
+// }, [allow_budget]);
 
 useEffect(() => {
   const NumberSSA = editData.listSSA ? parseFloat(editData.listSSA.toString().replace(/,/g, '')) : 0;
@@ -168,7 +168,7 @@ useEffect(() => {
     setListSSAll(total);
     const Refundtotal = allow_budget - total;
     setRefundtotal(Refundtotal.toLocaleString("en-US"));
-    console.log("total:", total);
+    // console.log("total:", total);
 
     
     setEditData({

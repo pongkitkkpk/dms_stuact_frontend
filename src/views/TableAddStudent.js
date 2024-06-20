@@ -111,7 +111,7 @@ function TableAddStudent() {
       // Make API call
       axios
         .post(
-          "http://localhost:3001/api/userInfo",
+          `${process.env.REACT_APP_API_URL}/api/userInfo`,
           {
             username: fusername,
           },
@@ -240,7 +240,7 @@ function TableAddStudent() {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
     }
 
-    Axios.post("http://localhost:3001/admin/user/createUser", {
+    Axios.post(`${process.env.REACT_APP_API_URL}/admin/user/createUser`, {
       id_student: username,
       name_student: name_student,
       Phone: Phone,
@@ -368,9 +368,9 @@ function TableAddStudent() {
     ) {
       setAgencyGroupName("ชมรมฝ่ายกีฬา");
     }
-    console.log("ASDASDFAS");
-    console.log(clubName);
-    console.log(agencyGroupName);
+    // console.log("ASDASDFAS");
+    // console.log(clubName);
+    // console.log(agencyGroupName);
   }, [clubName]);
   return (
     <>

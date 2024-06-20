@@ -22,7 +22,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
   const [pPersonData, setPPersonData] = useState([]);
 
   const getpPersonData = () => {
-    Axios.get("http://localhost:3001/student/project/p_person").then(
+    Axios.get(`${process.env.REACT_APP_API_URL}/student/project/p_person`).then(
       (response) => {
         setPPersonData(response.data);
       }
@@ -37,7 +37,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
     const idinperson = pPersonData.filter(
       (person) => person.id_projects === id_projects
     );
-    console.log("id" + id_projects);
+    // console.log("id" + id_projects);
 
     // Assuming idinperson is an array and you want to get data from the first element
     if (idinperson.length > 0) {
@@ -91,9 +91,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
     }
   };
 
-  useEffect(() => {
-    console.log(executiveType1Name);
-  }, [executiveType1Name]);
+
   useEffect(() => {
     // Calculate total for executive category
     const totalExecutiveCount =
@@ -328,7 +326,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
   ]);
 
   const createPerson = () => {
-    Axios.post("http://localhost:3001/student/project/p_person/create/", {
+    Axios.post(`${process.env.REACT_APP_API_URL}/student/project/p_person/create/`, {
       id_projects,
       codeclub,
       yearly_countsketch,
@@ -383,7 +381,7 @@ function CSD_person({ id_projects, switchToCSDLocationTime }) {
       grandTotalAll,
     })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         // Handle success, if needed
       })
       .catch((error) => {

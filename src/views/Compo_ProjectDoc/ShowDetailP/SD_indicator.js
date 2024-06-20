@@ -153,7 +153,7 @@ function SD_indicator({ id_project, currentStepProject }) {
   const [showdeadline, setShowDeadLine] = useState("");
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/indicator/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/indicator/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
@@ -256,7 +256,7 @@ function SD_indicator({ id_project, currentStepProject }) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/indicator/edit/${id_project}`, {
+          `${process.env.REACT_APP_API_URL}/student/project/indicator/edit/${id_project}`, {
           volume1: volume1,
           volume2: volume2,
           volume3: volume3,
@@ -281,7 +281,7 @@ function SD_indicator({ id_project, currentStepProject }) {
         }
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -289,11 +289,11 @@ function SD_indicator({ id_project, currentStepProject }) {
           });
 
         Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/edit/history/${id_project}`,
           { codeclub, editpage, id_student }
         )
           .then((response) => {
-            console.log("Data saved successfully:", response.data);
+            // console.log("Data saved successfully:", response.data);
             window.location.reload();
           })
           .catch((error) => {

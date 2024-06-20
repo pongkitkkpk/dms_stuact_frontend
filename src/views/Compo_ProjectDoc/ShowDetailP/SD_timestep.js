@@ -27,7 +27,7 @@ function SD_timestep({ id_project , currentStepProject}) {
   const [personNames, setPersonNames] = useState([]);
   const getProjectdeatailData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_project}`
     ).then((response) => {
       setProjectData(response.data);
 
@@ -296,7 +296,7 @@ function SD_timestep({ id_project , currentStepProject}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/timestep/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/timestep/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setEditData(response.data[0]);
@@ -1327,11 +1327,11 @@ function SD_timestep({ id_project , currentStepProject}) {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.put(
-          `http://localhost:3001/student/project/timestep/edit/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/timestep/edit/${id_project}`,
           editData
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -1339,11 +1339,11 @@ function SD_timestep({ id_project , currentStepProject}) {
           });
 
         Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/student/project/edit/history/${id_project}`,
           { codeclub, editpage, id_student }
         )
           .then((response) => {
-            console.log("Data saved successfully:", response.data);
+            // console.log("Data saved successfully:", response.data);
             window.location.reload();
           })
           .catch((error) => {

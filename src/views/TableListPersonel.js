@@ -22,7 +22,7 @@ function TableListPersonel() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const getUsers = () => {
-    Axios.get("http://localhost:3001/admin/stuactusers").then((response) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}/admin/stuactusers`).then((response) => {
       setUserList(response.data);
     });
   };
@@ -65,7 +65,7 @@ function TableListPersonel() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/admin/user/deleteUser/${id_project}`)
+        Axios.delete(`${process.env.REACT_APP_API_URL}/admin/user/deleteUser/${id_project}`)
           .then((response) => {
             setUserList(
               userList.filter((val) => {

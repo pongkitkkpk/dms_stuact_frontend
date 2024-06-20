@@ -25,13 +25,13 @@ function SD_showlogstatus({ id_project }) {
     getProjectHistoryEdit();
   }, []); // Fetch project data on component mount
 
-  useEffect(()=>{
-    console.log(LogStatus)
-  },[LogStatus])
+  // useEffect(()=>{
+  //   console.log(LogStatus)
+  // },[LogStatus])
 
   const getProjectHistoryEdit = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getlogstatus/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getlogstatus/${id_project}`
     )
       .then((response) => {
         setLogStatus(response.data);

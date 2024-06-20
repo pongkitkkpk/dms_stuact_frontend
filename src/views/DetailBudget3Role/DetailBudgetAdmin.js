@@ -38,7 +38,7 @@ function DetailBudgetAdmin() {
   // หลังเลือกดูแต่ละฝ่ายงาน
   useEffect(() => {
     if (AgnecyGroupName !== 'ทั้งหมด') {
-      Axios.get(`http://localhost:3001/admin/getSelectGroupNetProject/${AgnecyGroupName}/${yearly}`)
+      Axios.get(`${process.env.REACT_APP_API_URL}/admin/getSelectGroupNetProject/${AgnecyGroupName}/${yearly}`)
         .then((response) => {
           setBudgetList(response.data);
         })
@@ -46,7 +46,7 @@ function DetailBudgetAdmin() {
           console.error("Error fetching project details:", error);
         });
     } else {
-      Axios.get(`http://localhost:3001/admin/getyearlyNetProject/${yearly}`)
+      Axios.get(`${process.env.REACT_APP_API_URL}/admin/getyearlyNetProject/${yearly}`)
         .then((response) => {
           setBudgetList(response.data);
         })
@@ -60,7 +60,7 @@ function DetailBudgetAdmin() {
   // หลังเลือกดูแต่ละฝ่ายงาน
   useEffect(() => {
     if (AgnecyGroupName !== 'ทั้งหมด') {
-      Axios.get(`http://localhost:3001/admin/getsomeprojectshavenumber/${AgnecyGroupName}/${yearly}`)
+      Axios.get(`${process.env.REACT_APP_API_URL}/admin/getsomeprojectshavenumber/${AgnecyGroupName}/${yearly}`)
         .then((response) => {
           setProjectList(response.data);
         })
@@ -68,7 +68,7 @@ function DetailBudgetAdmin() {
           console.error("Error fetching project details:", error);
         });
     } else {
-      Axios.get(`http://localhost:3001/admin/yearlyprojectshavenumber/${yearly}`)
+      Axios.get(`${process.env.REACT_APP_API_URL}/admin/yearlyprojectshavenumber/${yearly}`)
         .then((response) => {
           setProjectList(response.data);
         })
@@ -358,8 +358,8 @@ function DetailBudgetAdmin() {
               {BudgetList.map((project, index) => {
                 // Find the corresponding project in ProjectList
                 const matchingProject = ProjectList.find(p => p.project_name === project.project_name);
-                console.log("matchingProject")
-                console.log(matchingProject)
+                // console.log("matchingProject")
+                // console.log(matchingProject)
                 return (
                   <tr key={index} style={{ backgroundColor: "white" }}>
                     {matchingProject ? (

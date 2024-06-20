@@ -28,7 +28,7 @@ function SD_showedit({ id_project }) {
 
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_project}`
     )
       .then((response) => {
         setProjectData(response.data);
@@ -41,7 +41,7 @@ function SD_showedit({ id_project }) {
 
   const getProjectHistoryEdit = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getedithistory/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getedithistory/${id_project}`
     )
       .then((response) => {
         setHistoryEditData(response.data);

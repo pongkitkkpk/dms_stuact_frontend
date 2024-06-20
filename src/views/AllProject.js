@@ -21,11 +21,12 @@ function AllProject() {
   const studentuser = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
   const strcodebooksome = storedUser.codebooksome;
-  useEffect(() => {
-    console.log(storedUser);
-    console.log(storedUser.account_type);
-    console.log(storedUser.position);
-  }, [storedUser]);
+  
+  // useEffect(() => {
+  //   console.log(storedUser);
+  //   console.log(storedUser.account_type);
+  //   console.log(storedUser.position);
+  // }, [storedUser]);
 
   const [projectList, setProjectList] = useState([]);
   const [id_student, setIDStudent] = useState(studentuser);
@@ -70,19 +71,18 @@ function AllProject() {
 
   const getProjects = () => {
     if (storedUser.position == "Admin") {
-      Axios.get(`http://localhost:3001/admin/allprojects`).then((response) => {
-        console.log("ASDFASDFasdfsad")
+      Axios.get(`${process.env.REACT_APP_API_URL}/admin/allprojects`).then((response) => {
         setProjectList(response.data);
       });
     } else if (storedUser.position === "Stuact") {
       Axios.get(
-        `http://localhost:3001/stuact/stuactallprojects/${storedUser.ClubGroup}`
+        `${process.env.REACT_APP_API_URL}/stuact/stuactallprojects/${storedUser.ClubGroup}`
       ).then((response) => {
         setProjectList(response.data);
       });
     } else {
       Axios.get(
-        `http://localhost:3001/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`
+        `${process.env.REACT_APP_API_URL}/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`
       ).then((response) => {
         setProjectList(response.data);
       });
@@ -120,7 +120,7 @@ function AllProject() {
     }).then((result) => {
       if (result.isConfirmed) {
         Axios.delete(
-          `http://localhost:3001/student/deleteProject/${id_project}`
+          `${process.env.REACT_APP_API_URL}/student/deleteProject/${id_project}`
         )
           .then((response) => {
             if (response.status === 200) {

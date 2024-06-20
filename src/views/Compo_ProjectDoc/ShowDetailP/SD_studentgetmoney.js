@@ -21,11 +21,12 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
-  useEffect(()=>{
-    console.log("storedUserData")
-    console.log(storedUser.position)
   
-  },[storedUserData])
+  // useEffect(()=>{
+  //   console.log("storedUserData")
+  //   console.log(storedUser.position)
+  
+  // },[storedUserData])
 
   useEffect(() => {
     console.log(storedUser.account_type == "students");
@@ -54,7 +55,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
 
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/getidproject/${id_project}`
     ).then((response) => {
       setOriginalData(response.data[0]);
       setProjectName(response.data[0].project_name);
@@ -72,7 +73,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
   const [stuactpersonList, setStuactPersonList] = useState([]);
 
   const getStuactProjectData = () => {
-    Axios.get(`http://localhost:3001/admin/stuactusers`).then((response) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}/admin/stuactusers`).then((response) => {
       setStuactPersonList(response.data);
     });
   };
@@ -84,7 +85,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
   }, [yearly]);
   const getProjectNetData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/getBudgetProjectName/${project_name}/${yearly}`
+      `${process.env.REACT_APP_API_URL}/student/project/getBudgetProjectName/${project_name}/${yearly}`
     )
       .then((response) => {
         setNetall_budget(response.data[0].net_budget);
@@ -97,7 +98,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
   const [history_budget, setHistory_budget] = useState([]);
   const [Netused_budget, setNetused_budget] = useState("");
   const getHistoryProjectData = () => {
-    Axios.get(`http://localhost:3001/gethistorystudentgetmoney/${id_project}`)
+    Axios.get(`${process.env.REACT_APP_API_URL}/gethistorystudentgetmoney/${id_project}`)
       .then((response) => {
         setHistory_budget(response.data);
         if (response.data.length > 0) {
@@ -148,7 +149,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.post(`http://localhost:3001/studentgetmoney/${id_project}`, {
+        Axios.post(`${process.env.REACT_APP_API_URL}/studentgetmoney/${id_project}`, {
           project_name,
           yearly,
           namestudent_receive,
@@ -157,14 +158,14 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
           remainingBudget,
         })
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
             console.error("Error creating project:", error);
           });
         Axios.post(
-          `http://localhost:3001/updateprojectusebudget/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/updateprojectusebudget/${id_project}`,
           {
             project_name,
             yearly,
@@ -175,7 +176,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
           }
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {

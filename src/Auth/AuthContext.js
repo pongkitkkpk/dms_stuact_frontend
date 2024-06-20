@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3001/api/authen",
+          `${process.env.REACT_APP_API_URL}/api/authen`,
           {
             username,
             password,
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
         if (response.data.status === 'success') {
 
-          const studentUsersResponse = await axios.get("http://localhost:3001/student/users");
+          const studentUsersResponse = await axios.get(`${process.env.REACT_APP_API_URL}/student/users`);
           const studentUsersData = studentUsersResponse.data;
           const matchingStudent = studentUsersData.find(student => student.id_student === response.data.message.username);
 

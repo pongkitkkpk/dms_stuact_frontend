@@ -6,6 +6,7 @@
     "axios": "^1.6.7",
     "bootstrap": "4.6.0",
     "chartist": "0.11.4",
+    "dotenv": "^16.4.5",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
     "normalize.css": "^8.0.1",

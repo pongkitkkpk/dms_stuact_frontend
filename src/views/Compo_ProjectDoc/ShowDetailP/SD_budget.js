@@ -18,7 +18,7 @@ function SD_budget({ id_project, currentStepProject  }) {
   const [showdeadline, setShowDeadLine] = useState("");
   const getProjectData = () => {
     Axios.get(
-      `http://localhost:3001/student/project/budget/getidproject/${id_project}`
+      `${process.env.REACT_APP_API_URL}/student/project/budget/getidproject/${id_project}`
     ).then((response) => {
       const responseData = response.data[0];
       setOriginalData(responseData);
@@ -212,9 +212,9 @@ function SD_budget({ id_project, currentStepProject  }) {
 
   const [listSSA, setListSSA] = useState(1);
   const [TypeACount, setTypeACount] = useState(1);
-  useEffect(() => {
-    console.log(TypeACount);
-  }, [TypeACount]);
+  // useEffect(() => {
+  //   console.log(TypeACount);
+  // }, [TypeACount]);
   // const handleSaveClick = () => {
   //   const editpage = "งบประมาณโครงการ"
   //   Axios.put(
@@ -668,7 +668,7 @@ function SD_budget({ id_project, currentStepProject  }) {
 
         const listSSB = sumBT_BBNT.toLocaleString("en-US");
         Axios.put(
-          `http://localhost:3001/student/project/p_budget/create/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/project/p_budget/create/${id_project}`,
           {
             // A
             listA1: listA[0],
@@ -1076,7 +1076,7 @@ function SD_budget({ id_project, currentStepProject  }) {
           }
         )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             window.location.reload();
           })
           .catch((error) => {
@@ -1084,11 +1084,11 @@ function SD_budget({ id_project, currentStepProject  }) {
           });
 
         Axios.post(
-          `http://localhost:3001/student/project/edit/history/${id_project}`,
+          `${process.env.REACT_APP_API_URL}/project/edit/history/${id_project}`,
           { codeclub, editpage, id_student }
         )
           .then((response) => {
-            console.log("Data saved successfully:", response.data);
+            // console.log("Data saved successfully:", response.data);
             window.location.reload();
           })
           .catch((error) => {

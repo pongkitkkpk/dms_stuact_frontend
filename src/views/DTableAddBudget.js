@@ -14,9 +14,9 @@ function DTableAddBudget() {
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
   const ClubGroup = storedUser.ClubGroup;
 
-  useEffect(() => {
-    console.log(storedUser);
-  }, [storedUser]);
+  // useEffect(() => {
+  //   console.log(storedUser);
+  // }, [storedUser]);
 
   const [clubGroup, setClubGroup] = useState(ClubGroup); //องค์กรนักศึกษาส่วนกลาง
   const [codeclub, setCodeclub] = useState("");
@@ -45,7 +45,7 @@ function DTableAddBudget() {
   // } else if (clubName === 'ชมรมลูกหนัง' || clubName === 'ชมรมจักรยานเพื่อสุขภาพ') {
   //   setAgencyGroupName("ชมรมฝ่ายกีฬา");
   const getNetProject = () => {
-    Axios.get("http://localhost:3001/admin/getallNetProject").then(
+    Axios.get(`${process.env.REACT_APP_API_URL}/admin/getallNetProject`).then(
       (response) => {
         const sortedData = response.data.sort((a, b) => {
           if (a.AgencyGroupName < b.AgencyGroupName) return 1;
@@ -89,7 +89,7 @@ function DTableAddBudget() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/admin/deleteNetProject/${id}`)
+        Axios.delete(`${process.env.REACT_APP_API_URL}/admin/deleteNetProject/${id}`)
           .then((response) => {
             setNetList(
               NetList.filter((val) => {
@@ -191,7 +191,7 @@ function DTableAddBudget() {
                 setClubname(selectedText);
                 const selectedIndex = event.target.selectedIndex;
 
-                console.log(selectedText);
+                // console.log(selectedText);
               }}
               required
               className="form-select"
