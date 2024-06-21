@@ -284,7 +284,7 @@ function ProjectDocument() {
         </div>
       )} */}
       {/* ร่างคำขออนุมัติ */}
-      {storedUser.account_type === "students" && currentStepProject == 1 && (
+      {(storedUser.position === "S" || storedUser.position === "SH") && currentStepProject == 1 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStep}
@@ -298,7 +298,7 @@ function ProjectDocument() {
         </div>
       )}
       {/* ดำเนินการขออนุมัติ  */}
-      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
+      {(storedUser.position === "Admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStepPleaseAllow}
@@ -314,7 +314,7 @@ function ProjectDocument() {
         </div>
       )}
       {/* โครงการอนุมัติ */}
-      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 3 && (
+      {(storedUser.position === "Admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 3 && (
         <div className="d-flex justify-content-end">
 
           <button
@@ -331,7 +331,7 @@ function ProjectDocument() {
         </div>
       )}
       {/* เงินโครงการอนุมัติ */}
-      {storedUser.account_type === "students" && currentStepProject == 4 && (
+      {(storedUser.position === "S" || storedUser.position === "SH") && currentStepProject == 4 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStep}
@@ -346,7 +346,7 @@ function ProjectDocument() {
       )}
       {/* ร่างสรุปผลโครงการ
  */}
-      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 5 && (
+      {(storedUser.position === "Admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 5 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStep}
@@ -362,7 +362,7 @@ function ProjectDocument() {
         </div>
       )}
       {/* ปิดโครงการ */}
-      {(storedUser.account_type === "admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 6 && (
+      {(storedUser.position === "Admin"  || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 6 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStep}
@@ -401,7 +401,7 @@ function ProjectDocument() {
                       <div
                         style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                       >
-                        <a><div>แบบขออนุมัติโครงการ</div></a>
+                        <a><div>แบบขออนุมัติเสนอโครงการ</div></a>
                       </div>
 
                     </th>
@@ -662,7 +662,7 @@ function ProjectDocument() {
                       <div
                         style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                       >
-                        <a><div>ปิดโครงการ</div></a>
+                        <a><div>แบบขออนุมัติปิดโครงการ</div></a>
                       </div>
                     </th>
                   </tr>
@@ -688,7 +688,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.1 ปิดโครงการ จำนวนผู้เข้าร่วมโครงการ
+                          4.1 จำนวนผู้เข้าร่วมโครงการ
                         </div>
                       </a>
                     </td>
@@ -715,7 +715,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.2 ปิดโครงการ ความสำเร็จของตัวชี้วัดโครงการ และค่าเป้าหมาย
+                          4.2 ความสำเร็จของตัวชี้วัด
                         </div>
                       </a>
                     </td>
@@ -742,7 +742,7 @@ function ProjectDocument() {
                         <div
                           style={{ fontFamily: "Bai Jamjuree", color: "white" }}
                         >
-                          4.3 ปิดโครงการ งบประมาณค่าใช้จ่าย
+                          4.3 งบประมาณค่าใช้จ่าย
                         </div>
                       </a>
                     </td>

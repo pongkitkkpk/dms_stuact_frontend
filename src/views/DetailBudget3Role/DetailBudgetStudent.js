@@ -208,55 +208,55 @@ function DetailBudgetStudent() {
                 style={{
                   width: "10%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>เลขรหัสโครงการ</div>
+                <div style={{fontSize:"12px"}}>เลขรหัสโครงการ</div>
               </th>
               <th
                 style={{
                   width: "30%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>ชื่อโครงการ</div>
+                <div style={{fontSize:"12px"}}>ชื่อโครงการ</div>
               </th>
               <th
                 style={{
                   width: "15%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>หน่วยงาน</div>
+                <div style={{fontSize:"12px"}}>หน่วยงาน</div>
               </th>
               <th
                 style={{
                   width: "10%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>ปีการศึกษา</div>
+                <div style={{fontSize:"12px"}}>ปีการศึกษา</div>
               </th>
               <th
                 style={{
                   width: "20%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>งบประมาณที่อนุมัติ</div>
+                <div style={{fontSize:"12px"}}>งบประมาณที่อนุมัติ</div>
               </th>
               <th
                 style={{
                   width: "20%",
                   color: "white",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                 }}
               >
-                <div>งบประมาณที่ใช้จริง</div>
+                <div style={{fontSize:"12px"}}>งบประมาณที่ใช้จริง</div>
               </th>
 
             </tr>
@@ -270,16 +270,16 @@ function DetailBudgetStudent() {
               return (
                 <tr key={index} style={{ backgroundColor: "white" }}>
                   {matchingProject ? (
-                    <td>{matchingProject.project_number}</td>
+                    <td><div>{matchingProject.project_number}</div></td>
                   ) : (
                     <td></td>
                   )}
 
-                  <td>{project.project_name}</td>
-                  <td>{project.responsible_agency}</td>
-                  <td>{project.yearly}</td>
-                  <td>{project.net_budget}</td>
-                  <td>{Number(project.allow_budget).toLocaleString()}</td>
+                  <td><div>{project.project_name}</div></td>
+                  <td><div>{project.responsible_agency}</div></td>
+                  <td><div>{project.yearly}</div></td>
+                  <td><div>{project.net_budget}</div></td>
+                  <td><div>{Number(project.allow_budget).toLocaleString()}</div></td>
 
                   {/* Add additional data from matchingProject if needed */}
 

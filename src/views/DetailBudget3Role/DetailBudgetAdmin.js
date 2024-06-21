@@ -363,16 +363,16 @@ function DetailBudgetAdmin() {
                 return (
                   <tr key={index} style={{ backgroundColor: "white" }}>
                     {matchingProject ? (
-                      <td>{matchingProject.project_number}</td>
+                      <td><div>{matchingProject.project_number}</div></td>
                     ) : (
                       <td></td>
                     )}
 
-                    <td>{project.project_name}</td>
-                    <td>{project.responsible_agency}</td>
-                    <td>{project.yearly}</td>
-                    <td>{project.net_budget}</td>
-                    <td>{Number(project.allow_budget).toLocaleString()}</td>
+                    <td><div>{project.project_name}</div></td>
+                    <td><div>{project.responsible_agency}</div></td>
+                    <td><div>{project.yearly}</div></td>
+                    <td><div>{project.net_budget}</div></td>
+                    <td><div>{Number(project.allow_budget).toLocaleString()}</div></td>
 
                     {/* Add additional data from matchingProject if needed */}
 
