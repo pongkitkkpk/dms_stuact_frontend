@@ -187,7 +187,7 @@ const AdviserRoutes = [
   },
   {
     path: "/Listbudgetproject",
-    name: "ดูงบประมาณ",
+    name: "งบประมาณทั้งหมด",
     icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/adviser",
@@ -220,7 +220,7 @@ const StudentRoutes = [
   },
   {
     path: "/Listbudgetproject",
-    name: "ดูงบประมาณ",
+    name: "งบประมาณทั้งหมด",
     icon: "nc-icon nc-chart-bar-32",
     component: DetailBudget,
     layout: "/students",
