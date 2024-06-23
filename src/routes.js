@@ -178,6 +178,11 @@ const StuactRoutes = [
 ];
 const AdviserRoutes = [
   {
+    path: "/project-doc/:id_project", // Add route parameter for id_project
+    component: ProjectDocument,
+    layout: "/adviser"
+  },
+  {
     path: "/allproject",
     name: "โครงการทั้งหมด",
     icon: "nc-icon nc-bullet-list-67",

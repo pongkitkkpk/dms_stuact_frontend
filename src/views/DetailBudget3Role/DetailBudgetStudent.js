@@ -58,7 +58,7 @@ function DetailBudgetStudent() {
   useEffect(() => {
     let sumnet = 0;
     let sumallow = 0;
-    ProjectList.forEach((project) => {
+    BudgetList.forEach((project) => {
       if (project.net_budget) {
         const net_budget = project.net_budget.replace(/,/g, "");
         sumnet += parseFloat(net_budget);
@@ -70,7 +70,7 @@ function DetailBudgetStudent() {
     });
     setTotalNetBudget(sumnet);
     setTotalAllowBudget(sumallow);
-  }, [ProjectList]);
+  }, [BudgetList]);
 
 
   useEffect(() => {
