@@ -25,10 +25,12 @@ function DetailBudget() {
     {/* admin admin */}
     {account_type == "admin" && <DetailBudgetAdmin />}
     {/* setDB */}
-    {account_type == "students" && <DetailBudgetStudent />}
+    {account_type == "students" && position == "Admin" && <DetailBudgetAdmin />}
+    {account_type == "students" && (position == "S" || position == "SH") && <DetailBudgetStudent />}
+
     {position == "AD" && <DetailBudgetStudent />}
-    {position == "Stuact" && <DetailBudgetAdmin />}
-    {position == "Admin" && <DetailBudgetAdmin />}
+    {/* {position == "Stuact" && <DetailBudgetAdmin />} */}
+    {position == "Admin"  || position == "Stuact" && <DetailBudgetAdmin />}
     
   </>
   );

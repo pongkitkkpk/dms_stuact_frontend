@@ -298,7 +298,7 @@ function ProjectDocument() {
         </div>
       )}
       {/* ดำเนินการขออนุมัติ  */}
-      {(storedUser.position === "Admin" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
+      {(storedUser.position === "Admin" || storedUser.position === "AD" || (storedUser.position === "Stuact" && storedUser.ClubGroup == AgnecyGroupName)) && currentStepProject == 2 && (
         <div className="d-flex justify-content-end">
           <button
             onClick={handleNextStepPleaseAllow}
