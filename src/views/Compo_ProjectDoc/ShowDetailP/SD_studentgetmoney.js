@@ -21,11 +21,11 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
   const storedUser = storedUserData ? JSON.parse(storedUserData) : {};
   const id_student = storedUser.username;
   const strcodebooksomeoutyear = storedUser.codebooksomeoutyear;
-  
+
   // useEffect(()=>{
   //   console.log("storedUserData")
   //   console.log(storedUser.position)
-  
+
   // },[storedUserData])
 
   useEffect(() => {
@@ -238,7 +238,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               นักศึกษารับเงิน
@@ -247,7 +247,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               บุคลากรรับเรื่อง
@@ -256,7 +256,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               จำนวนเงิน
@@ -265,7 +265,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               คงเหลือ
@@ -274,7 +274,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               อัปเดตล่าสุด
@@ -284,28 +284,32 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                         <tbody>
                           {history_budget.map((item, index) => (
                             <tr key={index}>
-                              <td>{item.namestudent_receive}</td>
-                              <td>{item.namestuact_receive}</td>
+                              <td><div>{item.namestudent_receive}</div></td>
+                              <td><div>{item.namestuact_receive}</div></td>
                               <td>
-                                {parseInt(
-                                  item.numberstudent_receive
-                                ).toLocaleString()}
+                                <div>
+                                  {parseInt(
+                                    item.numberstudent_receive
+                                  ).toLocaleString()}
+                                </div>
                               </td>
-                              <td>{item.remainingBudget}</td>
+                              <td><div>{item.remainingBudget}</div></td>
                               <td>
-                                {new Date(item.updated_at).toLocaleString(
-                                  "th-TH",
-                                  {
-                                    timeZone: "Asia/Bangkok",
-                                    weekday: "long",
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    second: "2-digit",
-                                  }
-                                )}
+                                <div>
+                                  {new Date(item.updated_at).toLocaleString(
+                                    "th-TH",
+                                    {
+                                      timeZone: "Asia/Bangkok",
+                                      weekday: "long",
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit",
+                                    }
+                                  )}
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -317,7 +321,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
               </Table>
             )}
 
-            
+
             {/* ยอดใหม่ที่กำลังลง */}
             {storedUser.position == "Admin" && history_budget.length < 2 && (
               <Table striped="columns">
@@ -342,7 +346,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                
                               }}
                             >
                               รายชื่อนักศึกษารับเงิน
@@ -351,7 +355,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             >
                               หน่วยงาน
@@ -360,7 +364,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             >
                               จำนวนเงิน
@@ -369,14 +373,14 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             ></th>
                             <th
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             >
                               คงเหลือ
@@ -385,7 +389,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             ></th>
                           </tr>
@@ -488,7 +492,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
                               style={{
                                 color: "white",
                                 fontSize: "14px",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                               }}
                             >
                               กรอก ICIT Account
@@ -528,7 +532,7 @@ function SD_studentgetmoney({ id_project, currentStepProject }) {
               </Table>
             )}
           </CardBody>
-          { storedUser.position == "Admin" && history_budget.length < 2 && (
+          {storedUser.position == "Admin" && history_budget.length < 2 && (
             <CardFooter
               style={{
                 display: "flex",

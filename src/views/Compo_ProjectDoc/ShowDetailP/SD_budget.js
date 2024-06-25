@@ -1781,7 +1781,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             รายการค่าใช้จ่าย
@@ -1790,7 +1790,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (คน)
@@ -1800,7 +1800,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "11%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (ชั่วโมง)
@@ -1810,7 +1810,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "16%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคา (ต่อชั่วโมง)(บาท)
@@ -1819,7 +1819,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคาสุทธิ (บาท)
@@ -1987,7 +1987,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             รายการค่าใช้จ่าย
@@ -1996,7 +1996,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (หน่วย)
@@ -2005,7 +2005,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             หน่วยนับ
@@ -2014,7 +2014,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "11%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (เวลา)
@@ -2023,7 +2023,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             หน่วยนับ
@@ -2032,7 +2032,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "16%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคา (ต่อหน่วย)(บาท)
@@ -2041,7 +2041,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคาสุทธิ (บาท)
@@ -2225,7 +2225,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             รายการค่าใช้จ่าย
@@ -2234,7 +2234,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (หน่วย)
@@ -2243,7 +2243,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             หน่วยนับ
@@ -2254,7 +2254,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "16%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคา (ต่อหน่วย)(บาท)
@@ -2263,7 +2263,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคาสุทธิ (บาท)
@@ -2430,7 +2430,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             รายการค่าใช้จ่าย
@@ -2439,7 +2439,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             จำนวน (หน่วย)
@@ -2448,7 +2448,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "10%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             หน่วยนับ
@@ -2459,7 +2459,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "16%",
                               color: "white",
-                              fontWeight: "bold",
+                              // // fontWeight: "bold",
                             }}
                           >
                             ราคา (ต่อหน่วย)(บาท)
@@ -2468,7 +2468,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             ราคาสุทธิ (บาท)
@@ -2627,7 +2627,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             รายการค่าใช้จ่าย
@@ -2641,7 +2641,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             ราคาสุทธิ (บาท)
@@ -2728,7 +2728,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                           textAlignLast: "right",
                         }}
@@ -2749,7 +2749,7 @@ function SD_budget({ id_project, currentStepProject  }) {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                         }}
                       >

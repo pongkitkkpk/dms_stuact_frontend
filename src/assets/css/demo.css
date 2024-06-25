@@ -912,14 +912,17 @@
 /* 8888888888888888888888 */
 .badge-draft {
   background-color: #ff0000; 
+  color: #ffff;
 }
 
 .badge-progress {
   background-color: #ff8000; 
+  color: #ffff;
 }
 
 .badge-wait-progress {
   background-color: #ff8000; 
+  color: #ffff;
 }
 
 .badge-approved {

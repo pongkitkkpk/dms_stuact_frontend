@@ -86,7 +86,7 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "5%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             #
@@ -95,7 +95,7 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "25%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div>ชื่อโครงการ</div>
@@ -104,7 +104,7 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "30%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             วันที่/เวลา
@@ -113,7 +113,7 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "20%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             สถานะโครงการ
@@ -122,7 +122,7 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "16%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             icit นักศึกษาที่แก้ไข

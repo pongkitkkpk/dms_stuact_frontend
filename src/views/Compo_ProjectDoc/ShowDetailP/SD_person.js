@@ -698,7 +698,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "80%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -709,7 +709,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "20%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>จำนวน (คน)</div>
@@ -922,7 +922,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "80%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -933,7 +933,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "20%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>จำนวน (คน)</div>
@@ -1143,7 +1143,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "80%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -1154,7 +1154,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "20%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>จำนวน (คน)</div>
@@ -1364,7 +1364,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "80%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -1375,7 +1375,7 @@ function SD_person({ id_project, currentStepProject }) {
                             style={{
                               width: "20%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>จำนวน (คน)</div>
@@ -1574,7 +1574,7 @@ function SD_person({ id_project, currentStepProject }) {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                           textAlignLast: "right",
                         }}
@@ -1595,7 +1595,7 @@ function SD_person({ id_project, currentStepProject }) {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                         }}
                       >

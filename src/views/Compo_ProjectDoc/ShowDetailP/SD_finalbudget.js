@@ -244,7 +244,7 @@ useEffect(() => {
                             style={{
                               width: "100%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -292,7 +292,7 @@ useEffect(() => {
                             style={{
                               width: "100%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -345,7 +345,7 @@ useEffect(() => {
                             style={{
                               width: "100%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -398,7 +398,7 @@ useEffect(() => {
                             style={{
                               width: "100%",
                               color: "white",
-                              fontWeight: "bold",
+                              // fontWeight: "bold",
                             }}
                           >
                             <div style={{ fontSize: "14px" }}>
@@ -450,7 +450,7 @@ useEffect(() => {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                           textAlignLast: "right",
                         }}
@@ -471,7 +471,7 @@ useEffect(() => {
                       <div
                         style={{
                           color: "#FF8B13",
-                          fontWeight: "bold",
+                          // fontWeight: "bold",
                           width: "40%",
                         }}
                       >

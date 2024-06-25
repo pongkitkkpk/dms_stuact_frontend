@@ -425,8 +425,8 @@ function SD_detail({ id_project, currentStepProject }) {
                     <Table striped="columns">
                       <thead style={{ backgroundColor: "rgba(255, 139, 19, 0)" }}>
                         <tr style={{ backgroundColor: "rgba(255, 139, 19, 1)" }}>
-                          <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>ชื่อ-สกุล</th>
-                          <th style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>โทรศัพท์</th>
+                          <th style={{ color: "white", fontSize: "14px"}}>ชื่อ-สกุล</th>
+                          <th style={{ color: "white", fontSize: "14px" }}>โทรศัพท์</th>
                         </tr>
                       </thead>
                       <tbody>

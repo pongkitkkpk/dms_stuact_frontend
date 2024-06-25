@@ -680,7 +680,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <th
                               style={{
                                 color: "white",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                                 fontSize: "14px",
                               }}
                             >
@@ -689,7 +689,7 @@ function SD_detail({ id_project, currentStepProject }) {
                             <th
                               style={{
                                 color: "white",
-                                fontWeight: "bold",
+                                // fontWeight: "bold",
                                 fontSize: "14px",
                               }}
                             >

@@ -72,19 +72,19 @@ function AllProject() {
   const getProjects = () => {
     if (storedUser.position == "Admin") {
       Axios.get(`${process.env.REACT_APP_API_URL}/admin/allprojects`).then((response) => {
-        setProjectList(response.data);
+        setProjectList(response.data.reverse());
       });
     } else if (storedUser.position === "Stuact") {
       Axios.get(
         `${process.env.REACT_APP_API_URL}/stuact/stuactallprojects/${storedUser.ClubGroup}`
       ).then((response) => {
-        setProjectList(response.data);
+        setProjectList(response.data.reverse());
       });
     } else {
       Axios.get(
         `${process.env.REACT_APP_API_URL}/student/project/getcodebooksomeoutyear/${codebooksomeoutyear}`
       ).then((response) => {
-        setProjectList(response.data);
+        setProjectList(response.data.reverse());
       });
     }
   };
