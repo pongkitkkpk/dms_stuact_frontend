@@ -95,10 +95,11 @@ function SD_showlogstatus({ id_project }) {
                             style={{
                               width: "25%",
                               color: "white",
+                              
                               // fontWeight: "bold",
                             }}
                           >
-                            <div>ชื่อโครงการ</div>
+                            ชื่อโครงการ
                           </th>
                           <th
                             style={{
